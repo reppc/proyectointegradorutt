@@ -1,6 +1,7 @@
+/*css de estilos para las cartas exclusivamente*/
 
-.contenedor{
-    
+/*contenedor de la carta*/
+.contenedor{   
     position: relative;
     margin: 0px;
     padding: 0px;
@@ -9,6 +10,7 @@
     box-sizing: border-box;
     overflow: hidden;
 }
+/*parte principal pintada de blanco*/
 .inicio{
     border: 2px solid #199B26;
     font-family: Roboto;
@@ -24,6 +26,7 @@
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 }
+/*parte de abajo pintado de verde*/
 .final{
     font-family: Roboto;
     font-weight: Regular;
@@ -36,6 +39,7 @@
     background-color: green;
     overflow: hidden;
 }
+/*estilos para el boton*/
 .boton{
     border: 0px;
     border-radius: 20px;
