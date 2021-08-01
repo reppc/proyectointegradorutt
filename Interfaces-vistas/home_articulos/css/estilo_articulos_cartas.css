@@ -1,0 +1,41 @@
+.contenedor{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: black;
+    border-radius: 20px;
+    margin: 20px;
+}
+.carta{
+    display:inline-block;
+}
+.arriba{
+    width: auto;
+    height: auto;
+    text-align: center;
+    background-color: white;
+    border-radius: 20px;
+    margin: 20px;
+}
+.contenedor_oferta{
+    text-align: center;
+    background-color: #9CC528;
+    width: auto;
+    height: auto;
+    border-radius: 20px;
+    margin:10px;
+}
+.abajo{
+    background-color: white;
+    margin: 20px;
+    border-radius: 20px;
+    text-align: justify;
+}
+.abajo p {
+    margin: 3px;
+}
