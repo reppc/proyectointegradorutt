@@ -1,3 +1,4 @@
+/*caja contenedora de la carta*/
 .contenedor{
     position: relative;
     margin: 0px;
@@ -11,9 +12,11 @@
     border-radius: 20px;
     margin: 20px;
 }
+/*propiedad para que tido el contenido que este en linea cambia a linea de bloque para que no ocupe todo el ancho de la pantalla*/
 .carta{
     display:inline-block;
 }
+/*parte de arriba de la carta pintada de blanco*/
 .arriba{
     width: auto;
     height: auto;
@@ -22,6 +25,8 @@
     border-radius: 20px;
     margin: 20px;
 }
+
+/*contenedor de la parte de enmedio*/
 .contenedor_oferta{
     text-align: center;
     background-color: #9CC528;
@@ -30,6 +35,7 @@
     border-radius: 20px;
     margin:10px;
 }
+/*parte de abajo*/
 .abajo{
     background-color: white;
     margin: 20px;
