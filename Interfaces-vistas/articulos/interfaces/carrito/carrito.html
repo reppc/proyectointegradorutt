@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../../../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../../../css/navStyle.css" />
-    <link rel="stylesheet" href="css/estilo botones.css" />
-    <title>categorias</title>
+    <link rel="stylesheet" href="css/estylo.css">
+    <title>carrito</title>
   </head>
   <body>
     <!--nav bar-->
@@ -170,95 +170,55 @@
         </div>
       </div>
     </nav>
-    <!--titulo-->
-    <div class="row">
-      <!--son 3 colores dependiendo la categoria
-        Accesorios: #1C8EE0
-        Limpueza PC: #6FD950
-        Refacciones: #A4A3A3
-        hacer que cambie de color ademas de cargar los articulos referentes a su categoria con php
-        -->
-      <div style="background-color: #1c8ee0; color: white">
-        <p style="margin: 20px">nombre de la categoria</p>
+    <!---->
+    <!--estructura del carro-->
+    <div class="row contenedor_carrito">
+      <!--contenido del carrito-->
+      <div class="col">
+        <div>
+          <div class="row">
+              <!--imagen del articulo-->
+            <div class="col">
+                <img src="" alt="">
+            </div>
+            <!--nombre del articulo-->
+            <div class="col">
+                <p>nombre del articulo</p>
+            </div>
+            <!--cantidad de artuculos a llevar-->
+            <div class="col">
+                <form action="">
+                    <select name="cantidad" id="">
+                        <option value="">php</option>
+                    </select>
+                </form>
+            </div>
+            <!--precio del articulo-->
+            <div class="col">
+                <p>precio del articulo</p>
+            </div>
+            <div class="col">
+                <form action="">
+                    <button>boton para eliminar producto</button>
+                </form>
+            </div>
+          </div>
+          <hr>
+          <!--total-->
+          <div class="row">
+            <div class="col">
+              <p>total</p>
+            </div>
+            <div class="col">
+              <p>monto</p>
+            </div>
+          </div>
+          <!---->
+        </div>
       </div>
+      <!--botones-->
+      <div class="col"></div>
     </div>
     <!---->
-    <!--articulos-->
-    <div class="row">
-      <!--carga de articulos segun su categoria-->
-      <div class="col">
-        <div class="row">
-          <div class="col">
-            <!--nombre-->
-            <div class="row">
-              <p>nombre del articulo</p>
-            </div>
-            <!--descripcion y foto-->
-            <div class="row">
-              <div class="col">
-                <p>descripcion del producto</p>
-              </div>
-              <div class="col">
-                <p>foto del producto</p>
-              </div>
-            </div>
-            <!--precio del producto-->
-            <div class="row">
-              <p>precio del producto</p>
-            </div>
-            <!--botones-->
-            <form action="" method="POST">
-              <div class="row">
-                <div class="col">
-                  <input
-                    class="boton"
-                    name="ver"
-                    type="submit"
-                    value="Ver detalles"
-                  />
-                </div>
-                <div class="col">
-                  <input
-                    class="boton"
-                    name="agregar"
-                    type="submit"
-                    value="Agregar al carro"
-                  />
-                </div>
-              </div>
-            </form>
-          </div>
-          <hr />
-        </div>
-      </div>
-      <!---->
-      <!--carrito-->
-      <div class="col">
-        <div class="contenedor_carrito">
-          <!--columnas-->
-         <div class="row contenido_carro">
-           <div class="col">
-             <p>nombre</p>
-           </div>
-           <div class="col">
-             <p>opcion</p>
-           </div>
-          </div>
-          <!--contenido del carro-->
-          <div class="row contenido_carro">
-            <p>contenido del carro</p>
-          </div>
-          <!---->
-          <!--boton-->
-          <div class="row contenido_carro">
-            <form action="">
-              <input class="boton_carro" type="submit" value="siguiente">
-            </form>
-          </div>
-          <!---->
-        </div>
-      </div>
-      <!---->
-    </div>
   </body>
 </html>
