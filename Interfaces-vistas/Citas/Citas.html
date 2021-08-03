@@ -84,16 +84,32 @@
 
                 $('#exampleModal').modal();
                 console.log(info);
+                calendar.addEvent({title:"Evento X", date:info.dateStr})
             },
+            eventClick:function(info){
+              console.log(info);
+              console.log(info.event.title);
+              console.log(info.event.start);
+
+              console.log(info.event.end);
+              console.log(info.event.textColor);
+              console.log(info.event.backgroundColor);
+            },
+
+
             events:[
                 {
-                    title:"Mi evento 1",
-                    start:"2021-07-31 2:13:00"
+                  title:"Mi evento 1",
+                  start:"2021-08-02 10:01:00"
                 },{
-                    title:"Mi evento 1",
-                    start:"2021-07-1 2:13:00"
+                  title:"Mi evento 2",
+                  start:"2021-08-04 10:30:00",
+                  end: "2021-08-12 10:30:00",
+                  color:"#FFCCAA",
+                  textColor:"#000000"
                 }
-            ]
+
+              ]
 
           });
           calendar.setOption('locale','Es');
