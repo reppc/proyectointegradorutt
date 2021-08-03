@@ -1,0 +1,29 @@
+.boton
+{
+    background-color: white;
+    border-radius: 20px;
+    border:1px solid #1C8EE0;
+    margin-bottom: 5px;
+    margin-left:5px;
+    color: #1C8EE0;
+}
+.contenedor_carrito
+{
+    width: auto;
+    height: auto;
+    float: right;
+}
+.contenido_carro
+{
+    border:1px solid gray;
+    margin-left:1px;
+    margin-right: 1px;
+}
+.boton_carro
+{
+    margin:1px;
+    border-radius: 20px;
+    border:0px;
+    background-color: gray;
+    color:white;
+}
