@@ -1,0 +1,16 @@
+*
+{
+    padding: 0px;
+    margin: 0px;
+}
+.contenedor
+{
+    background-color: #282121;
+    width: 100%;
+}
+.contenedor_menu
+{
+    background-color: #C4C4C4;
+    float: left;
+    margin:0px;
+}
