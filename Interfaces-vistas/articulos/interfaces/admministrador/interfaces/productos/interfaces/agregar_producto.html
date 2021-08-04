@@ -43,8 +43,6 @@
                 <hr />
                 <li><a href="" class="nav-link links">Historiales</a></li>
                 <hr />
-                <li><a href="" class="nav-link links">Productos</a></li>
-                <hr />
                 <li><a href="" class="nav-link links">Tipos de servicio</a></li>
                 <hr />
                 <li><a href="" class="nav-link links">Cerrar sesión</a></li>
@@ -72,14 +70,16 @@
                       <!---->
                       <!--contenido-->
                       <div class="row contenedor_formulario">
+                          <!--nombre-->
                         <input
                           style="margin-top: 5px"
                           class="form-control"
                           type="text"
-                          name="nomber"
+                          name="nombre"
                           placeholder="nombre.."
                         />
                         <br />
+                        <!--descripcion-->
                         <textarea
                           style="margin-top: 5px"
                           name="descripcion"
@@ -89,6 +89,7 @@
                         </textarea>
                         <br />
                         <div class="row">
+                          <!--precio y existencia-->
                           <div class="col">
                             <!--existencia-->
                             <input
@@ -98,6 +99,7 @@
                               placeholder="existencia"
                             />
                           </div>
+
                           <div class="col">
                             <!--precio por unidad-->
                             <input
@@ -108,14 +110,13 @@
                             />
                           </div>
                         </div>
-
                         <br />
-
-                        <br />
+                        <!--categoria-->
                         <select style="margin-top: 5px" name="categoria">
                           <option value="">php</option>
                         </select>
                         <br />
+                        <!--seleccionar la imagen-->
                         <label style="margin-top: 5px" for=""
                           >seleccione imagen:</label
                         >
@@ -128,6 +129,7 @@
                           id=""
                         />
                         <br />
+                        <!--botones-->
                         <div class="row" style="margin-top: 5px">
                           <div class="col"></div>
                           <!--atras-->
