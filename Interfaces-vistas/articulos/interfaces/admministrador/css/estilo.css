@@ -21,3 +21,10 @@
     border:1px solid black;   
     margin:20px;
 }
+.links
+{
+    color: black;
+}
+.links:hover{
+    color: rgb(223, 223, 223);
+}
