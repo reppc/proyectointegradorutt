@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../../../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../../../css/navStyle.css" />
-    <link rel="stylesheet" href="css/estylo.css">
+    <link rel="stylesheet" href="css/estylo.css" />
     <title>carrito</title>
   </head>
   <body>
@@ -172,53 +172,151 @@
     </nav>
     <!---->
     <!--estructura del carro-->
-    <div class="row contenedor_carrito">
-      <!--contenido del carrito-->
+    <div class="row">
       <div class="col">
-        <div>
-          <div class="row">
-              <!--imagen del articulo-->
-            <div class="col">
-                <img src="" alt="">
-            </div>
-            <!--nombre del articulo-->
-            <div class="col">
-                <p>nombre del articulo</p>
-            </div>
-            <!--cantidad de artuculos a llevar-->
-            <div class="col">
-                <form action="">
+        <div class="row contenedor_carrito">
+          <!--contenido del carrito-->
+          <div class="col">
+            <div style="margin: 5px">
+              <div class="row">
+                <!--imagen del articulo-->
+                <div class="col">
+                  <img src="" alt="" />
+                </div>
+                <!--nombre del articulo-->
+                <div class="col">
+                  <p>nombre del articulo</p>
+                </div>
+                <!--cantidad de artuculos a llevar-->
+                <div class="col">
+                  <form action="">
                     <select name="cantidad" id="">
-                        <option value="">php</option>
+                      <option value="">php</option>
                     </select>
-                </form>
-            </div>
-            <!--precio del articulo-->
-            <div class="col">
-                <p>precio del articulo</p>
-            </div>
-            <div class="col">
-                <form action="">
-                    <button>boton para eliminar producto</button>
-                </form>
+                  </form>
+                </div>
+                <!--precio del articulo-->
+                <div class="col">
+                  <p>precio del articulo</p>
+                </div>
+                <!--boton para eliminar productos-->
+                <div class="col">
+                  <form action="">
+                    <button class="boton_eliminar">
+                      <!--figura para el boton-->
+                      <svg
+                      style="
+                        margin-bottom:5px;
+                        margin-top:5px;
+                        margin-left:-2px;
+                      "
+                        width="40"
+                        height="20"
+                        viewBox="0 0 43 28"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g filter="url(#filter0_dd)">
+                          <path
+                            d="M22 5.95508H30.0893C38.577 6.90852 39.2403 18.998 30.9051 20.8623C30.3629 20.9835 29.8089 21.0447 29.2533 21.0447H22H14.8053C14.211 21.0447 13.6187 20.9748 13.0407 20.8362C4.82807 18.8679 5.52602 6.96437 13.9107 5.95508H22Z"
+                            fill="#A4B9A5"
+                          />
+                        </g>
+                        <defs>
+                          <filter
+                            id="filter0_dd"
+                            x="0.238281"
+                            y="0.955078"
+                            width="42.5802"
+                            height="26.0897"
+                            filterUnits="userSpaceOnUse"
+                            color-interpolation-filters="sRGB"
+                          >
+                            <feFlood
+                              flood-opacity="0"
+                              result="BackgroundImageFix"
+                            />
+                            <feColorMatrix
+                              in="SourceAlpha"
+                              type="matrix"
+                              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                              result="hardAlpha"
+                            />
+                            <feOffset dx="2" dy="2" />
+                            <feGaussianBlur stdDeviation="2" />
+                            <feColorMatrix
+                              type="matrix"
+                              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                            />
+                            <feBlend
+                              mode="normal"
+                              in2="BackgroundImageFix"
+                              result="effect1_dropShadow"
+                            />
+                            <feColorMatrix
+                              in="SourceAlpha"
+                              type="matrix"
+                              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                              result="hardAlpha"
+                            />
+                            <feOffset dx="-3" dy="-1" />
+                            <feGaussianBlur stdDeviation="2" />
+                            <feColorMatrix
+                              type="matrix"
+                              values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"
+                            />
+                            <feBlend
+                              mode="normal"
+                              in2="effect1_dropShadow"
+                              result="effect2_dropShadow"
+                            />
+                            <feBlend
+                              mode="normal"
+                              in="SourceGraphic"
+                              in2="effect2_dropShadow"
+                              result="shape"
+                            />
+                          </filter>
+                        </defs>
+                      </svg>
+                      <!---->
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <hr />
+              <!--total-->
+              <div style="margin: 5px">
+                <div class="row">
+                  <div class="col">
+                    <p>total</p>
+                  </div>
+                  <div class="col">
+                    <p>monto</p>
+                  </div>
+                </div>
+              </div>
+              <!---->
             </div>
           </div>
-          <hr>
-          <!--total-->
-          <div class="row">
-            <div class="col">
-              <p>total</p>
-            </div>
-            <div class="col">
-              <p>monto</p>
-            </div>
-          </div>
-          <!---->
         </div>
       </div>
-      <!--botones-->
-      <div class="col"></div>
+      <div class="col">
+        <!--botones-->
+        <div class="col">
+          <div class="row">
+            <form action="">
+              <div class="col">
+                <input class="botones" type="submit" value="siguiente" />
+              </div>
+              <div class="col">
+                <input class="botones" type="reset" value="limpiar carro" />
+              </div>
+            </form>
+          </div>
+        </div>
+        <!---->
+      </div>
     </div>
-    <!---->
   </body>
 </html>

@@ -3,17 +3,29 @@
     margin:20px;
     border:1px solid black;
     box-shadow: 1px 1px 1px #0000002f;
-    border-radius: 20px;
     /**/
     position: relative;
-    margin: 0px;
     padding: 0px;
     display: inline-block;
     width: auto;
     height: auto;
     box-sizing: border-box;
     overflow: hidden;
-    background-color: black;
     border-radius: 20px;
     margin: 20px;
+}
+.botones{
+    background-color: black;
+    border: 0px;
+    color:white;
+    margin:5px;
+    border-radius: 20px;
+}
+.boton_eliminar
+{
+    margin-top:10px;
+    border: 1px solid green;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
 }
