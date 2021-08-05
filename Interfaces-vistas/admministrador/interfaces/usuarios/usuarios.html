@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../../../../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../css/estilo.css" />
     <title>usuarios</title>
   </head>
@@ -37,15 +37,11 @@
                   <a href="" class="nav-link links"> Estadisticas </a>
                 </li>
                 <hr />
-                <li><a href="" class="nav-link links"> Usuarios</a></li>
+                <li><a href="" class="nav-link links">Usuarios</a></li>
                 <hr />
                 <li><a href="" class="nav-link links">Productos</a></li>
                 <hr />
                 <li><a href="" class="nav-link links">Historiales</a></li>
-                <hr />
-                <li><a href="" class="nav-link links">Productos</a></li>
-                <hr />
-                <li><a href="" class="nav-link links">Tipos de servicio</a></li>
                 <hr />
                 <li><a href="" class="nav-link links">Cerrar sesión</a></li>
               </ul>
@@ -69,7 +65,16 @@
             <div class="col-3"></div>
             <div class="col">
               <div class="col">
-                <input style="width: 300px; border: 1px solid gray; border-radius: 5px;" type="text" name="buscar" placeholder="buscar.." />
+                <input
+                  style="
+                    width: 300px;
+                    border: 1px solid gray;
+                    border-radius: 5px;
+                  "
+                  type="text"
+                  name="buscar"
+                  placeholder="buscar.."
+                />
                 <input class="btn btn-light" type="submit" value="buscar" />
               </div>
             </div>
@@ -80,14 +85,27 @@
           <!--contenido usuarios-->
           <div class="row">
             <!--filtro-->
-            <div class="row" style="background-color: #C4C4C4; margin:5px;border-radius: 10px;">
+            <div
+              class="row"
+              style="
+                background-color: #c4c4c4;
+                margin: 5px;
+                border-radius: 10px;
+              "
+            >
               <div class="row">
                 <p>filtro:</p>
               </div>
               <div class="row">
                 <div class="col">
                   <label>nombre:</label>
-                  <input style="margin:2px;" class="form-control" type="text" name="nombre" id="" />
+                  <input
+                    style="margin: 2px"
+                    class="form-control"
+                    type="text"
+                    name="nombre"
+                    id=""
+                  />
                 </div>
                 <div class="col">
                   <label>tipo usuario</label>
@@ -96,9 +114,23 @@
                   </select>
                 </div>
                 <div class="col">
-                  <input style="margin: 3px;" class="btn btn-secondary" type="submit" value="filtrar" />
+                  <input
+                    style="margin: 3px"
+                    class="btn btn-secondary"
+                    type="submit"
+                    value="filtrar"
+                  />
                   <br />
-                  <input style="margin: 3px;" class="btn btn-success" type="submit" value="registrar usuario" />
+
+                  <button
+                    style="margin: 3px"
+                    class="btn btn-success"
+                    type="submit"
+                  >
+                    <a href="usuarios_interfaces/agregar_usuario.html">
+                      registrar usuario</a
+                    >
+                  </button>
                 </div>
               </div>
             </div>
