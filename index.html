@@ -10,37 +10,37 @@
     <title>login</title>
   </head>
   <body>
-    <!--Barra navegadora-->
+    <!--nav bar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <!--logo-->
       <div class="container-fluid">
-        <img
-          class="logo navbar-brand md"
-          src="Imagenes/logo-sin-letras2.png"
-          alt=""
-        />
-        <a class="navbar-brand" href="">Soporte y servicios informaticos</a>
+        <!--#region logo y nombre-->
+        <img src="inicio/Imagenes/logo-sin-letras2.png" alt="" />
+        <a class="navbar-brand" href="#">Soporte y servicios informaticos</a>
+        <!-- #endregion -->
+        <!-- #region boton pastel-->
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarTogglerDemo02"
-          aria-controls="navbarTogglerDemo02"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <!-- #endregion -->
+        <!-- #region contenido del nav bar-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <!--Inicio-->
-            <li class="nav-item navli">
-              <a class="nav-link active" aria-current="page" href="index.html">
+            <!--inicio-->
+            <li class="nav-item" style="margin-right: 5px">
+              <a class="nav-link" aria-current="page" href="inicio/inicio.html">
                 <svg
                   style="margin-bottom: 5px"
                   width="30"
                   height="15"
-                  viewBox="0 0 1 34"
+                  viewBox="0 0 1 39"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -52,11 +52,16 @@
                 Inicio</a
               >
             </li>
+            <!---->
             <!--articulos-->
-            <li class="nav-item navli">
+            <li class="nav-item dropdown" style="margin-right: 5px">
               <a
-                class="nav-link"
-                href="Interfaces-vistas/articulos/home_articulos.html"
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
                 <svg
                   style="margin-bottom: 5px"
@@ -71,12 +76,52 @@
                     fill="white"
                   />
                 </svg>
-                Articulos</a
+                Articulos
+              </a>
+              <!--lista del dropdown de articulos-->
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">articulos</a></li>
+                <li><a class="dropdown-item" href="#">categoria</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">carrito</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Historial</a>
+                </li>
+              </ul>
+              <!---->
+            </li>
+            <!---->
+            <!--servicios-->
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="inicio/inicio.html">
+                <svg
+                  style="margin-bottom: 5px"
+                  width="18"
+                  height="20"
+                  viewBox="0 0 36 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M31.1012 12.9794V12.2342C31.1012 10.211 29.4688 8.56204 27.4512 8.56204H17.1013H16.6013V9.06204V14.0468C16.6013 15.0259 15.8149 15.8127 14.8513 15.8127C13.8876 15.8127 13.1013 15.0259 13.1013 14.0468V6.89252C13.1013 6.43698 13.3314 6.01667 13.7089 5.78213L13.711 5.78081L15.5935 4.59811C15.5938 4.59792 15.5941 4.59772 15.5944 4.59752C16.0907 4.28908 16.6573 4.12408 17.2362 4.12408H22.985H23.1198L23.2363 4.05633L29.0518 0.675014C29.052 0.674942 29.0521 0.674869 29.0522 0.674797C29.6734 0.315244 30.4682 0.527991 30.8252 1.15308L30.8256 1.15374L35.3252 9.00413L31.1012 12.9794ZM31.1012 12.9794L34.8485 10.8001C34.8487 10.8 34.8489 10.7999 34.849 10.7998C35.4714 10.4348 35.6847 9.63442 35.3256 9.00479L31.1012 12.9794ZM10.3013 8.04575V14.0468C10.3013 16.5685 12.3387 18.6253 14.8513 18.6253C17.3638 18.6253 19.4012 16.5685 19.4012 14.0468V11.3747H27.4512C27.9199 11.3747 28.3012 11.7536 28.3012 12.2342V14.9532C28.3012 15.4337 27.9199 15.8127 27.4512 15.8127H27.0012H26.5012V16.3127V19.938C26.5012 20.6677 25.9174 21.2506 25.2012 21.2506H24.3012H23.8012V21.7506C23.8012 23.4774 22.4074 24.8759 20.7012 24.8759H13.0175H12.8827L12.7662 24.9437L6.95067 28.325C6.32938 28.6848 5.53441 28.4721 5.17732 27.8469L5.17695 27.8463L0.676956 19.9952L0.676116 19.9937C0.313324 19.3657 0.53032 18.5611 1.15188 18.2011L1.15264 18.2007L5.65264 15.5836L5.90127 15.439V15.1514V12.4721C5.90127 11.3769 6.47458 10.3567 7.40791 9.79667L7.40951 9.7957L10.3013 8.04575Z"
+                    stroke="white"
+                  />
+                </svg>
+
+                servicios</a
               >
             </li>
+            <!---->
             <!--blog-->
-            <li class="nav-item navli">
-              <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">
+            <li class="nav-item dropdown" style="margin-right: 5px">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 <svg
                   style="margin-bottom: 5px"
                   width="17"
@@ -94,22 +139,30 @@
                     fill="white"
                   />
                 </svg>
-
-                Blog</a
-              >
+                Blog
+              </a>
+              <!--lista del dropdown de articulos-->
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">blog</a></li>
+                <li><a class="dropdown-item" href="#">categoria</a></li>
+              </ul>
+              <!---->
             </li>
+            <!---->
           </ul>
-          <!--acceder-->
+          <!-- #region boton-->
           <form class="d-flex">
             <button class="btn btn-outline-light" id="redondeado" type="submit">
               Acceder
             </button>
           </form>
+          <!-- #endregion -->
         </div>
+        <!-- #endregion -->
       </div>
     </nav>
     <!---->
-    <!--cotenido-->
+    <!--contenido del formulario para entrar-->
     <div class="row">
       <div class="col"></div>
       <div class="col">
@@ -123,11 +176,11 @@
               <div class="row" style="padding: 20px">
                 <label for="" class="titulo">usuario</label>
                 <br />
-                <input type="text" name="nombre"  />
+                <input type="text" name="nombre" />
                 <br />
                 <label for="" class="titulo">contraseña</label>
                 <br />
-                <input type="password" name="paswd"  />
+                <input type="password" name="paswd" />
                 <br />
                 <a href="" class="sub_t">olvide mi contraseña</a>
                 <br />
@@ -151,5 +204,9 @@
       </div>
       <div class="col"></div>
     </div>
+    <!---->
+    <!-- #region js-->
+    <script src="inicio/js/bootstrap.min.js"></script>
+    <!-- #endregion -->
   </body>
 </html>
