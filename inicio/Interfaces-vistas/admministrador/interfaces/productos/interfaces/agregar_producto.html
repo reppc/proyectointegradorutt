@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../../../../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../css/estilo.css" />
+    <link rel="stylesheet" href="css/estilo.css" />
+    <title>agregar producto</title>
+  </head>
+  <body>
+    <!--logo-->
+    <div class="row">
+      <div class="contenedor">
+        <img src="" alt="#" />
+      </div>
+    </div>
+    <!---->
+    <div class="row">
+      <!--menu-->
+      <div class="col-3">
+        <div
+          class="
+            contenedor_menu
+            navbar navbar-nav navbar-expand-md
+            container-fluid
+          "
+        >
+          <div class="row">
+            <div class="row">
+              <h2>Administrador</h2>
+            </div>
+            <div class="row">
+              <ul class="list-group" style="margin: 20px">
+                <li>
+                  <a href="" class="nav-link links"> Estadisticas </a>
+                </li>
+                <hr />
+                <li><a href="" class="nav-link links"> Usuarios</a></li>
+                <hr />
+                <li><a href="" class="nav-link links">Productos</a></li>
+                <hr />
+                <li><a href="" class="nav-link links">Historiales</a></li>
+                <hr />
+                <li><a href="" class="nav-link links">Tipos de servicio</a></li>
+                <hr />
+                <li><a href="" class="nav-link links">Cerrar sesión</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---->
+      <div class="col">
+        <!--contenido agregar usuarios-->
+        <div class="row">
+          <!--contenido-->
+          <div class="">
+            <!--formulario-->
+            <div class="">
+              <div class="row">
+                <div class="col">
+                  <form action="">
+                    <div class="contenedor_cartas_registro">
+                      <!--titulo-->
+                      <div class="row">
+                        <h2 style="text-align: center">Registrar productos</h2>
+                      </div>
+                      <!---->
+                      <!--contenido-->
+                      <div class="row contenedor_formulario">
+                          <!--nombre-->
+                        <input
+                          style="margin-top: 5px"
+                          class="form-control"
+                          type="text"
+                          name="nombre"
+                          placeholder="nombre.."
+                        />
+                        <br />
+                        <!--descripcion-->
+                        <textarea
+                          style="margin-top: 5px"
+                          name="descripcion"
+                          cols="30"
+                          rows="10"
+                        >
+                        </textarea>
+                        <br />
+                        <div class="row">
+                          <!--precio y existencia-->
+                          <div class="col">
+                            <!--existencia-->
+                            <input
+                              style="margin-top: 5px"
+                              class="form-control"
+                              type="text"
+                              placeholder="existencia"
+                            />
+                          </div>
+
+                          <div class="col">
+                            <!--precio por unidad-->
+                            <input
+                              style="margin-top: 5px"
+                              class="form-control"
+                              type="text"
+                              placeholder="precio por unidad"
+                            />
+                          </div>
+                        </div>
+                        <br />
+                        <!--categoria-->
+                        <select style="margin-top: 5px" name="categoria">
+                          <option value="">php</option>
+                        </select>
+                        <br />
+                        <!--seleccionar la imagen-->
+                        <label style="margin-top: 5px" for=""
+                          >seleccione imagen:</label
+                        >
+                        <br />
+                        <input
+                          style="margin-top: 5px"
+                          class="form-control"
+                          type="file"
+                          name="imagen"
+                          id=""
+                        />
+                        <br />
+                        <!--botones-->
+                        <div class="row" style="margin-top: 5px">
+                          <div class="col"></div>
+                          <!--atras-->
+                          <div class="col">
+                            <button class="btn btn-secondary">atras</button>
+                          </div>
+                          <!--agregar-->
+                          <div class="col">
+                            <input
+                              class="btn btn-success"
+                              type="submit"
+                              value="agregar"
+                            />
+                          </div>
+                          <div class="col"></div>
+                        </div>
+                      </div>
+                      <!---->
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!---->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #region js-->
+    <script src="../../../../../../../js/bootstrap.min.js"></script>
+    <!-- #endregion -->
+  </body>
+</html>

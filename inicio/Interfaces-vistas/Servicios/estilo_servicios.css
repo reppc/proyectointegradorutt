@@ -1,0 +1,52 @@
+/*css de estilos para las cartas exclusivamente*/
+
+/*contenedor de la carta*/
+.contenedor{   
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+    width: 400px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+/*parte principal pintada de blanco*/
+.inicio{
+    border: 2px solid #199B26;
+    font-family: Roboto;
+    font-weight: Regular;
+    margin-top:10px;
+    position: relative;
+    height: 200px;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+    background-color: white;
+    overflow: hidden;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+/*parte de abajo pintado de verde*/
+.final{
+    font-family: Roboto;
+    font-weight: Regular;
+    height: auto;
+    border-radius: 0px 0px 20px 20px;
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+    background-color: green;
+    overflow: hidden;
+}
+/*estilos para el boton*/
+.boton{
+    border: 0px;
+    border-radius: 20px;
+    padding: 10px;
+    position:relative;
+    margin-bottom: 10px;
+    background-color: white;
+    color: #24610F;
+    font-size: 30px;
+}

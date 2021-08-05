@@ -1,0 +1,68 @@
+.contenedor {
+    margin-top: 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+}
+
+.titulo {
+
+    margin: 2px;
+    padding: 5px;
+    /* titulos y textos */
+    color: #10771B;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.sub_t {
+    margin: 2px;
+    padding: 5px;
+    text-decoration-line: underline;
+    text-transform: lowercase;
+    color: #3C93E2;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.entrar {
+    margin: 20px;
+    margin-top: 0px;
+    border: 0px;
+    /* Verde Nav/Var */
+    background: #3DCB55;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.entrar p {
+    margin: 5px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.entrar:hover
+{
+    background-color: white;
+    color: black;
+}
+.entrar p:hover
+{
+    color: black;
+    text-shadow: 1px 2px rgba(0, 0, 0, 0.438);
+}
+
+.registrarse {
+    text-align: center;
+    align-items: center;
+    text-decoration-line: underline;
+    text-transform: lowercase;
+
+    color: #3C93E2;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+input {
+    border: 0px;
+    background: #E3E3E3;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+}

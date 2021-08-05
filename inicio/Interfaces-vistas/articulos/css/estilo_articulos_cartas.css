@@ -1,0 +1,46 @@
+/*caja contenedora de la carta*/
+.contenedor{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: black;
+    border-radius: 20px;
+    margin: 20px;
+}
+/*propiedad para que tido el contenido que este en linea cambia a linea de bloque para que no ocupe todo el ancho de la pantalla*/
+.carta{
+    display:inline-block;
+}
+/*parte de arriba de la carta pintada de blanco*/
+.arriba{
+    width: auto;
+    height: auto;
+    text-align: center;
+    background-color: white;
+    border-radius: 20px;
+    margin: 20px;
+}
+/*contenedor de la parte de enmedio*/
+.contenedor_oferta{
+    text-align: center;
+    background-color: #9CC528;
+    width: auto;
+    height: auto;
+    border-radius: 20px;
+    margin:10px;
+}
+/*parte de abajo*/
+.abajo{
+    background-color: white;
+    margin: 20px;
+    border-radius: 20px;
+    text-align: justify;
+}
+.abajo p {
+    margin: 3px;
+}

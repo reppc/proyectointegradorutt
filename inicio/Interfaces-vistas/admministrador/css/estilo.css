@@ -1,0 +1,30 @@
+*
+{
+    padding: 0px;
+    margin: 0px;
+}
+.contenedor
+{
+    background-color: #282121;
+    width: 100%;
+}
+.contenedor_menu
+{
+    width: 250px;
+    height: 621px;
+    background-color: #C4C4C4;
+    float: left;
+    margin:0px;
+}
+.contenedor_contenido
+{
+    border:1px solid black;   
+    margin:20px;
+}
+.links
+{
+    color: black;
+}
+.links:hover{
+    color: rgb(223, 223, 223);
+}
