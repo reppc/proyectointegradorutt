@@ -1,0 +1,36 @@
+/*ROL USUARIOS*/
+INSERT INTO rol_usuario (rol_usuario.tipo_usuario) VALUES 
+
+('Administrador'),
+
+('Administrador_Blog'),
+
+('Cliente');
+/*Usuarios*/
+INSERT INTO usuarios (usuarios.nombre_usuario, usuarios.nombres, usuarios.ap_paterno,usuarios.ap_materno, usuarios.correo, usuarios.contraseña, usuarios.Rol) VALUES 
+('Vic_555','Victor Isaac','Rodriguez','Garcia','4abduhosny_2012@gmail.com','papwi123','1'),
+('NairaUri1','Naira','Uribe','Macias','zahmadn@gmail.com','dan123','2'),
+('xxjuan77','Juan Manuel','Fernandez','fosaf47575@gmail.com','santi123','3'),
+('AleL55','Alejandra','Luna','Perez','jseham_20@gmail.com','iozo133','3'),
+('Leo33','Leon Daniel','Martinez','Hopi','vzlo_1@gmail.com','dan934','3'),
+('MariLaiu_5','Maria Rocio','Liu','Sanchez','9hunjun@gmail.com','letan123','3'),
+('Jorch123','Jorge','Cisneros','Martinez','qhic_1@gmail.com','fueg_1','3'),
+('Pablolike55','Pablo','Contreras','Siller','gsenyoo_5@gmail.com','54senda','3'), 
+('ManuGar','Manuel','Garcia','Perez','boussama179@gmail.com','nome35','3'),
+('GarayEle23','Elsa Patricia','Garay','2ishwarya@gmail.com','spider123','3'),
+('77Leslie','Leslie','Cuellar','Oropeza','2reyeslam991@gmail.com','itsjust123','3'),
+('Wilv935','Wilbert','Guajardo','Gutierrez','giwanttokilluman@gmail.com','ch123','3'),
+('HMigue_75','Hector Miguel','De Santiago','Adame','ospaco.red@gmail.com','desplant123','3'),
+('ArtePa_77xx','Paola','Arteaga','Garcia','zakaria12_@gmail.com','bait123','3'),
+('DanMP55','Tamara','Plascencia','Lopez','jennifer.mou_@gmail.com','mason123','3'),
+('Patrick-bob','Patricio Emanuel','Miron','Perez','ujames_1@gmail.com','papas123','3'),
+('ElisaMuro-Rey','Elisa','Muro','Reynoso','elovee_21@gmail.com','cuatra123','3'),
+('Tomas-Sylver777','Tomas','Corral','Lazarin','PaloArt55@gmail.com','pali123','3'),
+('MariLu-1999','Maria Lucia','Muñoz','De la rosa','ela_ou_55@outlook.es','123mma','3'),
+('ImaGamer555','Imanol','Arzate','Rivera','Imas_a_331@outlook.es','inten193','3'),
+('WhizMar31','Marcos','Martinez','Jimenez','Maride_la_55@outlook.com','marde123','3'),
+('Fel-Ma','Felipe','Macias','Adame','Tom_mas_55@outlook.es','bronce143','3'),
+('Josepe:)','Joseph','De la Rosa','Esquivel','Santi_00_2@outlook.es','menis123','3'),
+('AxaRyu','Isaac','Lopez','Gonzales','pbito123_4@gmail.com','qatar123','3'),
+('JorPe-77','Jorge','Perez','Cuellar','8714369915','9','3'),
+('DanBri-Gamerx','Daniel','Brizuela','De la cruz','Luna123_s@gmail.com','delha1','3')
