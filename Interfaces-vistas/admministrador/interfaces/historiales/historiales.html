@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../../../../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../css/estilo.css" />
     <title>Historiales</title>
   </head>
@@ -42,8 +42,6 @@
                 <hr />
                 <li><a href="" class="nav-link links">Historiales</a></li>
                 <hr />
-                <li><a href="" class="nav-link links">Tipos de servicio</a></li>
-                <hr />
                 <li><a href="" class="nav-link links">Cerrar sesión</a></li>
               </ul>
             </div>
@@ -76,21 +74,6 @@
                 aria-selected="true"
               >
                 pedido
-              </button>
-            </li>
-            <!--cita-->
-            <li class="nav-item" role="presentation">
-              <button
-                class="nav-link"
-                id="Clientes-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#Clientes"
-                type="button"
-                role="tab"
-                aria-controls="Clientes"
-                aria-selected="false"
-              >
-                cita
               </button>
             </li>
           </ul>
@@ -246,178 +229,13 @@
               </div>
             </div>
             <!---->
-            <!--citas-->
-            <div
-              class="tab-pane fade"
-              id="Clientes"
-              role="tabpanel"
-              aria-labelledby="Clientes-tab"
-            >
-            <div class="row">
-                <div class="col">
-                  <form action="">
-                    <!--contenido inicial-->
-                    <div class="col">
-                      <!--titulo-->
-                      <div class="row">
-                        <h2 style="text-align: center">Historial de citas</h2>
-                      </div>
-                      <!---->
-                      <!--contenido-->
-                      <form action="">
-                        <!--barra busqueda-->
-                        <div class="row">
-                          <!--espasios para alinear la barra de busqueda-->
-                          <div class="col-3"></div>
-                          <div class="col">
-                            <div class="col">
-                              <input
-                                style="
-                                  width: 300px;
-                                  border: 1px solid gray;
-                                  border-radius: 5px;
-                                "
-                                type="text"
-                                name="buscar"
-                                placeholder="buscar.."
-                              />
-                              <input
-                                class="btn btn-light"
-                                type="submit"
-                                value="buscar"
-                              />
-                            </div>
-                          </div>
-                          <!--espasios para alinear la barra de busqueda-->
-                          <div class="col-3"></div>
-                        </div>
-                        <!---->
-                        <!--contenido usuarios-->
-                        <div class="row">
-                          <!--filtro-->
-                          <div
-                            class="row"
-                            style="
-                              background-color: #c4c4c4;
-                              margin: 5px;
-                              border-radius: 10px;
-                            "
-                          >
-                            <div class="row">
-                              <p>filtro:</p>
-                            </div>
-                            <div class="row">
-                              <!--Cliente-->
-                              <div class="col">
-                                <label>Cliente:</label>
-                                <input
-                                  style="margin: 2px"
-                                  class="form-control"
-                                  type="text"
-                                  name="Cliente"
-                                  id=""
-                                />
-                              </div>
-                              <!---->
-                              <!--estado_cita-->
-                              <div class="col">
-                                  <label for="">estado de la cita:</label>
-                                  <select class="form-control" style="width: 200px;" name="" id="">
-                                      <option value="">php</option>
-                                  </select>
-                              </div>
-                              <!---->
-                              <!--Fecha cita-->
-                              <div class="col">
-                                <!--filtro fechas-->
-                                <div class="row">
-                                  <div class="col">
-                                    <p style="margin-top: 20px">Fecha cita:</p>
-                                  </div>
-                                  <!--Fecha cita-->
-                                  <div class="col">
-                                    <div class="row">
-                                      <input
-                                        class="form-control"
-                                        type="date"
-                                        name=""
-                                      />
-                                    </div>
-                                    <div class="row">
-                                      <input
-                                        class="form-control"
-                                        type="date"
-                                        name=""
-                                      />
-                                    </div>
-                                  </div>
-                                  <!---->
-                                </div>
-                                <!---->
-                              </div>
-                              <!---->
-                              <!--tipo cita-->
-                              <div class="co">
-                                
-                              </div>
-                              <!---->
-                              <!--boton-->
-                              <div class="col">
-                                <input
-                                  style="margin: 3px"
-                                  class="btn btn-secondary"
-                                  type="submit"
-                                  value="filtrar"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <!--tabla-->
-                          <div class="row">
-                            <table class="table">
-                              <thead>
-                                <tr>
-                                  <th scope="col">#</th>
-                                  <th scope="col">cliente</th>
-                                  <th scope="col">estado_cita</th>
-                                  <th scope="col">fecha_cita</th>
-                                  <th scope="col">domicilio</th>
-                                  <th scope="col">tipo_cita</th>
-                                  <th scope="col">tecnico</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>Mark</td>
-                                  <td>Otto</td>
-                                  <td>@mdo</td>
-                                  <td>@mdo</td>
-                                  <td>@mdo</td>
-                                  <td>@mdo</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                            <!---->
-                          </div>
-                        </div>
-                      </form>
-                      <!---->
-                    </div>
-                    <!---->
-                  </form>
-                </div>
-                <div class="col-1"></div>
-              </div>
-            </div>
-            <!---->
           </div>
           <!---->
         </div>
       </div>
     </div>
     <!-- #region js-->
-    <script src="../../../../../../js/bootstrap.min.js"></script>
+    <script src="../../../../js/bootstrap.min.js"></script>
     <!-- #endregion -->
   </body>
 </html>
