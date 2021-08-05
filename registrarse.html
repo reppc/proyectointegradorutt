@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="inicio/css/bootstrap.min.css" />
     <link rel="stylesheet" href="inicio/css/navStyle.css" />
     <link rel="stylesheet" href="css/estilo.css" />
-    <title>login</title>
+    <title>registrarse</title>
   </head>
   <body>
     <!--Barra navegadora-->
@@ -111,44 +111,74 @@
     <!---->
     <div class="row">
       <div class="col"></div>
-      <div class="col">
-        <div class="contenedor">
-          <div class="row">
-            <p class="titulo" style="text-align: center">iniciar sesion</p>
-          </div>
-          <!--datos formulario-->
-          <div class="row">
-            <form action="">
-              <div class="row" style="padding: 20px">
-                <label for="" class="titulo">usuario</label>
-                <br />
-                <input type="text" name="nombre"  />
-                <br />
-                <label for="" class="titulo">contraseña</label>
-                <br />
-                <input type="password" name="paswd"  />
-                <br />
-                <a href="" class="sub_t">olvide mi contraseña</a>
-                <br />
-                <!--boton-->
-                <div class="row">
-                  <div class="col"></div>
-                  <div class="col">
-                    <button class="entrar"><p>entrar</p></button>
+      <!--registrrse-->
+      <div class="row" style="width: auto;">
+        <div class="col">
+          <div class="contenedor">
+            <div class="row">
+              <p class="titulo" style="text-align: center">registrarse</p>
+            </div>
+            <!--datos formulario-->
+            <div class="row">
+              <form action="">
+                <div class="row" style="padding: 20px;margin-left:20px;">
+                  <div class="row">
+                    <!--columna 1 de registros-->
+                    <div class="col">
+                      <label for="" class="titulo">nombre</label>
+                      <br />
+                      <input type="text" name="nombre" />
+                      <br />
+                      <label for="" class="titulo">apellido paterno</label>
+                      <br />
+                      <input type="text" name="ap_paterno" />
+                      <br />
+                      <label for="" class="titulo">apellido materno</label>
+                      <br />
+                      <input type="text" name="ap_materno" />
+                      <br />
+                    </div>
+                    <!--columna 2 de registros-->
+                    <div class="col">
+                      <label class="titulo" for="">correo</label>
+                      <br>
+                      <input type="email" name="email">
+                      <br>
+                      <label class="titulo" for="">contraseña</label>
+                      <br>
+                      <input type="password" name="" id="">
+                      <br>
+                      <label class="titulo" for="">confirmar contraseña</label>
+                      <br>
+                      <input type="password">
+                    </div>
                   </div>
-                  <div class="col"></div>
+                  <!--boton-->
+                  <div class="row" style="margin-top: 20px;">
+                    <div class="col"></div>
+                    <div class="col">
+                      <button class="entrar"><p>registrarse</p></button>
+                    </div>
+                    <div class="col"></div>
+                  </div>
+                  <!---->
+                  <!--registrarse-->
+                  <div class="row">
+                    <a href="index.html" class="registrarse">entrar</a>
+                  </div>
+                  <!---->
                 </div>
-                <!---->
-                <!--registrarse-->
-                <a href="" class="registrarse">registrarse</a>
-                <!---->
-              </div>
-            </form>
+              </form>
+            </div>
+            <!---->
           </div>
-          <!---->
         </div>
       </div>
+      <!---->
       <div class="col"></div>
     </div>
+    <!-- #region js-->
+    <script src="inicio/js/bootstrap.min.js"></script>
+    <!-- #endregion -->
   </body>
 </html>
