@@ -1,0 +1,21 @@
+carrito:
+    actualizar_stock:
+        sumar o restar.
+        comprobar el stock 
+        antes de registrar 
+        al carrito el producto 
+        que sea mayor y no 
+        cero de la cantidad ingresada
+        de lo contrario no se inserta 
+        seguido con php se le notifica 
+        que se agoto en caso de ser 0
+        o en caso de no completar la 
+        cantidad ingresada igual php 
+        notifica la situasion.
+esto dependeria de un campo extra en carrito para evitarnos programacion en php.
+orden_detalle:
+    agregar pedido del carrito a detalle de orden: 
+    siempre y cuando se confirme la compra se pasaran 
+    los datos o modificasiones echas antes 
+    de presionar el boton asi como haber aceptado la notificasion o pantalla 
+    anti errores para confirmar al 100% la compra.
