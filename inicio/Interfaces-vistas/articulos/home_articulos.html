@@ -45,7 +45,7 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <!--inicio-->
             <li class="nav-item" style="margin-right: 5px">
-              <a class="nav-link" aria-current="page" href="inicio/inicio.html">
+              <a class="nav-link" aria-current="page" href="../../inicio.html">
                 <svg
                   style="margin-bottom: 5px"
                   width="30"
@@ -67,7 +67,6 @@
             <li class="nav-item dropdown" style="margin-right: 5px">
               <a
                 class="nav-link dropdown-toggle"
-                href="#"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -90,15 +89,27 @@
               </a>
               <!--lista del dropdown de articulos-->
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">articulos</a></li>
-                <li><a class="dropdown-item" href="#">categoria</a></li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="../../Interfaces-vistas/articulos/home_articulos.html"
+                    >articulos</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="../../Interfaces-vistas/articulos/interfaces/categorias/categorias.html"
+                    >categoria</a
+                  >
+                </li>
               </ul>
               <!---->
             </li>
             <!---->
             <!--servicios-->
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="inicio/inicio.html">
+              <a class="nav-link" aria-current="page" href="../../inicio.html">
                 <svg
                   style="margin-bottom: 5px"
                   width="18"
@@ -112,7 +123,6 @@
                     stroke="white"
                   />
                 </svg>
-
                 servicios</a
               >
             </li>
@@ -148,7 +158,13 @@
               </a>
               <!--lista del dropdown de articulos-->
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">blog</a></li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="../../Interfaces-vistas/Blog/pruebaBlog.html"
+                    >blog</a
+                  >
+                </li>
                 <li><a class="dropdown-item" href="#">categoria</a></li>
               </ul>
               <!---->
@@ -157,9 +173,9 @@
           </ul>
           <!-- #region boton-->
           <form class="d-flex">
-            <button class="btn btn-outline-light" id="redondeado" type="submit">
-              Acceder
-            </button>
+            <a href="login.html" class="btn btn-outline-light" id="redondeado"
+              >Acceder</a
+            >
           </form>
           <!-- #endregion -->
         </div>
@@ -167,6 +183,7 @@
       </div>
     </nav>
     <!---->
+    <!-- #region contenido home articulos-->
     <!--barra de busqueda-->
     <div class="row">
       <div
@@ -334,6 +351,7 @@
         </div>
       </div>
     </div>
+    <!-- #endregion -->
     <!---->
     <!-- #region js-->
 

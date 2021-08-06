@@ -57,7 +57,6 @@
             <li class="nav-item dropdown" style="margin-right: 5px">
               <a
                 class="nav-link dropdown-toggle"
-                href="#"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -80,8 +79,20 @@
               </a>
               <!--lista del dropdown de articulos-->
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">articulos</a></li>
-                <li><a class="dropdown-item" href="#">categoria</a></li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="inicio/Interfaces-vistas/articulos/home_articulos.html"
+                    >articulos</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="inicio/Interfaces-vistas/articulos/interfaces/categorias/categorias.html"
+                    >categoria</a
+                  >
+                </li>
               </ul>
               <!---->
             </li>
@@ -102,7 +113,6 @@
                     stroke="white"
                   />
                 </svg>
-
                 servicios</a
               >
             </li>
@@ -138,7 +148,13 @@
               </a>
               <!--lista del dropdown de articulos-->
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">blog</a></li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="inicio/Interfaces-vistas/Blog/pruebaBlog.html"
+                    >blog</a
+                  >
+                </li>
                 <li><a class="dropdown-item" href="#">categoria</a></li>
               </ul>
               <!---->
@@ -147,9 +163,9 @@
           </ul>
           <!-- #region boton-->
           <form class="d-flex">
-            <button class="btn btn-outline-light" id="redondeado" type="submit">
-              Acceder
-            </button>
+            <a href="login.html" class="btn btn-outline-light" id="redondeado"
+              >Acceder</a
+            >
           </form>
           <!-- #endregion -->
         </div>
@@ -202,18 +218,20 @@
                       <input type="password" />
                     </div>
                   </div>
-                  <!--boton-->
+                  <!--registrarse-->
                   <div class="row" style="margin-top: 20px">
                     <div class="col"></div>
                     <div class="col">
-                      <button class="entrar"><p>registrarse</p></button>
+                      <button type="submit" class="entrar">
+                        <p>registrarse</p>
+                      </button>
                     </div>
                     <div class="col"></div>
                   </div>
                   <!---->
-                  <!--registrarse-->
+                  <!--entrar-->
                   <div class="row">
-                    <a href="index.html" class="registrarse">entrar</a>
+                    <a href="login.html" class="registrarse">entrar</a>
                   </div>
                   <!---->
                 </div>
