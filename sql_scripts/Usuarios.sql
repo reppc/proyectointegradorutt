@@ -8,7 +8,6 @@ VALUES
   /*Usuarios*/
 ALTER TABLE
   usuarios AUTO_INCREMENT = 1;
-
 INSERT INTO
   usuarios (
     usuarios.nombre_usuario,
