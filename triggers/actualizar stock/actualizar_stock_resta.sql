@@ -1,4 +1,11 @@
-CREATE DEFINER = CURRENT_USER 
-TRIGGER `pruebas_appsocomm1`.`actualisar_stock_restar` 
-AFTER INSERT ON `carrito` 
-FOR EACH ROW update `productos` set productos.existencia=producto.existencia - new.cantidad where productos.id_producto=new.id_producto
+/*se restara el stock si se agrega a carrito*/
+CREATE TRIGGER stock_restar_pruebaI
+AFTER
+INSERT
+  ON carrito FOR EACH ROW
+update
+  productos
+set
+  productos.stock = producto.stock - carrito.cantidad
+where
+  productos.id_producto = carrito.producto

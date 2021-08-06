@@ -1,0 +1,3 @@
+Trigger para que no actualice el stock cuando es < 0
+
+https://es.stackoverflow.com/questions/163319/trigger-para-que-no-actualice-el-stock-cuando-es-0

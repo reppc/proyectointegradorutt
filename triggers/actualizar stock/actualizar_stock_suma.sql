@@ -1,9 +1,11 @@
 /*trigger actualiza el stock si se elimina un producto del carrito*/
-CREATE DEFINER = CURRENT_USER 
-TRIGGER `pruebas_appsocomm1`.`actualisar_stock_sumar` 
-AFTER DELETE ON `carrito` FOR EACH ROW 
-FOR EACH ROW
-BEGIN
-	update productos set productos.existencia=producto.existencia + new.cantidad
-	where productos.id_producto=new.id_producto
-END;
+CREATE TRIGGER stock_sumar_pruebaI
+AFTER
+INSERT
+  ON carrito FOR EACH ROW
+update
+  productos
+set
+  productos.stock = producto.stock + carrito.cantidad
+where
+  productos.id_producto = carrito.producto
