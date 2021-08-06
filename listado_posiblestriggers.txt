@@ -12,14 +12,15 @@ carrito:
         o en caso de no completar la 
         cantidad ingresada igual php 
         notifica la situasion.
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
 esto dependeria de un campo extra en carrito para evitarnos programacion en php.
-orden_compra:
+-orden_compra:
     agregar pedido del carrito a orden_compra: 
     siempre y cuando se confirme la compra se pasaran 
     los datos o modificasiones echas antes 
     de presionar el boton asi como haber aceptado la notificasion o pantalla 
     anti errores para confirmar al 50% la compra.
-orden_detalle:
+-orden_detalle:
     agregar orden_detalle:
         agregar otro campo de confirmacion a detalle de 
         orden para finalizar la compra al 100% aqui ya 

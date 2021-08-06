@@ -1,3 +1,4 @@
+/*trigger actualiza el stock si se elimina un producto del carrito*/
 CREATE DEFINER = CURRENT_USER 
 TRIGGER `pruebas_appsocomm1`.`actualisar_stock_sumar` 
 AFTER DELETE ON `carrito` FOR EACH ROW 
