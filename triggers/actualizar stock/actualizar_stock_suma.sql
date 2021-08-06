@@ -1,8 +1,7 @@
-/*trigger actualiza el stock si se elimina un producto del carrito*/
-CREATE TRIGGER stock_sumar_pruebaI
+DROP TRIGGER IF EXISTS `stock_sumar_pruebaI`;
+CREATE DEFINER = `root` @`localhost` TRIGGER `stock_sumar_pruebaI`
 AFTER
-INSERT
-  ON carrito FOR EACH ROW
+  DELETE ON `carrito` FOR EACH ROW
 update
   productos
 set
