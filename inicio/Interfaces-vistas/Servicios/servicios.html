@@ -13,6 +13,21 @@
     <link rel="stylesheet" href="estilo_servicios.css" />
     <link rel="stylesheet" href="../../css/navStyle.css">
     <style>
+      .redondeado{
+            margin-top: 2px;
+            border-top-left-radius: 37px;
+            border-top-right-radius: 37px;
+            border-bottom-left-radius: 37px;
+            border-bottom-right-radius: 37px;
+            overflow: hidden;
+        }
+        .btn-acceder{
+        text-decoration: none;
+        color: white;
+        }
+        .btn-acceder:hover{
+            color: black;
+        }
       .estilop{
         margin-top: 20px;
         margin-left: 20px;
@@ -97,8 +112,8 @@
               </ul>
               <!--acceder-->
               <form class="d-flex">
-              <button class="btn btn-outline-light" id="redondeado" type="submit">Acceder</button>
-              </form>
+                <button class="btn btn-outline-light redondeado" type="submit"> <a href="../../../login.html" class="btn-acceder">Acceder</a></button>
+                </form>
         </div>
       </div>
     </nav>
