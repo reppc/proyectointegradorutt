@@ -26,6 +26,7 @@ VALUES
 ALTER TABLE
   orden_compra AUTO_INCREMENT = 1;
 alter table orden_compra AUTO_INCREMENT=1;
+ --orden_compra
 insert into
   orden_compra(cliente,metodoPago,total,domicilio,fecha_pedido)
 values
@@ -38,6 +39,8 @@ values
   (7, 2, '9113.86', 7, '2020-02-18'),
   (8, 3, '9914.56', 8, '2020-03-20'),
   (9, 1, 849, 9, '2020-04-29');
+
+ --orden_detalle
 insert into
   orden_detalle(orden,producto, cantidad, precio)
 VALUES
