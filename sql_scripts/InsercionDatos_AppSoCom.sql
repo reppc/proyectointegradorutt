@@ -270,148 +270,28 @@ MODIFY
   COLUMN productos.nombre VARCHAR(80);
 ALTER TABLE
   productos AUTO_INCREMENT = 1;
-INSERT INTO
-  productos (
-    productos.nombre,
-    productos.existencia,
-    productos.precio_unitario,
-    productos.categoria,
-    productos.descripcion
-  )
+INSERT INTO productos (`nombre`, `descripcion`, `stock`, `precio_unitario`, `categoria`)
 VALUES
-  (
-    'Disco Duro Interno 1TB WD',
-    '66',
-    '849.00',
-    'refacciones',
-    'Disco Duro Interno 1TB 3.5 SATA3 7200RPM Nuevo WD WD10EZEX'
-  ),
-  (
-    'Unidad de estado solido SSD 120GB',
-    '30',
-    '549.00',
-    'refacciones',
-    'Unidad de estado solido SSD 120GB 2.5" SATA3 Kingston A400 / SA400S37/120G'
-  ),
-  (
-    'Aire Comprimido Silimex',
-    '85',
-    '125.76',
-    'limpieza',
-    'Aire comprimido Silimex / Teclados y electronicos / Circuitos mecánicos 660Ml'
-  ),
-  (
-    'Liquido Limpiador Perfect Choice',
-    '10',
-    '69.00',
-    'limpieza',
-    'Liquido Limpiador Alcohol Isopropilico / Para electronicos / PC-033066'
-  ),
-  (
-    'Toallitas Limpiadoras Perfect Choice',
-    '8',
-    '49.00',
-    'limpieza',
-    'Toallitas Limpiadoras Perfect Choice / Ideal para pantallas'
-  ),
-  (
-    'Mouse Gamer Logitech G203 Lightsync Black',
-    '300',
-    '429.00',
-    'accesorios',
-    'Mouse Gamer Logitech G203 Lightsync Black / Optico / USB / 8000DPI / Led RGB/'
-  ),
-  (
-    'Mouse Gamer Yaguaret Mantis',
-    '288',
-    '299.99',
-    'accesorios',
-    'Mouse Gamer Yaguaret Mantis / Optico / USB / 6400DPI / Led RGB/ GMMANTISYGT / 7 Botones'
-  ),
-  (
-    'Teclado Mecanico Gamer Naceb Black Cobra RGB',
-    '26',
-    '399.00',
-    'accesorios',
-    'Teclado Mecanico Gamer Naceb Black Cobra RGB / USB / NA-0944 / Switch Red / Antighosting / Reposamuñecas desmontable'
-  ),(
-    'Teclado Gamer Naceb',
-    '205',
-    '219.00',
-    'accesorios',
-    'Teclado Gamer Naceb NA-0912 Retroiluminado / Antighosting / Efecto rainbow'
-  ),(
-    'Memoria RAM Kingston HyperX DDR3',
-    '12',
-    '518.18',
-    'refacciones',
-    'Memoria RAM Kingston HyperX 4GB 1x4GB DDR3L 1866Mhz / Sodimm HX318LS11IB/4/ para Laptop'
-  ),(
-    'Memoria RAM DDR4',
-    '38',
-    '549.00',
-    'refacciones',
-    'Memoria RAM DDR4 4GB 2666MHz Kingston HyperX Fury 1 Modulo Negro HX426C16FB3/4'
-  ),(
-    'Memoria RAM DDR3',
-    '52',
-    '779.00',
-    'refacciones',
-    'Memoria RAM DDR3 4GB 1333MHz Kingston Value 1 Modulo / KVR13N9S8/4'
-  ),(
-    'Pasta Termica Cooler Master',
-    '235',
-    '299.99',
-    'limpieza',
-    'Pasta Termica Cooler Master MasterGel Pro V2 / MGY-ZOSG-N15M-R3'
-  ),(
-    'Fuente de poder 400W EVGA',
-    '158',
-    '650.99',
-    'refacciones',
-    'Fuente de poder 400W EVGA Continuous Power Active PFC 75%Ef. / 100-N1-0400-L1'
-  ),(
-    'Fuente de poder Getttech',
-    '250',
-    '259.00',
-    'refacciones',
-    'Fuente de poder Getttech 500W - FG500WBX'
-  ),
-  (
-    'Disipador para CPU Disipador y Ventilador para Procesador',
-    '64',
-    '619.66',
-    'refacciones',
-    'Disipador para CPU Disipador y Ventilador para Procesador Thermaltake Contact Silent 12 - 120mm X1 Intel y AMD'
-  ),
-  (
-    'Disipador y Ventilador para Procesador',
-    '55',
-    '300.50',
-    'refacciones',
-    'Disipador y Ventilador para Procesador Cooler Master Hyper T4 - 120mm X1 Intel y AMD'
-  ),
-  (
-    'Tarjeta Madre Asus',
-    '190',
-    '1379.55',
-    'refacciones',
-    'Tarjeta Madre Asus PRIME A320M-K Socket AM4 AMD A320 Micro ATX / DDR4'
-  ),
-  (
-    'Tarjeta Madre Intel',
-    '10',
-    '1299.99',
-    'refacciones',
-    'Tarjeta Madre MSI H310M PRO-VDH PLUS Socket 1151-v2 Intel H310 Micro-ATX'
-  ),
-  (
-    'Tarjeta de video NVIDIA',
-    '20',
-    '2499.00',
-    'refacciones',
-    'Tarjeta de video NVIDIA GeForce GT 1030 2GB GDDR4 / Gigabyte / HDMI, DVI / GV-N1030D4-2GL'
-  );
+('Disco Duro Interno 1TB WD','Disco Duro Interno 1TB 3.5 SATA3 7200RPM Nuevo WD WD10EZEX','66','849.00',3),
+('Unidad de estado solido SSD 120GB','Unidad de estado solido SSD 120GB 2.5" SATA3 Kingston A400 / SA400S37/120G','30','549.00',3),
+('Aire Comprimido Silimex','Aire comprimido Silimex / Teclados y electronicos / Circuitos mecánicos 660Ml','85','125.76',2),
+('Liquido Limpiador Perfect Choice','Liquido Limpiador Alcohol Isopropilico / Para electronicos / PC-033066','10','69.00',2),
+('Toallitas Limpiadoras Perfect Choice','Toallitas Limpiadoras Perfect Choice / Ideal para pantallas','8','49.00',2),
+('Mouse Gamer Logitech G203 Lightsync Black','Mouse Gamer Logitech G203 Lightsync Black / Optico / USB / 8000DPI / Led RGB/','300','429.00',2),
+('Mouse Gamer Yaguaret Mantis','Mouse Gamer Yaguaret Mantis / Optico / USB / 6400DPI / Led RGB/ GMMANTISYGT / 7 Botones','288','299.99',2),
+('Teclado Mecanico Gamer Naceb Black Cobra RGB','Teclado Mecanico Gamer Naceb Black Cobra RGB / USB / NA-0944 / Switch Red / Antighosting / Reposamuñecas desmontable','26','399.00',2),
+('Teclado Gamer Naceb','Teclado Gamer Naceb NA-0912 Retroiluminado / Antighosting / Efecto rainbow','205','219.00',2),
+('Memoria RAM Kingston HyperX DDR3','Memoria RAM Kingston HyperX 4GB 1x4GB DDR3L 1866Mhz / Sodimm HX318LS11IB/4/ para Laptop','12','518.18',3),
+('Memoria RAM DDR4','Memoria RAM DDR4 4GB 2666MHz Kingston HyperX Fury 1 Modulo Negro HX426C16FB3/4','38','549.00',3),
+('Memoria RAM DDR3','Memoria RAM DDR3 4GB 1333MHz Kingston Value 1 Modulo / KVR13N9S8/4','52','779.00',3),
+('Pasta Termica Cooler Master','Pasta Termica Cooler Master MasterGel Pro V2 / MGY-ZOSG-N15M-R3','235','299.99',2),
+('Fuente de poder 400W EVGA','Fuente de poder 400W EVGA Continuous Power Active PFC 75%Ef. / 100-N1-0400-L1','158','650.99',3),
+('Fuente de poder Getttech','Fuente de poder Getttech 500W - FG500WBX','250','259.00',3),
+('Disipador para CPU Disipador y Ventilador para Procesador','Disipador para CPU Disipador y Ventilador para Procesador Thermaltake Contact Silent 12 - 120mm X1 Intel y AMD','64','619.66',3),
+('Disipador y Ventilador para Procesador','Disipador y Ventilador para Procesador Cooler Master Hyper T4 - 120mm X1 Intel y AMD','55','300.50',3),
+('Tarjeta Madre Asus','Tarjeta Madre Asus PRIME A320M-K Socket AM4 AMD A320 Micro ATX / DDR4','190','1379.55',3),
+('Tarjeta Madre Intel','Tarjeta Madre MSI H310M PRO-VDH PLUS Socket 1151-v2 Intel H310 Micro-ATX','10','1299.99',3),
+('Tarjeta de video NVIDIA','Tarjeta de video NVIDIA GeForce GT 1030 2GB GDDR4 / Gigabyte / HDMI, DVI / GV-N1030D4-2GL','20','2499.00',3);
 insert into
   metodo_pago(nombre)
 VALUES
