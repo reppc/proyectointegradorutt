@@ -128,7 +128,7 @@
           <div class="titulo">
               Llena el formulario para registrarte
           </div>
-          <form id="loginform">
+          <form id="loginform" action="../Scripts/registroCompleto.php" method="POST">
             <div class="row">
               <div class="col">
               <input type="text" name="nombre" placeholder="Escribe tu nombre" required autofocus>

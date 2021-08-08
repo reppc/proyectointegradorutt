@@ -7,10 +7,58 @@
     <link rel="stylesheet" href="../inicio/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../inicio/css/navStyle.css" />
     <link rel="stylesheet" href="../css/estilo.css" />
-    <link rel="stylesheet" href="../css/registrarse.css">
+    <style>
+      #contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    margin: 0;
+    padding: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+    }
+    .titulo {
+        font-size: 250%;
+        color:#56c93f;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    #central {
+        max-width: 320px;
+        width: 100%;
+    }
+    #login {
+        width: 100%;
+        padding: 50px 30px;
+        background-color: #eafff1;
+        
+        -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
+        -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
+        box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
+        
+        border-radius: 3px 3px 3px 3px;
+        -moz-border-radius: 3px 3px 3px 3px;
+        -webkit-border-radius: 3px 3px 3px 3px;
+        
+        box-sizing: border-box;
+    }
+    .body-g{
+        background-color: #2aa13e;
+    }
+    .img-c{
+      text-align: center;
+    }
+    .img-tam{
+      width: 50%;
+    }
+    </style>
     <title>Registrarse</title>
 </head>
-<body>
+<body class="body-g">
     <!--Barra navegadora-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <!--logo-->
@@ -111,5 +159,34 @@
         </div>
       </nav>
       <!---->
+        <?php
+        include 'database.php';
+        $db= new Database();
+        $db->conectarDB();
+    
+        extract($_POST);
+    
+        $hash=password_hash($contraseña, PASSWORD_DEFAULT);
+        $cadena="INSERT INTO usuarios(nombres, ap_paterno, ap_materno,nombre_usuario,correo,contraseña,Rol, fecha_creacion) 
+        VALUES('$nombre','$ap_paterno','$ap_materno','$usuario','$correo','$hash',3,CURDATE())";
+    
+        $db->ejecutaSQL($cadena);
+        $db->desconectarDB();
+    
+        echo "<div id='contenedor'>
+                    <div id='central'>
+                      <div id='login'>
+                        <div class='titulo'>
+                          Registro completo
+                        </div>
+                        <div class='img-fluid img-c'>
+                          <img class='img-tam' src='../login/imgLogin/checked-icon-clipart1.png'>
+                        </div>
+                      </div>
+                    </div>
+              </div>";
+        header("refresh:3; ../login/login.html");
+        ?>
+
 </body>
 </html>
