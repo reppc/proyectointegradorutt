@@ -27,7 +27,7 @@ ALTER TABLE
   orden_compra AUTO_INCREMENT = 1;
 alter table orden_compra AUTO_INCREMENT=1;
 insert into
-  orden_compra(id_cliente,id_metodoPago,total,id_domicilio,fecha_pedido)
+  orden_compra(cliente,metodoPago,total,domicilio,fecha_pedido)
 values
   (1, 1, 1698, 1, '2019-08-12'),
   (2, 2, 1647, 2, '2019-09-29'),
@@ -39,15 +39,14 @@ values
   (8, 3, '9914.56', 8, '2020-03-20'),
   (9, 1, 849, 9, '2020-04-29');
 insert into
-  orden_detalle(id_orden, id_producto, cantidad, precio)
+  orden_detalle(orden,producto, cantidad, precio)
 VALUES
---id_orden, id_producto, cantidad, precio
-  (1        , 1          , 2        , 849),--
-  (2        , 2          , 3        , 549),--
-  (3        , 3          , 4        , '125.76'),--
-  (4        , 3          , 5        , '125.76'),--
-  (5        , 8          , 8        , 399),--
-  (6        , 20          , 7        , 2499),--
-  (7        , 14          , 14        ,'650.99'),--
-  (8        , 16          , 16        , '619.66'),--
-  (9        , 1          , 1        , 849);
+  (1, 1, 2, 849),
+  (2, 2, 3, 549),
+  (3, 3, 4, '125.76'),
+  (4, 3, 5, '125.76'),
+  (5, 8, 8, 399),
+  (6, 20, 7, 2499),
+  (7, 14, 14,'650.99'),
+  (8, 16, 16, '619.66'),
+  (9, 1, 1, 849);
