@@ -4,10 +4,9 @@ in nombres varchar(40),
 in ap_paterno VARCHAR(40), 
 in ap_materno VARCHAR(40),
 in contraseña VARCHAR(40), 
-in correo  VARCHAR(40),
-in Rol int
+in correo  VARCHAR(40)
 )
 BEGIN
 insert into usuarios(nombre_usuario,nombres,ap_paterno, ap_materno,contraseña,correo,Rol,fecha_creacion)
-values(nombre_usuario,nombres,ap_paterno, ap_materno,contraseña,correo,Rol,CURRENT_DATE);
+values(nombre_usuario,nombres,ap_paterno, ap_materno,contraseña,correo,1,CURRENT_DATE);
 END
