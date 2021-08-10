@@ -1,0 +1,6 @@
+agregar fecha en detalle de orden para coincidir las 
+fechas de orden de compra con la de detalle y actializar 
+la orden al terminar el llenado de domicilio y los datos 
+requeridos en el formulario.
+ALTER TABLE `carrito` ADD `confirmacion` BOOLEAN NULL DEFAULT FALSE AFTER `cantidad`;
+ALTER TABLE `carrito` ADD `fecha_agregado` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP;
