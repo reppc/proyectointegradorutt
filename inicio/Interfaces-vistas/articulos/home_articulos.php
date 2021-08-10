@@ -1,3 +1,6 @@
+<?php
+include("scripts/productos/productos.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -198,6 +201,8 @@
             </div>
             <!--barra de busqueda-->
             <div class="col">
+              <div class="row">
+              <div class="col">
               <input
                 class="form-control"
                 type="text"
@@ -205,16 +210,13 @@
                 id=""
                 style="width: 500px; margin-top: 5px; margin-right: 5px"
               />
-              <button
-                style="
-                  width: 30px;
-                  height: 30px;
-                  position: absolute;
-                  margin-left: 550px;
-                "
-              >
+              </div>
+              <div class="col">
+              <button name="buscar_producto" style="margin-top: 5px;margin-left: -65px;"type="submit" value="" class="btn btn-submit">
                 <i class="bi bi-search"></i>
               </button>
+              </div>
+              </div>
             </div>
           </div>
         </form>
@@ -229,9 +231,36 @@
     >
       <div class="carousel-inner">
         <!--codigo php para la carga de los articulos que apareseran en el carrusel-->
-        <div class="carousel-item active">
-          <img src="../" class="d-block w-100" alt="..." />
-        </div>
+        <?php
+        $producto1=new producto();
+        /*item activo*/
+        $fila=$producto1->cargar_productos(1);
+        foreach ($fila as $resultado) 
+        {
+          if ($resultado->id_producto=1) {
+            echo"  <div class='carousel-item active'>
+                <img style='margin-left:10%' width='150px' height='300px' src='$resultado->imagen' class='d-block w-25' alt='#'>
+                <div class='carousel-caption d-none d-md-block'>
+                <h5 style='color:black;'>$resultado->nombre</h5>
+                <p style='color:black;'>$$resultado->precio_unitario</p>
+                </div>
+              </div>";
+          }
+        }
+        $fila=$producto1->cargar_productos(3);
+        foreach ($fila as $resultado) 
+        {
+          if ($resultado->id_producto!=1) {
+            echo"<div class='carousel-item'>
+                <img style='margin-left:10%' width='150px' height='300px' src='$resultado->imagen' class='d-block w-25' alt='#'>
+                <div class='carousel-caption d-none d-md-block'>
+                  <h5 style='color:black;'>$resultado->nombre</h5>
+                  <p style='color:black;'>$$resultado->precio_unitario</p>
+                </div>
+              </div>";
+          }
+        }
+        ?>
       </div>
       <button
         class="carousel-control-prev"
@@ -259,72 +288,31 @@
       <hr />
     </div>
     <div class="row">
-      <!--Accesorios-->
-      <div class="col">
-        <div style="display: block; width: 150px">
-          <div>
-            <img
-              width="150px"
-              height="90px"
-              src="imagenes/Accesorios.jpeg"
-              alt=""
-            />
-            <p
-              style="
-                background-color: #1c8ee0;
-                text-align: center;
-                display: block;
-              "
-            >
-              Accesorios
-            </p>
+      <?php
+      $categoria=new producto();
+      $categorias=$categoria->cargar_categorias();
+      foreach ($categorias as $resultado) 
+        {
+          echo"
+          <div class='col'>
+            <div style='display: inline-block; width: 150px;'>
+              <div>
+                <p
+                  style='
+                    margin-left:20px;
+                    background-color: #1c8ee0;
+                    text-align: center;
+                    display: block;
+                  '
+                >
+                  $resultado->categoria
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <!--Refacciones-->
-      <div class="col">
-        <div style="display: block; width: 150px">
-          <div>
-            <img
-              width="150px"
-              height="90px"
-              src="imagenes/Accesorios.jpeg"
-              alt=""
-            />
-            <p
-              style="
-                background-color: #1c8ee0;
-                text-align: center;
-                display: block;
-              "
-            >
-              Accesorios
-            </p>
-          </div>
-        </div>
-      </div>
-      <!--Limpieza-->
-      <div class="col">
-        <div style="display: block; width: 150px">
-          <div>
-            <img
-              width="150px"
-              height="90px"
-              src="imagenes/Accesorios.jpeg"
-              alt=""
-            />
-            <p
-              style="
-                background-color: #1c8ee0;
-                text-align: center;
-                display: block;
-              "
-            >
-              Accesorios
-            </p>
-          </div>
-        </div>
-      </div>
+          ";
+        }
+      ?>
     </div>
     <!---->
     <!--productos-->
@@ -332,23 +320,32 @@
       <h2>Productos</h2>
       <hr />
       <div class="col">
-        <div class="contenedor">
-          <div class="carta">
-            <div class="arriba">
-              <div class="contenedor_foto">
-                <p>contenedor_foto</p>
+      <?php
+        /*item activo*/
+        $fila=$producto1->cargar_productos(20);
+        foreach ($fila as $resultado) 
+        {
+          if ($resultado->id_producto>=3) {
+            echo"<div class='contenedor'>
+            <div class='carta'>
+              <div class='arriba'>
+                <div class='contenedor_foto'>
+                  <img width='' height='' 
+                  src='$resultado->imagen' class='d-block w-10' alt='#'>
+                </div>
+              </div>
+              <div class='abajo'>
+                <div class='contenedor_abajo'>
+                  <h5 style='margin:5px; text-align:center;'>$resultado->nombre</h5>  
+                  </br>
+                  <p style='margin:5px; text-align:center;'>$$resultado->precio_unitario</p>
+                </div>
               </div>
             </div>
-            <div class="contenedor_oferta">
-              <p>contenedor_oferta</p>
-            </div>
-            <div class="abajo">
-              <div class="contenedor_abajo">
-                <p>contenedor_abajo</p>
-              </div>
-            </div>
-          </div>
-        </div>
+          </div>";
+          }
+        }
+        ?>
       </div>
     </div>
     <!-- #endregion -->
