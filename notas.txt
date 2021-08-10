@@ -2,5 +2,23 @@ agregar fecha en detalle de orden para coincidir las
 fechas de orden de compra con la de detalle y actializar 
 la orden al terminar el llenado de domicilio y los datos 
 requeridos en el formulario.
+--carrito
 ALTER TABLE `carrito` ADD `confirmacion` BOOLEAN NULL DEFAULT FALSE AFTER `cantidad`;
 ALTER TABLE `carrito` ADD `fecha_agregado` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP;
+
+--orden_compra
+ALTER TABLE `orden_compra` ADD `fecha_pedido` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE `orden_compra` CHANGE `cliente` `cliente` INT(10) NULL, 
+CHANGE `total` `total` INT(10) NULL, 
+CHANGE `domicilio` `domicilio` INT(10) NULL, 
+CHANGE `metodoPago` `metodoPago` INT(10) NULL,
+CHANGE `fecha_pedido` `fecha_pedido` TIMESTAMP on 
+update CURRENT_TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP;
+
+--orden_detalle
+ALTER TABLE `orden_detalle` CHANGE `orden` `orden` INT(10) NULL;
+ALTER TABLE `orden_detalle` CHANGE `producto` `producto` INT(10) NULL;
+ALTER TABLE `orden_detalle` CHANGE `cantidad` `producto` INT(10) NULL;
+ALTER TABLE `orden_detalle` CHANGE `precio` `producto` INT(10) NULL;
+
+--
