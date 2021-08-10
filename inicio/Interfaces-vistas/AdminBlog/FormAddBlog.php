@@ -72,10 +72,10 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/Blog/pruebaBlog.html" >Informativo</a>
+                            <a class="dropdown-item" href="../Blog/Proyecto/php/blog-informativo.php" >Informativo</a>
                           </li>
-                          <li><a class="dropdown-item" href="#">Consejos</a></li>
-                          <li><a class="dropdown-item" href="#">Sugerencias</a></li>
+                          <li><a class="dropdown-item" href="../Blog/Proyecto/php/blog-consejos.php">Consejos</a></li>
+                          <li><a class="dropdown-item" href="../Blog/Proyecto/php/blog-sugerencias.php">Sugerencias</a></li>
                         </ul>
                               
                 </li>
@@ -123,7 +123,7 @@
             <div class="titulo">
                 Nueva entrada
             </div>
-            <form id="loginform" action="" method="POST">
+            <form id="loginform" action="../../../Scripts/agreagarPubl.php" method="POST" enctype="multipart/form-data"
               <div class="row">
                 <div class="col">
                     <label for="formFile" class="form-label">Titulo:</label>
@@ -132,15 +132,17 @@
                     <label for="formFile" class="form-label">Contenido:</label>
                     <textarea class="form-control" placeholder="Contenido de la publicacion" name="contenido" required></textarea>
                     <br>
-                    <label class="form" for="">Categoria: </label>
-                    <select class="form-control" name="categoria" id="">
-                        <option value="0">Elige la categoria</option>
-                        <option value="0">CAT 1</option>
-                        <option value="0">CAT 2</option>
-                        <option value="0">CAT 3</option>
+                    <label class="form" for="categoria-label">Tema: </label>
+                    <select class="form-control" name="tema" id="">
+                        <option value="null">Elige el tema</option>
+                        <option value="informativa">Informativa</option>
+                        <option value="sugerencias">Sugerencias</option>
+                        <option value="consejos">Consejos</option>
                     </select>
+        
                     <br>
                 <div class="mb-3">
+                    <input type="hidden" name="MAX_TAM" value="20097152">
                     <label for="formFile" class="form-label">Imagen:</label>
                     <input class="form-control" type="file" name="imagen" id="formFile">
                 </div>

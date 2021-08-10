@@ -4,6 +4,8 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../styles/blog-info.css">
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+  <!--JS-->
+  <script src="../js/bootstrap.min.js"></script>
 	<style>
     .redondeado{
           margin-top: 2px;
@@ -46,7 +48,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <!--Inicio-->
                 <li class="nav-item navli">
-                    <a class="nav-link active" aria-current="page" href="../inicio/index copy.html">
+                    <a class="nav-link active" aria-current="page" href="../../../../index copy.html">
                         <svg style="margin-bottom: 5px;" width="30" height="15" viewBox="0 0 1 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M29.1667 11.0887L19.7917 2.65125L5.02917 15.9375H8.33333V30.9375H14.5833V19.6875H25V30.9375H31.25V15.9375H34.5542L31.25 12.9637V6.5625H29.1667V11.0887ZM0 17.8125L19.7917 0L27.0833 6.5625V4.6875H33.3333V12.1875L39.5833 17.8125H33.3333V32.8088H22.9167V21.5588H16.6667V32.8088H6.25V17.8125H0Z" fill="white"/>
                         </svg>
@@ -105,21 +107,21 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/Blog/pruebaBlog.html" > Ir a Blog</a>
+                            <a class="dropdown-item" href="../php/blog2.php" > Ir a Blog</a>
                           </li>
                           <div class="dropdown-divider"></div>
                           <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/Blog/pruebaBlog.html" >Informativo</a>
+                            <a class="dropdown-item" href="../php/blog-informativo.php" >Informativo</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="#">Consejos</a>
+                              <a class="dropdown-item" href="../php/blog-consejos.php">Consejos</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="#">Sugerencias</a>
+                              <a class="dropdown-item" href="../php/blog-sugerencias.php">Sugerencias</a>
                             </li>
                           <div class="dropdown-divider"></div>
                           <li>
-                            <a class="dropdown-item" href="#">Crear entrada</a>
+                            <a class="dropdown-item" href="../../../AdminBlog/FormAddBlog.php">Crear entrada</a>
                           </li>
                         </ul>
                               

@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../styles/blog-conse.css">
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+  <script src="../js/bootstrap.min.js"></script>
 	<style>
     .redondeado{
           margin-top: 2px;
@@ -29,6 +30,12 @@
       .body-g{
       background-color: #2aa13e;
       }
+
+      .img-sz{
+        width: 50%;
+      }
+
+
   </style>
 	<title>Blog-Consejos</title>
 </head>
@@ -47,7 +54,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <!--Inicio-->
                 <li class="nav-item navli">
-                    <a class="nav-link active" aria-current="page" href="../inicio/index copy.html">
+                    <a class="nav-link active" aria-current="page" href="../../../../index copy.html">
                         <svg style="margin-bottom: 5px;" width="30" height="15" viewBox="0 0 1 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M29.1667 11.0887L19.7917 2.65125L5.02917 15.9375H8.33333V30.9375H14.5833V19.6875H25V30.9375H31.25V15.9375H34.5542L31.25 12.9637V6.5625H29.1667V11.0887ZM0 17.8125L19.7917 0L27.0833 6.5625V4.6875H33.3333V12.1875L39.5833 17.8125H33.3333V32.8088H22.9167V21.5588H16.6667V32.8088H6.25V17.8125H0Z" fill="white"/>
                         </svg>
@@ -110,17 +117,17 @@
                           </li>
                           <div class="dropdown-divider"></div>
                           <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/Blog/pruebaBlog.html" >Informativo</a>
+                            <a class="dropdown-item" href="../php/blog-informativo-art1.php" >Informativo</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="#">Consejos</a>
+                              <a class="dropdown-item" href="../php/blog-consejos.php">Consejos</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="#">Sugerencias</a>
+                              <a class="dropdown-item" href="../php/blog-sugerencias.php">Sugerencias</a>
                             </li>
                           <div class="dropdown-divider"></div>
                           <li>
-                            <a class="dropdown-item" href="#">Crear entrada</a>
+                            <a class="dropdown-item" href="../../../AdminBlog/FormAddBlog.php">Crear entrada</a>
                           </li>
                         </ul>
                               
@@ -165,91 +172,73 @@
 			<p class="textoR">Consejos</p>
 		</div>
 		<a href="blog-informativo.php" type="button" class="btn btn-primary"style="position: absolute;
-width: 150px;
-height: 38px;
-left: 24%;
-top: 150px;
- font-size: 15px;
- background-color: #6FD950;
- color: black; #CBFDFA;#C4C4C4;
- border-radius: 30px;
-">informativo </a>	
-<a href="blog-sugerencias.php" type="button" class="btn btn-primary"style="position: absolute;
-width: 150px;
-height: 38px;
-left: 44%;
-top: 150px;
- font-size: 15px;
- background-color:#CBFDFA;
- color: black; #C4C4C4;
- border-radius: 30px;
-">sugerencias </a>	
-<a href="blog-consejos.php" type="button" class="btn btn-primary"style="position: absolute;
-width: 150px;
-height: 38px;
-left: 64%;
-top: 150px;
- font-size: 15px;
- background-color:#C4C4C4;
- color: black; 
- border-radius: 30px;
-">Consejos</a>	
-
-	
-
+      width: 150px;
+      height: 38px;
+      left: 24%;
+      top: 150px;
+      font-size: 15px;
+      background-color: #6FD950;
+      color: black; #CBFDFA;#C4C4C4;
+      border-radius: 30px;
+      ">informativo </a>	
+    <a href="blog-sugerencias.php" type="button" class="btn btn-primary"style="position: absolute;
+      width: 150px;
+      height: 38px;
+      left: 44%;
+      top: 150px;
+      font-size: 15px;
+      background-color:#CBFDFA;
+      color: black; #C4C4C4;
+      border-radius: 30px;
+      ">sugerencias </a>	
+    <a href="blog-consejos.php" type="button" class="btn btn-primary"style="position: absolute;
+      width: 150px;
+      height: 38px;
+      left: 64%;
+      top: 150px;
+      font-size: 15px;
+      background-color:#C4C4C4;
+      color: black; 
+      border-radius: 30px;
+      ">Consejos</a>	
 	</div>
 
-<div class="titulo1">Titulo 1</div>
-<p class="texto1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit <a href="">Ver más</a></p>
- <img src="../img/img1.png" class="img1">
- <div class="linea2"></div>
-  <div class="titulo2">Titulo 1</div>
-  <p class="texto2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit <a href="">Ver más</a></p>
-<img src="../img/img1.png" class="img2">
-<div class="linea1"></div>
-<div class="titulo3">Titulo 1</div>
-<p class="texto3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit <a href="">Ver más</a></p>
-<img src="../img/img1.png" class="img3">
-<div class="linea3"></div>
-<div class="titulo4">Titulo 1</div>
-<p class="texto4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit <a href="">Ver más</a></p>
-<img src="../img/img1.png" class="img4">
-<div class="titulo5">Titulo 1</div>
-<p class="texto5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit <a href="">Ver más</a></p>
-<img src="../img/img1.png" class="img5">
-<div class="titulo6">Titulo 1</div>
-<p class="texto6">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit <a href="">Ver más</a></p>
-<img src="../img/img1.png" class="img6">
-<div class="linea4"></div>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <?php
+        $miconexion=mysqli_connect("localhost", "root", "", "appsocompruebas");
+
+        $miconsulta="SELECT * FROM publicaciones WHERE tema='sugerencias' ORDER BY fecha_pub DESC";
+
+        if($resultado=mysqli_query($miconexion, $miconsulta))
+        {
+          while($registro=mysqli_fetch_assoc($resultado))
+          {
+            echo "<div class='row container'>
+                    <div class='col-6'>
+                      <h3 class=''>" . $registro ['titulo_pub'] . "</h3>";
+
+                      echo "<h4>" . $registro['fecha_pub'] . "</h4>";
+
+                      echo "<div style='width:900px'>" . $registro['contenido'] . "</div><br><br>
+                      </div>";
+
+            echo "<div class='col'>";
+
+            if($registro['imagen']!="")
+            {
+
+              echo "<img class='img-sz img-thumbnail' src='../../../../../ImgBlog/" . $registro['imagen'] . "'/>
+                    <br><br>";
+            }
+
+            echo "</div>";
+
+            echo "<hr>";
+          }
+        }
+            //parece ser que no se puede cerrar la conexion porque esta abierta a nuesvas inserciones del AdminBlog
+  ?>
+
+
 </body>
 </html>

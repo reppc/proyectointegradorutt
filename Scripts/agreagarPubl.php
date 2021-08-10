@@ -4,83 +4,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/navStyle.css">
+    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/recPass.css">
+    <link rel="stylesheet" href="../inicio/css/navStyle.css">
     <style>
-        /*Estilos propios del NavBar*/
-        .redondeado{
-            margin-top: 2px;
-            border-top-left-radius: 37px;
-            border-top-right-radius: 37px;
-            border-bottom-left-radius: 37px;
-            border-bottom-right-radius: 37px;
-            overflow: hidden;
-        }
-        .logo{
-            width: 20pt;
-        }
-        .navli{
-            margin-left: 50pt;
-        }
-        .btn-acceder{
-        text-decoration: none;
-        color: white;
-        }
-        .btn-acceder:hover{
-            color: black;
-        }
-        /*Fin de los estilos propios del NavBar*/
-        .jumbotronfm{
-            background-color: rgb(48, 193, 82);
-            color: white;
-        }
-        .cuadrojum{
-            padding-left: 25pt;
-            padding-top: 15pt;
-        }
-        .titulos{
-            color: rgb(25, 155, 38);
-        }
-        .bordcard{
-            border-radius: 20px;
-        }
-        .imgcard{
-            width: 100%;
-        }
-        .cardmargin{
-            margin-top: 25pt;
-            margin-bottom: 25pt;
-        }
-        .btnverde{
-            background-color: rgb(111, 217, 80);
-            border: rgb(111, 217, 80);
-            border-radius: 50px;
-        }
-        .scblog{
-            background-color: rgb(45, 42, 42);
-        }
-        footer {
-        background-color:#1A1A1A;
-        height: 50%;
-        color: white;
-        padding: 15px;
-        }
+      #contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
-        .main1 { 
-        display:flex;
-        margin:0 auto;
-        }
-    
+    margin: 0;
+    padding: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+    }
+    .titulo {
+        font-size: 250%;
+        color:#56c93f;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    #central {
+        max-width: 320px;
+        width: 100%;
+    }
+    #login {
+        width: 100%;
+        padding: 50px 30px;
+        background-color: #eafff1;
+        
+        -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
+        -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
+        box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
+        
+        border-radius: 3px 3px 3px 3px;
+        -moz-border-radius: 3px 3px 3px 3px;
+        -webkit-border-radius: 3px 3px 3px 3px;
+        
+        box-sizing: border-box;
+    }
+    .body-g{
+        background-color: #2aa13e;
+    }
+    .img-c{
+      text-align: center;
+    }
+    .img-tam{
+      width: 50%;
+    }
     </style>
-    
-    <!--JS de bootstrap-->
-    <script src="js/bootstrap.js"></script>
-    
-    <title>Centro de soporte y servicios</title>
+    <title>Registro exitoso</title>
 </head>
-<body> 
-    <!--Barra navegadora-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body class="body-g">
+
+<!--Barra navegadora-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <!--logo-->
         <div class="container-fluid">
           <img class="logo navbar-brand md" src="../inicio/Imagenes/logo-sin-letras2.png" alt="">
@@ -205,250 +186,79 @@
         </div>
       </nav>
 
-      <!--Seccion de presentacion-->
-      <div class="row jumbotron jumbotronfm">
-            <div class="col cuadrojum">
-                <h1 class="">Articulos, accesorios y refacciones <br>para tu equipo de cómputo</h1>
-                <br>
-                <a href="Interfaces-vistas/Servicios/servicios.html">
-                <button class="offset-1 btn btn-outline-light col-2 col-sm-3" type="submit">Ver servicios</button>
-                </a>
+<?php
+        include 'database.php';
+        $db=new Database();
+        $db->conectarDB();
+
+        if($_FILES['imagen']['error'])
+        {
+            switch($_FILES['imagen']['error']){
+
+                case 1: //exceso de tamaño de archivo permitido por php.ini
+
+                    echo "El tamaño del archivo excede el permitido por el servidor";
+
+                    break;
+
+                case 2: //Error tamaño de archivo marcado en el formulario
+
+                    echo "El tamaño de archivo excede los 20 MB";
+
+                    break;
+
+                case 3: //Corrupcion de archivo
+
+                    echo "El envio del archivo se interrumpio";
+
+                    break;
+
+                case 4: //No se ha subido ningun fichero
+
+                    echo "No se ha enviado ningun archivo";
+
+                    break;      
+            }
+        }
+        else
+        {
+            echo "<div class='alert alert-success'>Entrada subida correctamente</div>";
+
+            if((isset($_FILES['imagen']['name']) && ($_FILES['imagen']['error']==UPLOAD_ERR_OK)))
+            {
+                $destino_de_ruta="../ImgBlog/";
+
+                move_uploaded_file($_FILES['imagen']['tmp_name'], $destino_de_ruta.$_FILES['imagen']['name']);
+
+                echo "<div class='alert alert-warning'>El archivo " . $_FILES['imagen']['name'] . " se ha copiado en el directorio del ImgBlog</div>";
+            }
+            else{
+                echo "<div class='alert alert-danger'>El archivo no se ha podido copiar en el directorio de ImgBlog</div>";
+            }
+        }
+        extract($_POST);
+        $imagenL=$_FILES['imagen']['name'];
+
+        $miconsulta="INSERT INTO publicaciones (titulo_pub,contenido,tema,imagen,hora_pub,fecha_pub,autor)
+        VALUES ('$titulo','$contenido','$tema','$imagenL',CURDATE(),NOW(),2)";
+
+        $db->ejecutaSQL($miconsulta);
+        $db->desconectarDB();
+
+        echo "<div id='contenedor'>
+        <div id='central'>
+          <div id='login'>
+            <div class='titulo'>
+              Registro completo
             </div>
-                <div class="col col-lg-3 d-none d-lg-block d-md-block">
-                    <img class="" src="Imagenes/iconfinder_62107_computer_desktop_pc_icon_256px.png" alt="">
+                <div class='img-fluid img-c'>
+                <img class='img-tam' src='../login/imgLogin/checked-icon-clipart1.png'>
                 </div>
-      </div>
-      <br><br>
-
-      <!--Algunos servicios-->
-      <section>
-        <h2 class="titulos text-center">Algunos servicios</h2>
-        <br>
-        <div class="row">
-            <div class="card mx-auto" style="width: 18rem;">
-                    <img src="Imagenes/iconfinder_473643_computer_desktop_device_hardware_monitor_icon_512px.png" class="card-img-top" alt="...">
-                    <div class="row card-body">
-                    <p class="col card-text">Limpiamos tu pc de de manera profesional para mantenerla operativa y evitar problemas de hardware</p>
-                    </div>
-                </div>
-
-                <div class="card mx-auto" style="width: 18rem;">
-                    <img src="Imagenes/iconfinder_2317703_chip_computer_cpu_microchip_pc_icon_512px.png" class="card-img-top" alt="...">
-                    <div class="row card-body">
-                    <p class="col card-text">Limpiamos tu pc de de manera profesional para mantenerla operativa y evitar problemas de hardware</p>
-                    </div>
-                </div>
-
-                <div class="card mx-auto" style="width: 18rem;">
-                    <img src="Imagenes/iconfinder_4021462_lock_protect_security_shield_virus_icon_512px.png" class="card-img-top" alt="...">
-                    <div class="row card-body">
-                    <p class="col card-text">Limpiamos tu pc de de manera profesional para mantenerla operativa y evitar problemas de hardware</p>
-                    </div>
-                </div>
-        </div>
-        <br><br>
-      </section>
-      <br>
-      <hr>
-      <br><br>
-
-      <!--Articulos en venta-->
-      <h2 class="titulos text-center">Articulos en venta</h2>
-      <br>
-        <div class="row">
-            <div class="card mx-auto bg-dark bordcard cardmargin" style="width: 18rem;">
-                    <div class="container col-11 bg-light rounded text-center cardmargin">
-                        <img class="card-img imgcard" src="Imagenes/cubreteclado.jpg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="row card-body">
-                        <h3 class="text-light text-center">Cubreteclado</h3>
-                        <div class="container bg-light rounded">
-                            <h4 class="titulos text-center">$130</h4>
-                            <p class="col card-text">Limpiamos tu pc de de manera profesional para mantenerla operativa y evitar problemas de hardware</p>
-                        </div>
-                    </div>
+                
             </div>
-
-                <div class="card mx-auto bg-dark bordcard cardmargin" style="width: 18rem;">
-                    <div class="container col-11 bg-light rounded text-center cardmargin">
-                        <img class="card-img imgcard" src="Imagenes/genius-mouse-inalambrico-1200dpi-4710268250074.jpg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="row card-body">
-                        <h3 class="text-light text-center">Mouse inalambrico</h3>
-                        <div class="container bg-light rounded">
-                            <h4 class="titulos text-center">$185</h4>
-                            <p class="col card-text">Limpiamos tu pc de de manera profesional para mantenerla operativa y evitar problemas de hardware</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mx-auto bg-dark bordcard cardmargin" style="width: 18rem;">
-                    <div class="container col-11 bg-light rounded text-center cardmargin">
-                        <img class="card-img imgcard" src="Imagenes//mousepad.jpg" class="card-img-top" alt="...">
-                    </div>
-                        <div class="row card-body">
-                            <h3 class="text-light text-center">Mouse pad</h3>
-                            <div class="container bg-light rounded">
-                                <h4 class="titulos text-center">$125</h4>
-                                <p class="col card-text">Limpiamos tu pc de de manera profesional para mantenerla operativa y evitar problemas de hardware</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        <br><br>
-        <hr>
-        <br><br>
-        <!--Seccion 'Acerca de nosotros'-->
-        <div class="row offset-1">
-            <h2 class="text-center titulos">Mas acerca de nosotros</h2>
-            <br><br>
-            <div class="col">
-
-                <br><br>
-                <p class="">Nuestro discreto servicio de reparación de computadoras y laptops ofrece la más alta calidad para 
-                    todos nuestros clientes y nuestro objetivo es brindar el mejor servicio posible, 
-                    solucionando cualquier problema informático en el menor tiempo posible. Siempre estamos 
-                    entrenando para perfeccionar nuestro servicio para que podamos ofrecer la mejor atención 
-                    para todos nuestros clientes.
-                </p>
-                <br><br>
-                <button class="btn btn-success col-2 col-sm-3 offset-3 btnverde">Contactanos</button>
             </div>
-
-            <div class="col text-end">
-                <img class="col col-8 img-fluid" src="Imagenes/iconfinder_131507_hacker_administrator_system_sys_hack_icon_512px.png" alt="">
-            </div>
-        </div>
-        <br>
-        <hr>
-        <br>
-
-        <!--Entradas blog-->
-        <div class="jumbotron scblog">
-            <div class="col cuadrojum">
-                <br>
-                <h2 class="text-light text-center">Ultimas entradas de nuestro blog</h2>
-            </div>
-            <br><br>
-            <div class="row">
-                <div class="card mx-auto bg-light bordcard cardmargin" style="width: 18rem; height: 21rem;">
-                        <div class="card-body">
-                            <h3 class="text-dark text-center">Consejos para evitar los virus en tu PC</h3>
-                            <div class="bg-light rounded">
-                                <p class="col card-text">Buenas tardes, en este post les dare recomendaciones para...</p>
-                                <br>
-                                <h4 class="text-dark text-center">Tema: Consejos</h4>
-                            </div>
-                        </div>
-                </div>
-    
-                    <div class="card mx-auto bg-light bordcard cardmargin" style="width: 18rem; height: 21rem;">
-                            <div class="card-body">
-                                <h3 class="text-dark text-center">Consejos para evitar los virus en tu PC</h3>
-                                <div class="bg-light rounded">
-                                    <p class="col card-text">Buenas tardes, en este post les dare recomendaciones para...</p>
-                                    <br>
-                                    <h4 class="text-dark text-center">Tema: Consejos</h4>
-                                </div>
-                            </div>
-                    </div>
-    
-                        <div class="card mx-auto bg-light bordcard cardmargin" style="width: 18rem; height: 21rem;">
-                                <div class="card-body">
-                                    <h3 class="text-dark text-center">Consejos para evitar los virus en tu PC</h3>
-                                    <div class="bg-light rounded">
-                                        <p class="col card-text">Buenas tardes, en este post les dare recomendaciones para...</p>
-                                        <br>
-                                        <h4 class="text-dark text-center">Tema: Consejos</h4>
-                                    </div>
-                                </div>
-                        </div>
-                        <br><br>
-        </div>
-    </div>
-
-        <br>
-        <hr>
-        <br><br>
-
-       <!--Preguntas frecuentes-->
-       <div class="container row">
-        <h2 class="text-center titulos">Preguntas frecuentes</h2><br><br>
-        <br><br>
-           <div class="col col-6">
-                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                    <p class="titulos">¿Tienen servicio a docmicilio?</p>
-                                    </button>
-                    </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">Los usuarios suscritos a nuestros servicios para usuarios recurrentes pueden contar con los servicios a domicilio</div>
-                    </div>
-                    </div>
-                    <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                            <p class="titulos">¿Venden articulos de todo tipo?</p>
-                        </button>
-                    </h2>
-                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">Contamos con accesorios para equipos de computo, articulos de limpieza para equipos de computo y tambien algunas refacciones para tu PC</div>
-                    </div>
-                    </div>
-                    <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                            <p class="titulos">¿Qué clase de equipos de computo reparan?</p>
-                        </button>
-                    </h2>
-                    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">Reparamos equipos de computo de escritorio y portatiles. No reparamos Mac, tablets o smarthphones</div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col text-end container-fluid">
-                <img class="col col-10 img-fluid" src="Imagenes/tecnico-diagnostico.jpg" alt="">
-            </div>
-        </div>
-        <br><br><br>
-
-        <!--Pie de pagina-->
-        <footer>
-            <div class="container">
-              <div class="row">
-                  <div class="col-xs-12 col-md-6 text-left">
-                      <h6 class="text-muted lead">CONTACTO:</h6>
-                      <h6 class="text-muted">
-                      Carretera 8h No. 166-71 Local 2<br>
-                      Santa Cruz de la Ronda.<br>
-                      Teléfonos: 3115988953 – 3112641818.<br>
-                      </h6>
-                  </div>
-          
-                  <div class="col-xs-12 col-md-6 text-right">
-                      <h6 class="text-muted lead">ENCUENTRANOS EN LAS REDES</h6>
-                      <div class="redes-footer">
-                        <a href="https://www.facebook.com/"><img src="imagenes/facebook-2.png"></a>
-                        <a href="https://twitter.com/"><img src="imagenes/twitter-2.png"></a>
-                        <a href="https://www.youtube.com/"><img src="imagenes/youtube-2.png"></a>
-                      </div>
-                  </div>
-              </div>
-              <div class="row"> 
-          
-                  <div class="col-md-12 text-right">
-                      <p class="text-muted small">Centro de soporte y servicios informaticos @2021.<br> Todos los derechos reservados.</p>
-                  </div>
-                  
-              </div>
-          
-              </div>
-            </div>  
-          </div>
-          </footer>
+        </div>";
+        header("refresh:3 ../inicio/Interfaces-vistas/AdminBlog/FormAddBlog.php");
+?>
 </body>
 </html>

@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../styles/blog-sug.css">
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+  <script src="../js/bootstrap.min.js"></script>
 	<style>
     .redondeado{
           margin-top: 2px;
@@ -109,17 +110,17 @@
                           </li>
                           <div class="dropdown-divider"></div>
                           <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/Blog/pruebaBlog.html" >Informativo</a>
+                            <a class="dropdown-item" href="blog-informativo.php" >Informativo</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="#">Consejos</a>
+                              <a class="dropdown-item" href="blog-consejos.php">Consejos</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="#">Sugerencias</a>
+                              <a class="dropdown-item" href="blog-sugerencias.php">Sugerencias</a>
                             </li>
                           <div class="dropdown-divider"></div>
                           <li>
-                            <a class="dropdown-item" href="#">Crear entrada</a>
+                            <a class="dropdown-item" href="../../../AdminBlog/FormAddBlog.php">Crear entrada</a>
                           </li>
                         </ul>
                               
