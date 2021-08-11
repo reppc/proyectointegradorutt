@@ -5,7 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="css-blog/blog-info.css">
 	<link rel="stylesheet" type="text/css" href="../inicio/css/bootstrap.min.css">
   <!--JS-->
-  <script src="../js/bootstrap.min.js"></script>
+  <script src="../inicio/js/bootstrap.min.js"></script>
 	<style>
     .redondeado{
           margin-top: 2px;
@@ -185,7 +185,7 @@ top: 150px;
  color: black; #C4C4C4;
  border-radius: 30px;
 ">sugerencias </a>	
-<a href="blog-sugerencias.php" type="button" class="btn btn-primary"style="position: absolute;
+<a href="blog-consejos.php" type="button" class="btn btn-primary"style="position: absolute;
 width: 150px;
 height: 38px;
 left: 64%;
@@ -199,10 +199,9 @@ top: 150px;
 	
 
 	</div>
-<!--Inicio-->
-<div  class="container">
-  <div class="row">
-    <div class="col-md-6 col-lg-6 col-6"><br><br><br><br><br><br><br><br><br><br><br><br>
+  <!--Inicio-->
+<div  class="container-fluid">
+  <br><br><br><br><br><br><br><br><br><br><br>
 <?php 
   include '../Scripts/database.php';
   $conexion= new database();
@@ -214,18 +213,20 @@ top: 150px;
 
   foreach($publicacion as $registro)
   {
-      echo "<div class='row'>";
-      echo "<b>$registro->titulo_pub</b></div>";
+      echo "<div class='row'><div class='col-x1-6 col-lg-6 col-md-6 col-sm-6'>";
+      echo "<h5><b>$registro->titulo_pub</b><h5>";
+      echo "<br>";     
+      echo "$registro->contenido</div>";
+      echo "<div class='d-none d-lg-block col-lg-6 d-none d-block col-6 text-center'>
+        <img src='$registro->imagen' width='30%'>
+      </div>";
+      echo "</div>";
       echo "<br>";
-      echo "<div class='col 6'>$registro->contenido</div>";
-      echo "<div class='col 6'><img src='$registro->imagen'</div>";
 
- 
 
   }
   echo "</div>";
-  echo "</div>";
-  echo "</div>";
+
 
   $conexion->desconectarDB();
    

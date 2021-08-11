@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="css-blog/blog-conse.css">
   <link rel="stylesheet" type="text/css" href="../inicio/css/bootstrap.min.css">
-  <script src="../js/bootstrap.min.js"></script>
+ <script src="../inicio/js/bootstrap.min.js"></script>
 	<style>
     .redondeado{
           margin-top: 2px;
@@ -205,9 +205,8 @@
 
   
   <!--Inicio-->
-<div  class="container">
-  <div class="row">
-    <div class="col-md-6 col-lg-6 col-6"><br><br><br><br><br><br><br><br><br><br><br>
+<div  class="container-fluid">
+  <br><br><br><br><br><br><br><br><br><br><br>
 <?php 
   include '../Scripts/database.php';
   $conexion= new database();
@@ -219,19 +218,18 @@
 
   foreach($publicacion as $registro)
   {
-      echo "<div class='row'>";
-      echo "<b>$registro->titulo_pub</b></div>";
-      echo "<br>";
-      echo "<div class='col 6'>$registro->contenido";
+     echo "<div class='row'><div class='col-x1-6 col-lg-6 col-md-6 col-sm-6'>";
+      echo "<h5><b>$registro->titulo_pub</b><h5>";
+      echo "<br>";     
+      echo "$registro->contenido</div>";
       echo "<div class='d-none d-lg-block col-lg-6 d-none d-block col-6 text-center'>
-        <img src='$registro->imagen'>
+        <img src='$registro->imagen' width='40%'>
       </div>";
       echo "</div>";
-
+      echo "<br>";
   }
   echo "</div>";
-  echo "</div>";
-  echo "</div>";
+
 
   $conexion->desconectarDB();
    
