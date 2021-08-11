@@ -144,7 +144,7 @@
               <div class="titulo">
                   Bienvenido
               </div>
-              <form id="loginform" action="" method="POST">
+              <form id="loginform" action="../Scripts/verificaLogin.php" method="POST">
                   <input type="text" name="usuario" placeholder="Usuario" required>
                   
                   <input type="password" placeholder="Contraseña" name="password" required>
@@ -152,7 +152,6 @@
                   <button type="submit" title="Ingresar" name="Ingresar">Ingresar</button>
               </form>
               <div class="pie-form">
-                  <a href="recuperar_contraseña.html">¿Perdiste tu contraseña?</a>
                   <a href="registrarse.php">¿No tienes Cuenta? Registrate</a>
               </div>
           </div>
