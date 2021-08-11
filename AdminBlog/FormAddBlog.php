@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../css/adminBlog.css">
-    <link rel="stylesheet" href="../../../inicio/css/navStyle.css">
+    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+    <link rel="stylesheet" href="adminBlog.css">
+    <link rel="stylesheet" href="../inicio/css/navStyle.css">
 
     <!--JS-->
-    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../inicio/js/bootstrap.min.js"></script>
     <title>Agregar entrada</title>
 </head>
 <body class="body-g">
@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <!--logo-->
         <div class="container-fluid">
-          <img class="logo navbar-brand md" src="../../../inicio/Imagenes/logo-sin-letras2.png" alt="">
+          <img class="logo navbar-brand md" src="../inicio/Imagenes/logo-sin-letras2.png" alt="">
           <a class="navbar-brand" href="">Soporte y servicios informaticos</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -26,7 +26,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <!--Inicio-->
                 <li class="nav-item navli">
-                    <a class="nav-link active" aria-current="page" href="../../index copy.html">
+                    <a class="nav-link active" aria-current="page" href="../inicio/index copy.php">
                         <svg style="margin-bottom: 5px;" width="30" height="15" viewBox="0 0 1 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M29.1667 11.0887L19.7917 2.65125L5.02917 15.9375H8.33333V30.9375H14.5833V19.6875H25V30.9375H31.25V15.9375H34.5542L31.25 12.9637V6.5625H29.1667V11.0887ZM0 17.8125L19.7917 0L27.0833 6.5625V4.6875H33.3333V12.1875L39.5833 17.8125H33.3333V32.8088H22.9167V21.5588H16.6667V32.8088H6.25V17.8125H0Z" fill="white"/>
                         </svg>
@@ -71,37 +71,23 @@
   
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <div class="dropdown-divider"></div>
                           <li>
-                            <a class="dropdown-item" href="../Blog/Proyecto/php/blog-informativo.php" >Informativo</a>
+                            <a class="dropdown-item" href="../Blog/blog-informativo.php" >Informativo</a>
                           </li>
-                          <li><a class="dropdown-item" href="../Blog/Proyecto/php/blog-consejos.php">Consejos</a></li>
-                          <li><a class="dropdown-item" href="../Blog/Proyecto/php/blog-sugerencias.php">Sugerencias</a></li>
-                        </ul>
+                          <li>
+                              <a class="dropdown-item" href="../Blog/blog-consejos.php">Consejos</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../Blog/blog-sugerencias.php">Sugerencias</a>
+                            </li>
+                          <div class="dropdown-divider"></div>
+                          
+                          <li>
+                            <a class="dropdown-item" href="../AdminBlog/FormAddBlog.php">Crear entrada</a>
+                          </li>
+                        </ul> 
                               
-                </li>
-                <!--citas-->
-                <li class="nav-item navli">
-                    <a class="nav-link" href="Interfaces-vistas/Citas/Citas.html" tabindex="-1" aria-disabled="true">
-                        <svg style="margin-bottom: 5px;" width="18" height="18" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M32.2503 6H29.0003V8H32.0003V30H4.00026V8H7.00026V6H3.75026C3.51649 6.00391 3.28579 6.05383 3.07132 6.14691C2.85686 6.23999 2.66283 6.37441 2.50032 6.54249C2.33781 6.71057 2.21 6.90902 2.1242 7.1265C2.0384 7.34398 1.99628 7.57624 2.00026 7.81V30.19C1.99628 30.4238 2.0384 30.656 2.1242 30.8735C2.21 31.091 2.33781 31.2894 2.50032 31.4575C2.66283 31.6256 2.85686 31.76 3.07132 31.8531C3.28579 31.9462 3.51649 31.9961 3.75026 32H32.2503C32.484 31.9961 32.7147 31.9462 32.9292 31.8531C33.1437 31.76 33.3377 31.6256 33.5002 31.4575C33.6627 31.2894 33.7905 31.091 33.8763 30.8735C33.9621 30.656 34.0042 30.4238 34.0003 30.19V7.81C34.0042 7.57624 33.9621 7.34398 33.8763 7.1265C33.7905 6.90902 33.6627 6.71057 33.5002 6.54249C33.3377 6.37441 33.1437 6.23999 32.9292 6.14691C32.7147 6.05383 32.484 6.00391 32.2503 6Z" fill="white"/>
-                            <path d="M8 14H10V16H8V14Z" fill="white"/>
-                            <path d="M14 14H16V16H14V14Z" fill="white"/>
-                            <path d="M20 14H22V16H20V14Z" fill="white"/>
-                            <path d="M26 14H28V16H26V14Z" fill="white"/>
-                            <path d="M8 19H10V21H8V19Z" fill="white"/>
-                            <path d="M14 19H16V21H14V19Z" fill="white"/>
-                            <path d="M20 19H22V21H20V19Z" fill="white"/>
-                            <path d="M26 19H28V21H26V19Z" fill="white"/>
-                            <path d="M8 24H10V26H8V24Z" fill="white"/>
-                            <path d="M14 24H16V26H14V24Z" fill="white"/>
-                            <path d="M20 24H22V26H20V24Z" fill="white"/>
-                            <path d="M26 24H28V26H26V24Z" fill="white"/>
-                            <path d="M10 10C10.2652 10 10.5196 9.89464 10.7071 9.70711C10.8946 9.51957 11 9.26522 11 9V3C11 2.73478 10.8946 2.48043 10.7071 2.29289C10.5196 2.10536 10.2652 2 10 2C9.73478 2 9.48043 2.10536 9.29289 2.29289C9.10536 2.48043 9 2.73478 9 3V9C9 9.26522 9.10536 9.51957 9.29289 9.70711C9.48043 9.89464 9.73478 10 10 10Z" fill="white"/>
-                            <path d="M26 10C26.2652 10 26.5196 9.89464 26.7071 9.70711C26.8946 9.51957 27 9.26522 27 9V3C27 2.73478 26.8946 2.48043 26.7071 2.29289C26.5196 2.10536 26.2652 2 26 2C25.7348 2 25.4804 2.10536 25.2929 2.29289C25.1054 2.48043 25 2.73478 25 3V9C25 9.26522 25.1054 9.51957 25.2929 9.70711C25.4804 9.89464 25.7348 10 26 10Z" fill="white"/>
-                            <path d="M13 6H23V8H13V6Z" fill="white"/>
-                            </svg>
-                            
-                        Contacto</a>
                 </li>
                 </ul>
                 <!-- #region boton-->

@@ -79,6 +79,16 @@
     <title>Centro de soporte y servicios</title>
 </head>
 <body> 
+        <?php
+        session_start();
+        if(isset($_SESSION["usuario"]))
+        {
+        echo "<h5 align='right'>Usuario:".$_SESSION["usuario"]."</h5>";
+        echo "<h6 align='right'>
+        <a href='../Scripts/cerrarSesion.php'>[Cerrar sesión]</a>
+         </h6>";
+        }
+        ?>
     <!--Barra navegadora-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <!--logo-->
@@ -107,10 +117,6 @@
                         Articulos</a>
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                             <a class="dropdown-item" href="../inicio/Interfaces-vistas/articulos/home_articulos.html">Articulos</a>
-                            </li>
-                            <div class="dropdown-divider"></div>
                           <li>
                             <a class="dropdown-item" href="../inicio/Interfaces-vistas/articulos/home_articulos.html">Refacciones</a>
                           </li>
@@ -122,6 +128,10 @@
                           </li>
                           <div class="dropdown-divider"></div>
                           <li>
+                             <a class="dropdown-item" href=""> Ver registros de Articulos</a>
+                            </li>
+                            <div class="dropdown-divider"></div>
+                          <li>
                             <a class="dropdown-item" href="#">Agregar articulos</a>
                           </li>
                           <div class="dropdown-divider"></div>
@@ -132,7 +142,7 @@
                 </li>
                 <!--servicios-->
                 <li class="nav-item navli">
-                  <a class="nav-link" id="" role="button" data-bs-toggle="" aria-expanded="false" href="../inicio/Interfaces-vistas/Servicios/servicios.html">
+                  <a class="nav-link" id="" role="button" data-bs-toggle="" aria-expanded="false" href="../Servicios/servicios.html">
                         <svg style="margin-bottom: 5px;" width="23" height="15" viewBox="0 0 36 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M31.1012 12.9794V12.2342C31.1012 10.211 29.4688 8.56204 27.4512 8.56204H17.1013H16.6013V9.06204V14.0468C16.6013 15.0259 15.8149 15.8127 14.8513 15.8127C13.8876 15.8127 13.1013 15.0259 13.1013 14.0468V6.89252C13.1013 6.43698 13.3314 6.01667 13.7089 5.78213L13.711 5.78081L15.5935 4.59811C15.5938 4.59792 15.5941 4.59772 15.5944 4.59752C16.0907 4.28908 16.6573 4.12408 17.2362 4.12408H22.985H23.1198L23.2363 4.05633L29.0518 0.675014C29.052 0.674942 29.0521 0.674869 29.0522 0.674797C29.6734 0.315244 30.4682 0.527991 30.8252 1.15308L30.8256 1.15374L35.3252 9.00413L31.1012 12.9794ZM31.1012 12.9794L34.8485 10.8001C34.8487 10.8 34.8489 10.7999 34.849 10.7998C35.4714 10.4348 35.6847 9.63442 35.3256 9.00479L31.1012 12.9794ZM10.3013 8.04575V14.0468C10.3013 16.5685 12.3387 18.6253 14.8513 18.6253C17.3638 18.6253 19.4012 16.5685 19.4012 14.0468V11.3747H27.4512C27.9199 11.3747 28.3012 11.7536 28.3012 12.2342V14.9532C28.3012 15.4337 27.9199 15.8127 27.4512 15.8127H27.0012H26.5012V16.3127V19.938C26.5012 20.6677 25.9174 21.2506 25.2012 21.2506H24.3012H23.8012V21.7506C23.8012 23.4774 22.4074 24.8759 20.7012 24.8759H13.0175H12.8827L12.7662 24.9437L6.95067 28.325C6.32938 28.6848 5.53441 28.4721 5.17732 27.8469L5.17695 27.8463L0.676956 19.9952L0.676116 19.9937C0.313324 19.3657 0.53032 18.5611 1.15188 18.2011L1.15264 18.2007L5.65264 15.5836L5.90127 15.439V15.1514V12.4721C5.90127 11.3769 6.47458 10.3567 7.40791 9.79667L7.40951 9.7957L10.3013 8.04575Z" stroke="white"/>
                             </svg>
@@ -150,55 +160,28 @@
   
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <li>
-                            <a class="dropdown-item" href="../inicio/Interfaces-vistas/Blog/Proyecto/php/blog2.php" > Ir a Blog</a>
-                          </li>
                           <div class="dropdown-divider"></div>
                           <li>
-                            <a class="dropdown-item" href="../inicio/Interfaces-vistas/Blog/Proyecto/php/blog-informativo.php" >Informativo</a>
+                            <a class="dropdown-item" href="../Blog/blog-informativo.php" >Informativo</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="../inicio/Interfaces-vistas/Blog/Proyecto/php/blog-consejos.php">Consejos</a>
+                              <a class="dropdown-item" href="../Blog/blog-consejos.php">Consejos</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="../inicio/Interfaces-vistas/Blog/Proyecto/php/blog-sugerencias.php">Sugerencias</a>
+                              <a class="dropdown-item" href="../Blog/blog-sugerencias.php">Sugerencias</a>
                             </li>
                           <div class="dropdown-divider"></div>
                           
                           <li>
-                            <a class="dropdown-item" href="../inicio/Interfaces-vistas/AdminBlog/FormAddBlog.html">Crear entrada</a>
+                            <a class="dropdown-item" href="../AdminBlog/FormAddBlog.php">Crear entrada</a>
                           </li>
-                        </ul>
-                              
+                        </ul>        
                 </li>
-                <!--citas-->
-                <li class="nav-item navli">
-                    <a class="nav-link" href="Interfaces-vistas/Citas/Citas.html" tabindex="-1" aria-disabled="true">
-                        <svg style="margin-bottom: 5px;" width="18" height="18" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M32.2503 6H29.0003V8H32.0003V30H4.00026V8H7.00026V6H3.75026C3.51649 6.00391 3.28579 6.05383 3.07132 6.14691C2.85686 6.23999 2.66283 6.37441 2.50032 6.54249C2.33781 6.71057 2.21 6.90902 2.1242 7.1265C2.0384 7.34398 1.99628 7.57624 2.00026 7.81V30.19C1.99628 30.4238 2.0384 30.656 2.1242 30.8735C2.21 31.091 2.33781 31.2894 2.50032 31.4575C2.66283 31.6256 2.85686 31.76 3.07132 31.8531C3.28579 31.9462 3.51649 31.9961 3.75026 32H32.2503C32.484 31.9961 32.7147 31.9462 32.9292 31.8531C33.1437 31.76 33.3377 31.6256 33.5002 31.4575C33.6627 31.2894 33.7905 31.091 33.8763 30.8735C33.9621 30.656 34.0042 30.4238 34.0003 30.19V7.81C34.0042 7.57624 33.9621 7.34398 33.8763 7.1265C33.7905 6.90902 33.6627 6.71057 33.5002 6.54249C33.3377 6.37441 33.1437 6.23999 32.9292 6.14691C32.7147 6.05383 32.484 6.00391 32.2503 6Z" fill="white"/>
-                            <path d="M8 14H10V16H8V14Z" fill="white"/>
-                            <path d="M14 14H16V16H14V14Z" fill="white"/>
-                            <path d="M20 14H22V16H20V14Z" fill="white"/>
-                            <path d="M26 14H28V16H26V14Z" fill="white"/>
-                            <path d="M8 19H10V21H8V19Z" fill="white"/>
-                            <path d="M14 19H16V21H14V19Z" fill="white"/>
-                            <path d="M20 19H22V21H20V19Z" fill="white"/>
-                            <path d="M26 19H28V21H26V19Z" fill="white"/>
-                            <path d="M8 24H10V26H8V24Z" fill="white"/>
-                            <path d="M14 24H16V26H14V24Z" fill="white"/>
-                            <path d="M20 24H22V26H20V24Z" fill="white"/>
-                            <path d="M26 24H28V26H26V24Z" fill="white"/>
-                            <path d="M10 10C10.2652 10 10.5196 9.89464 10.7071 9.70711C10.8946 9.51957 11 9.26522 11 9V3C11 2.73478 10.8946 2.48043 10.7071 2.29289C10.5196 2.10536 10.2652 2 10 2C9.73478 2 9.48043 2.10536 9.29289 2.29289C9.10536 2.48043 9 2.73478 9 3V9C9 9.26522 9.10536 9.51957 9.29289 9.70711C9.48043 9.89464 9.73478 10 10 10Z" fill="white"/>
-                            <path d="M26 10C26.2652 10 26.5196 9.89464 26.7071 9.70711C26.8946 9.51957 27 9.26522 27 9V3C27 2.73478 26.8946 2.48043 26.7071 2.29289C26.5196 2.10536 26.2652 2 26 2C25.7348 2 25.4804 2.10536 25.2929 2.29289C25.1054 2.48043 25 2.73478 25 3V9C25 9.26522 25.1054 9.51957 25.2929 9.70711C25.4804 9.89464 25.7348 10 26 10Z" fill="white"/>
-                            <path d="M13 6H23V8H13V6Z" fill="white"/>
-                            </svg>
-                            
-                        Contacto</a>
-                </li>
+                
                 </ul>
                 <!-- #region boton-->
                 <form class="d-flex">
-                  <a href="../login/login.html" class="btn btn-outline-light" style="text-decoration: none;" id="redondeado">Acceder</a>
+                  <a href="../login/login.php" class="btn btn-outline-light" style="text-decoration: none;" id="redondeado">Acceder</a>
                 </form>
             <!-- #endregion -->
           </div>
@@ -210,8 +193,8 @@
             <div class="col cuadrojum">
                 <h1 class="">Articulos, accesorios y refacciones <br>para tu equipo de cómputo</h1>
                 <br>
-                <a href="Interfaces-vistas/Servicios/servicios.html">
-                <button class="offset-1 btn btn-outline-light col-2 col-sm-3" type="submit">Ver servicios</button>
+                <a href="#">
+                <button class="offset-1 btn btn-outline-light col-2 col-sm-3">Ir a articulos</button>
                 </a>
             </div>
                 <div class="col col-lg-3 d-none d-lg-block d-md-block">
