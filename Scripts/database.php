@@ -63,6 +63,12 @@
                     {
                         $pase++;
                     }
+                    else{
+                        if($contra==$renglon['contraseña'])
+                        {
+                            $pase++;
+                        }
+                    }
                 }
 
 

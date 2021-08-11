@@ -13,6 +13,10 @@
     <title>Agregar entrada</title>
 </head>
 <body class="body-g">
+<?php
+        session_start();
+    ?>
+
     <!--Barra navegadora-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <!--logo-->
@@ -42,22 +46,26 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/articulos/home_articulos.html">Articulos</a>
+                            <a class="dropdown-item" href="../inicio/Interfaces-vistas/articulos/home_articulos.html">Refacciones</a>
                           </li>
                           <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/articulos/interfaces/categorias/categorias.html">Categoria</a>
+                            <a class="dropdown-item" href="inicio/Interfaces-vistas/articulos/interfaces/categorias/categorias.html">Accesorios</a>
                           </li>
+                          <li>
+                            <a class="dropdown-item" href="inicio/Interfaces-vistas/articulos/interfaces/categorias/categorias.html">Limpieza de PC</a>
+                          </li>
+                          <div class="dropdown-divider"></div>
+                          <li>
+                             <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Articulos</a>
+                            </li>
+                          <li>
+                            <a class="dropdown-item" href="../PHPVistas/verMetodosPago.php">Ver registros de  metodos de pago</a>
+                          </li>
+                          <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="../PHPVistas/HistorialPedidos.php">Historial de pedidos</a>
                         </ul>
                         <!---->
                         
-                </li>
-                <!--servicios-->
-                <li class="nav-item navli">
-                  <a class="nav-link" id="" role="button" data-bs-toggle="" aria-expanded="false">
-                        <svg style="margin-bottom: 5px;" width="23" height="15" viewBox="0 0 36 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M31.1012 12.9794V12.2342C31.1012 10.211 29.4688 8.56204 27.4512 8.56204H17.1013H16.6013V9.06204V14.0468C16.6013 15.0259 15.8149 15.8127 14.8513 15.8127C13.8876 15.8127 13.1013 15.0259 13.1013 14.0468V6.89252C13.1013 6.43698 13.3314 6.01667 13.7089 5.78213L13.711 5.78081L15.5935 4.59811C15.5938 4.59792 15.5941 4.59772 15.5944 4.59752C16.0907 4.28908 16.6573 4.12408 17.2362 4.12408H22.985H23.1198L23.2363 4.05633L29.0518 0.675014C29.052 0.674942 29.0521 0.674869 29.0522 0.674797C29.6734 0.315244 30.4682 0.527991 30.8252 1.15308L30.8256 1.15374L35.3252 9.00413L31.1012 12.9794ZM31.1012 12.9794L34.8485 10.8001C34.8487 10.8 34.8489 10.7999 34.849 10.7998C35.4714 10.4348 35.6847 9.63442 35.3256 9.00479L31.1012 12.9794ZM10.3013 8.04575V14.0468C10.3013 16.5685 12.3387 18.6253 14.8513 18.6253C17.3638 18.6253 19.4012 16.5685 19.4012 14.0468V11.3747H27.4512C27.9199 11.3747 28.3012 11.7536 28.3012 12.2342V14.9532C28.3012 15.4337 27.9199 15.8127 27.4512 15.8127H27.0012H26.5012V16.3127V19.938C26.5012 20.6677 25.9174 21.2506 25.2012 21.2506H24.3012H23.8012V21.7506C23.8012 23.4774 22.4074 24.8759 20.7012 24.8759H13.0175H12.8827L12.7662 24.9437L6.95067 28.325C6.32938 28.6848 5.53441 28.4721 5.17732 27.8469L5.17695 27.8463L0.676956 19.9952L0.676116 19.9937C0.313324 19.3657 0.53032 18.5611 1.15188 18.2011L1.15264 18.2007L5.65264 15.5836L5.90127 15.439V15.1514V12.4721C5.90127 11.3769 6.47458 10.3567 7.40791 9.79667L7.40951 9.7957L10.3013 8.04575Z" stroke="white"/>
-                            </svg>
-                        Servicios</a>
                 </li>
                 <!--blog-->
                 <li class="nav-item dropdown navli">
@@ -86,19 +94,67 @@
                           <li>
                             <a class="dropdown-item" href="../AdminBlog/FormAddBlog.php">Crear entrada</a>
                           </li>
-                        </ul> 
-                              
+                        </ul>        
                 </li>
+                
+
+                <!--Perfil-->
+                <li class="nav-item dropdown navli">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg style="margin-bottom: 5px;" width="17" height="17" viewBox="0 0 35 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.2 16C11.2 16.5304 10.9787 17.0391 10.5849 17.4142C10.1911 17.7893 9.65695 18 9.1 18C8.54305 18 8.0089 17.7893 7.61508 17.4142C7.22125 17.0391 7 16.5304 7 16C7 15.4696 7.22125 14.9609 7.61508 14.5858C8.0089 14.2107 8.54305 14 9.1 14C9.65695 14 10.1911 14.2107 10.5849 14.5858C10.9787 14.9609 11.2 15.4696 11.2 16ZM19.6 16C19.6 16.5304 19.3787 17.0391 18.9849 17.4142C18.5911 17.7893 18.057 18 17.5 18C16.943 18 16.4089 17.7893 16.0151 17.4142C15.6212 17.0391 15.4 16.5304 15.4 16C15.4 15.4696 15.6212 14.9609 16.0151 14.5858C16.4089 14.2107 16.943 14 17.5 14C18.057 14 18.5911 14.2107 18.9849 14.5858C19.3787 14.9609 19.6 15.4696 19.6 16ZM25.9 18C26.457 18 26.9911 17.7893 27.3849 17.4142C27.7787 17.0391 28 16.5304 28 16C28 15.4696 27.7787 14.9609 27.3849 14.5858C26.9911 14.2107 26.457 14 25.9 14C25.343 14 24.8089 14.2107 24.4151 14.5858C24.0212 14.9609 23.8 15.4696 23.8 16C23.8 16.5304 24.0212 17.0391 24.4151 17.4142C24.8089 17.7893 25.343 18 25.9 18Z" fill="white"/>
+                            <path d="M4.73594 32.7165L4.77969 32.7076C8.78281 31.9054 11.2284 30.8467 12.3659 30.2655C14.0407 30.7167 15.7667 30.9441 17.5 30.9417C27.1644 30.9417 35 24.0152 35 15.4709C35 6.92653 27.1644 0 17.5 0C7.83562 0 0 6.92653 0 15.4709C0 19.3607 1.62531 22.919 4.30938 25.6375C4.12159 27.3837 3.73702 29.1025 3.16313 30.7605L3.15656 30.7848C2.99347 31.2597 2.81546 31.7292 2.62281 32.1927C2.45 32.6038 2.78469 33.0635 3.22 32.9927C3.72676 32.909 4.23214 32.8169 4.73594 32.7165ZM6.48594 25.8474C6.51658 25.5238 6.4762 25.1974 6.36768 24.8914C6.25917 24.5854 6.08518 24.3074 5.85812 24.0771C3.53938 21.7255 2.1875 18.7153 2.1875 15.4709C2.1875 8.41616 8.75875 2.21012 17.5 2.21012C26.2413 2.21012 32.8125 8.41616 32.8125 15.4709C32.8125 22.5278 26.2413 28.7316 17.5 28.7316C15.958 28.7339 14.4224 28.5318 12.9325 28.1305C12.4118 27.9895 11.858 28.0478 11.3772 28.294C10.5306 28.7272 8.66469 29.5538 5.61531 30.2677C6.04073 28.8248 6.3322 27.3449 6.48594 25.8474Z" fill="white"/>
+                            </svg>
+                            
+                        <?php 
+
+                        if(isset($_SESSION["usuario"]))
+                        { 
+                            echo $_SESSION['usuario'];
+                        } else {
+                            
+                            echo "Perfil";
+                        }
+                        ?>
+                        </a>
+  
+                        <!--lista del dropdown de perfil-->
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li>
+                            <a class="dropdown-item" href="../php/blog-informativo.php" >Mi perfil</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../php/blog-consejos.php">Mis pedidos</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../php/blog-sugerencias.php">Mis direcciones</a>
+                            </li>
+                            <li>
+                            <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
+                          </li>
+                            <div class="dropdown-divider"></div>
+                            <li>
+                              <a class="dropdown-item" href="../PHPVistas/VerUsuarios.php">Ver usuarios</a>
+                          </li>
+                        </ul>
+                             
+                </li>
+
                 </ul>
-                <!-- #region boton-->
-                <form class="d-flex">
-                  <a href="login.html" class="btn btn-outline-light" style="text-decoration: none;" id="redondeado">Acceder</a>
-                </form>
-            <!-- #endregion -->
+                <?php
+                    if(!isset($_SESSION["usuario"]))
+                    { 
+                        echo "<!-- #region boton-->
+                        <form class='d-flex'>
+                          <a href='../login/login.php' class='btn btn-outline-light' style='text-decoration: none;' id='redondeado'>Acceder</a>
+                        </form>
+                    <!-- #endregion -->";
+                    }
+                ?>
+                
           </div>
         </div>
       </nav>
-      <!---->
 
 
      <!--contenido del formulario para entrar-->
@@ -109,7 +165,7 @@
             <div class="titulo">
                 Nueva entrada
             </div>
-            <form id="loginform" action="../../../Scripts/agreagarPubl.php" method="POST" enctype="multipart/form-data"
+            <form id="loginform" action="../Scripts/agreagarPubl.php" method="POST" enctype="multipart/form-data"
               <div class="row">
                 <div class="col">
                     <label for="formFile" class="form-label">Titulo:</label>

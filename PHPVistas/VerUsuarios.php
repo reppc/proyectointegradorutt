@@ -1,39 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="css-blog/blog-sug.css">
-  <link rel="stylesheet" type="text/css" href="../inicio/css/bootstrap.min.css">
-  <script src="../inicio/js/bootstrap.min.js"></script>
-	<style>
-    .redondeado{
-          margin-top: 2px;
-          border-top-left-radius: 37px;
-          border-top-right-radius: 37px;
-          border-bottom-left-radius: 37px;
-          border-bottom-right-radius: 37px;
-          overflow: hidden;
-      }
-    .logo{
-          width: 20pt;
-      }
-      .navli{
-          margin-left: 50pt;
-      }
-      .btn-acceder{
-      text-decoration: none;
-      color: white;
-      }
-      .btn-acceder:hover{
-          color: black;
-      }
-      .body-g{
-      background-color: #2aa13e;
-      }
-  </style>
-	<title>Blog-Sugerencias</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../inicio/css/navStyle.css">
+
+    <script src="../inicio/js/bootstrap.min.js"></script>
+    <title>Usuarios</title>
 </head>
-<body>
+<body> 
 <?php
         session_start();
     ?>
@@ -177,79 +154,51 @@
         </div>
       </nav>
 
+      <div class="cuadro container">
+          <br>
+        <h1 align="center">Usuarios</h1>
+        <br>
 
-	<div class="portada">
-		<div class="rectangulo">
-			<p class="textoR">Sugerencias</p>
-		</div>
-		<a href="blog-informativo.php" type="button" class="btn btn-primary"style="position: absolute;
-width: 150px;
-height: 38px;
-left: 24%;
-top: 150px;
- font-size: 15px;
- background-color: #6FD950;
- color: black; #CBFDFA;#C4C4C4;
- border-radius: 30px;
-">informativo </a>	
-<a href="blog-sugerencias.php" type="button" class="btn btn-primary"style="position: absolute;
-width: 150px;
-height: 38px;
-left: 44%;
-top: 150px;
- font-size: 15px;
- background-color:#CBFDFA;
- color: black; #C4C4C4;
- border-radius: 30px;
-">sugerencias </a>	
-<a href="blog-consejos.php" type="button" class="btn btn-primary"style="position: absolute;
-width: 150px;
-height: 38px;
-left: 64%;
-top: 150px;
- font-size: 15px;
- background-color:#C4C4C4;
- color: black; 
- border-radius: 30px;
-">Consejos</a>	
 
-	
 
-	</div>
+    <?php
+    include '../Scripts/database.php';
+    $conexion = new Database();
+    $conexion -> conectarDB();
 
- <!--Inicio-->
-<div  class="container">
-  <div class="row">
-    <div class="col-md-6 col-lg-6 col-6"><br><br><br><br><br><br><br><br><br><br><br>
-<?php 
-  include '../Scripts/database.php';
-  $conexion= new database();
-  $conexion->conectarDB();
+    $consulta="SELECT usuarios.nombres, usuarios.ap_paterno, usuarios.ap_materno,
+    usuarios.correo,usuarios.contraseña,rol_usuario.tipo_usuario,usuarios.fecha_creacion FROM usuarios
+    INNER JOIN rol_usuario ON rol_usuario.id_rol = usuarios.Rol";
+    $tabla = $conexion->seleccionar($consulta);
 
-  $consulta="SELECT publicaciones.titulo_pub, publicaciones.contenido, publicaciones.imagen FROM publicaciones WHERE publicaciones.tema='sugerencias'";
+    //creacion de tabla dinamica para los datos de la BD
+    echo "<table class='table table-hover'>
+    <thead class='table-dark'>
+    <tr>
+    <th>NombreUsuario</th><th>ap_paterno</th><th>ap_materno</th><th>Correo</th><th>Contraseña</th><th>Tipo</th><th>fecha_creacion</th>
+    </tr>
+    </thead>
+    <tbody>";
 
-  $publicacion= $conexion->seleccionar($consulta);
+        foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
+        {
+            echo "<tr>";
+            echo "<td>$registro->nombres</td>";  //los nombres de los campos deben ser exactos a los de la BD
+            echo "<td>$registro->ap_paterno</td>";
+            echo "<td>$registro->ap_materno</td>"; //no deben quedar espacios
+            echo "<td>$registro->correo</td>"; //no deben quedar espacios
+            echo "<td>$registro->contraseña</td>"; //no deben quedar espacios
+            echo "<td>$registro->tipo_usuario</td>"; //no deben quedar espacios
+            echo "<td>$registro->fecha_creacion</td>"; //no deben quedar espacios
+            echo "<tr>";
+        }
 
-  foreach($publicacion as $registro)
-  {
-       echo "<div class='row'>";
-      echo "<b>$registro->titulo_pub</b></div>";
-      echo "<br>";
-      echo "<div class='col 6'>$registro->contenido";
-      echo "<div class='col-6'>
-        <img src='$registro->imagen'>
-      </div>";
-      echo "</div>";
+        echo "</tbody>
+        </table>";
 
-  }
-  echo "</div>";
-  echo "</div>";
-  echo "</div>";
-
-  $conexion->desconectarDB();
-   
-  
-?>
-
+        $conexion -> desconectarDB();
+        ?>
+        </div>
+    
 </body>
 </html>

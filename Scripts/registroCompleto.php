@@ -161,7 +161,8 @@
                       </div>
                     </div>
               </div>";
-        header("refresh:3; ../login/login.html");
+
+        }
         ?>
 
 </body>
