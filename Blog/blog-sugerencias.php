@@ -2,8 +2,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="../styles/blog-sug.css">
-	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css-blog/blog-sug.css">
+  <link rel="stylesheet" type="text/css" href="../inicio/css/bootstrap.min.css">
   <script src="../js/bootstrap.min.js"></script>
 	<style>
     .redondeado{
@@ -199,57 +199,39 @@ top: 150px;
 
 	</div>
 
-<div class="titulo1">Titulo 1</div>
-<p class="texto1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit <a href="">Ver más</a></p>
- <img src="../img/img1.png" class="img1">
- <div class="linea2"></div>
-  <div class="titulo2">Titulo 1</div>
-  <p class="texto2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit <a href="">Ver más</a></p>
-<img src="../img/img1.png" class="img2">
-<div class="linea1"></div>
-<div class="titulo3">Titulo 1</div>
-<p class="texto3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit <a href="">Ver más</a></p>
-<img src="../img/img1.png" class="img3">
-<div class="linea3"></div>
-<div class="titulo4">Titulo 1</div>
-<p class="texto4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit <a href="">Ver más</a></p>
-<img src="../img/img1.png" class="img4">
-<div class="titulo5">Titulo 1</div>
-<p class="texto5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit <a href="">Ver más</a></p>
-<img src="../img/img1.png" class="img5">
-<div class="titulo6">Titulo 1</div>
-<p class="texto6">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit <a href="">Ver más</a></p>
-<img src="../img/img1.png" class="img6">
-<div class="linea4"></div>
+ <!--Inicio-->
+<div  class="container">
+  <div class="row">
+    <div class="col-md-6 col-lg-6 col-6"><br><br><br><br><br><br><br><br><br><br><br>
+<?php 
+  include '../Scripts/database.php';
+  $conexion= new database();
+  $conexion->conectarDB();
+
+  $consulta="SELECT publicaciones.titulo_pub, publicaciones.contenido, publicaciones.imagen FROM publicaciones WHERE publicaciones.tema='sugerencias'";
+
+  $publicacion= $conexion->seleccionar($consulta);
+
+  foreach($publicacion as $registro)
+  {
+       echo "<div class='row'>";
+      echo "<b>$registro->titulo_pub</b></div>";
+      echo "<br>";
+      echo "<div class='col 6'>$registro->contenido";
+      echo "<div class='col-6'>
+        <img src='$registro->imagen'>
+      </div>";
+      echo "</div>";
+
+  }
+  echo "</div>";
+  echo "</div>";
+  echo "</div>";
+
+  $conexion->desconectarDB();
+   
+  
+?>
+
 </body>
 </html>

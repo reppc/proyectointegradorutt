@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css-blog/blog-info.css">
-	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../inicio/css/bootstrap.min.css">
   <!--JS-->
   <script src="../js/bootstrap.min.js"></script>
 	<style>
@@ -199,10 +199,12 @@ top: 150px;
 	
 
 	</div>
-
-<div class="titulo1">
+<!--Inicio-->
+<div  class="container">
+  <div class="row">
+    <div class="col-md-6 col-lg-6 col-6"><br><br><br><br><br><br><br><br><br><br><br><br>
 <?php 
-  include 'database.php';
+  include '../Scripts/database.php';
   $conexion= new database();
   $conexion->conectarDB();
 
@@ -212,10 +214,18 @@ top: 150px;
 
   foreach($publicacion as $registro)
   {
-        echo "$registro->titulo_pub</div>";
-        echo "<p class='texto1'>$registro->contenido";
+      echo "<div class='row'>";
+      echo "<b>$registro->titulo_pub</b></div>";
+      echo "<br>";
+      echo "<div class='col 6'>$registro->contenido</div>";
+      echo "<div class='col 6'><img src='$registro->imagen'</div>";
+
+ 
+
   }
-  echo "</p>";
+  echo "</div>";
+  echo "</div>";
+  echo "</div>";
 
   $conexion->desconectarDB();
    

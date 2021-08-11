@@ -2,8 +2,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="../css-blog/blog-conse.css">
-	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css-blog/blog-conse.css">
+  <link rel="stylesheet" type="text/css" href="../inicio/css/bootstrap.min.css">
   <script src="../js/bootstrap.min.js"></script>
 	<style>
     .redondeado{
@@ -203,41 +203,40 @@
       ">Consejos</a>	
 	</div>
 
-  <br><br><br><br><br><br><br><br><br><br><br><br><br>
-  <?php
-        $miconexion=mysqli_connect("localhost", "root", "", "appsocompruebas");
+  
+  <!--Inicio-->
+<div  class="container">
+  <div class="row">
+    <div class="col-md-6 col-lg-6 col-6"><br><br><br><br><br><br><br><br><br><br><br>
+<?php 
+  include '../Scripts/database.php';
+  $conexion= new database();
+  $conexion->conectarDB();
 
-        $miconsulta="SELECT * FROM publicaciones WHERE tema='sugerencias' ORDER BY fecha_pub DESC";
+  $consulta="SELECT publicaciones.titulo_pub, publicaciones.contenido, publicaciones.imagen FROM publicaciones WHERE publicaciones.tema='consejos'";
 
-        if($resultado=mysqli_query($miconexion, $miconsulta))
-        {
-          while($registro=mysqli_fetch_assoc($resultado))
-          {
-            echo "<div class='row container'>
-                    <div class='col-6'>
-                      <h3 class=''>" . $registro ['titulo_pub'] . "</h3>";
+  $publicacion= $conexion->seleccionar($consulta);
 
-                      echo "<h4>" . $registro['fecha_pub'] . "</h4>";
+  foreach($publicacion as $registro)
+  {
+      echo "<div class='row'>";
+      echo "<b>$registro->titulo_pub</b></div>";
+      echo "<br>";
+      echo "<div class='col 6'>$registro->contenido";
+      echo "<div class='d-none d-lg-block col-lg-6 d-none d-block col-6 text-center'>
+        <img src='$registro->imagen'>
+      </div>";
+      echo "</div>";
 
-                      echo "<div style='width:900px'>" . $registro['contenido'] . "</div><br><br>
-                      </div>";
+  }
+  echo "</div>";
+  echo "</div>";
+  echo "</div>";
 
-            echo "<div class='col'>";
-
-            if($registro['imagen']!="")
-            {
-
-              echo "<img class='img-sz img-thumbnail' src='../../../../../ImgBlog/" . $registro['imagen'] . "'/>
-                    <br><br>";
-            }
-
-            echo "</div>";
-
-            echo "<hr>";
-          }
-        }
-            //parece ser que no se puede cerrar la conexion porque esta abierta a nuesvas inserciones del AdminBlog
-  ?>
+  $conexion->desconectarDB();
+   
+  
+?>
 
 
 </body>
