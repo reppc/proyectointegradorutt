@@ -1,45 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="css-blog/blog-conse.css">
-  <link rel="stylesheet" type="text/css" href="../inicio/css/bootstrap.min.css">
- <script src="../inicio/js/bootstrap.min.js"></script>
-	<style>
-    .redondeado{
-          margin-top: 2px;
-          border-top-left-radius: 37px;
-          border-top-right-radius: 37px;
-          border-bottom-left-radius: 37px;
-          border-bottom-right-radius: 37px;
-          overflow: hidden;
-      }
-    .logo{
-          width: 20pt;
-      }
-      .navli{
-          margin-left: 50pt;
-      }
-      .btn-acceder{
-      text-decoration: none;
-      color: white;
-      }
-      .btn-acceder:hover{
-          color: black;
-      }
-      .body-g{
-      background-color: #2aa13e;
-      }
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../inicio/css/navStyle.css">
 
-      .img-sz{
-        width: 50%;
-      }
-
-
-  </style>
-	<title>Blog-Consejos</title>
+    <script src="../inicio/js/bootstrap.min.js"></script>
+    <title>Productos registrados</title>
 </head>
 <body>
+
+<body> 
 <?php
         session_start();
     ?>
@@ -75,6 +48,7 @@
                           <li>
                           <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
+
                           <div class="dropdown-divider"></div>
                           <li>
                              <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Articulos</a>
@@ -167,7 +141,7 @@
                     { 
                         echo "<!-- #region boton-->
                         <form class='d-flex'>
-                          <a href='../login/login.php' class='btn btn-outline-light redondeado' style='text-decoration: none;' id='redondeado'>Acceder</a>
+                          <a href='../login/login.php' class='btn btn-outline-light' style='text-decoration: none;' id='redondeado'>Acceder</a>
                         </form>
                     <!-- #endregion -->";
                     }
@@ -177,76 +151,47 @@
         </div>
       </nav>
 
+      <div class="cuadro container">
+          <br>
+        <h1 align="center">Articulos</h1>
+        <br>
 
-	<div class="portada">
-		<div class="rectangulo">
-			<p class="textoR">Consejos</p>
-		</div>
-		<a href="blog-informativo.php" type="button" class="btn btn-primary"style="position: absolute;
-      width: 150px;
-      height: 38px;
-      left: 24%;
-      top: 150px;
-      font-size: 15px;
-      background-color: #6FD950;
-      color: black; #CBFDFA;#C4C4C4;
-      border-radius: 30px;
-      ">informativo </a>	
-    <a href="blog-sugerencias.php" type="button" class="btn btn-primary"style="position: absolute;
-      width: 150px;
-      height: 38px;
-      left: 44%;
-      top: 150px;
-      font-size: 15px;
-      background-color:#CBFDFA;
-      color: black; #C4C4C4;
-      border-radius: 30px;
-      ">sugerencias </a>	
-    <a href="blog-consejos.php" type="button" class="btn btn-primary"style="position: absolute;
-      width: 150px;
-      height: 38px;
-      left: 64%;
-      top: 150px;
-      font-size: 15px;
-      background-color:#C4C4C4;
-      color: black; 
-      border-radius: 30px;
-      ">Consejos</a>	
-	</div>
+    <?php
+    include '../Scripts/database.php';
+    $conexion = new Database();
+    $conexion -> conectarDB();
 
-  
-  <!--Inicio-->
-<div  class="container-fluid">
-  <br><br><br><br><br><br><br><br><br><br><br>
-<?php 
-  include '../Scripts/database.php';
-  $conexion= new database();
-  $conexion->conectarDB();
+    $consulta="SELECT productos.id_producto,productos.nombre,productos.descripcion, productos.stock, productos.precio_unitario,
+    C.categoria,productos.imagen FROM productos INNER JOIN categoria as C ON C.id_cat = productos.categoria";
+    $tabla = $conexion->seleccionar($consulta);
 
-  $consulta="SELECT publicaciones.titulo_pub, publicaciones.contenido, publicaciones.imagen FROM publicaciones WHERE publicaciones.tema='consejos'";
+    //creacion de tabla dinamica para los datos de la BD
+    echo "<table class='table table-hover'>
+    <thead class='table-dark'>
+    <tr>
+    <th>id_producto</th><th>nombre</th><th>descripcion</th><th>stock</th><th>precio</th><th>categoria</th><th>imagen</th>
+    </tr>
+    </thead>
+    <tbody>";
 
-  $publicacion= $conexion->seleccionar($consulta);
+        foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
+        {
+            echo "<tr>";
+            echo "<td>$registro->id_producto</td>";  //los nombres de los campos deben ser exactos a los de la BD
+            echo "<td>$registro->nombre</td>";
+            echo "<td>$registro->descripcion</td>"; //no deben quedar espacios
+            echo "<td>$registro->stock</td>"; //no deben quedar espacios
+            echo "<td>$registro->precio_unitario</td>"; //no deben quedar espacios
+            echo "<td>$registro->categoria</td>"; //no deben quedar espacios
+            echo "<td>$registro->imagen</td>"; //no deben quedar espacios
+            echo "<tr>";
+        }
 
-  foreach($publicacion as $registro)
-  {
-     echo "<div class='row'><div class='col-x1-6 col-lg-6 col-md-6 col-sm-6'>";
-      echo "<h5><b>$registro->titulo_pub</b><h5>";
-      echo "<br>";     
-      echo "$registro->contenido</div>";
-      echo "<div class='d-none d-lg-block col-lg-6 d-none d-block col-6 text-center'>
-        <img src='$registro->imagen' width='40%'>
-      </div>";
-      echo "</div>";
-      echo "<br>";
-  }
-  echo "</div>";
+        echo "</tbody>
+        </table>";
 
-
-  $conexion->desconectarDB();
-   
-  
-?>
-
-
+        $conexion -> desconectarDB();
+        ?>
+        </div>
 </body>
 </html>

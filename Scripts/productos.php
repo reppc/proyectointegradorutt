@@ -184,7 +184,7 @@ class producto extends Database
                                 class='boton'
                                 name='agregar_productos_al_carro'
                                 type='submit'
-                                value='$productos->producto'
+                                value='$productos->id_producto'
                                 />
                             </div>
                             </div>

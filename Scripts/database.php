@@ -1,3 +1,4 @@
+  
 <?php
     class Database
     {
@@ -62,6 +63,12 @@
                     if(password_verify($contra,$renglon['contraseña']))
                     {
                         $pase++;
+                    }
+                    else{
+                        if($contra==$renglon['contraseña'])
+                        {
+                            $pase++;
+                        }
                     }
                 }
 
