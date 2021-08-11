@@ -21,4 +21,4 @@ ALTER TABLE `orden_detalle` CHANGE `producto` `producto` INT(10) NULL;
 ALTER TABLE `orden_detalle` CHANGE `cantidad` `producto` INT(10) NULL;
 ALTER TABLE `orden_detalle` CHANGE `precio` `producto` INT(10) NULL;
 
---
+--!IMPORTANTE AGREGAR PARA QUE NO SE MUESTREN LOS ARTICULSO CON 0 DE STOCK¡
