@@ -1,11 +1,10 @@
 <?php
     class Database
     {
-        private $basededatos="appsocompruebas";
         private $PDOLocal;
         private $user="root";
-        private $password="admin";
-        private $server="mysql:host=localhost; dbname=pruebas_appsocom";
+        private $password="";
+        private $server="mysql:host=localhost; dbname=appsocom";
 
         function conectarDB()
         {

@@ -1,5 +1,5 @@
 <?php
-include("../../../Scripts/productos.php");
+include("scripts/productos/productos.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,6 @@ include("../../../Scripts/productos.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../css/navStyle.css" />
     <link rel="stylesheet" href="../../css/bootstrap.min.css" />
-    <link rel="stylesheet" href="interfaces/categorias/css/estilo botones.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -25,7 +24,7 @@ include("../../../Scripts/productos.php");
   </head>
   <body>
     <!--nav bar-->
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <!--#region logo y nombre-->
         <img src="../../Imagenes/logo-sin-letras2.png" alt="" />
@@ -185,9 +184,8 @@ include("../../../Scripts/productos.php");
         </div>
         <!-- #endregion -->
       </div>
-      </nav>
+    </nav>
     <!---->
-    
     <!-- #region contenido home articulos-->
     <!--barra de busqueda-->
     <div class="row">
@@ -284,95 +282,71 @@ include("../../../Scripts/productos.php");
       </button>
     </div>
     <!---->
-    <!--titulo-->
+    <!--categorias-->
     <div class="row">
-      <!--son 3 colores dependiendo la categoria
-        Accesorios: #1C8EE0
-        Limpueza PC: #6FD950
-        Refacciones: #A4A3A3
-        hacer que cambie de color ademas de cargar los articulos referentes a su categoria con php
-        -->
-      <div style="background-color: #1c8ee0; color: white">
-        <p style="margin: 20px">nombre de la categoria</p>
-      </div>
+      <h2>categorias</h2>
+      <hr />
+    </div>
+    <div class="row">
+      <?php
+      $categoria=new producto();
+      $categorias=$categoria->cargar_categorias();
+      foreach ($categorias as $resultado) 
+        {
+          echo"
+          <div class='col'>
+            <div style='display: inline-block; width: 150px;'>
+              <div>
+                <p
+                  style='
+                    margin-left:20px;
+                    background-color: #1c8ee0;
+                    text-align: center;
+                    display: block;
+                  '
+                >
+                  $resultado->categoria
+                </p>
+              </div>
+            </div>
+          </div>
+          ";
+        }
+      ?>
     </div>
     <!---->
-    <!--articulos-->
+    <!--productos-->
     <div class="row">
-      <!--carga de articulos segun su categoria-->
+      <h2>Productos</h2>
+      <hr />
       <div class="col">
-        <div class="row">
-          <div class="col">
-            <!--nombre-->
-            <div class="row">
-              <p>nombre del articulo</p>
-            </div>
-            <!--descripcion y foto-->
-            <div class="row">
-              <div class="col">
-                <p>descripcion del producto</p>
-              </div>
-              <div class="col">
-                <p>foto del producto</p>
-              </div>
-            </div>
-            <!--precio del producto-->
-            <div class="row">
-              <p>precio del producto</p>
-            </div>
-            <!--botones-->
-            <form action="" method="POST">
-              <div class="row">
-                <div class="col">
-                  <input
-                    class="boton"
-                    name="ver"
-                    type="submit"
-                    value="Ver detalles"
-                  />
-                </div>
-                <div class="col">
-                  <input
-                    class="boton"
-                    name="agregar"
-                    type="submit"
-                    value="Agregar al carro"
-                  />
+      <?php
+        /*item activo*/
+        $fila=$producto1->cargar_productos(20);
+        foreach ($fila as $resultado) 
+        {
+          if ($resultado->id_producto>=3) {
+            echo"<div class='contenedor'>
+            <div class='carta'>
+              <div class='arriba'>
+                <div class='contenedor_foto'>
+                  <img width='' height='' 
+                  src='$resultado->imagen' class='d-block w-10' alt='#'>
                 </div>
               </div>
-            </form>
-          </div>
-          <hr />
-        </div>
-      </div>
-      <!---->
-      <!--carrito-->
-      <div class="col">
-        <div class="contenedor_carrito">
-          <!--columnas-->
-          <div class="row contenido_carro">
-            <div class="col">
-              <p>nombre</p>
+              <div class='abajo'>
+                <div class='contenedor_abajo'>
+                  <h5 style='margin:5px; text-align:center;'>$resultado->nombre</h5>  
+                  </br>
+                  <p style='margin:5px; text-align:center;'>$$resultado->precio_unitario</p>
+                </div>
+              </div>
             </div>
-            <div class="col">
-              <p>opcion</p>
-            </div>
-          </div>
-          <!--contenido del carro-->
-          <div class="row contenido_carro">
-            <p>contenido del carro</p>
-          </div>
-          <!---->
-          <!--boton-->
-          <div class="row contenido_carro">
-            <form action="">
-              <input class="boton_carro" type="submit" value="siguiente" />
-            </form>
-          </div>
-          <!---->
-        </div>
+          </div>";
+          }
+        }
+        ?>
       </div>
-      <!---->
     </div>
     <!-- #endregion -->
     <!---->

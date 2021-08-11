@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../css/adminBlog.css">
+    <link rel="stylesheet" type="text/css" href="../inicio/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/adminBlog.css">
     <link rel="stylesheet" href="../../../inicio/css/navStyle.css">
 
     <!--JS-->
@@ -123,7 +123,7 @@
             <div class="titulo">
                 Nueva entrada
             </div>
-            <form id="loginform" action="../../../Scripts/agreagarPubl.php" method="POST" enctype="multipart/form-data"
+            <form id="loginform" action="../Scripts/agreagarPubl.php" method="POST" enctype="multipart/form-data">
               <div class="row">
                 <div class="col">
                     <label for="formFile" class="form-label">Titulo:</label>
