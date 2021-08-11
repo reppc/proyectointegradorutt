@@ -74,13 +74,7 @@
                             </li>
                             <div class="dropdown-divider"></div>
                           <li>
-                            <a class="dropdown-item" href="../inicio/Interfaces-vistas/articulos/home_articulos.html">Refacciones</a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/articulos/interfaces/categorias/categorias.html">Accesorios</a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/articulos/interfaces/categorias/categorias.html">Limpieza de PC</a>
+                          <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
                           <div class="dropdown-divider"></div>
                           <li>
@@ -157,11 +151,17 @@
                         Contacto</a>
                 </li>
                 </ul>
-                <!-- #region boton-->
-                <form class="d-flex">
-                  <a href="../login/login.html" class="btn btn-outline-light redondeado" style="text-decoration: none;">Acceder</a>
-                </form>
-            <!-- #endregion -->
+                <?php
+                    if(!isset($_SESSION["usuario"]))
+                    { 
+                        echo "<!-- #region boton-->
+                        <form class='d-flex'>
+                          <a href='../login/login.php' class='btn btn-outline-light redondeado' style='text-decoration: none;' id='redondeado'>Acceder</a>
+                        </form>
+                    <!-- #endregion -->";
+                    }
+                ?>
+                
           </div>
         </div>
       </nav>

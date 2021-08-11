@@ -42,10 +42,7 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/articulos/home_articulos.html">Articulos</a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/articulos/interfaces/categorias/categorias.html">Categoria</a>
+                          <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
                         </ul>
                         <!---->

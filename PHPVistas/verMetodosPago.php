@@ -44,13 +44,7 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="../inicio/Interfaces-vistas/articulos/home_articulos.html">Refacciones</a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/articulos/interfaces/categorias/categorias.html">Accesorios</a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/articulos/interfaces/categorias/categorias.html">Limpieza de PC</a>
+                          <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
                           <div class="dropdown-divider"></div>
                           <li>

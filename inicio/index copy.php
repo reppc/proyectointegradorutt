@@ -112,13 +112,7 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="../inicio/Interfaces-vistas/articulos/home_articulos.html">Refacciones</a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/articulos/interfaces/categorias/categorias.html">Accesorios</a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="inicio/Interfaces-vistas/articulos/interfaces/categorias/categorias.html">Limpieza de PC</a>
+                            <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
                           <div class="dropdown-divider"></div>
                           <li>
@@ -329,7 +323,7 @@
                     para todos nuestros clientes.
                 </p>
                 <br><br>
-                <button class="btn btn-success col-2 col-sm-3 offset-3 btnverde">Contactanos</button>
+                <a class="btn btn-success col-2 col-sm-3 offset-3 btnverde" href="../Servicios/servicios.php">Mas sobre nosotros</a>
             </div>
 
             <div class="col text-end">
@@ -441,7 +435,7 @@
                       <h6 class="text-muted lead">CONTACTO:</h6>
                       <h6 class="text-muted">
                       Carretera 8h No. 166-71 Local 2<br>
-                      Santa Cruz de la Ronda.<br>
+                      Torreon colonia centro.<br>
                       Teléfonos: 3115988953 – 3112641818.<br>
                       </h6>
                   </div>
@@ -449,8 +443,33 @@
                   <div class="col-xs-12 col-md-6 text-right">
                       <h6 class="text-muted lead">ENCUENTRANOS EN LAS REDES</h6>
                       <div class="redes-footer">
-                        <a href="https://www.facebook.com/"><img src="imagenes/facebook-2.png"></a>
-                        <a href="https://twitter.com/"><img src="imagenes/twitter-2.png"></a>
+                        <a href="https://www.facebook.com/">
+                        
+                            <svg width="35" height="35" viewBox="0 0 170 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="170" height="170" viewBox="0 0 170 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0)">
+                            <path d="M160.617 170.001C165.798 170.001 170 165.8 170 160.618V9.38254C170 4.2002 165.798 0 160.617 0H9.38254C4.19953 0 0 4.2002 0 9.38254V160.618C0 165.8 4.19953 170.001 9.38254 170.001H160.617" fill="#395185"/>
+                            <path d="M117.297 170V104.167H139.395L142.703 78.5112H117.297V62.1302C117.297 54.702 119.36 49.6398 130.012 49.6398L143.598 49.6338V26.6871C141.247 26.3744 133.183 25.6758 123.801 25.6758C104.212 25.6758 90.8024 37.6322 90.8024 59.5901V78.5112H68.6479V104.167H90.8024V170H117.297" fill="white"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0">
+                            <rect width="170" height="170" fill="white"/>
+                            </clipPath>
+                            </defs>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/">
+                            <svg width="209" height="170" viewBox="0 0 209 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0)">
+                            <path d="M208.23 20.7013C200.567 24.0989 192.334 26.3951 183.693 27.4281C192.514 22.141 199.287 13.7687 202.477 3.7932C194.091 8.76945 184.916 12.2755 175.349 14.16C167.556 5.85761 156.454 0.668945 144.166 0.668945C120.572 0.668945 101.444 19.7968 101.444 43.3886C101.444 46.7373 101.822 49.9974 102.55 53.1249C67.0451 51.3428 35.5666 34.3355 14.4955 8.48895C10.819 14.7985 8.7123 22.1378 8.7123 29.9659C8.7123 44.7876 16.2549 57.863 27.7173 65.5244C20.9332 65.3119 14.2983 63.4796 8.3666 60.1803C8.36416 60.3593 8.36416 60.5382 8.36416 60.718C8.36416 81.4165 23.0899 98.6833 42.6326 102.608C36.3417 104.319 29.7429 104.569 23.3404 103.34C28.7764 120.312 44.5538 132.663 63.2473 133.009C48.6265 144.466 30.2055 151.296 10.1911 151.296C6.74225 151.296 3.34225 151.094 0 150.699C18.9058 162.82 41.3612 169.893 65.4866 169.893C144.066 169.893 187.036 104.796 187.036 48.343C187.036 46.49 186.995 44.6477 186.912 42.8159C195.276 36.7698 202.495 29.2811 208.23 20.7013" fill="#55ACEE"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0">
+                            <rect width="208.23" height="170" fill="white"/>
+                            </clipPath>
+                            </defs>
+                            </svg>            
+                        </a>
                         <a href="https://www.youtube.com/"><img src="imagenes/youtube-2.png"></a>
                       </div>
                   </div>
