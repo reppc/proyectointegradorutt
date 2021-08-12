@@ -55,10 +55,9 @@ CREATE TABLE Domicilio (
 id_domicilio int (10) PRIMARY KEY AUTO_INCREMENT not null,
 cliente int(10) not null,
 calle varchar (50) not null,
-ciudad varchar (50) not null,
+codigo_postal int (5) not null,
 numeroExt int(5),
 numeroInt int(5),
-codigo_postal int (5) not null,
 telefono varchar(10),
 CONSTRAINT fk_cliente FOREIGN KEY (cliente) REFERENCES usuarios(id_usuario)
 );
@@ -185,31 +184,31 @@ UPDATE usuarios SET correo='jorgdnz@gmail.com' WHERE id_usuario = 25;
 
 ALTER TABLE domicilio ADD colonia varchar(60) not null;
 ALTER TABLE domicilio AUTO_INCREMENT = 1;
-insert into domicilio(cliente,calle,colonia,ciudad,numeroExt,numeroInt,codigo_postal,telefono)
+insert into domicilio(cliente,calle,colonia,numeroExt,numeroInt,codigo_postal,telefono)
 VALUES 
-(3,'AZTECAS', 'LAS CAROLINAS','TORREÓN',395,null,27040,'8713509720'),
-(4,'PEDRO CAMINO', 'AMPLIACION LOS ANGELES','TORREÓN',108,null,27260,'8703985297'),
-(5,'JUAN E GARCIA', 'TORREON CENTRO','TORREÓN',63,null,27000,'8701986529'),
-(6,'PASEO DE LA DANZA', 'CAMPESTRE LA ROSITA','TORREÓN',506,1,27250,'8715987462'),
-(7,'SALTILLO 400', 'CAMPESTRE LA ROSITA','TORREÓN',951,null,27250,'2015894537'),
-(8,'BERLIN', 'SAN ISIDRO','TORREÓN',201,null,27100,'8215453097'),
-(9,'AVE JUAREZ', 'FRAC CALIFORNIA','TORREÓN',null,null,27089,'8741203698'),
-(10,'HIDALGO', 'TORREON CENTRO','TORREÓN',1440,4,27000,'8587410398'),
-(11,'AV. PRESIDENTE CARRANZA', 'CENTRO','TORREÓN',881,null,27000,'8712036592'),
-(12,'SALTILLO', 'CAMPESTRE LA ROSITA','TORREÓN',400,951,27250,'8745120369'),
-(13,'JUAREZ', 'TORREON CENTRO','TORREÓN',3254,null,27000,'8745103685'),
-(14,'PASEO DE LA DANZA', 'CAMPESTRE LA ROSITA','TORREÓN',506,1,27250,'8745120398'),
-(15,'PASEO DE LA DANZA', 'CAMPESTRE LA ROSITA','TORREÓN',506,2,27250,'8745196320'),
-(16,'PASEO DE LA DANZA', 'CAMPESTRE LA ROSITA','TORREÓN',506,3,27250,'8745120398'),
-(17,'CARR MATAMOROS TORREON', 'LA AMISTAD','TORREÓN',309,null,27087,'8695741203'),
-(18,'CONSTITUCION', 'LAS MARGARITAS','TORREÓN',1111,null,27130,'2987451203'),
-(19,'AV PDTE CARRANZA', 'CENTRO','TORREÓN',1499,null,27000,'8795698730'),
-(20,'DE LAS PAPAS', 'ABASTOS','TORREÓN',169,170,27020,'8745129837'),
-(21,'HIDALGO', 'TORREON CENTRO','TORREÓN',1130,null,27000,'8745120398'),
-(22,'PASEO DE LA ROSITA', 'CENTRO','TORREÓN',1578,null,27015,'8976541230'),
-(23,'CALLE SAN JOAQUIN', 'CENTRO','TORREÓN',1710,null,27020,'8754198762'),
-(24,'AVENIDA REFORMA', 'CENTRO','TORREÓN',878,null,27000,'8749512398'),
-(25,'PROLONGACION HIDALGO', 'CENTRO','TORREÓN',554,null,27000,'8741520398');
+(3,'AZTECAS', 'LAS CAROLINAS',395,null,27040,'8713509720'),
+(4,'PEDRO CAMINO', 'AMPLIACION LOS ANGELES',108,null,27260,'8703985297'),
+(5,'JUAN E GARCIA', 'TORREON CENTRO',63,null,27000,'8701986529'),
+(6,'PASEO DE LA DANZA', 'CAMPESTRE LA ROSITA',506,1,27250,'8715987462'),
+(7,'SALTILLO 400', 'CAMPESTRE LA ROSITA',951,null,27250,'2015894537'),
+(8,'BERLIN', 'SAN ISIDRO',201,null,27100,'8215453097'),
+(9,'AVE JUAREZ', 'FRAC CALIFORNIA',null,null,27089,'8741203698'),
+(10,'HIDALGO', 'TORREON CENTRO',1440,4,27000,'8587410398'),
+(11,'AV. PRESIDENTE CARRANZA', 'CENTRO',881,null,27000,'8712036592'),
+(12,'SALTILLO', 'CAMPESTRE LA ROSITA',400,951,27250,'8745120369'),
+(13,'JUAREZ', 'TORREON CENTRO',3254,null,27000,'8745103685'),
+(14,'PASEO DE LA DANZA', 'CAMPESTRE LA ROSITA',506,1,27250,'8745120398'),
+(15,'PASEO DE LA DANZA', 'CAMPESTRE LA ROSITA',506,2,27250,'8745196320'),
+(16,'PASEO DE LA DANZA', 'CAMPESTRE LA ROSITA',506,3,27250,'8745120398'),
+(17,'CARR MATAMOROS TORREON', 'LA AMISTAD',309,null,27087,'8695741203'),
+(18,'CONSTITUCION', 'LAS MARGARITAS',1111,null,27130,'2987451203'),
+(19,'AV PDTE CARRANZA', 'CENTRO',1499,null,27032,'8795698730'),
+(20,'DE LAS PAPAS', 'ABASTOS',169,170,27020,'8745129837'),
+(21,'HIDALGO', 'TORREON CENTRO',1130,null,27000,'8745120398'),
+(22,'PASEO DE LA ROSITA', 'CENTRO',1578,null,27015,'8976541230'),
+(23,'CALLE SAN JOAQUIN', 'CENTRO',1710,null,27020,'8754198762'),
+(24,'AVENIDA REFORMA', 'CENTRO',878,null,27000,'8749512398'),
+(25,'PROLONGACION HIDALGO', 'CENTRO',554,null,27000,'8741520398');
 
 ALTER TABLE publicaciones AUTO_INCREMENT = 1;
 INSERT INTO publicaciones (titulo_pub,imagen,tema,me_gusta,fecha_pub,contenido,autor) 
@@ -305,6 +304,17 @@ values
   (1006,7, 2, '9113.86', 7, '2021-04-07'),
   (1007,8, 3, '9914.56', 8, '2021-04-11'),
   (1008,9, 1, 849, 9, '2021-04-20');
+  
+  /*Actualizacion logica de los registros*/
+  UPDATE orden_compra SET orden_compra.domicilio='12' WHERE orden_compra.id_orden='1';
+UPDATE orden_compra SET orden_compra.domicilio='18' WHERE orden_compra.id_orden='2';
+UPDATE orden_compra SET orden_compra.domicilio='1'WHERE orden_compra.id_orden='3';
+UPDATE orden_compra SET orden_compra.domicilio='2' WHERE orden_compra.id_orden='4';
+UPDATE orden_compra SET orden_compra.domicilio='3' WHERE orden_compra.id_orden='5';
+UPDATE orden_compra SET orden_compra.domicilio='4' WHERE orden_compra.id_orden='6';
+UPDATE orden_compra SET orden_compra.domicilio='5' WHERE orden_compra.id_orden='7';
+UPDATE orden_compra SET orden_compra.domicilio='6' WHERE orden_compra.id_orden='8';
+UPDATE orden_compra SET orden_compra.domicilio='7' WHERE orden_compra.id_orden='9';
 
  /*orden_detalle*/
 insert into
