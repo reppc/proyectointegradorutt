@@ -87,6 +87,11 @@
                     session_start();
                     $_SESSION["usuario"]=$usuario;
                     $_SESSION['rol']=$nUsuario['tipo_usuario'];
+                    $_SESSION['Nombres']=$renglon['nombres'];
+                    $_SESSION['Correo']=$renglon['correo'];
+                    $_SESSION['Ap_paterno']=$renglon['ap_paterno'];
+                    $_SESSION['Ap_materno']=$renglon['ap_materno'];
+                    
                     echo "<div id='contenedor'>
                     <div id='central'>
                       <div id='login'>
