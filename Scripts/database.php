@@ -4,6 +4,7 @@
     {
         private $basededatos="appsocom";
         private $PDOLocal;
+        private $PDOLocal1;
         private $user="root";
         private $password="admin";
         private $server="mysql:host=localhost; dbname=appsocom";
@@ -56,7 +57,14 @@
             try
             {
                 $pase=0;
-                $query="SELECT * FROM usuarios WHERE nombre_usuario='$usuario'";
+                $query="SELECT * FROM usuarios INNER JOIN rol_usuario ON rol_usuario.id_rol=usuarios.Rol 
+                        WHERE nombre_usuario='$usuario'";
+
+                $queryR= "SELECT rol_usuario.tipo_usuario FROM usuarios 
+                            INNER JOIN rol_usuario ON rol_usuario.id_rol=usuarios.Rol WHERE usuarios.nombre_usuario = '$usuario'";
+                $consulta1=$this->PDOLocal->query($query);
+                $nUsuario=$consulta1->fetch(PDO::FETCH_ASSOC);
+
                 $consulta=$this->PDOLocal->query($query);
                 while($renglon=$consulta->fetch(PDO::FETCH_ASSOC))
                 {
@@ -78,6 +86,7 @@
                 {
                     session_start();
                     $_SESSION["usuario"]=$usuario;
+                    $_SESSION['rol']=$nUsuario['tipo_usuario'];
                     echo "<div id='contenedor'>
                     <div id='central'>
                       <div id='login'>
