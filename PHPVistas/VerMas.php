@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+	<meta charset="utf-8">
+	<title>Detalle de la compra</title>
+	 <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="../css/vermas.css">
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
 
     <script src="../inicio/js/bootstrap.min.js"></script>
-    <title>Productos registrados</title>
 </head>
 <body>
-
-<body> 
-<?php
+	<?php
         session_start();
     ?>
 
@@ -48,7 +45,6 @@
                           <li>
                           <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
-
                           <div class="dropdown-divider"></div>
                           <li>
                              <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Articulos</a>
@@ -119,10 +115,10 @@
                             <a class="dropdown-item" href="../php/blog-informativo.php" >Mi perfil</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="../php/blog-consejos.php">Mis pedidos</a>
+                              <a class="dropdown-item" href="HistorialCompras.php">Mis pedidos</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="../php/blog-sugerencias.php">Mis direcciones</a>
+                              <a class="dropdown-item" href="MisDirecciones.php">Mis direcciones</a>
                             </li>
                             <li>
                             <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
@@ -151,47 +147,55 @@
         </div>
       </nav>
 
-      <div class="cuadro container">
-          <br>
-        <h1 align="center">Articulos</h1>
-        <br>
+      <br> 
+      <div class="container-fluid"><h2 align="center">Lista de detalles de tu compra</h2>
+        
+<?php     
+include'../Scripts/database.php';
+$conexion= new Database();
+$conexion->conectarDB();
+$iduser=$_SESSION["usuario"];
 
-    <?php
-    include '../Scripts/database.php';
-    $conexion = new Database();
-    $conexion -> conectarDB();
+$consulta="SELECT orden_compra.folio,productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser';";
+$interfaz= $conexion->seleccionar($consulta);
 
-    $consulta="SELECT productos.id_producto,productos.nombre,productos.descripcion, productos.stock, productos.precio_unitario,
-    C.categoria,productos.imagen FROM productos INNER JOIN categoria as C ON C.id_cat = productos.categoria";
-    $tabla = $conexion->seleccionar($consulta);
+ echo "      
+          <div class='rectangulo'></div>
+          <div class='rectangulo2'></div>
+       ";
+echo "<br>
+  <div class='row'>
+  <div class='offset-3 col-6 offset-3'
+  <div class='accordion' id='accordionExample'>
+  <div class='accordion-item'>
+    <h2 class='accordion-header' id='headingOne'>
+      
+    ";
+    foreach($interfaz as $registro)
+    {
+      echo "
+      <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
+        <strong>Folio de compra: $registro->folio</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Clic para ver tu compra
+      </button>
+    </h2><div id='collapseOne' class='accordion-collapse collapse' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+      <div class='accordion-body'>
+      <img src='$registro->imagen' style='width: 10%;'>
+        <strong>$registro->producto</strong><br>
+        <strong>Cantidad: </strong>$registro->cantidad <br>
+        <strong>Costo: </strong>$registro->precio <br>
+       <strong>Forma de pago: </strong>$registro->nombre <br>
+        <strong>Domicilio: </strong>$registro->Domicilio<br> 
+        <strong>Fecha: </strong>$registro->fecha_pedido 
+      </div>
+    </div>
+  </div>";
+    }
+   
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
 
-    //creacion de tabla dinamica para los datos de la BD
-    echo "<table class='table table-hover'>
-    <thead class='table-dark'>
-    <tr>
-    <th>id_producto</th><th>nombre</th><th>descripcion</th><th>stock</th><th>precio</th><th>categoria</th><th>imagen</th>
-    </tr>
-    </thead>
-    <tbody>";
-
-        foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
-        {
-            echo "<tr>";
-            echo "<td>$registro->id_producto</td>";  //los nombres de los campos deben ser exactos a los de la BD
-            echo "<td>$registro->nombre</td>";
-            echo "<td>$registro->descripcion</td>"; //no deben quedar espacios
-            echo "<td>$registro->stock</td>"; //no deben quedar espacios
-            echo "<td>$registro->precio_unitario</td>"; //no deben quedar espacios
-            echo "<td>$registro->categoria</td>"; //no deben quedar espacios
-            echo "<td>$registro->imagen</td>"; //no deben quedar espacios
-            echo "<tr>";
-        }
-
-        echo "</tbody>
-        </table>";
-
-        $conexion -> desconectarDB();
-        ?>
-        </div>
+?>
 </body>
 </html>

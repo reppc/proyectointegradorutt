@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
 
     <script src="../inicio/js/bootstrap.min.js"></script>
-    <title>Productos registrados</title>
+
+	<title>Direcciones Registradas Por Ti</title>
 </head>
 <body>
-
-<body> 
-<?php
+	<?php
         session_start();
     ?>
 
@@ -48,7 +45,6 @@
                           <li>
                           <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
-
                           <div class="dropdown-divider"></div>
                           <li>
                              <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Articulos</a>
@@ -119,10 +115,10 @@
                             <a class="dropdown-item" href="../php/blog-informativo.php" >Mi perfil</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="../php/blog-consejos.php">Mis pedidos</a>
+                              <a class="dropdown-item" href="HistorialCompras.php">Mis pedidos</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="../php/blog-sugerencias.php">Mis direcciones</a>
+                              <a class="dropdown-item" href="MisDirecciones.php">Mis direcciones</a>
                             </li>
                             <li>
                             <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
@@ -150,48 +146,13 @@
           </div>
         </div>
       </nav>
+<?php 
 
-      <div class="cuadro container">
-          <br>
-        <h1 align="center">Articulos</h1>
-        <br>
+include'../Scripts/database.php';
+$conexion= new Database();
+$conexion->conectarDB();
+$iduser=$_SESSION["usuario"];
 
-    <?php
-    include '../Scripts/database.php';
-    $conexion = new Database();
-    $conexion -> conectarDB();
-
-    $consulta="SELECT productos.id_producto,productos.nombre,productos.descripcion, productos.stock, productos.precio_unitario,
-    C.categoria,productos.imagen FROM productos INNER JOIN categoria as C ON C.id_cat = productos.categoria";
-    $tabla = $conexion->seleccionar($consulta);
-
-    //creacion de tabla dinamica para los datos de la BD
-    echo "<table class='table table-hover'>
-    <thead class='table-dark'>
-    <tr>
-    <th>id_producto</th><th>nombre</th><th>descripcion</th><th>stock</th><th>precio</th><th>categoria</th><th>imagen</th>
-    </tr>
-    </thead>
-    <tbody>";
-
-        foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
-        {
-            echo "<tr>";
-            echo "<td>$registro->id_producto</td>";  //los nombres de los campos deben ser exactos a los de la BD
-            echo "<td>$registro->nombre</td>";
-            echo "<td>$registro->descripcion</td>"; //no deben quedar espacios
-            echo "<td>$registro->stock</td>"; //no deben quedar espacios
-            echo "<td>$registro->precio_unitario</td>"; //no deben quedar espacios
-            echo "<td>$registro->categoria</td>"; //no deben quedar espacios
-            echo "<td>$registro->imagen</td>"; //no deben quedar espacios
-            echo "<tr>";
-        }
-
-        echo "</tbody>
-        </table>";
-
-        $conexion -> desconectarDB();
-        ?>
-        </div>
+?>
 </body>
 </html>

@@ -8,10 +8,9 @@
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
 
     <script src="../inicio/js/bootstrap.min.js"></script>
-    <title>Productos registrados</title>
+    <title>Historial de tus compras</title>
 </head>
 <body>
-
 <body> 
 <?php
         session_start();
@@ -48,7 +47,6 @@
                           <li>
                           <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
-
                           <div class="dropdown-divider"></div>
                           <li>
                              <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Articulos</a>
@@ -119,7 +117,7 @@
                             <a class="dropdown-item" href="../php/blog-informativo.php" >Mi perfil</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="../php/blog-consejos.php">Mis pedidos</a>
+                              <a class="dropdown-item" href="HistorialCompras.php">Mis pedidos</a>
                           </li>
                           <li>
                               <a class="dropdown-item" href="../php/blog-sugerencias.php">Mis direcciones</a>
@@ -153,37 +151,42 @@
 
       <div class="cuadro container">
           <br>
-        <h1 align="center">Articulos</h1>
+        <h1 align="center">Historial de tus compras</h1>
         <br>
+
+
 
     <?php
     include '../Scripts/database.php';
     $conexion = new Database();
     $conexion -> conectarDB();
+    $iduser=$_SESSION["usuario"];
+    $consulta="SELECT orden_compra.folio, metodo_pago.nombre, orden_compra.total, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido
+      FROM metodo_pago INNER JOIN orden_compra ON metodo_pago.id_metodo= orden_compra.domicilio
+      INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio
+      INNER JOIN usuarios ON orden_compra.cliente= usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser'";
 
-    $consulta="SELECT productos.id_producto,productos.nombre,productos.descripcion, productos.stock, productos.precio_unitario,
-    C.categoria,productos.imagen FROM productos INNER JOIN categoria as C ON C.id_cat = productos.categoria";
     $tabla = $conexion->seleccionar($consulta);
 
+
     //creacion de tabla dinamica para los datos de la BD
-    echo "<table class='table table-hover'>
+    echo "<table class='table table-hover table-borderless'>
     <thead class='table-dark'>
     <tr>
-    <th>id_producto</th><th>nombre</th><th>descripcion</th><th>stock</th><th>precio</th><th>categoria</th><th>imagen</th>
+    <th>Folio</th><th>Metodo de pago</th><th>Costo</th><th>Domicilio</th><th>Fecha del pedido</th><th>Acciones</th>
     </tr>
     </thead>
-    <tbody>";
+    <tbody class='table-secondary'>";
 
         foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
         {
             echo "<tr>";
-            echo "<td>$registro->id_producto</td>";  //los nombres de los campos deben ser exactos a los de la BD
+            echo "<td>$registro->folio</td>";  //los nombres de los campos deben ser exactos a los de la BD
             echo "<td>$registro->nombre</td>";
-            echo "<td>$registro->descripcion</td>"; //no deben quedar espacios
-            echo "<td>$registro->stock</td>"; //no deben quedar espacios
-            echo "<td>$registro->precio_unitario</td>"; //no deben quedar espacios
-            echo "<td>$registro->categoria</td>"; //no deben quedar espacios
-            echo "<td>$registro->imagen</td>"; //no deben quedar espacios
+            echo "<td>$registro->total</td>";
+            echo "<td>$registro->Domicilio</td>"; //no deben quedar espacios
+            echo "<td>$registro->fecha_pedido</td>";
+            echo "<th><a href='VerMas.php'>Ver más</a></th>";
             echo "<tr>";
         }
 
@@ -193,5 +196,6 @@
         $conexion -> desconectarDB();
         ?>
         </div>
+    
 </body>
 </html>
