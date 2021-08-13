@@ -7,25 +7,26 @@ include("../Scripts/productos.php");
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../../css/navStyle.css" />
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link
-      rel="stylesheet"
-      href="interfaces/categorias/css/estilo botones.css"
-    />
-    <link rel="stylesheet" href="../../css/navStyle.css" />
-    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-    />
-    <link rel="stylesheet" href="css/estilo_articulos_cartas.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
+    <!--links-->
+      <link rel="stylesheet" href="../../../css/navStyle.css" />
+      <link rel="stylesheet" href="../css/bootstrap.min.css" />
+      <link
+        rel="stylesheet"
+        href="interfaces/categorias/css/estilo botones.css"
+      />
+      <link rel="stylesheet" href="../../css/navStyle.css" />
+      <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+      />
+      <link rel="stylesheet" href="css/estilo_articulos_cartas.css" />
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous"
+      />
     <style>
         /*Estilos propios del NavBar*/
         .redondeado{
@@ -110,14 +111,14 @@ include("../Scripts/productos.php");
           </button>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!--Inicio-->
-                <li class="nav-item navli">
-                    <a class="nav-link active" aria-current="page" href="../inicio/index copy.php">
-                        <svg style="margin-bottom: 5px;" width="30" height="15" viewBox="0 0 1 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M29.1667 11.0887L19.7917 2.65125L5.02917 15.9375H8.33333V30.9375H14.5833V19.6875H25V30.9375H31.25V15.9375H34.5542L31.25 12.9637V6.5625H29.1667V11.0887ZM0 17.8125L19.7917 0L27.0833 6.5625V4.6875H33.3333V12.1875L39.5833 17.8125H33.3333V32.8088H22.9167V21.5588H16.6667V32.8088H6.25V17.8125H0Z" fill="white"/>
-                        </svg>
-                        Inicio</a>
-                </li>
+                <!--Inicio-->
+                  <li class="nav-item navli">
+                      <a class="nav-link active" aria-current="page" href="../inicio/index copy.php">
+                          <svg style="margin-bottom: 5px;" width="30" height="15" viewBox="0 0 1 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M29.1667 11.0887L19.7917 2.65125L5.02917 15.9375H8.33333V30.9375H14.5833V19.6875H25V30.9375H31.25V15.9375H34.5542L31.25 12.9637V6.5625H29.1667V11.0887ZM0 17.8125L19.7917 0L27.0833 6.5625V4.6875H33.3333V12.1875L39.5833 17.8125H33.3333V32.8088H22.9167V21.5588H16.6667V32.8088H6.25V17.8125H0Z" fill="white"/>
+                          </svg>
+                          Inicio</a>
+                  </li>
                 <!--articulos-->
                 <li class="nav-item dropdown navli">
                   <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -172,8 +173,6 @@ include("../Scripts/productos.php");
                           </li>
                         </ul>        
                 </li>
-                
-
                 <!--Perfil-->
                 <li class="nav-item dropdown navli">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -215,23 +214,25 @@ include("../Scripts/productos.php");
                         </ul>
                              
                 </li>
-
                 </ul>
                 <?php
                     if(!isset($_SESSION["usuario"]))
                     { 
                         echo "<!-- #region boton-->
                         <form class='d-flex'>
-                          <a href='../login/login.php' class='btn btn-outline-light redondeado' style='text-decoration: none;' id='redondeado'>Acceder</a>
+                          <a href='../login/login.php' 
+                          class='btn btn-outline-light redondeado' 
+                          style='text-decoration: none;' 
+                          id='redondeado'>Acceder</a>
                         </form>
-                    <!-- #endregion -->";
+                        <!-- #endregion -->";
                     }
                 ?>
                 
           </div>
         </div>
       </nav>
-    
+    <!---->
     <!-- #region contenido home articulos-->
     <!--barra de busqueda-->
       <div class="row">
@@ -239,7 +240,7 @@ include("../Scripts/productos.php");
           class="col"
           style="background-color: #1c8ee0; width: 100%; height: 50px"
         >
-          <form class="form" action="" method="GET">
+          <form class="form" action="" method="POST">
             <div class="row">
               <!--titulo-->
               <div class="col-3">
@@ -423,16 +424,15 @@ include("../Scripts/productos.php");
                 {
                   $control_filtros="todos";
                 }
-                if(isset($_GET['buscar_articulo']))
+                if(isset($_POST['buscar_articulo']))
                 {
                   $buscar_articulo_nombre=new articulo();
-                  $resultado_busqueda=$buscar_articulo_nombre->buscar($_GET['articulos_a_buscar']);
+                  $resultado_busqueda=$buscar_articulo_nombre->buscar($_POST['articulos_a_buscar']);
                 }
                 else
                 {
-                  $carga_de_los_productos_filtrados->carga_todo($control_filtros);
+                  $carga_de_los_productos_filtrados->carga_todo($control_filtros,session_status());
                 }
-              
             ?>
         </div>
         <!---->
@@ -445,19 +445,45 @@ include("../Scripts/productos.php");
                 <p>nombre</p>
               </div>
               <div class="col">
-                <p>opcion</p>
+                <p>cantidad</p>
               </div>
             </div>
             <!--contenido del carro-->
-              <div class="row contenido_carro">
-                <p>contenido del carro</p>
-              </div>
+              <?php
+              $carga_del_carrito=new producto();
+              if(session_status()==PHP_SESSION_ACTIVE)
+              {
+                $carga_del_carrito->carga_carrito($_SESSION['usuario']);
+              }
+              else
+              {
+
+              }
+              ?>
+              
+              </table>
+                  </div>
             <!---->
             <!--boton-->
             <div class="row contenido_carro">
-              <form action="">
-                <input class="boton_carro" type="submit" value="siguiente" />
-              </form>
+              <div class="col" style="width:auto;">
+              <?php
+                if (session_status()!=0 || session_status()!=1) {
+                  echo"<a class='btn btn-secondary' 
+                  style='padding:5px;' 
+                  href='interfaces/carrito/carrito.php'>
+                  siguiente</a>";
+                }
+                else
+                {
+                  echo"<a class='btn btn-secondary' 
+                  style='padding:5px;' 
+                  href='#'>
+                  siguiente</a>";
+                }
+              ?>
+                
+                </div>
             </div>
             <!---->
           </div>
@@ -465,6 +491,29 @@ include("../Scripts/productos.php");
         <!---->
       </div>
     <!-- #endregion -->
+    <?php
+      /*agregado de producto al carrito*/
+      $insertar_carro=new producto();
+      if(session_status()==PHP_SESSION_ACTIVE)
+      {
+        if (isset($_POST['agregar_productos_al_carro_prueba'])) {
+          if ($_POST['cantidad_producto']>0 
+          && $_POST['cantidad_producto']!=null 
+          && $_POST['cantidad_producto']!="cantidad") 
+          {
+            $usuario=$_SESSION['usuario'];
+            $cantidad_productos=$_POST['agregar_productos_al_carro_prueba'];
+            $id_producto=$_POST['cantidad_producto'];
+            $insertar_carro->insertar_carro(
+            $usuario,
+            $cantidad_productos,
+            $id_producto);
+          }
+        }
+      }
+      else{
+      }
+    ?>
     <!---->
   <!-- #region js-->
 
