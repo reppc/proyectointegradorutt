@@ -551,5 +551,104 @@ class producto extends Database
             }
         /*fin*/
     }
+    function carga_de_domicilios($usuario)
+    {
+        $this->conexion=new Database();
+        $articulo="
+        select 
+        domicilio.id_domicilio, 
+        domicilio.cliente, 
+        domicilio.calle, 
+        domicilio.ciudad, 
+        domicilio.numeroExt, 
+        domicilio.numeroInt, 
+        domicilio.codigo_postal, 
+        domicilio.telefono, 
+        domicilio.colonia 
+        from domicilio 
+        INNER JOIN usuarios 
+        on domicilio.cliente=usuarios.id_usuario 
+        where usuarios.nombre_usuario='$usuario';";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->seleccionar($articulo);
+                foreach ($consulta as $resultado) {
+                    echo
+                    "
+                    <option from='domicilio' value='$resultado->calle'>$resultado->calle</option>
+                    ";
+                }
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
+    function carga_de_domicilios_selects($usuario)
+    {
+        $this->conexion=new Database();
+        $articulo="
+        select 
+        domicilio.id_domicilio, 
+        domicilio.cliente, 
+        domicilio.calle, 
+        domicilio.ciudad, 
+        domicilio.numeroExt, 
+        domicilio.numeroInt, 
+        domicilio.codigo_postal, 
+        domicilio.telefono, 
+        domicilio.colonia 
+        from domicilio 
+        INNER JOIN usuarios 
+        on domicilio.cliente=usuarios.id_usuario 
+        where usuarios.nombre_usuario='$usuario';";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->seleccionar($articulo);
+                return $consulta;
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
+    
 }
+/*
+                      if(isset($_GET['cargar_domicilios']))
+                      {
+                        $mostrar=implode($carga_dom_s->carga_de_domicilios_selects($_SESSION['usuario']));
+                        $calle=$mostrar;
+                        echo $calle;
+                      }*/
 ?>
