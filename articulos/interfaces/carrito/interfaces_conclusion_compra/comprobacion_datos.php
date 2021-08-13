@@ -183,8 +183,21 @@
                   <label for="">cambiar domicilio</label> <br />
                   <select class="form-select" name="domicilio" onchange="">
                     <?php
+
                       $carga_dom=new producto();
                       $carga_dom->carga_de_domicilios($_SESSION['usuario']);
+                      $carga_for=new producto();        
+                      $mostrar=$carga_for->carga_de_domicilios_selects($_SESSION['usuario']);  
+                      echo serialize($mostrar);
+                          /*$dom=$value->id_domicilio;
+                          $us=$value->cliente;
+                          $calle=$value->calle;
+                          $ciudad=$value->ciudad;
+                          $num_ex=$value->numeroExt;
+                          $num_int=$value->numeroInt;
+                          $cod_p=$value->codigo_postal;
+                          $tel=$value->telefono;
+                          $col=$value->colonia;*/ 
                     ?>
                   </select >
                   <input type="submit" name="cargar_domicilios" value="cargar domicilio">
@@ -199,14 +212,31 @@
                   <!--domicilio-->
                   <div class="row" style="padding: 2px;">
                     <div class="col">
-                      <input value="" type="text" name="dom_calle" class="form form-control" placeholder="calle" />
+                      <label for="">Calle:</label>
                       <br>
-                      <input type="text" class="form form-control" placeholder="Numero interior (opcional)" />
+                      <input value="
+                      <?php 
+                        if (isset($_GET['cargar_domicilios'])) 
+                        {
+                          foreach ($mostrar as $value) 
+                          { $c=$value->calle;
+                            echo "
+                            $c;
+                            ";
+                          } 
+                        }
+                      ?>" type="text" style="width:250px" name="dom_calle" class="form form-control" placeholder="calle" />
                       <br>
-                      <input type="text" class="form form-control" placeholder="Numero exterior" />
+                      <label for="">Numero interior:</label>
+                      <br>
+                      <input type="text" style="width:250px" class="form form-control" placeholder="Numero interior" />
+                      <br>
+                      <label for="">Numero exterior:</label>
+                      <br>
+                      <input type="text" style="width:250px" class="form form-control" placeholder="Numero exterior" />
                       <br>
                     </div>
-                    <!--estado, cp-->
+                    <!--cp-->
                     <div class="col">
                       <div class="row">
                         <div class="col">
@@ -214,8 +244,17 @@
                           <select class="form-select" name="codigo postal" id="">
                             
                             <?php
+                              if (isset($_GET['cargar_domicilios'])) 
+                              {
+                                foreach ($mostrar as $value) 
+                                {
+                                  echo "
+                                  <option selected value='$value->codigo_postal'>$value->codigo_postal</option>
+                                  ";
+                                } 
+                              }
                               for ($i=27000; $i < 27438; $i++) { 
-                                echo "<option value='codigo postal'>$i</option>";
+                                echo "<option value='$i'>$i</option>";
                               }
                             ?>
                           <select >
@@ -251,12 +290,12 @@
       </div>
     </form>
     <!---->
-    <!-- #region js-->
+  <!-- #region js-->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <!-- #endregion -->
+  <!-- #endregion -->
   </body>
 </html>

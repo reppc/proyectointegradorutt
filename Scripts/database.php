@@ -86,7 +86,7 @@
                 {
                     session_start();
                     $_SESSION["usuario"]=$usuario;
-                    $_SESSION['rol']=$nUsuario['tipo_usuario'];
+                    $_SESSION["rol"]=$nUsuario['tipo_usuario'];
                     echo "<div id='contenedor'>
                     <div id='central'>
                       <div id='login'>

@@ -642,7 +642,15 @@ class producto extends Database
             }
         /*fin*/
     }
-    
+    function carga_metodo_pago($usuario)
+    {
+        if ($usuario="") {
+            
+        }
+        else {
+            
+        }
+    }
 }
 /*
                       if(isset($_GET['cargar_domicilios']))

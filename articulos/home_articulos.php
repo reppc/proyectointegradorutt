@@ -1,5 +1,6 @@
 <?php
 include("../Scripts/productos.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,77 +28,78 @@ include("../Scripts/productos.php");
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous"
       />
-    <style>
-        /*Estilos propios del NavBar*/
-        .redondeado{
-            margin-top: 2px;
-            border-top-left-radius: 37px;
-            border-top-right-radius: 37px;
-            border-bottom-left-radius: 37px;
-            border-bottom-right-radius: 37px;
-            overflow: hidden;
-        }
-        .logo{
-            width: 20pt;
-        }
-        .navli{
-            margin-left: 50pt;
-        }
-        .btn-acceder{
-        text-decoration: none;
-        color: white;
-        }
-        .btn-acceder:hover{
-            color: black;
-        }
-        /*Fin de los estilos propios del NavBar*/
-        .jumbotronfm{
-            background-color: rgb(48, 193, 82);
-            color: white;
-        }
-        .cuadrojum{
-            padding-left: 25pt;
-            padding-top: 15pt;
-        }
-        .titulos{
-            color: rgb(25, 155, 38);
-        }
-        .bordcard{
-            border-radius: 20px;
-        }
-        .imgcard{
-            width: 100%;
-        }
-        .cardmargin{
-            margin-top: 25pt;
-            margin-bottom: 25pt;
-        }
-        .btnverde{
-            background-color: rgb(111, 217, 80);
-            border: rgb(111, 217, 80);
-            border-radius: 50px;
-        }
-        .scblog{
-            background-color: rgb(45, 42, 42);
-        }
-        footer {
-        background-color:#1A1A1A;
-        height: 50%;
-        color: white;
-        padding: 15px;
-        }
-    
-        .main1 { 
-        display:flex;
-        margin:0 auto;
-        }
-    
-    </style>
+  <style>
+      /*Estilos propios del NavBar*/
+      .redondeado{
+          margin-top: 2px;
+          border-top-left-radius: 37px;
+          border-top-right-radius: 37px;
+          border-bottom-left-radius: 37px;
+          border-bottom-right-radius: 37px;
+          overflow: hidden;
+      }
+      .logo{
+          width: 20pt;
+      }
+      .navli{
+          margin-left: 50pt;
+      }
+      .btn-acceder{
+      text-decoration: none;
+      color: white;
+      }
+      .btn-acceder:hover{
+          color: black;
+      }
+      /*Fin de los estilos propios del NavBar*/
+      .jumbotronfm{
+          background-color: rgb(48, 193, 82);
+          color: white;
+      }
+      .cuadrojum{
+          padding-left: 25pt;
+          padding-top: 15pt;
+      }
+      .titulos{
+          color: rgb(25, 155, 38);
+      }
+      .bordcard{
+          border-radius: 20px;
+      }
+      .imgcard{
+          width: 100%;
+      }
+      .cardmargin{
+          margin-top: 25pt;
+          margin-bottom: 25pt;
+      }
+      .btnverde{
+          background-color: rgb(111, 217, 80);
+          border: rgb(111, 217, 80);
+          border-radius: 50px;
+      }
+      .scblog{
+          background-color: rgb(45, 42, 42);
+      }
+      footer {
+      background-color:#1A1A1A;
+      height: 50%;
+      color: white;
+      padding: 15px;
+      }
+  
+      .main1 { 
+      display:flex;
+      margin:0 auto;
+      }
+  
+  </style>
     <title>articulos</title>
   </head>
   <body>
   <?php
         session_start();
+        echo $_SESSION["rol"];
     ?>
 
     <!--Barra navegadora-->
@@ -132,7 +134,7 @@ include("../Scripts/productos.php");
                             <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
                           <?php
-                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador')
+                            if(isset($_SESSION["usuario"]) && $_SESSION["rol"]=='Administrador')
                             {
 
                             ?>
@@ -175,7 +177,7 @@ include("../Scripts/productos.php");
                               <a class="dropdown-item" href="../Blog/blog-sugerencias.php">Sugerencias</a>
                             </li>
                             <?php
-                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador_Blog')
+                            if(isset($_SESSION["usuario"]) && $_SESSION["rol"]=='Administrador_Blog')
                             {
 
                             ?>
@@ -201,7 +203,7 @@ include("../Scripts/productos.php");
 
                         if(isset($_SESSION["usuario"]))
                         { 
-                            echo $_SESSION['rol'] . ": " . $_SESSION['usuario'];
+                            echo $_SESSION["rol"] . ": " . $_SESSION['usuario'];
                         } else {
                             
                             echo "Perfil";
@@ -216,10 +218,10 @@ include("../Scripts/productos.php");
                             <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
                           </li>
 
-                          <?php
-                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Cliente')
+                          <?php echo $_SESSION["rol"];
+                            if(isset($_SESSION["usuario"]) && $_SESSION["rol"]=='Cliente')
                             {
-
+                            
                             ?>
 
                           <li>
@@ -231,10 +233,13 @@ include("../Scripts/productos.php");
 
                             <?php
                             }
+                            else {
+                              
+                            }
                             ?>
 
                           <?php
-                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador')
+                            if(isset($_SESSION["usuario"]) && $_SESSION["rol"]=='Administrador')
                             {
 
                             ?>
@@ -567,5 +572,8 @@ include("../Scripts/productos.php");
       crossorigin="anonymous"
     ></script>
   <!-- #endregion -->
+  <?php
+  echo $_SESSION["rol"];
+  ?>
   </body>
 </html>

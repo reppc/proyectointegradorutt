@@ -152,48 +152,47 @@ include("../../../scripts/productos.php");
     <!--estructura del carro-->
     <div class="row">
     <div class='col'>
-                    <div class='row contenedor_carrito' style="width:auto;">
-                      <!--contenido del carrito-->
-                      <div class='col'>
-                        <div style='margin: 5px'>
-                          <div class='row'>
-                            <div class='row'>
-                    <!--imagen del articulo-->
-                    <div id='div1' style='overflow: scroll; height: 400px; width: auto'>
-                    <table style='width: auto; background-color: lightgray'>
-                      <?php
-                        if(session_status()!=PHP_SESSION_ACTIVE)
-                        {
-                          header("location:'../../../inicio/scripts/productos.php'");
-                        }
-                        else
-                        {
-                          $carga_de_articulos=new producto();
-                          $carga_de_articulos->carga_de_los_articulos_a_comprar($_SESSION['usuario']);
-                        }
-                      ?>
-                    </table>
+            <div class='row contenedor_carrito' style="width:auto;">
+              <!--contenido del carrito-->
+              <div class='col'>
+                <div style='margin: 5px'>
+                  <div class='row'>
+                    <div class='row'>
+            <!--imagen del articulo-->
+            <div id='div1' style='overflow: scroll; height: 400px; width: auto'>
+            <table style='width: auto; background-color: lightgray'>
+              <?php
+                if(session_status()!=PHP_SESSION_ACTIVE)
+                {
+                  header("location:'../../../inicio/scripts/productos.php'");
+                }
+                else
+                {
+                  $carga_de_articulos=new producto();
+                  $carga_de_articulos->carga_de_los_articulos_a_comprar($_SESSION['usuario']);
+                }
+              ?>
+            </table>
+          </div>
+          <hr>
+                </div>
                   </div>
-                  <hr>
-                        </div>
-                          </div>
-                          <!--total-->
-                          <div style='margin: 5px'>
-                            <div class='row'>
-                              <div class='col'>
-                                <p>total</p>
-                              </div>
-                              <div class='col'>
-                                <p>monto</p>
-                              </div>
-                            </div>
-                          </div>
-                          <!---->
-                        </div>
+                  <!--total-->
+                  <div style='margin: 5px'>
+                    <div class='row'>
+                      <div class='col'>
+                        <p>total</p>
+                      </div>
+                      <div class='col'>
+                        <p>monto</p>
                       </div>
                     </div>
                   </div>
-      
+                  <!---->
+                </div>
+              </div>
+            </div>
+          </div>
       <div class="col">
         <!--botones-->
         <div class="col">
@@ -201,7 +200,23 @@ include("../../../scripts/productos.php");
             <form action="">
               <div class="col">
                 <!--interfaces_conclusion_compra/comprobacion_datos.html-->
-                <input class="nav-link botones" type="submit">
+                
+                <?php
+                  if(isset($_POST['confirmar_productos']))
+                  {
+                    if (session_status()==2) 
+                    {
+                      echo "<input class='nav-link botones' type='submit' name='confirmar_productos'>";
+                     
+                    }
+                  }
+                  else {
+                    echo" <a style='width:100px' class='nav-link botones' type='submit' name='confirmar_productos' 
+                     href='interfaces_conclusion_compra/comprobacion_datos.php'>
+                      siguiente
+                      </a>";
+                  }
+                ?>
               </div>
               <div class="col">
                 <input class="botones" type="reset" value="limpiar carro" />
@@ -212,12 +227,12 @@ include("../../../scripts/productos.php");
         <!---->
       </div>
     </div>
-    <!-- #region js-->
+  <!-- #region js-->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <!-- #endregion -->
+  <!-- #endregion -->
   </body>
 </html>
