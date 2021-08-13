@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<body> 
+<body class=""> 
 <?php
         session_start();
     ?>
@@ -46,7 +46,7 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                          <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
+                          <a class="dropdown-item" href="../articulos/home_articulos.php">Productos</a>
                           </li>
 
                           <div class="dropdown-divider"></div>

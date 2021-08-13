@@ -2,11 +2,11 @@
 <?php
     class Database
     {
-        private $basededatos="appsocompruebas";
+        private $basededatos="appsocom";
         private $PDOLocal;
         private $user="root";
         private $password="admin";
-        private $server="mysql:host=localhost; dbname=pruebas_appsocom";
+        private $server="mysql:host=localhost; dbname=appsocom";
 
         function conectarDB()
         {
@@ -90,13 +90,22 @@
                       </div>
                     </div>
               </div>";
-        header("refresh:3; ../inicio/index copy.php");
+        header("refresh:2; ../inicio/index copy.php");
         
                 }
                 else{
-                    echo "<div class='alert alert-danger'>";
-                    echo "<h2 align='center'>Usuario o password incorrecto</h2>";
-                    echo "</div>";
+                    echo "<div id='contenedor'>
+                    <div id='central'>
+                      <div id='login'>
+                        <div class='titulo'>
+                          Usuario o contraseña incorrectos
+                        </div>
+                        <div class='img-fluid img-c'>
+                          <img class='img-tam' src='../login/imgLogin/uncheck-icon-17.jpg'>
+                        </div>
+                      </div>
+                    </div>
+                 </div>";
                     header("refresh:2; ../login/login.php");
                 }
             }
