@@ -21,6 +21,7 @@
 }
 .boton_carro
 {
+    width: auto;
     margin:1px;
     border-radius: 20px;
     border:0px;

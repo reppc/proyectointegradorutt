@@ -1,0 +1,65 @@
+<div class='row' style='margin-left: 10px'>
+    <form class='col' action='' method='POST'>
+        <!--nombre-->
+        <div class='row'>
+        <p>$productos->nombre</p>
+        </div>
+        <!--descripcion y foto-->
+        <div class='row'>
+        <div class='col'>
+            <p>$productos->descripcion</p>
+        </div>
+        <div class='col'>
+            <img
+            width='60%'
+            height='60%'
+            src='$productos->imagen'
+            class='d-block w-3'
+            alt='#'
+            />
+        </div>
+        </div>
+        <!--precio del producto-->
+        <div class='row'>
+        <div class='col col'>
+            <p>$$productos->precio_unitario</p>
+        </div>
+        <div class='col  col'>
+            <p>disponibles:$productos->stock</p>
+        </div>
+        <div class='col col'>
+            <select name='cantidad_producto' class='form-select-sm' aria-label='Default select example'>
+                <option selected>cantidad</option>
+                <option from='cantidad_producto' value='1'>1</option>
+                <option from='cantidad_producto' value='2'>2</option>
+                <option from='cantidad_producto' value='3'>3</option>
+                <option from='cantidad_producto' value='4'>4</option>
+                <option from='cantidad_producto' value='5'>5</option>
+            </select>
+        </div>
+        </div>
+        <!--botones-->
+
+        <div class='row'>
+        <div class='col'>
+            <input
+            class='boton'
+            name='ver'
+            type='submit'
+            value='Ver detalles'
+            />
+        </div>
+        <div class='col'>
+            <button
+            class='boton'
+            name='agregar_productos_al_carro_prueba'
+            type='submit'
+            value='$productos->id_producto'
+            >
+            agregar al carrito
+            </button>
+        </div>
+        </div>
+    </form>
+    <hr />
+    </div>

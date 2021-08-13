@@ -145,4 +145,31 @@ class producto extends Database
         /*fin*/
     }
 }
+class carga_carrito()
+{
+
+}
 ?>
+<div class="contenedor_carrito">
+    <!--columnas-->
+    <div class="row contenido_carro">
+        <div class="col">
+        <p>nombre</p>
+        </div>
+        <div class="col">
+        <p>opcion</p>
+        </div>
+    </div>
+    <!--contenido del carro-->
+        <div class="row contenido_carro">
+        <p>contenido del carro</p>
+        </div>
+    <!---->
+    <!--boton-->
+    <div class="row contenido_carro">
+        <form action="">
+        <input class="boton_carro" type="submit" value="siguiente" />
+        </form>
+    </div>
+    <!---->
+</div>

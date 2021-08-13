@@ -86,7 +86,6 @@
         $db=new Database();
         $db->conectarDB();
         extract($_POST);
-
         $db->verificaLogin("$usuario","$password");
         $db->desconectarDB();
         ?>
