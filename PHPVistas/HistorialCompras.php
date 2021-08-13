@@ -1,43 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../inicio/css/navStyle.css" />
-    <link rel="stylesheet" href="../css/estilo.css" />
-    <link rel="stylesheet" href="../css/login.css">
-    <style>
-      .redondeado{
-            margin-top: 2px;
-            border-top-left-radius: 37px;
-            border-top-right-radius: 37px;
-            border-bottom-left-radius: 37px;
-            border-bottom-right-radius: 37px;
-            overflow: hidden;
-        }
-      .logo{
-            width: 20pt;
-        }
-        .navli{
-            margin-left: 50pt;
-        }
-        .btn-acceder{
-        text-decoration: none;
-        color: white;
-        }
-        .btn-acceder:hover{
-            color: black;
-        }
-        .body-g{
-        background-color: #2aa13e;
-        }
-    </style>
-    <title>login</title>
-  </head>
-  <body class="body-g">
-  <?php
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../inicio/css/navStyle.css">
+
+    <script src="../inicio/js/bootstrap.min.js"></script>
+    <title>Historial de tus compras</title>
+</head>
+<body>
+<body> 
+<?php
         session_start();
     ?>
 
@@ -70,7 +45,7 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
+                          <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
                           <div class="dropdown-divider"></div>
                           <li>
@@ -128,7 +103,7 @@
 
                         if(isset($_SESSION["usuario"]))
                         { 
-                            echo   $_SESSION['usuario'];
+                            echo $_SESSION['usuario'];
                         } else {
                             
                             echo "Perfil";
@@ -142,12 +117,12 @@
                             <a class="dropdown-item" href="../php/blog-informativo.php" >Mi perfil</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="../php/blog-consejos.php">Mis pedidos</a>
+                              <a class="dropdown-item" href="HistorialCompras.php">Mis pedidos</a>
                           </li>
                           <li>
                               <a class="dropdown-item" href="../php/blog-sugerencias.php">Mis direcciones</a>
-                          </li>
-                          <li>
+                            </li>
+                            <li>
                             <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
                           </li>
                             <div class="dropdown-divider"></div>
@@ -173,32 +148,54 @@
           </div>
         </div>
       </nav>
-    <!---->
-    <!--contenido del formulario para entrar-->
-    <div id="contenedor">
-      <div id="central">
-          <div id="login">
-              <div class="titulo">
-                  Bienvenido
-              </div>
-              <form id="loginform" action="../Scripts/verificaLogin.php" method="POST">
-                  <input type="text" name="usuario" placeholder="Usuario" required>
-                  
-                  <input type="password" placeholder="Contraseña" name="password" required>
-                  
-                  <button type="submit" title="Ingresar" name="Ingresar">Ingresar</button>
-              </form>
-              <div class="pie-form">
-                  <a href="registrarse.php">¿No tienes Cuenta? Registrate</a>
-              </div>
-          </div>
-          <div class="inferior">
-              <a href="../inicio/index copy.php">Ir a inicio</a>
-          </div>
-      </div>
-  </div>
-    <!-- #region js-->
-    <script src="../inicio/js/bootstrap.min.js"></script>
-    <!-- #endregion -->
-  </body>
+
+      <div class="cuadro container">
+          <br>
+        <h1 align="center">Historial de tus compras</h1>
+        <br>
+
+
+
+    <?php
+    include '../Scripts/database.php';
+    $conexion = new Database();
+    $conexion -> conectarDB();
+    $iduser=$_SESSION["usuario"];
+    $consulta="SELECT orden_compra.folio, metodo_pago.nombre, orden_compra.total, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido
+      FROM metodo_pago INNER JOIN orden_compra ON metodo_pago.id_metodo= orden_compra.domicilio
+      INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio
+      INNER JOIN usuarios ON orden_compra.cliente= usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser'";
+
+    $tabla = $conexion->seleccionar($consulta);
+
+
+    //creacion de tabla dinamica para los datos de la BD
+    echo "<table class='table table-hover table-borderless'>
+    <thead class='table-dark'>
+    <tr>
+    <th>Folio</th><th>Metodo de pago</th><th>Costo</th><th>Domicilio</th><th>Fecha del pedido</th><th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody class='table-secondary'>";
+
+        foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
+        {
+            echo "<tr>";
+            echo "<td>$registro->folio</td>";  //los nombres de los campos deben ser exactos a los de la BD
+            echo "<td>$registro->nombre</td>";
+            echo "<td>$registro->total</td>";
+            echo "<td>$registro->Domicilio</td>"; //no deben quedar espacios
+            echo "<td>$registro->fecha_pedido</td>";
+            echo "<th><a href='VerMas.php'>Ver más</a></th>";
+            echo "<tr>";
+        }
+
+        echo "</tbody>
+        </table>";
+
+        $conexion -> desconectarDB();
+        ?>
+        </div>
+    
+</body>
 </html>

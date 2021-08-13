@@ -1,43 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../inicio/css/navStyle.css" />
-    <link rel="stylesheet" href="../css/estilo.css" />
-    <link rel="stylesheet" href="../css/login.css">
-    <style>
-      .redondeado{
-            margin-top: 2px;
-            border-top-left-radius: 37px;
-            border-top-right-radius: 37px;
-            border-bottom-left-radius: 37px;
-            border-bottom-right-radius: 37px;
-            overflow: hidden;
-        }
-      .logo{
-            width: 20pt;
-        }
-        .navli{
-            margin-left: 50pt;
-        }
-        .btn-acceder{
-        text-decoration: none;
-        color: white;
-        }
-        .btn-acceder:hover{
-            color: black;
-        }
-        .body-g{
-        background-color: #2aa13e;
-        }
-    </style>
-    <title>login</title>
-  </head>
-  <body class="body-g">
-  <?php
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Detalle de la compra</title>
+	 <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="../css/vermas.css">
+    <link rel="stylesheet" href="../inicio/css/navStyle.css">
+
+    <script src="../inicio/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<?php
         session_start();
     ?>
 
@@ -70,7 +43,7 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
+                          <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
                           <div class="dropdown-divider"></div>
                           <li>
@@ -128,7 +101,7 @@
 
                         if(isset($_SESSION["usuario"]))
                         { 
-                            echo   $_SESSION['usuario'];
+                            echo $_SESSION['usuario'];
                         } else {
                             
                             echo "Perfil";
@@ -142,12 +115,12 @@
                             <a class="dropdown-item" href="../php/blog-informativo.php" >Mi perfil</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="../php/blog-consejos.php">Mis pedidos</a>
+                              <a class="dropdown-item" href="HistorialCompras.php">Mis pedidos</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="../php/blog-sugerencias.php">Mis direcciones</a>
-                          </li>
-                          <li>
+                              <a class="dropdown-item" href="MisDirecciones.php">Mis direcciones</a>
+                            </li>
+                            <li>
                             <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
                           </li>
                             <div class="dropdown-divider"></div>
@@ -173,32 +146,56 @@
           </div>
         </div>
       </nav>
-    <!---->
-    <!--contenido del formulario para entrar-->
-    <div id="contenedor">
-      <div id="central">
-          <div id="login">
-              <div class="titulo">
-                  Bienvenido
-              </div>
-              <form id="loginform" action="../Scripts/verificaLogin.php" method="POST">
-                  <input type="text" name="usuario" placeholder="Usuario" required>
-                  
-                  <input type="password" placeholder="Contraseña" name="password" required>
-                  
-                  <button type="submit" title="Ingresar" name="Ingresar">Ingresar</button>
-              </form>
-              <div class="pie-form">
-                  <a href="registrarse.php">¿No tienes Cuenta? Registrate</a>
-              </div>
-          </div>
-          <div class="inferior">
-              <a href="../inicio/index copy.php">Ir a inicio</a>
-          </div>
+
+      <br> 
+      <div class="container-fluid"><h2 align="center">Lista de detalles de tu compra</h2>
+        
+<?php     
+include'../Scripts/database.php';
+$conexion= new Database();
+$conexion->conectarDB();
+$iduser=$_SESSION["usuario"];
+
+$consulta="SELECT orden_compra.folio,productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser';";
+$interfaz= $conexion->seleccionar($consulta);
+
+ echo "      
+          <div class='rectangulo'></div>
+          <div class='rectangulo2'></div>
+       ";
+echo "<br>
+  <div class='row'>
+  <div class='offset-3 col-6 offset-3'
+  <div class='accordion' id='accordionExample'>
+  <div class='accordion-item'>
+    <h2 class='accordion-header' id='headingOne'>
+      
+    ";
+    foreach($interfaz as $registro)
+    {
+      echo "
+      <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
+        <strong>Folio de compra: $registro->folio</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Clic para ver tu compra
+      </button>
+    </h2><div id='collapseOne' class='accordion-collapse collapse' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+      <div class='accordion-body'>
+      <img src='$registro->imagen' style='width: 10%;'>
+        <strong>$registro->producto</strong><br>
+        <strong>Cantidad: </strong>$registro->cantidad <br>
+        <strong>Costo: </strong>$registro->precio <br>
+       <strong>Forma de pago: </strong>$registro->nombre <br>
+        <strong>Domicilio: </strong>$registro->Domicilio<br> 
+        <strong>Fecha: </strong>$registro->fecha_pedido 
       </div>
-  </div>
-    <!-- #region js-->
-    <script src="../inicio/js/bootstrap.min.js"></script>
-    <!-- #endregion -->
-  </body>
+    </div>
+  </div>";
+    }
+   
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+
+?>
+</body>
 </html>

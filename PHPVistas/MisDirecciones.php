@@ -1,43 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../inicio/css/navStyle.css" />
-    <link rel="stylesheet" href="../css/estilo.css" />
-    <link rel="stylesheet" href="../css/login.css">
-    <style>
-      .redondeado{
-            margin-top: 2px;
-            border-top-left-radius: 37px;
-            border-top-right-radius: 37px;
-            border-bottom-left-radius: 37px;
-            border-bottom-right-radius: 37px;
-            overflow: hidden;
-        }
-      .logo{
-            width: 20pt;
-        }
-        .navli{
-            margin-left: 50pt;
-        }
-        .btn-acceder{
-        text-decoration: none;
-        color: white;
-        }
-        .btn-acceder:hover{
-            color: black;
-        }
-        .body-g{
-        background-color: #2aa13e;
-        }
-    </style>
-    <title>login</title>
-  </head>
-  <body class="body-g">
-  <?php
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../inicio/css/navStyle.css">
+
+    <script src="../inicio/js/bootstrap.min.js"></script>
+
+	<title>Direcciones Registradas Por Ti</title>
+</head>
+<body>
+	<?php
         session_start();
     ?>
 
@@ -70,7 +43,7 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
+                          <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
                           <div class="dropdown-divider"></div>
                           <li>
@@ -128,7 +101,7 @@
 
                         if(isset($_SESSION["usuario"]))
                         { 
-                            echo   $_SESSION['usuario'];
+                            echo $_SESSION['usuario'];
                         } else {
                             
                             echo "Perfil";
@@ -142,12 +115,12 @@
                             <a class="dropdown-item" href="../php/blog-informativo.php" >Mi perfil</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="../php/blog-consejos.php">Mis pedidos</a>
+                              <a class="dropdown-item" href="HistorialCompras.php">Mis pedidos</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="../php/blog-sugerencias.php">Mis direcciones</a>
-                          </li>
-                          <li>
+                              <a class="dropdown-item" href="MisDirecciones.php">Mis direcciones</a>
+                            </li>
+                            <li>
                             <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
                           </li>
                             <div class="dropdown-divider"></div>
@@ -173,32 +146,13 @@
           </div>
         </div>
       </nav>
-    <!---->
-    <!--contenido del formulario para entrar-->
-    <div id="contenedor">
-      <div id="central">
-          <div id="login">
-              <div class="titulo">
-                  Bienvenido
-              </div>
-              <form id="loginform" action="../Scripts/verificaLogin.php" method="POST">
-                  <input type="text" name="usuario" placeholder="Usuario" required>
-                  
-                  <input type="password" placeholder="Contraseña" name="password" required>
-                  
-                  <button type="submit" title="Ingresar" name="Ingresar">Ingresar</button>
-              </form>
-              <div class="pie-form">
-                  <a href="registrarse.php">¿No tienes Cuenta? Registrate</a>
-              </div>
-          </div>
-          <div class="inferior">
-              <a href="../inicio/index copy.php">Ir a inicio</a>
-          </div>
-      </div>
-  </div>
-    <!-- #region js-->
-    <script src="../inicio/js/bootstrap.min.js"></script>
-    <!-- #endregion -->
-  </body>
+<?php 
+
+include'../Scripts/database.php';
+$conexion= new Database();
+$conexion->conectarDB();
+$iduser=$_SESSION["usuario"];
+
+?>
+</body>
 </html>

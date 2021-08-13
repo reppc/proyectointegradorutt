@@ -234,9 +234,9 @@
       echo "<br>";     
       echo "$registro->contenido</div>";
       echo "<div class='d-none d-lg-block col-lg-6 d-none d-block col-6 text-center'>
-        <img src='$registro->imagen' width='40%'>
+        <img src='$registro->imagen' width='47%'>
       </div>";
-      echo "</div>";
+      echo "</div><br><br>";
       echo "<br>";
   }
   echo "</div>";
