@@ -6,7 +6,7 @@
         private $PDOLocal;
         private $PDOLocal1;
         private $user="root";
-        private $password="";
+        private $password="admin";
         private $server="mysql:host=localhost; dbname=appsocom";
 
         function conectarDB()
@@ -61,7 +61,8 @@
                         WHERE nombre_usuario='$usuario'";
 
                 $queryR= "SELECT rol_usuario.tipo_usuario FROM usuarios 
-                            INNER JOIN rol_usuario ON rol_usuario.id_rol=usuarios.Rol WHERE usuarios.nombre_usuario = '$usuario'";
+                            INNER JOIN rol_usuario ON rol_usuario.id_rol=usuarios.Rol 
+                            WHERE usuarios.nombre_usuario = '$usuario'";
                 $consulta1=$this->PDOLocal->query($query);
                 $nUsuario=$consulta1->fetch(PDO::FETCH_ASSOC);
 
@@ -81,12 +82,21 @@
                 }
 
 
-
                 if($pase>0)
                 {
                     session_start();
+
+                    //Variables de sesión con los datos propios del usuario en sesion activa
+                    //use estas variables si necesita una referencia de algun tipo de este usuario
                     $_SESSION["usuario"]=$usuario;
                     $_SESSION['rol']=$nUsuario['tipo_usuario'];
+                    $_SESSION['id']=$nUsuario['id_usuario'];
+                    $_SESSION['nombres']=$nUsuario['nombres'];         //use la variable de sesion deseada
+                    $_SESSION['ap_paterno']=$nUsuario['ap_paterno'];
+                    $_SESSION['ap_materno']=$nUsuario['ap_materno'];
+                    $_SESSION['correo']=$nUsuario['correo'];
+                    $_SESSION['fecha_creacion']=$nUsuario['fecha_creacion'];
+                    
                     echo "<div id='contenedor'>
                     <div id='central'>
                       <div id='login'>
