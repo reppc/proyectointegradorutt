@@ -30,7 +30,7 @@ include("../../../scripts/productos.php");
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <!--Inicio-->
             <li class="nav-item navli">
-                <a class="nav-link active" aria-current="page" href="../inicio/index copy.php">
+                <a class="nav-link active" aria-current="page" href="../../../inicio/index copy.php">
                     <svg style="margin-bottom: 5px;" width="30" height="15" viewBox="0 0 1 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M29.1667 11.0887L19.7917 2.65125L5.02917 15.9375H8.33333V30.9375H14.5833V19.6875H25V30.9375H31.25V15.9375H34.5542L31.25 12.9637V6.5625H29.1667V11.0887ZM0 17.8125L19.7917 0L27.0833 6.5625V4.6875H33.3333V12.1875L39.5833 17.8125H33.3333V32.8088H22.9167V21.5588H16.6667V32.8088H6.25V17.8125H0Z" fill="white"/>
                     </svg>
@@ -46,7 +46,7 @@ include("../../../scripts/productos.php");
                     <!--lista del dropdown de articulos-->
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li>
-                        <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
+                        <a class="dropdown-item" href="../../home_articulos.php">Articulos</a>
                       </li>
                       <?php
                         if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador')
@@ -55,13 +55,13 @@ include("../../../scripts/productos.php");
                         ?>
                       <div class="dropdown-divider"></div>
                       <li>
-                          <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Productos</a>
+                          <a class="dropdown-item" href="../../../PHPVistas/verProductos.php"> Ver registros de Productos</a>
                         </li>
                       <li>
-                        <a class="dropdown-item" href="../PHPVistas/verMetodosPago.php">Ver registros de  metodos de pago</a>
+                        <a class="dropdown-item" href="../../../PHPVistas/verMetodosPago.php">Ver registros de  metodos de pago</a>
                       </li>
 
-                        <a class="dropdown-item" href="../PHPVistas/HistorialPedidos.php">Historial de pedidos</a>
+                        <a class="dropdown-item" href="../../../PHPVistas/HistorialPedidos.php">Historial de pedidos</a>
                         <div class="dropdown-divider"></div>
                         <?php
                         }
@@ -83,13 +83,13 @@ include("../../../scripts/productos.php");
                     <!--lista del dropdown de articulos-->
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li>
-                        <a class="dropdown-item" href="../Blog/blog-informativo.php" >Informativo</a>
+                        <a class="dropdown-item" href="../../../Blog/blog-informativo.php" >Informativo</a>
                       </li>
                       <li>
-                          <a class="dropdown-item" href="../Blog/blog-consejos.php">Consejos</a>
+                          <a class="dropdown-item" href="../../../Blog/blog-consejos.php">Consejos</a>
                       </li>
                       <li>
-                          <a class="dropdown-item" href="../Blog/blog-sugerencias.php">Sugerencias</a>
+                          <a class="dropdown-item" href="../../../Blog/blog-sugerencias.php">Sugerencias</a>
                         </li>
                         <?php
                         if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador_Blog')
@@ -98,7 +98,7 @@ include("../../../scripts/productos.php");
                         ?>
                       <div class="dropdown-divider"></div>
                       <li>
-                        <a class="dropdown-item" href="../AdminBlog/FormAddBlog.php">Crear entrada</a>
+                        <a class="dropdown-item" href="../../../AdminBlog/FormAddBlog.php">Crear entrada</a>
                       </li>
                       <div class="dropdown-divider"></div>
                       <?php
@@ -132,7 +132,7 @@ include("../../../scripts/productos.php");
                     
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li>
-                        <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
+                        <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../../../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
                       </li>
 
                       <?php
@@ -142,10 +142,10 @@ include("../../../scripts/productos.php");
                         ?>
 
                       <li>
-                          <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/HistorialCompras.php'";}else{echo "href='../login/login.php'";}?>>Mis pedidos</a>
+                          <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../../../PHPVistas/HistorialCompras.php'";}else{echo "href='../login/login.php'";}?>>Mis pedidos</a>
                       </li>
                       <li>
-                          <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?>>Mis direcciones</a>
+                          <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../../../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?>>Mis direcciones</a>
                       </li>
 
                         <?php
@@ -159,7 +159,7 @@ include("../../../scripts/productos.php");
                         ?>
                         <div class="dropdown-divider"></div>
                         <li>
-                          <a class="dropdown-item" href="../PHPVistas/VerUsuarios.php">Ver usuarios</a>
+                          <a class="dropdown-item" href="../../../PHPVistas/VerUsuarios.php">Ver usuarios</a>
                         </li>
                         <div class="dropdown-divider"></div>
                         <?php
@@ -172,7 +172,7 @@ include("../../../scripts/productos.php");
 
                         ?>
                       <li>
-                        <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
+                        <a class="dropdown-item" href="../../../Scripts/cerrarSesion.php">Cerrar sesion</a>
                       </li>
                       <?php
                         }
@@ -187,7 +187,7 @@ include("../../../scripts/productos.php");
                 { 
                     echo "<!-- #region boton-->
                     <form class='d-flex'>
-                      <a href='../login/login.php' class='btn btn-outline-light' style='text-decoration: none;' id='redondeado'>Acceder</a>
+                      <a href='../../../login/login.php' class='btn btn-outline-light' style='text-decoration: none;' id='redondeado'>Acceder</a>
                     </form>
                 <!-- #endregion -->";
                 }
