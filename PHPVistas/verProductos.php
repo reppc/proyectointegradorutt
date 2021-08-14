@@ -199,8 +199,33 @@
 
       <div class="cuadro container">
           <br>
-        <h1 align="center">Articulos</h1>
+          <div class="row">
+          <h1 align="center">Articulos</h1>
+
+            <div class="row">
+              <div class="col float-right">
+                <a href="FormAddProd.php" class="col btn btn-primary" type="button">Agregar nuevo Articulo</a>
+              </div>
+            </div>
+          </div>
+        
         <br>
+
+
+    <table class='table table-hover'>
+    <thead class='table-dark'>
+    <tr>
+    <th>id_producto</th>
+    <th>nombre</th>
+    <th>descripcion</th>
+    <th>stock</th>
+    <th>precio</th>
+    <th>categoria</th>
+    <th>imagen</th>
+    <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
 
     <?php
     include '../Scripts/database.php';
@@ -208,36 +233,44 @@
     $conexion -> conectarDB();
 
     $consulta="SELECT productos.id_producto,productos.nombre,productos.descripcion, productos.stock, productos.precio_unitario,
-    C.categoria,productos.imagen FROM productos INNER JOIN categoria as C ON C.id_cat = productos.categoria";
-    $tabla = $conexion->seleccionar($consulta);
+    C.categoria,productos.imagen FROM productos INNER JOIN categoria as C ON C.id_cat = productos.categoria ORDER BY id_producto";
 
-    //creacion de tabla dinamica para los datos de la BD
-    echo "<table class='table table-hover'>
-    <thead class='table-dark'>
-    <tr>
-    <th>id_producto</th><th>nombre</th><th>descripcion</th><th>stock</th><th>precio</th><th>categoria</th><th>imagen</th>
-    </tr>
-    </thead>
-    <tbody>";
+    $resultado=$conexion->seleccionar($consulta);    
+    //print_r($resultado);
+    
+    //$array = json_decode(json_encode($resultado), true);
+    //echo "<h1>Separacion ------------</h1>";
+    //print_r($array);
 
-        foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
-        {
+    foreach ($resultado as $filas) {
+      
             echo "<tr>";
-            echo "<td>$registro->id_producto</td>";  //los nombres de los campos deben ser exactos a los de la BD
-            echo "<td>$registro->nombre</td>";
-            echo "<td>$registro->descripcion</td>"; //no deben quedar espacios
-            echo "<td>$registro->stock</td>"; //no deben quedar espacios
-            echo "<td>$registro->precio_unitario</td>"; //no deben quedar espacios
-            echo "<td>$registro->categoria</td>"; //no deben quedar espacios
-            echo "<td>$registro->imagen</td>"; //no deben quedar espacios
-            echo "<tr>";
-        }
+          //<!--los nombres de los campos deben ser exactos a los de la BD-->
 
-        echo "</tbody>
-        </table>";
+            echo "<td>"; echo $filas->id_producto; echo "</td>"; //<!--id-->
+            echo "<td>"; echo $filas->nombre; "</td>"; //<!--Nombre-->
+            echo "<td>"; echo $filas->descripcion; echo "</td>"; //<!--descripcion-->
+            echo "<td>"; echo $filas->stock; echo "</td>"; //<!--stock-->
+            echo "<td>"; echo $filas->precio_unitario; echo "</td>"; //<!--precio-->
+            echo "<td>"; echo $filas->categoria; echo "</td>"; //<!--categoria-->
+            echo "<td>"; echo $filas->imagen; echo "</td>"; //<!--imagen-->
 
-        $conexion -> desconectarDB();
-        ?>
+            echo "<td>
+                <a href='FormEditProd.php?no=$filas->id_producto' value type='submit' class='btn btn-success'>Editar</a>
+              &nbsp
+
+                <a href='eliminarProd.php' type='submit' class='btn btn-danger'>Editar</a>
+                  </td>
+                <tr>";
+
+            }
+            $conexion -> desconectarDB();
+            ?>
+        
+        </tbody>
+        </table>
+
+
         </div>
 </body>
 </html>

@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/recPass.css">
-    <link rel="stylesheet" href="../inicio/css/navStyle.css">
-    <style>
-      #contenedor {
+     <!DOCTYPE html>
+     <html lang="en">
+     <head>
+         <meta charset="UTF-8">
+         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../inicio/css/navStyle.css">
+        <link rel="stylesheet" href="../css/registrarse.css">
+        <style>
+                  #contenedor {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,20 +55,22 @@
     .img-tam{
       width: 50%;
     }
-    </style>
-    <title>Registro exitoso</title>
-</head>
-<body class="body-g">
-
-<?php
+        </style>
+         <title>Registro actualizado</title>
+     </head>
+     <body class="body-g">
+         
+     <!---->
+      <?php
         include 'database.php';
-        $db=new Database();
+        $db= new Database();
         $db->conectarDB();
+    
 
         if($_FILES['imagen']['error'])
         {
             switch($_FILES['imagen']['error'])
-            {
+                {
                 case 1: //exceso de tamaño de archivo permitido por php.ini
 
                     echo "El tamaño del archivo excede el permitido por el servidor";
@@ -96,44 +98,53 @@
         }
         else
         {
-            echo "<div class='alert alert-success'>Entrada subida correctamente</div>";
+            echo "<div class='alert alert-success'>Datos del articulo actualizados correctamente</div>";
 
             if((isset($_FILES['imagen']['name']) && ($_FILES['imagen']['error']==UPLOAD_ERR_OK)))
             {
-                $destino_de_ruta="../ImgBlog/";
+                $destino_de_ruta="../articulos/imgProductos";
 
                 move_uploaded_file($_FILES['imagen']['tmp_name'], $destino_de_ruta.$_FILES['imagen']['name']);
 
                 echo "<div class='alert alert-warning'>El archivo " . $_FILES['imagen']['name'] . " se ha copiado en el directorio del ImgBlog</div>";
             }
             else{
-                echo "<div class='alert alert-danger'>El archivo no se ha podido copiar en el directorio de ImgBlog</div>";
+                echo "<div class='alert alert-danger'>No se ha enviado ninguna imagen</div>";
             }
         }
         extract($_POST);
-        $imagenL=$_FILES['imagen']['name'];
-        $lafecha=date("Y-m-d H:i:s");
 
-        $miconsulta="INSERT INTO publicaciones (titulo_pub,contenido,tema,imagen,fecha_pub,autor)
-        VALUES ('$titulo','$contenido','$tema','$imagenL','".$lafecha."',2)";
+        if(!isset($_FILES['imagen']['name']))
+        {
+            $cadena="UPDATE productos SET nombre='$nombre', descripcion='$descripcion', precio_unitario='$precio', 
+            categoria='$categoria', stock='$stock' WHERE id_producto='$id_prod'";    
+        }else{
+            $imagenL=$_FILES['imagen']['name'];
 
-        $db->ejecutaSQL($miconsulta);
+            $cadena="UPDATE productos SET nombre='$nombre', descripcion='$descripcion', precio_unitario='$precio', 
+            categoria='$categoria', stock='$stock', imagen='$imagenL' WHERE id_producto='$id_prod'";
+    
+        }
+    
+        
+        $db->ejecutaSQL($cadena);
         $db->desconectarDB();
-
+    
         echo "<div id='contenedor'>
-        <div id='central'>
-          <div id='login'>
-            <div class='titulo'>
-              Publicacion realizada
-            </div>
-                <div class='img-fluid img-c'>
-                <img class='img-tam' src='../login/imgLogin/checked-icon-clipart1.png'>
-                </div>
-                
-            </div>
-            </div>
-        </div>";
-        header("refresh:3 ../AdminBlog/FormAddBlog.php");
-?>
+                    <div id='central'>
+                      <div id='login'>
+                        <div class='titulo'>
+                          Registro completo
+                        </div>
+                        <div class='img-fluid img-c'>
+                          <img class='img-tam' src='../login/imgLogin/checked-icon-clipart1.png'>
+                        </div>
+                      </div>
+                    </div>
+              </div>";
+
+              header("refresh:2; ../PHPVistas/verProductos.php");
+        ?>
+
 </body>
 </html>

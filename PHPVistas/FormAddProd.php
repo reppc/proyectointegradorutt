@@ -4,63 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../inicio/css/navStyle.css" />
-    <link rel="stylesheet" href="../css/estilo.css" />
-    <style>
-      #contenedor {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    margin: 0;
-    padding: 0;
-    min-width: 100vw;
-    min-height: 100vh;
-    width: 100%;
-    height: 100%;
-    }
-    .titulo {
-        font-size: 250%;
-        color:#56c93f;
-        text-align: center;
-        margin-bottom: 20px;
-    }
+    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../AdminBlog/adminBlog.css">
+    <link rel="stylesheet" href="../inicio/css/navStyle.css">
 
-    #central {
-        max-width: 320px;
-        width: 100%;
-    }
-    #login {
-        width: 100%;
-        padding: 50px 30px;
-        background-color: #eafff1;
-        
-        -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
-        -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
-        box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
-        
-        border-radius: 3px 3px 3px 3px;
-        -moz-border-radius: 3px 3px 3px 3px;
-        -webkit-border-radius: 3px 3px 3px 3px;
-        
-        box-sizing: border-box;
-    }
-    .body-g{
-        background-color: #2aa13e;
-    }
-    .img-c{
-      text-align: center;
-    }
-    .img-tam{
-      width: 50%;
-    }
-    </style>
-    <title>Registrarse</title>
+    <!--JS-->
+    <script src="../inicio/js/bootstrap.min.js"></script>
+    <title>Agregar Articulo</title>
 </head>
 <body class="body-g">
-    <!--Barra navegadora-->
-    <?php
+<?php
         session_start();
     ?>
 
@@ -179,7 +132,7 @@
                         
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MiPerfil.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
+                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
                           </li>
 
                           <?php
@@ -244,36 +197,71 @@
         </div>
       </nav>
 
+
+     <!--contenido del formulario para agregar articulos-->
+     <br>
+ <div id="contenedor">
+    <div id="central">
+        <div id="login">
+            <div class="titulo">
+                Nuevo Articulo
+            </div>
+            <form id="loginform" action="../Scripts/agreagarPubl.php" method="POST" enctype="multipart/form-data">
+              <div class="row">
+                <div class="col">
+                    <label for="formFile" class="form-label">Nombre:</label>
+                    <input type="text" name="nombre"  required autofocus>
+                    <br>
+                    <label for="formFile" class="form-label">Descripción:</label>
+                    <textarea class="form-control" name="descripcion" required></textarea>
+                    <br>
+                    <label for="formFile" class="form-label">Stock:</label>
+                    <input type="text" name="stock"  required autofocus>
+                    <br>
+                    <label for="formFile" class="form-label">Precio:</label>
+                    <input type="text" name="precio" " required autofocus>
+                    <br>
+                    <label class="form" for="categoria-label">Categoria: </label>
+                    <?php
+
+                    include '../Scripts/database.php';
+                    $conexion = new Database();
+                    $conexion->conectarDB();
+
+                    $cadena="SELECT id_cat, categoria FROM categoria";
+                    $reg=$conexion->seleccionar($cadena);
+
+                    echo "
+                    <select class='form-select' name='depa'>";
+
+                        foreach($reg as $value){
+                            echo "<option value='".$value->id_cat."'>".$value->categoria."</option>";
+                        }
+
+                    echo "</select>
+                    ";    
+                    $conexion->desconectarDB();
+                    ?>
+            
+                    <br>
+                <div class="mb-3">
+                    <input type="hidden" name="MAX_TAM" value="20097152">
+                    <label for="formFile" class="form-label">Imagen:</label>
+                    <input class="form-control" type="file" name="imagen" id="formFile">
+                </div>
+              </div>
+              <div class="text-center">
+                <button type="submit" title="Ingresar" name="ingresar">Agregar producto</button>
+              </div>
+            </form>
+        </div>
+        <br>
+        <div class="inferior">
+            <a href="verProductos.php">Ver Productos</a>
+        </div>
+    </div>
+  </div>
       <!---->
-        <?php
-        include 'database.php';
-        $db= new Database();
-        $db->conectarDB();
     
-        extract($_POST);
-    
-        $hash=password_hash($contraseña, PASSWORD_DEFAULT);
-        $cadena="INSERT INTO usuarios(nombres, ap_paterno, ap_materno,nombre_usuario,correo,contraseña,Rol, fecha_creacion) 
-        VALUES('$nombre','$ap_paterno','$ap_materno','$usuario','$correo','$hash',3,CURDATE())";
-    
-        $db->ejecutaSQL($cadena);
-        $db->desconectarDB();
-    
-        echo "<div id='contenedor'>
-                    <div id='central'>
-                      <div id='login'>
-                        <div class='titulo'>
-                          Registro completo
-                        </div>
-                        <div class='img-fluid img-c'>
-                          <img class='img-tam' src='../login/imgLogin/checked-icon-clipart1.png'>
-                        </div>
-                      </div>
-                    </div>
-              </div>";
-
-        }
-        ?>
-
 </body>
 </html>
