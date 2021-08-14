@@ -205,43 +205,50 @@
 
     <?php
     include '../Scripts/database.php';
-    $conexion = new Database();
-    $conexion -> conectarDB();
+    $conexion = mysqli_connect("localhost","root","","appsocom");
     $iduser=$_SESSION["usuario"];
-    $consulta="SELECT orden_compra.folio, metodo_pago.nombre, orden_compra.total, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido
-      FROM metodo_pago INNER JOIN orden_compra ON metodo_pago.id_metodo= orden_compra.domicilio
-      INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio
-      INNER JOIN usuarios ON orden_compra.cliente= usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser'";
+    $consulta="SELECT metodo_pago.nombre,orden_compra.total,CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio',orden_compra.fecha_pedido, orden_compra.folio, productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser'";
 
-    $tabla = $conexion->seleccionar($consulta);
+    $tabla = mysqli_query($conexion, $consulta);
 
 
     //creacion de tabla dinamica para los datos de la BD
     echo "<table class='table table-hover table-borderless'>
     <thead class='table-dark'>
     <tr>
-    <th>Folio</th><th>Metodo de pago</th><th>Costo</th><th>Domicilio</th><th>Fecha del pedido</th><th>Acciones</th>
+    <th>Metodo de pago</th><th>Costo</th><th>Domicilio</th><th>Fecha del pedido</th><th>Opciones</th>
     </tr>
     </thead>
     <tbody class='table-secondary'>";
 
-        foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
-        {
-            echo "<tr>";
-            echo "<td>$registro->folio</td>";  //los nombres de los campos deben ser exactos a los de la BD
-            echo "<td>$registro->nombre</td>";
-            echo "<td>$registro->total</td>";
-            echo "<td>$registro->Domicilio</td>"; //no deben quedar espacios
-            echo "<td>$registro->fecha_pedido</td>";
-            echo "<th><a href='VerMas.php'>Ver más</a></th>";
-            echo "<tr>";
+        while($registro = mysqli_fetch_row($tabla))
+        {?>
+            <tr>
+            <td><?php echo $registro['0']; ?></td> <!--los nombres de los campos deben ser exactos a los de la BD-->
+            <td><?php echo $registro['1'] ?></td>
+            <td><?php echo $registro['2'] ?></td> <!--//no deben quedar espacios-->
+            <td><?php echo $registro['3'] ?></td>
+            <td hidden><?php echo $registro['4'] ?></td>
+            <td hidden><?php echo $registro['5'] ?></td>
+            <td hidden><?php echo $registro['6'] ?></td>
+            <td hidden><?php echo $registro['7'] ?></td>
+            <td hidden><?php echo $registro['8'] ?></td>
+            <th><a href="VerMas.php? met=<?php echo $registro['0'] ?> &
+              tot=<?php echo $registro['1'] ?> &
+              dom=<?php echo $registro['2'] ?> &
+              fecha=<?php echo $registro['3'] ?>&
+              folio=<?php echo $registro['4'] ?> &
+              img=<?php echo $registro['5'] ?> &
+              producto=<?php echo $registro['6'] ?> &
+              cantidad=<?php echo $registro['7'] ?> &
+              precio=<?php echo $registro['8'] ?>">Ver más</a></th>
+            </tr>
+            <?php 
         }
+ ?>
 
-        echo "</tbody>
-        </table>";
-
-        $conexion -> desconectarDB();
-        ?>
+        </tbody>
+        </table>
         </div>
     
 </body>
