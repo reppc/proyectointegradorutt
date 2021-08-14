@@ -261,7 +261,7 @@ class producto extends Database
         FROM carrito inner JOIN productos on 
         productos.id_producto=carrito.id_carrito 
         WHERE carrito.cliente>(select usuarios.id_usuario 
-        from usuarios where usuarios.nombre_usuario='$usuario');";
+        from usuarios where usuarios.nombre_usuario='$usuario') and carrito.id_carrito<=4;";
         /*conexion*/ 
             try{
                 $this->conexion->conectarDB();
