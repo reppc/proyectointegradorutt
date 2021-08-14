@@ -1,7 +1,6 @@
 <?php
   include("../../../../Scripts/productos.php");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,10 +13,9 @@
     <title>comprobacion datos</title>
   </head>
   <body>
-  <?php
-        session_start();
-    ?>
-
+<?php
+  session_start();
+?>
     <!--Barra navegadora-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <!--logo-->
@@ -198,113 +196,95 @@
         </div>
       </nav>
     <!---->
-    <!--contenido para la confirmacion de datos del cliente-->
-    <form action="" method="GET">
-      <div class="conteiner">
-            <!--titulos principales-->
-        <div class="container" style="text-align: center">
-          <!--titulo-->
-          <div class="row">
-            <h1>Datos para la compra</h1>
-          </div>
-          <!--mensaje-->
-          <p style="text-align: center">
-            Por favor llene correctamente los siguientes campos para completar su
-            compra
-          </p>
-      </div>
-      <!---->
-      <div class="row">
-          <div class="col"></div>
-          <div class="col">
-              <div class="contenedor_form">
-                  <!--modificasion de datos para finalisar la compra-->
-                  <div style="text-align: center">
-                    <p>Direccion de envio</p>
-                  </div>
-                  <p style="text-align: center">
-                    Si tiene domicilio registrado elijalo en la lista
-                  </p>
-                  <p style="text-align: center">
-                    ¡IMPORTANTE SOLO ESTAMOS DISPONIBLES PARA LA CIUDAD DE TORREÓN!
-                  </p>
-                  <label for="">cambiar domicilio</label> <br />
-                  <select class="form-select" name="domicilio" onchange="">
-                    <?php
-                      $carga_dom=new producto();
-                      $carga_dom->carga_de_domicilios($_SESSION['usuario']);
-                    ?>
-                  </select >
-                  <input type="submit" name="cargar_domicilios" value="cargar domicilio">
-                  <br />
-                  <!--inputs
-                      inputs para modificar la direccion.
-                      debera verse con php los datos de la 
-                      direccion seleccionada esto para 
-                      facilitar la edicion de un domicilio 
-                      ya exsistente si se da el caso.
-                    -->
-                  <!--domicilio-->
-                  <div class="row" style="padding: 2px;">
-                    <div class="col">
-                      <input value="" type="text" name="dom_calle" class="form form-control" placeholder="calle" />
-                      <br>
-                      <input type="text" class="form form-control" placeholder="Numero interior (opcional)" />
-                      <br>
-                      <input type="text" class="form form-control" placeholder="Numero exterior" />
-                      <br>
-                    </div>
-                    <!--estado, cp-->
-                    <div class="col">
-                      <div class="row">
-                        <div class="col">
-                          <label for="">codigo postal</label>
-                          <select class="form-select" name="codigo postal" id="">
-                            
-                            <?php
-                              for ($i=27000; $i < 27438; $i++) { 
-                                echo "<option value='codigo postal'>$i</option>";
-                              }
-                            ?>
-                          <select >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--cambiar metodo de pago-->
-                  <div class="row" style="width: auto; padding: 20px;">
-                    <div class="col">
-                    <label for=""> metodo de pago </label>
-                    <br />
-                    <select class="form-select" style="width: 100px; margin-left:10px;" name="met_pago" id="">
-                      <option value="">php</option>
-                    <select >
-                  </div>
-                  <div class="col">
-                      <input
-                      style="
-                      border: 0px;
-                      background-color: black;
-                      color: white;
-                      border-radius: 20px;
-                      "
-                      type="submit" value="siguiente">
-                  </div>
-                </div>
-                </div>
-          </div>
-          <div class="col"></div>
-      </div>
-        </div>
-      </div>
+<!--contenido para la confirmacion de datos del cliente-->
+  <!--titulos principales-->
+  <div class="container" style="text-align: center">
+    <!--titulo-->
+    <div class="row">
+      <h1>Datos para la compra</h1>
+    </div>
+    <!--modificasion de datos para finalisar la compra-->
+    <div style="text-align: center">
+      <p>Direccion de envio</p>
+    </div>
+    <p style="text-align: center">
+    Si tiene domicilio registrado elijalo en la lista
+    </p>
+    <p style="text-align: center">
+    ¡IMPORTANTE SOLO ESTAMOS DISPONIBLES PARA LA CIUDAD DE TORREÓN!
+    </p>
+    </div>
+    </div>
+  </div>
+  <form class="row" action="" method="POST">
+
+    <div class="col">
+    <a href="finalizacion/finalizacion compra.php"
+    style="
+    border: 0px;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+
+    "
+    type="submit" class="btn" name="continuar_compra">siguiente</a>
+    </div>
+    <div class="col">
+    <a href="../carrito.php"
+    style="
+    border: 0px;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+
+    "
+    type="submit" class="btn" name="continuar_compra">atras</a>
+    </div>
     </form>
-    <!---->
-    <!-- #region js-->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-    <!-- #endregion -->
+  <div class="col">
+    <table class="table" width="70%">
+      <thead>
+      <tr>
+      <th scope="col">calle</th>
+      <th scope="col">ciudad</th>
+      <th scope="col">numeroExt</th>
+      <th scope="col">numeroInt</th>
+      <th scope="col">CP</th>
+      <th scope="col">telefono</th>
+      <th scope="col">colonia</th>
+      <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <?php
+          $carga_dom_I=new producto();
+          $s=$carga_dom_I->carga_de_domicilios_selects($_SESSION['usuario']);
+          foreach ($s as $res) 
+          {
+              echo"
+              <td>$res->calle</td>
+              <td>$res->ciudad</td>
+              <td>$res->numeroExt</td>
+              <td>$res->numeroInt</td>
+              <td>$res->codigo_postal</td>
+              <td>$res->telefono</td>
+              <td>$res->colonia</td>
+              <td><input type='radio' name='seleccion' value='$res->id_domicilio'></td>
+              ";
+          }
+        ?>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<!---->
+<!-- #region js-->
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"
+  ></script>
+<!-- #endregion -->
   </body>
 </html>

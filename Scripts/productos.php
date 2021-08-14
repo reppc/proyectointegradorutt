@@ -430,7 +430,8 @@ class producto extends Database
             try 
             {
                 $consulta=$this->conexion->seleccionar($articulo);
-                foreach ($consulta as $resultado) {
+                foreach ($consulta as $resultado) 
+                {
                     /*<?php
                                 
                           ?>*/
@@ -438,107 +439,190 @@ class producto extends Database
                     "
                     
                     <tr>
-                        <td><img src='$resultado->imagen' alt='' /></td>
+                        <td><img width='20%' src='$resultado->imagen' alt='' /></td>
                         <td><p style='margin:4px;'>$resultado->nombre</p></td>
-                        <td><form action='' method='post'>
-                          <select style='margin:4px;' name='cantidad_producto' id=''>
-                            <option from='cantidad_producto' value='1'>1</option>
-                            <option from='cantidad_producto' value='2'>2</option>
-                            <option from='cantidad_producto' value='3'>3</option>
-                            <option from='cantidad_producto' value='4'>4</option>
-                            <option from='cantidad_producto' value='5'>5</option>
-                          </select>
-                        </form></td>
+                        <td>cantidad:($resultado->cantidad)</td>
                         <td><p style='margin:4px;'>$$resultado->precio_unitario</p></td>
-                        <td><!--boton para eliminar productos-->
-                          <div class='col'>
-                            <form action=''>
-                              <button class='boton_eliminar'>
-                                <!--figura para el boton-->
-                                  <!--boton eliminar-->
-                                  <svg
-                                    style='
-                                      margin-bottom: 5px;
-                                      margin-top: 5px;
-                                      margin-left: -2px;
-                                    '
-                                    width='40'
-                                    height='20'
-                                    viewBox='0 0 43 28'
-                                    fill='none'
-                                    xmlns='http://www.w3.org/2000/svg'
-                                  >
-                                    <g filter='url(#filter0_dd)'>
-                                      <path
-                                        d='M22 5.95508H30.0893C38.577 6.90852 39.2403 18.998 30.9051 20.8623C30.3629 20.9835 29.8089 21.0447 29.2533 21.0447H22H14.8053C14.211 21.0447 13.6187 20.9748 13.0407 20.8362C4.82807 18.8679 5.52602 6.96437 13.9107 5.95508H22Z'
-                                        fill='#A4B9A5'
-                                      />
-                                    </g>
-                                    <defs>
-                                      <filter
-                                        id='filter0_dd'
-                                        x='0.238281'
-                                        y='0.955078'
-                                        width='42.5802'
-                                        height='26.0897'
-                                        filterUnits='userSpaceOnUse'
-                                        color-interpolation-filters='sRGB'
-                                      >
-                                        <feFlood
-                                          flood-opacity='0'
-                                          result='BackgroundImageFix'
+                        <td>
+                            <!--boton para eliminar productos-->
+                            <div class='col'>
+                                <form action=''>
+                                <button class='boton_eliminar'>
+                                    <!--figura para el boton-->
+                                    <!--boton eliminar-->
+                                    <svg
+                                        style='
+                                        margin-bottom: 5px;
+                                        margin-top: 5px;
+                                        margin-left: -2px;
+                                        '
+                                        width='40'
+                                        height='20'
+                                        viewBox='0 0 43 28'
+                                        fill='none'
+                                        xmlns='http://www.w3.org/2000/svg'
+                                    >
+                                        <g filter='url(#filter0_dd)'>
+                                        <path
+                                            d='M22 5.95508H30.0893C38.577 6.90852 39.2403 18.998 30.9051 20.8623C30.3629 20.9835 29.8089 21.0447 29.2533 21.0447H22H14.8053C14.211 21.0447 13.6187 20.9748 13.0407 20.8362C4.82807 18.8679 5.52602 6.96437 13.9107 5.95508H22Z'
+                                            fill='#A4B9A5'
                                         />
-                                        <feColorMatrix
-                                          in='SourceAlpha'
-                                          type='matrix'
-                                          values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-                                          result='hardAlpha'
-                                        />
-                                        <feOffset dx='2' dy='2' />
-                                        <feGaussianBlur stdDeviation='2' />
-                                        <feColorMatrix
-                                          type='matrix'
-                                          values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0'
-                                        />
-                                        <feBlend
-                                          mode='normal'
-                                          in2='BackgroundImageFix'
-                                          result='effect1_dropShadow'
-                                        />
-                                        <feColorMatrix
-                                          in='SourceAlpha'
-                                          type='matrix'
-                                          values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-                                          result='hardAlpha'
-                                        />
-                                        <feOffset dx='-3' dy='-1' />
-                                        <feGaussianBlur stdDeviation='2' />
-                                        <feColorMatrix
-                                          type='matrix'
-                                          values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'
-                                        />
-                                        <feBlend
-                                          mode='normal'
-                                          in2='effect1_dropShadow'
-                                          result='effect2_dropShadow'
-                                        />
-                                        <feBlend
-                                          mode='normal'
-                                          in='SourceGraphic'
-                                          in2='effect2_dropShadow'
-                                          result='shape'
-                                        />
-                                      </filter>
-                                    </defs>
-                                  </svg>
-                                  <!---->
-                                <!---->
+                                        </g>
+                                        <defs>
+                                        <filter
+                                            id='filter0_dd'
+                                            x='0.238281'
+                                            y='0.955078'
+                                            width='42.5802'
+                                            height='26.0897'
+                                            filterUnits='userSpaceOnUse'
+                                            color-interpolation-filters='sRGB'
+                                        >
+                                            <feFlood
+                                            flood-opacity='0'
+                                            result='BackgroundImageFix'
+                                            />
+                                            <feColorMatrix
+                                            in='SourceAlpha'
+                                            type='matrix'
+                                            values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+                                            result='hardAlpha'
+                                            />
+                                            <feOffset dx='2' dy='2' />
+                                            <feGaussianBlur stdDeviation='2' />
+                                            <feColorMatrix
+                                            type='matrix'
+                                            values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0'
+                                            />
+                                            <feBlend
+                                            mode='normal'
+                                            in2='BackgroundImageFix'
+                                            result='effect1_dropShadow'
+                                            />
+                                            <feColorMatrix
+                                            in='SourceAlpha'
+                                            type='matrix'
+                                            values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+                                            result='hardAlpha'
+                                            />
+                                            <feOffset dx='-3' dy='-1' />
+                                            <feGaussianBlur stdDeviation='2' />
+                                            <feColorMatrix
+                                            type='matrix'
+                                            values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'
+                                            />
+                                            <feBlend
+                                            mode='normal'
+                                            in2='effect1_dropShadow'
+                                            result='effect2_dropShadow'
+                                            />
+                                            <feBlend
+                                            mode='normal'
+                                            in='SourceGraphic'
+                                            in2='effect2_dropShadow'
+                                            result='shape'
+                                            />
+                                        </filter>
+                                        </defs>
+                                    </svg>
+                                    <!---->
+                                    <!---->
+                                </button>
+                                </form>
+                            </div>
+                        </td>
+                        <td>
+                            <!-- Button trigger modal -->
+                            <button type='button' class='btn btn-secundary' data-bs-toggle='modal' data-bs-target='#exampleModal'>
+                            editar
+                            </button>
+                            <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#editChildresn$resultado->nombre'>
+                                  Modificar
                               </button>
-                            </form>
-                          </div>
-                      </tr>
+                            <!--ventana para Update--->
+                                <div class='modal fade' id='editChildresn$resultado->nombre' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+                                <div class='modal-dialog'>
+                                    <div class='modal-content'>
+                                    <div class='modal-header' style='background-color: #563d7c !important;'>
+                                        <h6 class='modal-title' style='color: #fff; text-align: center;'>
+                                            Actualizar Información
+                                        </h6>
+                                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                        <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>
+
+
+                                    <form method='POST' action='recib_Update.php'>
+                                        <input type='hidden' name='id' value=''>
+
+                                            <div class='modal-body' id='cont_modal'>
+
+                                                <div class='form-group'>
+                                                <label for='recipient-name' class='col-form-label'>Nombre del Niño:</label>
+                                                <input type='text' name='nombre' class='form-control' value='' required='true'>
+                                                </div>
+                                                <div class='form-group'>
+                                                <label for='recipient-name' class='col-form-label'>Correo:</label>
+                                                <input type='email' name='correo' class='form-control' value='' required='true'>
+                                                </div>
+                                                <div class='form-group'>
+                                                <label for='recipient-name' class='col-form-label'>Telefono:</label>
+                                                <input type='number' name='celular' class='form-control' value='' required='true'>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class='modal-footer'>
+                                            <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cerrar</button>
+                                            <button type='submit' class='btn btn-primary'>Guardar Cambios</button>
+                                            </div>
+                                    </form>
+
+                                    </div>
+                                </div>
+                                </div>
+                            <!---fin ventana Update --->
+
+                        </td>
+                    </tr>
                     ";
                 }
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
+    function total_carrito($usuario)
+    {
+        $this->conexion=new Database();
+        $articulo=
+        "
+            SELECT carrito.id_carrito, carrito.cantidad, productos.nombre, productos.precio_unitario,productos.imagen
+            FROM carrito inner JOIN productos on 
+            productos.id_producto=carrito.id_carrito 
+            WHERE carrito.cliente=(select usuarios.id_usuario 
+            from usuarios where usuarios.nombre_usuario='$usuario')
+        ";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->seleccionar($articulo);
+                return $consulta;
             } catch (PDOException $e) {
                 echo "ERROR-CONSULTA:".$e->getMessage();
             }
@@ -555,20 +639,21 @@ class producto extends Database
     {
         $this->conexion=new Database();
         $articulo="
-        select 
-        domicilio.id_domicilio, 
-        domicilio.cliente, 
-        domicilio.calle, 
-        domicilio.ciudad, 
-        domicilio.numeroExt, 
-        domicilio.numeroInt, 
-        domicilio.codigo_postal, 
-        domicilio.telefono, 
-        domicilio.colonia 
-        from domicilio 
-        INNER JOIN usuarios 
-        on domicilio.cliente=usuarios.id_usuario 
-        where usuarios.nombre_usuario='$usuario';";
+            select 
+            domicilio.id_domicilio, 
+            domicilio.cliente, 
+            domicilio.calle, 
+            domicilio.ciudad, 
+            domicilio.numeroExt, 
+            domicilio.numeroInt, 
+            domicilio.codigo_postal, 
+            domicilio.telefono, 
+            domicilio.colonia 
+            from domicilio 
+            INNER JOIN usuarios 
+            on domicilio.cliente=usuarios.id_usuario 
+            where usuarios.nombre_usuario='$usuario';"
+            ;
         /*conexion*/ 
             try{
                 $this->conexion->conectarDB();
@@ -581,12 +666,7 @@ class producto extends Database
             try 
             {
                 $consulta=$this->conexion->seleccionar($articulo);
-                foreach ($consulta as $resultado) {
-                    echo
-                    "
-                    <option from='domicilio' value='$resultado->calle'>$resultado->calle</option>
-                    ";
-                }
+                return $consulta;
             } catch (PDOException $e) {
                 echo "ERROR-CONSULTA:".$e->getMessage();
             }
@@ -642,7 +722,135 @@ class producto extends Database
             }
         /*fin*/
     }
-    
+    function carga_final_carro($usuario)
+    {
+        $this->conexion=new Database();
+        $articulo="
+        SELECT * FROM `carrito` 
+        WHERE carrito.cliente=
+        (select usuarios.id_usuario FROM usuarios 
+        WHERE usuarios.nombre_usuario='$usuario')
+        ";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->seleccionar($articulo);
+                return $consulta;
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
+    function carga_orden($usuario)
+    {
+        $this->conexion=new Database();
+        $articulo="
+                SELECT 
+                orden_compra.id_orden,
+                usuarios.nombres,
+                metodo_pago.nombre,
+                orden_compra.total,
+                concat(
+                    domicilio.calle,
+                    domicilio.numeroExt,
+                    domicilio.numeroInt,
+                    domicilio.codigo_postal,
+                    domicilio.colonia,
+                    domicilio.ciudad,
+                    domicilio.telefono,
+                    domicilio.colonia)as 'domicilio',
+                orden_compra.fecha_pedido 
+                FROM orden_compra
+                INNER JOIN usuarios
+                on usuarios.id_usuario=orden_compra.cliente
+                INNER JOIN metodo_pago
+                on metodo_pago.id_metodo=orden_compra.metodoPago
+                INNER JOIN domicilio
+                on orden_compra.domicilio=domicilio.id_domicilio
+                        WHERE orden_compra.cliente=
+                        (select usuarios.id_usuario FROM usuarios 
+                        WHERE usuarios.nombre_usuario='$usuario');
+        ";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->seleccionar($articulo);
+                return $consulta;
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
+    function carga_productos($usuario)
+    {
+        $this->conexion=new Database();
+        $articulo="
+        SELECT 
+        productos.id_producto, 
+        productos.nombre, 
+        productos.precio_unitario, 
+        orden_detalle.cantidad 
+        FROM orden_detalle 
+        INNER JOIN productos 
+        on productos.id_producto=orden_detalle.producto 
+        where orden_detalle.orden=(select usuarios.id_usuario from usuarios
+        WHERE usuarios.nombre_usuario='$usuario');
+        ";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->seleccionar($articulo);
+                return $consulta;
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
 }
 /*
                       if(isset($_GET['cargar_domicilios']))
