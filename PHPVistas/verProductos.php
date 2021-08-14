@@ -200,11 +200,11 @@
       <div class="cuadro container">
           <br>
           <div class="row">
-          <h1 align="center">Articulos</h1>
+          <h1 align="center">Productos</h1>
 
             <div class="row">
               <div class="col float-right">
-                <a href="FormAddProd.php" class="col btn btn-primary" type="button">Agregar nuevo Articulo</a>
+                <a href="FormAddProd.php" class="col btn btn-primary" type="button">Agregar nuevo producto</a>
               </div>
             </div>
           </div>

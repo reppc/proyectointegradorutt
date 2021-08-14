@@ -53,7 +53,7 @@ include("../Scripts/productos.php");
       }
       /*Fin de los estilos propios del NavBar*/
       .jumbotronfm{
-          background-color: rgb(48, 193, 82);
+         background-color: #1c8ee0;
           color: white;
       }
       .cuadrojum{
@@ -280,53 +280,80 @@ include("../Scripts/productos.php");
           </div>
         </div>
       </nav>
-    <!---->
-    <!-- #region contenido home articulos-->
-    <!--barra de busqueda-->
-      <div class="row">
-        <div
-          class="col"
-          style="background-color: #1c8ee0; width: 100%; height: 50px"
-        >
-          <form class="form" action="" method="POST">
-            <div class="row">
-              <!--titulo-->
-              <div class="col-3">
-                <h2 style="color: white">articulos</h2>
-              </div>
-              <!--barra de busqueda-->
+
+            <!--Seccion de presentacion-->
+            <div class="row jumbotron jumbotronfm">
+            <div class="col cuadrojum ">
+                <h1 class="">Articulos</h1>
+                <br>
+                <p class="offset-1 col-2 col-sm-3"> <i>Entregas en el area de Torreón</i></p>
+                </a>
+            </div>
+                <div class="col col-lg-3 d-none d-lg-block d-md-block">
+                <!--barra de busqueda-->
               <div class="col">
+
                 <div class="row">
+                  
                   <!--input de busqueda-->
+
                   <div class="col">
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="articulos_a_buscar"
-                      id=""
-                      style="width: 500px; margin-top: 5px; margin-right: 5px"
-                    />
+                    <input class="form-control" type="text" name="articulos_a_buscar" id="" style="width: 250px; margin-top: 15px; margin-right: 5px">
                   </div>
+
                   <!--boton de busqueda-->
                   <div class="col">
-                    <button
-                      name="buscar_producto"
-                      style="margin-top:5px; margin-left:-25px;"
-                      type="submit"
-                      value=""
-                      name="buscar_articulo"
-                      class="btn btn-submit"
-                    >
+                    <button class="btn btn-outline-light" name="buscar_producto" style="margin-top:15px; margin-left:-25px;" type="submit" value="" name="buscar_articulo" class="btn btn-submit">
                       <i class="bi bi-search"></i>
                     </button>
                   </div>
+
+                </div>
+              </div>
+                </div>
+      </div>
+      <br><br>
+
+    <!---->
+    <!-- #region contenido home articulos-->
+    <!--barra de busqueda-->
+    <!--
+      <div class="row">
+        <div
+          class="col"
+          style="background-color: #1c8ee0; width: 100%; height: 50px">
+          <form class="form" action="" method="POST">
+            <div class="row">
+              titulo
+              <div class="col-3">
+                <h2 class="tect-center" style="color: white">Articulos</h2>
+              </div>
+              barra de busqueda
+              <div class="col">
+
+                <div class="row">
+
+                  input de busqueda
+
+                  <div class="col">
+                    <input class="form-control" type="text" name="articulos_a_buscar" id="" style="width: 500px; margin-top: 5px; margin-right: 5px">
+                  </div>
+
+                  boton de busqueda
+
+                  <div class="col">
+                    <button name="buscar_producto" style="margin-top:5px; margin-left:-25px;" type="submit" value="" name="buscar_articulo" class="btn btn-submit">
+                      <i class="bi bi-search"></i>
+                    </button>
+                  </div>
+
                 </div>
               </div>
             </div>
           </form>
         </div>
       </div>
-    <!---->
+                  -->
     <!--carrusel-->
       <div
         id="carouselExampleControls"
@@ -415,7 +442,7 @@ include("../Scripts/productos.php");
                 echo "$xd";
               }
               else{
-                echo "articulos disponibles";
+                echo "Articulos disponibles";
               }
             ?>
             </p>
@@ -430,12 +457,12 @@ include("../Scripts/productos.php");
                 aria-expanded="false"
                 name="categorias"
               >
-              seleccione una categoria
+              Seleccione una categoria
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   <li>
                     <button type='submit option' class='dropdown-item' name='filtro' value='todos'>
-                    todos</button>
+                    Todos</button>
                   </li>
                   <!--carga de categorias-->
                 <?php
@@ -490,10 +517,10 @@ include("../Scripts/productos.php");
             <!--columnas-->
             <div class="row contenido_carro">
               <div class="col">
-                <p>nombre</p>
+                <p>Nombre</p>
               </div>
               <div class="col">
-                <p>cantidad</p>
+                <p>Cantidad</p>
               </div>
             </div>
             <!--contenido del carro-->
