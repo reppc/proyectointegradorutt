@@ -4,13 +4,13 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
+    <link rel="stylesheet" href="../AdminBlog/adminBlog.css">
 
     <script src="../inicio/js/bootstrap.min.js"></script>
-
-	<title>Direcciones Registradas Por Ti</title>
+	<title>Agrega tu direccion</title>
 </head>
 <body>
-	<?php
+<?php
         session_start();
     ?>
 
@@ -146,41 +146,48 @@
           </div>
         </div>
       </nav>
-      <div class="container-fluid"> <br>
-          
-          <div class="row">
-          <div class="offset-2 col-8 offset-2">
-      <h2>Mis direcciones <a href="AgregarDirec.php" type="button" class="btn btn-primary">Agregar Direccion</a></h2> <br>
-<?php 
 
-include'../Scripts/database.php';
-$conexion= new Database();
-$conexion->conectarDB();
-$iduser=$_SESSION["usuario"];
+<!--Formulario-->
+<br>
+ <div id="contenedor">
+    <div id="central">
+        <div id="login">
+            <div class="titulo">
+                Añadir Direccion
+            </div>
+            <form id="loginform" action="../Scripts/agregarDir.php" method="POST" enctype="multipart/form-data"
+              <div class="row">
+                <div class="col">
+                    <label for="formFile" class="form-label">Calle:</label>
+                    <input type="text" name="calle" placeholder="Ingresa tu calle" required autofocus>
+                    
+                    <label for="formFile" class="form-label">Codigo Postal:</label>
+                    <input type="text" name="codigop" placeholder="Codigo Postal" required>
+                     <p>Recuerda que por el momento solo contamos con servicio en Torreon</p>
+                    
+                    <label class="form" for="categoria-label">Numero exterior: </label>
+                    <input type="text" name="numeroE" placeholder="Num-Exterior" required>
 
-$consulta="SELECT concat(domicilio.calle,' ', domicilio.colonia, ' ', domicilio.numeroExt,' ', domicilio.codigo_postal)as 'Domicilio' FROM domicilio INNER JOIN usuarios ON domicilio.cliente= usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser'";
-$tabla=$conexion->seleccionar($consulta);
-echo "<table class='table table-hover table-borderless'>
-    <thead class='table-dark'>
-    <tr>
-    <th>Domicilio</th><th>Opciones</th>
-    </tr>
-    </thead>
-    <tbody class='table-secondary'>";
-$reg=1;
-foreach($tabla as $registro)
-{
-    echo "<tr>";
-    echo "<td>$registro->Domicilio</td>";
-    $reg++;
-    echo "<td><a href=''>Editar</a> | <a href=''style='color:red'>Eliminar</a></td>";
-    echo "</tr>";
-}
-echo "</tbody>
-        </table>";
-        echo "</div>";
-        echo "</div>";
-echo "</div>";
-?> 
+                    <label class="form" for="categoria-label">Numero interior: </label>
+                    <input type="text" name="numeroI" placeholder="Num-interior" required>
+
+                    <label class="form" for="categoria-label">Telefono: </label>
+                    <input type="text" name="telefono" placeholder="Escribe tu telefono" required>
+                    <label class="form" for="categoria-label">Colonia: </label>
+                    <input type="text" name="colonia" placeholder="Escribe la colonia" required>
+
+                <br>
+              </div>
+              <div class="text-center">
+                <button type="submit" title="Ingresar" name="ingresar">Agregar Domicilio</button>
+              </div>
+            </form>
+        </div>
+        <br>
+       
+    </div>
+  </div>
+      <!---->
+
 </body>
 </html>
