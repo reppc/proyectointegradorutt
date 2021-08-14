@@ -1,6 +1,5 @@
 <?php
 include("../Scripts/productos.php");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -526,13 +525,13 @@ include("../Scripts/productos.php");
             <!--contenido del carro-->
               <?php
               $carga_del_carrito=new producto();
-              if(session_status()==PHP_SESSION_ACTIVE)
+              if(session_status()==0 || session_status()==1)
               {
-                $carga_del_carrito->carga_carrito($_SESSION['usuario']);
+                
               }
               else
               {
-
+                $carga_del_carrito->carga_carrito($_SESSION['usuario']);
               }
               ?>
               
@@ -571,10 +570,14 @@ include("../Scripts/productos.php");
       $insertar_carro=new producto();
       if(session_status()==PHP_SESSION_ACTIVE)
       {
-        if (isset($_POST['agregar_productos_al_carro_prueba'])) {
-          if ($_POST['cantidad_producto']>0 
-          && $_POST['cantidad_producto']!=null 
-          && $_POST['cantidad_producto']!="cantidad") 
+        if (isset($_POST['agregar_productos_al_carro_prueba'])) 
+        {
+          if 
+          (
+            $_POST['cantidad_producto']>0 
+            && $_POST['cantidad_producto']!=null 
+            && $_POST['cantidad_producto']!="cantidad"
+          ) 
           {
             $usuario=$_SESSION['usuario'];
             $cantidad_productos=$_POST['agregar_productos_al_carro_prueba'];
@@ -598,8 +601,5 @@ include("../Scripts/productos.php");
       crossorigin="anonymous"
     ></script>
   <!-- #endregion -->
-  <?php
-  echo $_SESSION["rol"];
-  ?>
   </body>
 </html>

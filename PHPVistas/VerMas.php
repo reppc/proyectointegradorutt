@@ -195,21 +195,27 @@
       </nav>
 
       <br> 
-      <div class="container-fluid"><h2 align="center">Lista de detalles de tu compra</h2>
+      <div class="container-fluid"><h2 align="center">Detalles de tu compra</h2>
         
 <?php     
 include'../Scripts/database.php';
-$conexion= new Database();
-$conexion->conectarDB();
-$iduser=$_SESSION["usuario"];
+$conexion = mysqli_connect("localhost","root","","appsocom");
+    $iduser=$_SESSION["usuario"];
 
 $consulta="SELECT orden_compra.folio,productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser';";
-$interfaz= $conexion->seleccionar($consulta);
+$tabla = mysqli_query($conexion, $consulta);
 
- echo "      
-          <div class='rectangulo'></div>
-          <div class='rectangulo2'></div>
-       ";
+$met=$_GET['met'];
+$tot=$_GET['tot'];
+$dom=$_GET['dom'];
+$fecha=$_GET['fecha'];
+$folio=$_GET['folio'];
+$img=$_GET['img'];
+$producto=$_GET['producto'];
+$cantidad=$_GET['cantidad'];
+$precio=$_GET['precio'];
+
+
 echo "<br>
   <div class='row'>
   <div class='offset-3 col-6 offset-3'
@@ -218,31 +224,31 @@ echo "<br>
     <h2 class='accordion-header' id='headingOne'>
       
     ";
-    foreach($interfaz as $registro)
-    {
-      echo "
+    if($registro = mysqli_fetch_row($tabla))
+    { ?>
+      
       <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
-        <strong>Folio de compra: $registro->folio</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <strong><?php echo  "$folio" ?></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Clic para ver tu compra
       </button>
     </h2><div id='collapseOne' class='accordion-collapse collapse' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
       <div class='accordion-body'>
-      <img src='$registro->imagen' style='width: 10%;'>
-        <strong>$registro->producto</strong><br>
-        <strong>Cantidad: </strong>$registro->cantidad <br>
-        <strong>Costo: </strong>$registro->precio <br>
-       <strong>Forma de pago: </strong>$registro->nombre <br>
-        <strong>Domicilio: </strong>$registro->Domicilio<br> 
-        <strong>Fecha: </strong>$registro->fecha_pedido 
+      <img src='<?php echo  "$img" ?>' style='width: 10%;'>
+        <strong><?php echo  "$producto" ?></strong><br>
+        <strong>Cantidad: </strong><?php echo  "$cantidad" ?> <br>
+        <strong>Costo: </strong><?php echo "$precio" ?><br>
+       <strong>Forma de pago: </strong> <?php echo "$met" ?><br>
+        <strong>Domicilio: </strong><?php echo "$dom"?><br> 
+        <strong>Fecha: </strong><?php echo "$fecha"?>
       </div>
     </div>
-  </div>";
-    }
+  </div>
+   <?php   }
    
     echo "</div>";
     echo "</div>";
     echo "</div>";
-
 ?>
+
 </body>
 </html>

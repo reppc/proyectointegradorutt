@@ -221,6 +221,12 @@ include("../../../scripts/productos.php");
                   }
                 ?>
               </table>
+              <?php
+                if(isset($_GET['edicion_cant']))
+                {
+                  echo $_GET['edicion_cant'];
+                }
+              ?>
             </div>
             <hr>
                   </div>
