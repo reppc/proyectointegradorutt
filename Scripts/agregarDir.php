@@ -2,14 +2,16 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+	<title>Registro exitoso</title>
+  <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
-
-    <script src="../inicio/js/bootstrap.min.js"></script>
-
-	<title>Direcciones Registradas Por Ti</title>
 </head>
-<body>
+<style type="text/css">
+	.body-g{
+        background-color: #2aa13e;
+    }
+</style>
+<body class="body-g">
 	<?php
         session_start();
     ?>
@@ -146,41 +148,39 @@
           </div>
         </div>
       </nav>
-      <div class="container-fluid"> <br>
-          
-          <div class="row">
-          <div class="offset-2 col-8 offset-2">
-      <h2>Mis direcciones <a href="AgregarDirec.php" type="button" class="btn btn-primary">Agregar Direccion</a></h2> <br>
 <?php 
+ include 'database.php';
+ $db=new Database();
+       $db->conectarDB();
 
-include'../Scripts/database.php';
-$conexion= new Database();
-$conexion->conectarDB();
+extract($_POST);
+       
 $iduser=$_SESSION["usuario"];
 
-$consulta="SELECT concat(domicilio.calle,' ', domicilio.colonia, ' ', domicilio.numeroExt,' ', domicilio.codigo_postal)as 'Domicilio' FROM domicilio INNER JOIN usuarios ON domicilio.cliente= usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser'";
-$tabla=$conexion->seleccionar($consulta);
-echo "<table class='table table-hover table-borderless'>
-    <thead class='table-dark'>
-    <tr>
-    <th>Domicilio</th><th>Opciones</th>
-    </tr>
-    </thead>
-    <tbody class='table-secondary'>";
-$reg=1;
-foreach($tabla as $registro)
-{
-    echo "<tr>";
-    echo "<td>$registro->Domicilio</td>";
-    $reg++;
-    echo "<td><a href=''>Editar</a> | <a href=''style='color:red'>Eliminar</a></td>";
-    echo "</tr>";
-}
-echo "</tbody>
-        </table>";
-        echo "</div>";
-        echo "</div>";
-echo "</div>";
-?> 
+
+
+
+
+        $miconsulta="INSERT INTO domicilio (cliente, calle, codigo_postal, numeroExt, numeroInt, telefono, colonia) VALUES ((SELECT usuarios.id_usuario FROM usuarios WHERE usuarios.nombre_usuario='$iduser'),'$calle','$codigop','$numeroE','$numeroI','$telefono','$colonia')";
+
+        $db->ejecutaSQL($miconsulta);
+        $db->desconectarDB();
+
+        echo "<div id='contenedor'>
+        <div id='central'>
+          <div id='login'>
+            <div class='titulo'>
+              Publicacion realizada
+            </div>
+                <div class='img-fluid img-c'>
+                <img class='img-tam' src='../login/imgLogin/checked-icon-clipart1.png'>
+                </div>
+                
+            </div>
+            </div>
+        </div>";
+        header("refresh:3 ../PHPVistas/MisDirecciones.php");
+
+?>
 </body>
 </html>

@@ -67,8 +67,8 @@
 
         if($_FILES['imagen']['error'])
         {
-            switch($_FILES['imagen']['error']){
-
+            switch($_FILES['imagen']['error'])
+{
                 case 1: //exceso de tamaño de archivo permitido por php.ini
 
                     echo "El tamaño del archivo excede el permitido por el servidor";
