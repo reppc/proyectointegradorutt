@@ -1,5 +1,5 @@
 <?php
-  include("../../../../Scripts/productos.php");
+  include("../../../../../Scripts/productos.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,21 +7,21 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../../../inicio/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../../../../inicio/css/navStyle.css" />
-    <link rel="stylesheet" href="css/estilos.css" />
-    <title>comprobacion datos</title>
+    <link rel="stylesheet" href="../../../../../inicio/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../../../inicio/css/navStyle.css" />
+    <link rel="stylesheet" href="css/estilo.css" />
+    <title>finalizacion compra</title>
   </head>
   <body>
 <?php
-  session_start();
+    session_start();
 ?>
 
     <!--Barra navegadora-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <!--logo-->
         <div class="container-fluid">
-          <img class="logo navbar-brand md" src="../../../../inicio/Imagenes/logo-sin-letras2.png" alt="">
+          <img class="logo navbar-brand md" src="../../../inicio/Imagenes/logo-sin-letras2.png" alt="">
           <a class="navbar-brand" href="">Soporte y servicios informaticos</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -172,7 +172,7 @@
 
                             ?>
                           <li>
-                            <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
+                            <a class="dropdown-item" href="../../../../../Scripts/cerrarSesion.php">Cerrar sesion</a>
                           </li>
                           <?php
                             }
@@ -197,78 +197,130 @@
         </div>
       </nav>
     <!---->
-<!--contenido para la confirmacion de datos del cliente-->
-  <!--titulos principales-->
-  <div class="container" style="text-align: center">
-  <!--titulo-->
-  <div class="row">
-  <h1>Datos para la compra</h1>
-  </div>
-  <!--mensaje-->
-  <p style="text-align: center">
-  Por favor llene correctamente los siguientes campos para completar su
-  compra
-  </p>
-  </div>
-  <!--modificasion de datos para finalisar la compra-->
-  <div style="text-align: center">
-  <p>Direccion de envio</p>
-  </div>
-  <p style="text-align: center">
-  Si tiene domicilio registrado elijalo en la lista
-  </p>
-  <p style="text-align: center">
-  ¡IMPORTANTE SOLO ESTAMOS DISPONIBLES PARA LA CIUDAD DE TORREÓN!
-  </p>
-  </<div>
-
-  </div>
-  <div class="row">
-  <div class="col">
-  <input
-  style="
-  border: 0px;
-  background-color: black;
-  color: white;
-  border-radius: 20px;
-  "
-  type="submit" value="siguiente">
-  </div>
-  </div>
-  <div class="col">
-  <table class="table">
-  <thead>
-  <tr>
-  <th scope="col">calle</th>
-  <th scope="col">ciudad</th>
-  <th scope="col">numeroExt</th>
-  <th scope="col">CP</th>
-  <th scope="col">telefono</th>
-  <th scope="col">colonia</th>
-  <th scope="col"></th>
-  <th scope="col"></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-  <td>Mark</td>
-  <td>Otto</td>
-  <td>@mdo</td>
-  <td>@mdo</td>
-  <td>@mdo</td>
-  <td>@mdo</td>
-  <td><input type="radio" name="seleccion" value="p"></td>
-  </tr>
-  </tbody>
-  </table>
-  </div>
-<!---->
-<!-- #region js-->
-  <script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-  crossorigin="anonymous"
-  ></script>
-<!-- #endregion -->
+    <!-- #region contenido inicio-->
+    <!--titulo-->
+    <div class="row">
+      <h2 style="text-align: center">Confirmacion</h2>
+    </div>
+    <!---->
+    <!--datos de la orden-->
+    <div class="row" style="margin: 20px">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">numero de orden</th>
+            <th scope="col">metodo de pago</th>
+            <th scope="col">fecha de pedido</th>
+            <th scope="col">Monto total</th>
+            <th scope="col">Direccion de envio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <?php
+              $carga_orden=new producto();
+              $cargar_ordenes=$carga_orden->carga_orden($_SESSION['usuario']);
+              foreach ($cargar_ordenes as $value) 
+              {
+                echo
+                "
+                  <th scope='row'>$value->id_orden</th>
+                  <td>$value->nombre</td>
+                  <td>$value->fecha_pedido</td>
+                  <td>$value->total</td>
+                  <td>$value->domicilio</td>
+                ";
+              }
+            ?>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!---->
+    <!--titulo-->
+    <div class="row">
+      <h2 style="text-align: center">Articulos a comprar</h2>
+    </div>
+    <!---->
+    <!--datos productos-->
+    <div class="row" style="margin: 20px">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">nombre del producto</th>
+            <th scope="col">cantidad</th>
+            <th scope="col">precio unitario</th>
+            <th scope="col">total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <?php
+              $carga_articulos=new producto();
+              $cont_art=$carga_articulos->carga_productos($_SESSION['usuario']);
+              $sub_t=0;
+              $total=0;
+              foreach ($cont_art as $value) 
+              {$sub_t=$value->precio_unitario*$value->cantidad;
+                echo "
+                <th scope='row'>$value->nombre</th>
+                <td>$value->cantidad</td>
+                <td>$$value->precio_unitario</td>
+                <td>$sub_t</td>
+                ";
+                $total+=$sub_t;
+              }
+            ?>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <div class="col">
+        <p>total:</p>
+      </div>
+      <div class="col">
+        <p><?php echo$total;?></p>
+      </div>
+      
+    </div>
+    <!---->
+    <div class="row">
+      <form action="">
+        <div class="col" style="text-align: center">
+          <a class="boton_atras btn" href="../comprobacion_datos.php">atras</a>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn boton_finalizar" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            finalizar
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  esta seguro de que todos los datos son correctos y desea comprar el o los articulos en el carro
+                </div>
+                <form  class="modal-footer" method="POST">
+                  <button type="submit" name="cancelar" class="btn btn-secondary" data-bs-dismiss="modal">cancelar</button>
+                  <button type="submit" name="comprar" class="btn btn-primary">comprar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- #endregion -->
+    <!-- #region js-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- #endregion -->
   </body>
 </html>

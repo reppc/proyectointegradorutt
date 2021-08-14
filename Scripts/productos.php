@@ -430,7 +430,8 @@ class producto extends Database
             try 
             {
                 $consulta=$this->conexion->seleccionar($articulo);
-                foreach ($consulta as $resultado) {
+                foreach ($consulta as $resultado) 
+                {
                     /*<?php
                                 
                           ?>*/
@@ -438,17 +439,9 @@ class producto extends Database
                     "
                     
                     <tr>
-                        <td><img src='$resultado->imagen' alt='' /></td>
+                        <td><img width='20%' src='$resultado->imagen' alt='' /></td>
                         <td><p style='margin:4px;'>$resultado->nombre</p></td>
-                        <td><form action='' method='post'>
-                          <select style='margin:4px;' name='cantidad_producto' id=''>
-                            <option from='cantidad_producto' value='1'>1</option>
-                            <option from='cantidad_producto' value='2'>2</option>
-                            <option from='cantidad_producto' value='3'>3</option>
-                            <option from='cantidad_producto' value='4'>4</option>
-                            <option from='cantidad_producto' value='5'>5</option>
-                          </select>
-                        </form></td>
+                        <td>cantidad:($resultado->cantidad)</td>
                         <td><p style='margin:4px;'>$$resultado->precio_unitario</p></td>
                         <td><!--boton para eliminar productos-->
                           <div class='col'>
@@ -551,24 +544,17 @@ class producto extends Database
             }
         /*fin*/
     }
-    function carga_de_domicilios($usuario)
+    function total_carrito($usuario)
     {
         $this->conexion=new Database();
-        $articulo="
-        select 
-        domicilio.id_domicilio, 
-        domicilio.cliente, 
-        domicilio.calle, 
-        domicilio.ciudad, 
-        domicilio.numeroExt, 
-        domicilio.numeroInt, 
-        domicilio.codigo_postal, 
-        domicilio.telefono, 
-        domicilio.colonia 
-        from domicilio 
-        INNER JOIN usuarios 
-        on domicilio.cliente=usuarios.id_usuario 
-        where usuarios.nombre_usuario='$usuario';";
+        $articulo=
+        "
+            SELECT carrito.id_carrito, carrito.cantidad, productos.nombre, productos.precio_unitario,productos.imagen
+            FROM carrito inner JOIN productos on 
+            productos.id_producto=carrito.id_carrito 
+            WHERE carrito.cliente=(select usuarios.id_usuario 
+            from usuarios where usuarios.nombre_usuario='$usuario')
+        ";
         /*conexion*/ 
             try{
                 $this->conexion->conectarDB();
@@ -581,12 +567,51 @@ class producto extends Database
             try 
             {
                 $consulta=$this->conexion->seleccionar($articulo);
-                foreach ($consulta as $resultado) {
-                    echo
-                    "
-                    <option from='domicilio' value='$resultado->calle'>$resultado->calle</option>
-                    ";
-                }
+                return $consulta;
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
+    function carga_de_domicilios($usuario)
+    {
+        $this->conexion=new Database();
+        $articulo="
+            select 
+            domicilio.id_domicilio, 
+            domicilio.cliente, 
+            domicilio.calle, 
+            domicilio.ciudad, 
+            domicilio.numeroExt, 
+            domicilio.numeroInt, 
+            domicilio.codigo_postal, 
+            domicilio.telefono, 
+            domicilio.colonia 
+            from domicilio 
+            INNER JOIN usuarios 
+            on domicilio.cliente=usuarios.id_usuario 
+            where usuarios.nombre_usuario='$usuario';"
+            ;
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->seleccionar($articulo);
+                return $consulta;
             } catch (PDOException $e) {
                 echo "ERROR-CONSULTA:".$e->getMessage();
             }
@@ -642,14 +667,134 @@ class producto extends Database
             }
         /*fin*/
     }
-    function carga_metodo_pago($usuario)
+    function carga_final_carro($usuario)
     {
-        if ($usuario="") {
-            
-        }
-        else {
-            
-        }
+        $this->conexion=new Database();
+        $articulo="
+        SELECT * FROM `carrito` 
+        WHERE carrito.cliente=
+        (select usuarios.id_usuario FROM usuarios 
+        WHERE usuarios.nombre_usuario='$usuario')
+        ";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->seleccionar($articulo);
+                return $consulta;
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
+    function carga_orden($usuario)
+    {
+        $this->conexion=new Database();
+        $articulo="
+                SELECT 
+                orden_compra.id_orden,
+                usuarios.nombres,
+                metodo_pago.nombre,
+                orden_compra.total,
+                concat(
+                    domicilio.calle,
+                    domicilio.numeroExt,
+                    domicilio.numeroInt,
+                    domicilio.codigo_postal,
+                    domicilio.colonia,
+                    domicilio.ciudad,
+                    domicilio.telefono,
+                    domicilio.colonia)as 'domicilio',
+                orden_compra.fecha_pedido 
+                FROM orden_compra
+                INNER JOIN usuarios
+                on usuarios.id_usuario=orden_compra.cliente
+                INNER JOIN metodo_pago
+                on metodo_pago.id_metodo=orden_compra.metodoPago
+                INNER JOIN domicilio
+                on orden_compra.domicilio=domicilio.id_domicilio
+                        WHERE orden_compra.cliente=
+                        (select usuarios.id_usuario FROM usuarios 
+                        WHERE usuarios.nombre_usuario='$usuario');
+        ";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->seleccionar($articulo);
+                return $consulta;
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
+    function carga_productos($usuario)
+    {
+        $this->conexion=new Database();
+        $articulo="
+        SELECT 
+        productos.id_producto, 
+        productos.nombre, 
+        productos.precio_unitario, 
+        orden_detalle.cantidad 
+        FROM orden_detalle 
+        INNER JOIN productos 
+        on productos.id_producto=orden_detalle.producto 
+        where orden_detalle.orden=(select usuarios.id_usuario from usuarios
+        WHERE usuarios.nombre_usuario='$usuario');
+        ";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->seleccionar($articulo);
+                return $consulta;
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
     }
 }
 /*

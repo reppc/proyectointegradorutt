@@ -1,27 +1,26 @@
-<?php
-  include("../../../../Scripts/productos.php");
-?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../../../inicio/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../../../../inicio/css/navStyle.css" />
-    <link rel="stylesheet" href="css/estilos.css" />
-    <title>comprobacion datos</title>
-  </head>
-  <body>
-<?php
-  session_start();
-?>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../inicio/css/navStyle.css">
+    <link rel="stylesheet" href="../css/registrarse.css">
+
+    <script src="../inicio/js/bootstrap.min.js"></script>
+    <title>Mi Perfil</title>
+</head>
+<body class="body-g">
+    <?php
+        session_start();
+    ?>
 
     <!--Barra navegadora-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <!--logo-->
         <div class="container-fluid">
-          <img class="logo navbar-brand md" src="../../../../inicio/Imagenes/logo-sin-letras2.png" alt="">
+          <img class="logo navbar-brand md" src="../inicio/Imagenes/logo-sin-letras2.png" alt="">
           <a class="navbar-brand" href="">Soporte y servicios informaticos</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -196,79 +195,49 @@
           </div>
         </div>
       </nav>
-    <!---->
-<!--contenido para la confirmacion de datos del cliente-->
-  <!--titulos principales-->
-  <div class="container" style="text-align: center">
-  <!--titulo-->
-  <div class="row">
-  <h1>Datos para la compra</h1>
-  </div>
-  <!--mensaje-->
-  <p style="text-align: center">
-  Por favor llene correctamente los siguientes campos para completar su
-  compra
-  </p>
-  </div>
-  <!--modificasion de datos para finalisar la compra-->
-  <div style="text-align: center">
-  <p>Direccion de envio</p>
-  </div>
-  <p style="text-align: center">
-  Si tiene domicilio registrado elijalo en la lista
-  </p>
-  <p style="text-align: center">
-  ¡IMPORTANTE SOLO ESTAMOS DISPONIBLES PARA LA CIUDAD DE TORREÓN!
-  </p>
-  </<div>
 
-  </div>
-  <div class="row">
-  <div class="col">
-  <input
-  style="
-  border: 0px;
-  background-color: black;
-  color: white;
-  border-radius: 20px;
-  "
-  type="submit" value="siguiente">
-  </div>
-  </div>
-  <div class="col">
-  <table class="table">
-  <thead>
-  <tr>
-  <th scope="col">calle</th>
-  <th scope="col">ciudad</th>
-  <th scope="col">numeroExt</th>
-  <th scope="col">CP</th>
-  <th scope="col">telefono</th>
-  <th scope="col">colonia</th>
-  <th scope="col"></th>
-  <th scope="col"></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-  <td>Mark</td>
-  <td>Otto</td>
-  <td>@mdo</td>
-  <td>@mdo</td>
-  <td>@mdo</td>
-  <td>@mdo</td>
-  <td><input type="radio" name="seleccion" value="p"></td>
-  </tr>
-  </tbody>
-  </table>
-  </div>
-<!---->
-<!-- #region js-->
-  <script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-  crossorigin="anonymous"
-  ></script>
-<!-- #endregion -->
-  </body>
+    <?php
+    include '../Scripts/database.php';
+    $conexion = new Database();
+    $conexion -> conectarDB();
+
+    ?>
+
+    <!--contenido del formulario para entrar-->
+    <div id="contenedor">
+     <div id="central">
+         <div id="login">
+             <div class="titulo">
+                 Mi Perfil
+             </div>
+             <form id="loginform" action="../Scripts/registroCompleto.php" method="POST">
+               <div class="row">
+                 <div class="col">
+                   <Label class="form-control"><?php echo $_SESSION['Nombres'];?></Label>
+
+                 
+                 <input type="text" placeholder="Escribe tu apellido paterno" name="ap_paterno" required>
+   
+                 <input type="text" placeholder="Escribe tu apellido materno" name="ap_materno" required>
+               </div>
+               <div class="col">
+                 <input type="text" placeholder="Escribe tu nombre de usuario" name="usuario" required>
+   
+                 <input type="text" placeholder="Escribe tu correo" name="correo" required>
+   
+                 <input type="password" placeholder="Escribe una contraseña" name="contraseña" required>
+               </div>
+                 <button type="submit" name="registrar">Siguiente</button>
+               </div>
+             </form>
+         </div>
+         <div class="inferior">
+             <a href="../inicio/index copy.html">Volver a inicio</a>
+         </div>
+     </div>
+   </div>
+
+        </div>
+    
+</body>
 </html>
