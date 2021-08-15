@@ -41,6 +41,9 @@
         .titulos{
             color: rgb(25, 155, 38);
         }
+        .pad-l{
+            padding-left: 100px;
+        }
         .bordcard{
             border-radius: 20px;
         }
@@ -312,21 +315,46 @@
 
       <!--Articulos en venta-->
       <h2 class="titulos text-center">Articulos en venta</h2>
-      <br>
-        <div class="row">
-            <div class="card mx-auto bg-dark bordcard cardmargin" style="width: 18rem;">
-                    <div class="container col-11 bg-light rounded text-center cardmargin">
-                        <img class="card-img imgcard" src="Imagenes/cubreteclado.jpg" class="card-img-top" alt="...">
+      <div class='row'>
+      <?php
+        include '../Scripts/database.php';
+        $conexion= new database();
+        $conexion->conectarDB();
+      
+        $consulta="SELECT productos.nombre,productos.descripcion, productos.precio_unitario, productos.imagen FROM productos WHERE productos.id_producto <= 3";
+      
+        $datos= $conexion->seleccionar($consulta);
+
+        foreach($datos as $registro)
+        {
+
+        echo "
+      
+
+            <div class='card mx-auto bg-dark bordcard cardmargin' style='width: 18rem;'>
+                    <div class='container col-11 bg-light rounded text-center cardmargin'>
+                        <img class='card-img imgcard' src='".$registro->imagen."' style='width:55%;' class='card-img-top' alt='...'>
                     </div>
-                    <div class="row card-body">
-                        <h3 class="text-light text-center">Cubreteclado</h3>
-                        <div class="container bg-light rounded">
-                            <h4 class="titulos text-center">$130</h4>
-                            <p class="col card-text">Limpiamos tu pc de de manera profesional para mantenerla operativa y evitar problemas de hardware</p>
+                    <div class='row card-body'>
+                        <h3 class='text-light text-center'>".$registro->nombre."</h3>
+                        <div class='container bg-light rounded'>
+                            <h4 class='titulos text-center'>".$registro->precio_unitario."</h4>
+                            <p class='col card-text'>".$registro->descripcion."</p>
                         </div>
                     </div>
             </div>
-
+            ";        
+        }
+            ?> 
+            
+                <div class="text-center">
+                    <a href="../articulos/home_articulos.php">
+                        <button class=" btn btn-outline-success col-2 col-sm-3 redondeado">Ir a Articulos</button>
+                    </a>
+                    <br><br>
+                </div>
+            
+            <!--
                 <div class="card mx-auto bg-dark bordcard cardmargin" style="width: 18rem;">
                     <div class="container col-11 bg-light rounded text-center cardmargin">
                         <img class="card-img imgcard" src="Imagenes/genius-mouse-inalambrico-1200dpi-4710268250074.jpg" class="card-img-top" alt="...">
@@ -353,17 +381,18 @@
                         </div>
                     </div>
                 </div>
+                -->
         <br><br>
         <hr>
         <br><br>
         <!--Seccion 'Acerca de nosotros'-->
-        <div class="row offset-1">
-            <h2 class="text-center titulos">Mas acerca de nosotros</h2>
+        <div class="row">
+            <h2 class="titulos pad-l">Mas acerca de nosotros</h2>
             <br><br>
             <div class="col">
 
                 <br><br>
-                <p class="">Nuestro discreto servicio de reparación de computadoras y laptops ofrece la más alta calidad para 
+                <p class="offset-1">Nuestro discreto servicio de reparación de computadoras y laptops ofrece la más alta calidad para 
                     todos nuestros clientes y nuestro objetivo es brindar el mejor servicio posible, 
                     solucionando cualquier problema informático en el menor tiempo posible. Siempre estamos 
                     entrenando para perfeccionar nuestro servicio para que podamos ofrecer la mejor atención 
@@ -373,9 +402,9 @@
                 <a class="btn btn-success col-2 col-sm-3 offset-3 btnverde" href="../Servicios/servicios.php">Mas sobre nosotros</a>
             </div>
 
-            <div class="col text-end">
-                <img class="col col-8 img-fluid" src="Imagenes/iconfinder_131507_hacker_administrator_system_sys_hack_icon_512px.png" alt="">
-            </div>
+                <div class="col text-end d-none d-lg-block">
+                    <img class="col col-8" src="Imagenes/iconfinder_131507_hacker_administrator_system_sys_hack_icon_512px.png" alt="">
+                </div>
         </div>
         <br>
         <hr>
@@ -389,6 +418,34 @@
             </div>
             <br><br>
             <div class="row">
+
+            <?php
+            $consultap="SELECT publicaciones.titulo_pub,publicaciones.contenido,publicaciones.tema FROM publicaciones WHERE publicaciones.cve_pub <= 3";
+      
+            $datosp= $conexion->seleccionar($consultap);
+    
+            foreach($datosp as $registrop)
+            {
+                echo "
+                <div class='card mx-auto bg-light bordcard cardmargin' style='width: 18rem; height: 21rem;'>
+                    <div class='card-body'>
+                        <h3 class='text-dark text-center'>".$registrop->titulo_pub."</h3>
+                        <div class='bg-light rounded'>
+                            <br>    
+                            <h4 class='text-dark text-center'>Tema: $registrop->tema</h4>
+                        </div>
+                    </div>
+                </div>";
+
+            }
+            ?>
+                <div class="text-center">
+                    <a href="../Blog/blog-informativo.php">
+                        <button class=" btn btn-outline-light col-2 col-sm-3 redondeado">Ir a Blog</button>
+                    </a>
+                    <br><br>
+                </div>
+            <!--
                 <div class="card mx-auto bg-light bordcard cardmargin" style="width: 18rem; height: 21rem;">
                         <div class="card-body">
                             <h3 class="text-dark text-center">Consejos para evitar los virus en tu PC</h3>
@@ -422,6 +479,7 @@
                                 </div>
                         </div>
                         <br><br>
+            -->
         </div>
     </div>
 
@@ -442,7 +500,7 @@
                                     </button>
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">Los usuarios suscritos a nuestros servicios para usuarios recurrentes pueden contar con los servicios a domicilio</div>
+                        <div class="accordion-body">Los usuarios suscritos a nuestros servicios para usuarios recurrentes pueden contar con los servicios a domicilio, para mas informacion visitanos en nuestra sucursal</div>
                     </div>
                     </div>
                     <div class="accordion-item">
