@@ -246,7 +246,6 @@
       <thead>
       <tr>
       <th scope="col">calle</th>
-      <th scope="col">ciudad</th>
       <th scope="col">numeroExt</th>
       <th scope="col">numeroInt</th>
       <th scope="col">CP</th>
@@ -264,7 +263,6 @@
           {
               echo"
               <td>$res->calle</td>
-              <td>$res->ciudad</td>
               <td>$res->numeroExt</td>
               <td>$res->numeroInt</td>
               <td>$res->codigo_postal</td>

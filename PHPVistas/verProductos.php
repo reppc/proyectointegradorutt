@@ -257,9 +257,6 @@
 
             echo "<td>
                 <a href='FormEditProd.php?no=$filas->id_producto' value type='submit' class='btn btn-success'>Editar</a>
-              &nbsp
-
-                <a href='eliminarProd.php' type='submit' class='btn btn-danger'>Editar</a>
                   </td>
                 <tr>";
 

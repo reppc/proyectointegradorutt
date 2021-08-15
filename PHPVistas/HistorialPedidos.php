@@ -201,8 +201,6 @@
         <h1 align="center">Historiales de ventas</h1>
         <br>
 
-
-
     <?php
     include '../Scripts/database.php';
     $conexion = new Database();

@@ -549,7 +549,6 @@ class producto extends Database
         domicilio.id_domicilio, 
         domicilio.cliente, 
         domicilio.calle, 
-        domicilio.ciudad, 
         domicilio.numeroExt, 
         domicilio.numeroInt, 
         domicilio.codigo_postal, 
@@ -631,7 +630,6 @@ class producto extends Database
                     domicilio.numeroInt,
                     domicilio.codigo_postal,
                     domicilio.colonia,
-                    domicilio.ciudad,
                     domicilio.telefono,
                     domicilio.colonia)as 'domicilio',
                 orden_compra.fecha_pedido 
