@@ -2,12 +2,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Detalle de la compra</title>
-	 <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
-   <link rel="stylesheet" type="text/css" href="../css/vermas.css">
+	<link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
 
-    <script src="../inicio/js/bootstrap.min.js"></script>
+ <script src="../inicio/js/bootstrap.min.js"></script>
+	<title>Finalizado</title>
 </head>
 <body>
 <?php
@@ -43,26 +42,17 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
+                          <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
-                          <?php
-                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador')
-                            {
-
-                            ?>
                           <div class="dropdown-divider"></div>
                           <li>
-                             <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Productos</a>
+                             <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Articulos</a>
                             </li>
                           <li>
                             <a class="dropdown-item" href="../PHPVistas/verMetodosPago.php">Ver registros de  metodos de pago</a>
                           </li>
-
+                          <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../PHPVistas/HistorialPedidos.php">Historial de pedidos</a>
-                            <div class="dropdown-divider"></div>
-                            <?php
-                            }
-                            ?>
                         </ul>
                         <!---->
                         
@@ -79,6 +69,7 @@
   
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <div class="dropdown-divider"></div>
                           <li>
                             <a class="dropdown-item" href="../Blog/blog-informativo.php" >Informativo</a>
                           </li>
@@ -88,19 +79,11 @@
                           <li>
                               <a class="dropdown-item" href="../Blog/blog-sugerencias.php">Sugerencias</a>
                             </li>
-                            <?php
-                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador_Blog')
-                            {
-
-                            ?>
                           <div class="dropdown-divider"></div>
+                          
                           <li>
                             <a class="dropdown-item" href="../AdminBlog/FormAddBlog.php">Crear entrada</a>
                           </li>
-                          <div class="dropdown-divider"></div>
-                          <?php
-                            }
-                            ?>
                         </ul>        
                 </li>
                 
@@ -117,7 +100,7 @@
 
                         if(isset($_SESSION["usuario"]))
                         { 
-                            echo $_SESSION['rol'] . ": " . $_SESSION['usuario'];
+                            echo $_SESSION['usuario'];
                         } else {
                             
                             echo "Perfil";
@@ -126,54 +109,23 @@
                         </a>
   
                         <!--lista del dropdown de perfil-->
-                        
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
-                          </li>
-
-                          <?php
-                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Cliente')
-                            {
-
-                            ?>
-
-                          <li>
-                              <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/HistorialCompras.php'";}else{echo "href='../login/login.php'";}?>>Mis pedidos</a>
+                            <a class="dropdown-item" href="../php/blog-informativo.php" >Mi perfil</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?>>Mis direcciones</a>
+                              <a class="dropdown-item" href="HistorialCompras.php">Mis pedidos</a>
                           </li>
-
-                            <?php
-                            }
-                            ?>
-
-                          <?php
-                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador')
-                            {
-
-                            ?>
+                          <li>
+                              <a class="dropdown-item" href="../PHPVistas/MisDirecciones.php">Mis direcciones</a>
+                            </li>
+                            <li>
+                            <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
+                          </li>
                             <div class="dropdown-divider"></div>
                             <li>
                               <a class="dropdown-item" href="../PHPVistas/VerUsuarios.php">Ver usuarios</a>
-                            </li>
-                            <div class="dropdown-divider"></div>
-                            <?php
-                            }
-                            ?>
-
-                            <?php
-                            if(isset($_SESSION["usuario"]))
-                            {
-
-                            ?>
-                          <li>
-                            <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
                           </li>
-                          <?php
-                            }
-                            ?>
                         </ul>
                              
                 </li>
@@ -193,62 +145,41 @@
           </div>
         </div>
       </nav>
+      <?php 
+include'database.php';
+$conexion= new Database();
+$conexion->conectarDB();
+$iduser=$_SESSION['id'];
 
-      <br> 
-      <div class="container-fluid"><h2 align="center">Detalles de tu compra</h2>
-        
-<?php     
-include'../Scripts/database.php';
-$conexion = mysqli_connect("localhost","root","","appsocom");
-    $iduser=$_SESSION["usuario"];
+$calle=$_POST['calle'];
+$colonia=$_POST['colonia'];
+$numero1=$_POST['numero1'];
+$numero2=$_POST['numero2'];
+$codigo=$_POST['codigo'];
+$telefono=$_POST['telefono'];
+$id=$_POST['id'];
 
-$consulta="SELECT orden_compra.folio,productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser';";
-$tabla = mysqli_query($conexion, $consulta);
+$consulta="UPDATE domicilio
+SET domicilio.calle='$calle', domicilio.codigo_postal='$codigo', domicilio.numeroExt='$numero1', domicilio.numeroInt='$numero2', domicilio.telefono='$telefono',domicilio.colonia='$colonia'
+WHERE domicilio.cliente='$iduser' AND domicilio.id_domicilio='$id'";
 
-$met=$_GET['met'];
-$tot=$_GET['tot'];
-$dom=$_GET['dom'];
-$fecha=$_GET['fecha'];
-$folio=$_GET['folio'];
-$img=$_GET['img'];
-$producto=$_GET['producto'];
-$cantidad=$_GET['cantidad'];
-$precio=$_GET['precio'];
+$conexion->ejecutaSQL($consulta);
+$conexion->desconectarDB();
 
 
-echo "<br>
-  <div class='row'>
-  <div class='offset-3 col-6 offset-3'
-  <div class='accordion' id='accordionExample'>
-  <div class='accordion-item'>
-    <h2 class='accordion-header' id='headingOne'>
-      
-    ";
-    if($registro = mysqli_fetch_row($tabla))
-    { ?>
-      
-      <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
-        <strong>Folio: <?php echo  "$folio" ?></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Clic para ver tu compra
-      </button>
-    </h2><div id='collapseOne' class='accordion-collapse collapse' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
-      <div class='accordion-body'>
-      <img src='<?php echo  "$img" ?>' style='width: 10%;'>
-        <strong><?php echo  "$producto" ?></strong><br>
-        <strong>Cantidad: </strong><?php echo  "$cantidad" ?> <br>
-        <strong>Costo: </strong><?php echo "$precio" ?><br>
-       <strong>Forma de pago: </strong> <?php echo "$met" ?><br>
-        <strong>Domicilio: </strong><?php echo "$dom"?><br> 
-        <strong>Fecha: </strong><?php echo "$fecha"?>
-      </div>
-    </div>
-  </div>
-   <?php   }
-   
-    echo "</div>";
-    echo "</div>";
-    echo "</div>";
-?>
-
+      echo "<div id='contenedor'>
+        <div id='central'>
+          <div id='login'>
+            <div class='titulo'>
+              Publicacion realizada
+            </div>
+                <div class='img-fluid img-c'>
+                <img class='img-tam' src='../login/imgLogin/checked-icon-clipart1.png'>
+                </div>
+                
+            </div>
+            </div>
+        </div>";
+        header("refresh:3 ../PHPVistas/MisDirecciones.php"); ?>
 </body>
 </html>

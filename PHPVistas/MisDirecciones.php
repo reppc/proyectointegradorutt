@@ -158,7 +158,7 @@ $conexion= new Database();
 $conexion->conectarDB();
 $iduser=$_SESSION["usuario"];
 
-$consulta="SELECT concat(domicilio.calle,' ', domicilio.colonia, ' ', domicilio.numeroExt,' ', domicilio.codigo_postal)as 'Domicilio' FROM domicilio INNER JOIN usuarios ON domicilio.cliente= usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser'";
+$consulta="SELECT domicilio.calle,' ', domicilio.colonia, ' ', domicilio.numeroExt,' ',domicilio.numeroInt,' ',domicilio.telefono,' ', domicilio.codigo_postal,' ', domicilio.id_domicilio FROM domicilio INNER JOIN usuarios ON domicilio.cliente= usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser'";
 $tabla=$conexion->seleccionar($consulta);
 echo "<table class='table table-hover table-borderless'>
     <thead class='table-dark'>
@@ -167,13 +167,30 @@ echo "<table class='table table-hover table-borderless'>
     </tr>
     </thead>
     <tbody class='table-secondary'>";
-$reg=1;
+
 foreach($tabla as $registro)
 {
     echo "<tr>";
-    echo "<td>$registro->Domicilio</td>";
-    $reg++;
-    echo "<td><a href=''>Editar</a> | <a href=''style='color:red'>Eliminar</a></td>";
+    echo "<td>$registro->calle";
+    echo " $registro->colonia";
+    echo " $registro->numeroExt";
+    echo " $registro->codigo_postal";
+    echo "</td>";
+    echo "<td hidden>$registro->numeroInt</td>";
+    echo "<td hidden>$registro->telefono</td>";
+    echo "<td hidden>$registro->id_domicilio</td>";
+//creacion de editar
+    echo "<td><a href='EditarDireccion.php?
+    calle=$registro->calle &
+    colonia=$registro->colonia &
+    numero1=$registro->numeroExt &
+    numero2=$registro->numeroInt &
+    telefono=$registro->telefono &
+    codigo=$registro->codigo_postal &
+    id=$registro->id_domicilio
+
+    ' value type='submit' class='btn btn-primary'>Editar</a> 
+    ";
     echo "</tr>";
 }
 echo "</tbody>
