@@ -226,8 +226,7 @@ class producto extends Database
     {
         $this->conexion=new Database();
         $articulo="INSERT INTO carrito(cliente, producto, cantidad) 
-        VALUES ((select id_usuario 
-        from usuarios where nombre_usuario='$cliente'),$producto,$cantidad)";
+        VALUES ($cliente,$producto,$cantidad);";
         /*conexion*/ 
             try{
                 $this->conexion->conectarDB();
@@ -260,8 +259,7 @@ class producto extends Database
         SELECT carrito.id_carrito, carrito.cantidad, productos.nombre 
         FROM carrito inner JOIN productos on 
         productos.id_producto=carrito.id_carrito 
-        WHERE carrito.cliente>(select usuarios.id_usuario 
-        from usuarios where usuarios.nombre_usuario='$usuario') and carrito.id_carrito<=4;";
+        WHERE carrito.cliente=$usuario and carrito.id_carrito<=4;";
         /*conexion*/ 
             try{
                 $this->conexion->conectarDB();
@@ -307,11 +305,15 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo=
         "
-            SELECT carrito.id_carrito, carrito.cantidad, productos.nombre, productos.precio_unitario,productos.imagen
-            FROM carrito inner JOIN productos on 
-            productos.id_producto=carrito.id_carrito 
-            WHERE carrito.cliente>(select usuarios.id_usuario 
-            from usuarios where usuarios.nombre_usuario='$usuario')
+        SELECT carrito.id_carrito, 
+        carrito.cantidad,
+        productos.nombre, 
+        productos.precio_unitario,
+        productos.imagen 
+        FROM carrito inner 
+        JOIN productos 
+        on productos.id_producto=carrito.id_carrito 
+        WHERE carrito.cliente=$usuario;
         ";
         /*conexion*/ 
             try{
@@ -466,11 +468,10 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo=
         "
-            SELECT carrito.id_carrito, carrito.cantidad, productos.nombre, productos.precio_unitario,productos.imagen
-            FROM carrito inner JOIN productos on 
-            productos.id_producto=carrito.id_carrito 
-            WHERE carrito.cliente=(select usuarios.id_usuario 
-            from usuarios where usuarios.nombre_usuario='$usuario')
+        SELECT carrito.id_carrito, carrito.cantidad, productos.nombre, productos.precio_unitario,productos.imagen
+        FROM carrito inner JOIN productos on 
+        productos.id_producto=carrito.id_carrito 
+        WHERE carrito.cliente=$usuario;
         ";
         /*conexion*/ 
             try{
@@ -501,20 +502,19 @@ class producto extends Database
     {
         $this->conexion=new Database();
         $articulo="
-            select 
-            domicilio.id_domicilio, 
-            domicilio.cliente, 
-            domicilio.calle, 
-            domicilio.ciudad, 
-            domicilio.numeroExt, 
-            domicilio.numeroInt, 
-            domicilio.codigo_postal, 
-            domicilio.telefono, 
-            domicilio.colonia 
-            from domicilio 
-            INNER JOIN usuarios 
-            on domicilio.cliente=usuarios.id_usuario 
-            where usuarios.nombre_usuario='$usuario';"
+        select domicilio.id_domicilio, 
+        domicilio.cliente,
+         domicilio.calle,
+          domicilio.ciudad,
+           domicilio.numeroExt,
+            domicilio.numeroInt,
+             domicilio.codigo_postal,
+              domicilio.telefono,
+               domicilio.colonia 
+               from domicilio 
+               INNER JOIN usuarios 
+               on domicilio.cliente=usuarios.id_usuario 
+               where usuarios.id_usuario=$usuario;"
             ;
         /*conexion*/ 
             try{
@@ -558,7 +558,7 @@ class producto extends Database
         from domicilio 
         INNER JOIN usuarios 
         on domicilio.cliente=usuarios.id_usuario 
-        where usuarios.nombre_usuario='$usuario';";
+        where usuarios.id_usuario='$usuario';";
         /*conexion*/ 
             try{
                 $this->conexion->conectarDB();
@@ -589,9 +589,7 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo="
         SELECT * FROM `carrito` 
-        WHERE carrito.cliente=
-        (select usuarios.id_usuario FROM usuarios 
-        WHERE usuarios.nombre_usuario='$usuario')
+        WHERE carrito.cliente='$usuario'
         ";
         /*conexion*/ 
             try{
@@ -644,9 +642,7 @@ class producto extends Database
                 on metodo_pago.id_metodo=orden_compra.metodoPago
                 INNER JOIN domicilio
                 on orden_compra.domicilio=domicilio.id_domicilio
-                        WHERE orden_compra.cliente=
-                        (select usuarios.id_usuario FROM usuarios 
-                        WHERE usuarios.nombre_usuario='$usuario');
+                        WHERE orden_compra.cliente='$usuario';
         ";
         /*conexion*/ 
             try{
@@ -685,8 +681,8 @@ class producto extends Database
         FROM orden_detalle 
         INNER JOIN productos 
         on productos.id_producto=orden_detalle.producto 
-        where orden_detalle.orden=(select usuarios.id_usuario from usuarios
-        WHERE usuarios.nombre_usuario='$usuario');
+        where orden_detalle.orden=(select orden_compra.id_orden from orden_compra
+        WHERE orden_compra.id_orden=(select usuarios.id_usuario from usuarios where usuarios.id_usuario=$usuario));
         ";
         /*conexion*/ 
             try{
@@ -713,16 +709,12 @@ class producto extends Database
             }
         /*fin*/
     }
-    function eliminar_articulo()
+    function eliminar_articulo($id)
     {
         $this->conexion=new Database();
         $articulo=
         "
-            SELECT carrito.id_carrito, carrito.cantidad, productos.nombre, productos.precio_unitario,productos.imagen
-            FROM carrito inner JOIN productos on 
-            productos.id_producto=carrito.id_carrito 
-            WHERE carrito.cliente=(select usuarios.id_usuario 
-            from usuarios where usuarios.nombre_usuario='$usuario')
+        DELETE FROM `carrito` WHERE id_carrito=$id;
         ";
         /*conexion*/ 
             try{

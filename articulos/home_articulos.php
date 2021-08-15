@@ -500,11 +500,25 @@ include("../Scripts/productos.php");
               $carga_del_carrito=new producto();
               if(session_status()==0 || session_status()==1)
               {
-                
+                echo
+                "
+                <!--contenido del carro-->
+                  <div class='row contenido_carro'>
+                  <div class='col'>
+                  <p></p>
+                  </div>
+                  <div class='col'>
+                  <p></p>
+                  </div>
+                  </div>
+                  <hr>
+                <!---->
+                ";
               }
               else
               {
-                $carga_del_carrito->carga_carrito($_SESSION['usuario']);
+                
+                $carga_del_carrito->carga_carrito($_SESSION['id']);
               }
               ?>
               
@@ -529,8 +543,7 @@ include("../Scripts/productos.php");
                   siguiente</a>";
                 }
               ?>
-                
-                </div>
+            </div>
             </div>
             <!---->
           </div>
@@ -552,7 +565,7 @@ include("../Scripts/productos.php");
             && $_POST['cantidad_producto']!="cantidad"
           ) 
           {
-            $usuario=$_SESSION['usuario'];
+            $usuario=$_SESSION['id'];
             $cantidad_productos=$_POST['agregar_productos_al_carro_prueba'];
             $id_producto=$_POST['cantidad_producto'];
             $insertar_carro->insertar_carro(
@@ -574,5 +587,8 @@ include("../Scripts/productos.php");
       crossorigin="anonymous"
     ></script>
   <!-- #endregion -->
+  <?php
+    echo $_SESSION['id'];
+  ?>
   </body>
 </html>

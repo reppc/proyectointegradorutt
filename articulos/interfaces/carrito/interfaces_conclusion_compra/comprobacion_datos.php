@@ -259,7 +259,7 @@
       <tr>
         <?php
           $carga_dom_I=new producto();
-          $s=$carga_dom_I->carga_de_domicilios_selects($_SESSION['usuario']);
+          $s=$carga_dom_I->carga_de_domicilios_selects($_SESSION['id']);
           foreach ($s as $res) 
           {
               echo"

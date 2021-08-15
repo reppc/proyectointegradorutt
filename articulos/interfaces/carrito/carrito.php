@@ -217,7 +217,7 @@ include("../../../scripts/productos.php");
                   else
                   {
                     $carga_de_articulos=new producto();
-                    $carga_de_articulos->carga_de_los_articulos_a_comprar($_SESSION['usuario']);
+                    $carga_de_articulos->carga_de_los_articulos_a_comprar($_SESSION['id']);
                   }
                 ?>
               </table>
@@ -225,6 +225,9 @@ include("../../../scripts/productos.php");
                 if(isset($_GET['edicion_cant']))
                 {
                   echo $_GET['edicion_cant'];
+                }
+                if (isset($_POST[''])) {
+                  # code...
                 }
               ?>
             </div>
@@ -240,8 +243,8 @@ include("../../../scripts/productos.php");
                         <div class='col'>
                           <?php
                             $carga_total=new producto();
-                            $carga_total->total_carrito($_SESSION['usuario']);
-                            $s=$carga_de_articulos->total_carrito($_SESSION['usuario']);
+                            $carga_total->total_carrito($_SESSION['id']);
+                            $s=$carga_de_articulos->total_carrito($_SESSION['id']);
                             $d=0;
                             $sub=0;
                             foreach ($s as $value) 

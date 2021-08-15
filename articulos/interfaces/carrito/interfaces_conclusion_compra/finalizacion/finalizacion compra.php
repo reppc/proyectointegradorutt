@@ -219,7 +219,7 @@
           <tr>
             <?php
               $carga_orden=new producto();
-              $cargar_ordenes=$carga_orden->carga_orden($_SESSION['usuario']);
+              $cargar_ordenes=$carga_orden->carga_orden($_SESSION['id']);
               foreach ($cargar_ordenes as $value) 
               {
                 echo
@@ -258,7 +258,7 @@
           <tr>
             <?php
               $carga_articulos=new producto();
-              $cont_art=$carga_articulos->carga_productos($_SESSION['usuario']);
+              $cont_art=$carga_articulos->carga_productos($_SESSION['id']);
               $sub_t=0;
               $total=0;
               foreach ($cont_art as $value) 
