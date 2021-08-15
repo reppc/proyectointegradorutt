@@ -270,7 +270,7 @@ include("../Scripts/productos.php");
                     { 
                         echo "<!-- #region boton-->
                         <form class='d-flex'>
-                          <a href='../login/login.php' class='btn btn-outline-light' style='text-decoration: none;' id='redondeado'>Acceder</a>
+                          <a href='../login/login.php' class='btn btn-outline-light redondeado' style='text-decoration: none;'>Acceder</a>
                         </form>
                     <!-- #endregion -->";
                     }

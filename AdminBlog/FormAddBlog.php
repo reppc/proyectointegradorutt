@@ -216,8 +216,7 @@
                     <textarea class="form-control" placeholder="Contenido de la publicacion" name="contenido" required></textarea>
                     <br>
                     <label class="form" for="categoria-label">Tema: </label>
-                    <select class="form-control" name="tema" id="">
-                        <option value="null">Elige el tema</option>
+                    <select class="form-select" name="tema" id="">
                         <option value="informativa">Informativa</option>
                         <option value="sugerencias">Sugerencias</option>
                         <option value="consejos">Consejos</option>
@@ -237,7 +236,7 @@
         </div>
         <br>
         <div class="inferior">
-            <a href="../Blog/Proyecto/php/blog2.php">Ver blog</a>
+            <a href="../Blog/blog-informativo.php">Ver blog</a>
         </div>
     </div>
   </div>

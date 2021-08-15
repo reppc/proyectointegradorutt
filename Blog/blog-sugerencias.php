@@ -30,6 +30,54 @@
       .body-g{
       background-color: #2aa13e;
       }
+      .btn-con{
+        position: absolute;
+        width: 150px;
+        height: 38px;
+        left: 64%;
+        top: 150px;
+        font-size: 15px;
+        font-weight: 600;
+        background-color:#C4C4C4;
+        color: white; 
+        border: #C4C4C4;
+        border-radius: 30px;
+      }
+      .btn-sug{
+        position: absolute;
+        width: 150px;
+        height: 38px;
+        left: 44%;
+        top: 150px;
+        font-size: 15px;
+        font-weight: 600;
+        background-color:rgb(28, 142, 224);
+        color: white;
+        border:rgb(28, 142, 224);
+        border-radius: 30px;
+      }
+      .btn-inf{
+        position: absolute;
+        width: 150px;
+        height: 38px;
+        left: 24%;
+        top: 150px;
+        font-size: 15px;
+        font-weight: 600;
+        background-color: #6FD950;
+        color: white;
+        border:#6FD950;
+        border-radius: 30px;
+      }
+      .recuadro{
+        margin-left:25px;
+        margin-top:15px;
+        padding-bottom:40px;
+        border-bottom: rgb(188, 197, 197) 2px solid;
+      }
+      .recuadro img{
+        margin-top:10px;
+      }
   </style>
 	<title>Blog-Sugerencias</title>
 </head>
@@ -208,7 +256,7 @@
                     { 
                         echo "<!-- #region boton-->
                         <form class='d-flex'>
-                          <a href='../login/login.php' class='btn btn-outline-light' style='text-decoration: none;' id='redondeado'>Acceder</a>
+                          <a href='../login/login.php' class='btn btn-outline-light redondeado' style='text-decoration: none;' id='redondeado'>Acceder</a>
                         </form>
                     <!-- #endregion -->";
                     }
@@ -223,36 +271,13 @@
 		<div class="rectangulo">
 			<p class="textoR">Sugerencias</p>
 		</div>
-		<a href="blog-informativo.php" type="button" class="btn btn-primary"style="position: absolute;
-width: 150px;
-height: 38px;
-left: 24%;
-top: 150px;
- font-size: 15px;
- background-color: #6FD950;
- color: black; #CBFDFA;#C4C4C4;
- border-radius: 30px;
-">informativo </a>	
-<a href="blog-sugerencias.php" type="button" class="btn btn-primary"style="position: absolute;
-width: 150px;
-height: 38px;
-left: 44%;
-top: 150px;
- font-size: 15px;
- background-color:#CBFDFA;
- color: black; #C4C4C4;
- border-radius: 30px;
-">sugerencias </a>	
-<a href="blog-consejos.php" type="button" class="btn btn-primary"style="position: absolute;
-width: 150px;
-height: 38px;
-left: 64%;
-top: 150px;
- font-size: 15px;
- background-color:#C4C4C4;
- color: black; 
- border-radius: 30px;
-">Consejos</a>	
+        <!--Botones de navegacion entre secciones de blog-->
+				<a href="blog-informativo.php" type="button" class="btn btn-primary btn-inf">Informativo</a>	
+
+        <a href="blog-sugerencias.php" type="button" class="btn btn-primary btn-sug">Sugerencias </a>	
+
+        <a href="blog-consejos.php" type="button" class="btn btn-primary btn-con">Consejos</a>
+
 
 	
 
@@ -266,22 +291,47 @@ top: 150px;
   $conexion= new database();
   $conexion->conectarDB();
 
-  $consulta="SELECT publicaciones.titulo_pub, publicaciones.contenido, publicaciones.imagen FROM publicaciones WHERE publicaciones.tema='sugerencias'";
+  $consulta="SELECT publicaciones.titulo_pub, publicaciones.contenido, publicaciones.imagen, publicaciones.fecha_pub FROM publicaciones WHERE publicaciones.tema='sugerencias' AND publicaciones.imagen like '%http%'";
 
   $publicacion= $conexion->seleccionar($consulta);
 
   foreach($publicacion as $registro)
   {
-      echo "<div class='row'><div class='col-x1-6 col-lg-6 col-md-6 col-sm-6'>";
-      echo "<h5><b>$registro->titulo_pub</b><h5>";
+      echo "<div class='row recuadro'>
+          <div class='col-x1-6 col-lg-6 col-md-6 col-sm-6'>";
+      echo "<h5><b>$registro->titulo_pub</b><h5><br>";
+      echo "<h6>$registro->fecha_pub</h6>";
       echo "<br>";     
       echo "$registro->contenido</div>";
-      echo "<div class='d-none d-lg-block col-lg-6 d-none d-block col-6 text-center'>
-        <img src='$registro->imagen' width='40%'>
-      </div>";
+
+        echo "<div class='d-none d-lg-block col-lg-6 d-none d-block col-6 text-center'>
+                <img src='$registro->imagen' width='55%' class=' rounded'>
+            </div>";
+     
       echo "</div>";
       echo "<br>";
+  }
+  echo "</div>";
+
+  $consulta="SELECT publicaciones.titulo_pub, publicaciones.contenido, publicaciones.imagen,publicaciones.fecha_pub FROM publicaciones WHERE publicaciones.tema='sugerencias' AND publicaciones.imagen NOT like '%http%'";
+
+  $publicacion= $conexion->seleccionar($consulta);
+
+  foreach($publicacion as $registro)
+  {
+      echo "<div class='row recuadro'>
+              <div class='col-x1-6 col-lg-6 col-md-6 col-sm-6'>";
+      echo "<h5><b>$registro->titulo_pub</b><h5><br>";
+      echo "<h6>$registro->fecha_pub</h6>";
+      echo "<br>";     
+      echo "$registro->contenido</div>";
+
+          echo "<div class='d-none d-lg-block col-lg-6 d-none d-block col-6 text-center'>
+          <img src='ImgBlog/" . $registro->imagen . "' width='55%' class='rounded'>
+        </div>";
      
+      echo "</div>";
+      echo "<br>";
   }
   echo "</div>";
 

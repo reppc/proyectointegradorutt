@@ -100,7 +100,7 @@
 
             if((isset($_FILES['imagen']['name']) && ($_FILES['imagen']['error']==UPLOAD_ERR_OK)))
             {
-                $destino_de_ruta="../ImgBlog/";
+                $destino_de_ruta="../Blog/ImgBlog/";
 
                 move_uploaded_file($_FILES['imagen']['tmp_name'], $destino_de_ruta.$_FILES['imagen']['name']);
 

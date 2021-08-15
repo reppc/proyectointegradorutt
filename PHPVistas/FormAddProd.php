@@ -206,7 +206,7 @@
             <div class="titulo">
                 Nuevo Articulo
             </div>
-            <form id="loginform" action="../Scripts/agreagarPubl.php" method="POST" enctype="multipart/form-data">
+            <form id="loginform" action="../Scripts/agregarProd.php" method="POST" enctype="multipart/form-data">
               <div class="row">
                 <div class="col">
                     <label for="formFile" class="form-label">Nombre:</label>
@@ -232,7 +232,7 @@
                     $reg=$conexion->seleccionar($cadena);
 
                     echo "
-                    <select class='form-select' name='depa'>";
+                    <select class='form-select' name='categoria'>";
 
                         foreach($reg as $value){
                             echo "<option value='".$value->id_cat."'>".$value->categoria."</option>";

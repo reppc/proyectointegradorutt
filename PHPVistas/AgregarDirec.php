@@ -169,7 +169,7 @@
                     <input type="text" name="numeroE" placeholder="Num-Exterior" required>
 
                     <label class="form" for="categoria-label">Numero interior: </label>
-                    <input type="text" name="numeroI" placeholder="Num-interior" required>
+                    <input type="text" name="numeroI" placeholder="Num-interior">
 
                     <label class="form" for="categoria-label">Telefono: </label>
                     <input type="text" name="telefono" placeholder="Escribe tu telefono" required>
