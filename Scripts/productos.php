@@ -503,18 +503,17 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo="
         select domicilio.id_domicilio, 
-        domicilio.cliente,
-         domicilio.calle,
-          domicilio.ciudad,
-           domicilio.numeroExt,
-            domicilio.numeroInt,
-             domicilio.codigo_postal,
-              domicilio.telefono,
-               domicilio.colonia 
-               from domicilio 
-               INNER JOIN usuarios 
-               on domicilio.cliente=usuarios.id_usuario 
-               where usuarios.id_usuario=$usuario;"
+            domicilio.cliente,
+            domicilio.calle,
+            domicilio.numeroExt,
+                domicilio.numeroInt,
+                domicilio.codigo_postal,
+                domicilio.telefono,
+                domicilio.colonia 
+                from domicilio 
+                INNER JOIN usuarios 
+                on domicilio.cliente=usuarios.id_usuario 
+                where usuarios.id_usuario=$usuario;"
             ;
         /*conexion*/ 
             try{
@@ -549,7 +548,6 @@ class producto extends Database
         domicilio.id_domicilio, 
         domicilio.cliente, 
         domicilio.calle, 
-        domicilio.ciudad, 
         domicilio.numeroExt, 
         domicilio.numeroInt, 
         domicilio.codigo_postal, 
@@ -631,7 +629,6 @@ class producto extends Database
                     domicilio.numeroInt,
                     domicilio.codigo_postal,
                     domicilio.colonia,
-                    domicilio.ciudad,
                     domicilio.telefono,
                     domicilio.colonia)as 'domicilio',
                 orden_compra.fecha_pedido 
@@ -852,6 +849,43 @@ class producto extends Database
                     </tr>
                     ";
                 }
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
+    function crear_orden($usuario,$pago,$total,$domicilio)
+    {
+        $this->conexion=new Database();
+        $articulo=
+        "
+        INSERT INTO `orden_compra`(
+            `cliente`, 
+           `metodoPago`, 
+           `total`, 
+           `domicilio`) 
+       VALUES ($usuario,$pago,$total,$domicilio);
+        ";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->seleccionar($articulo);
+                return $consulta;
             } catch (PDOException $e) {
                 echo "ERROR-CONSULTA:".$e->getMessage();
             }

@@ -1,5 +1,6 @@
 <?php
   include("../../../../Scripts/productos.php");
+  session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -215,38 +216,42 @@
     </p>
     </div>
     </div>
+  </div><!--finalizacion/finalizacion compra.php-->
+  <form  action="" method="get">
+  <div class="row">
+      <div class="col">
+      <input style="
+      border: 0px;
+      background-color: black;
+      color: white;
+      border-radius: 20px;
+
+      " type="submit" name="sig" value="siguiente">
+      </div>
+      <div class="col">
+        <a href="../carrito.php"
+        style="
+        border: 0px;
+        background-color: black;
+        color: white;
+        border-radius: 20px;
+        "
+        type="submit" class="btn" name="continuar_compra">atras</a>
+      </div>
+      <div class="col">
+      <label for="">seleccione forma de pago</label>
+      <select width="100px" name="seleccion_pago" id="">
+        <option value="1">efectivo</option>
+        <option value="2">tarjeta</option>
+        <option value="3">transaccion</option>
+      </select>
+      </div>
   </div>
-  <form class="row" action="" method="POST">
-
-    <div class="col">
-    <a href="finalizacion/finalizacion compra.php"
-    style="
-    border: 0px;
-    background-color: black;
-    color: white;
-    border-radius: 20px;
-
-    "
-    type="submit" class="btn" name="continuar_compra">siguiente</a>
-    </div>
-    <div class="col">
-    <a href="../carrito.php"
-    style="
-    border: 0px;
-    background-color: black;
-    color: white;
-    border-radius: 20px;
-
-    "
-    type="submit" class="btn" name="continuar_compra">atras</a>
-    </div>
-    </form>
   <div class="col">
     <table class="table" width="70%">
       <thead>
       <tr>
       <th scope="col">calle</th>
-      <th scope="col">ciudad</th>
       <th scope="col">numeroExt</th>
       <th scope="col">numeroInt</th>
       <th scope="col">CP</th>
@@ -259,24 +264,40 @@
       <tr>
         <?php
           $carga_dom_I=new producto();
+          if(session_status()==2)
+          {
           $s=$carga_dom_I->carga_de_domicilios_selects($_SESSION['id']);
+          
           foreach ($s as $res) 
           {
               echo"
               <td>$res->calle</td>
-              <td>$res->ciudad</td>
               <td>$res->numeroExt</td>
               <td>$res->numeroInt</td>
               <td>$res->codigo_postal</td>
               <td>$res->telefono</td>
               <td>$res->colonia</td>
-              <td><input type='radio' name='seleccion' value='$res->id_domicilio'></td>
+              <td><input type='radio' name='seleccion_dom' value='$res->id_domicilio'></td>
               ";
           }
+        }
         ?>
       </tr>
       </tbody>
     </table>
+    </form>
+    <?php
+      $crear_orden=new producto();
+      if (isset($_POST['sig'])) 
+      {
+        $total_env=$_POST['TOTAL_ENV'];
+        echo $us=$_SESSION['id'];
+        echo $pg=$_POST['seleccion_pago'];
+        echo $dom=$_POST['seleccion_dom'];
+        $crear_orden->crear_orden($us,$pg,$total_env,$dom);
+
+      }
+    ?>
   </div>
 <!---->
 <!-- #region js-->

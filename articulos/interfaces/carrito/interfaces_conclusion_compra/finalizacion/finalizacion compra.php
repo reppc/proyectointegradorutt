@@ -1,5 +1,7 @@
 <?php
   include("../../../../../Scripts/productos.php");
+  $metodo_de_pago_env=$_POST['seleccion_pago'];
+  $direccion_env=$_POST['seleccion_dom'];
 ?>
 <!DOCTYPE html>
 <html lang="en">

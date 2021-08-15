@@ -238,7 +238,7 @@ include("../../../scripts/productos.php");
                     <div style='margin: 5px'>
                       <div class='row'>
                         <div class='col'>
-                          <p>total</p>
+                          <p>TOTAL:</p>
                         </div>
                         <div class='col'>
                           <?php
@@ -252,7 +252,7 @@ include("../../../scripts/productos.php");
                               $sub=$value->cantidad*$value->precio_unitario;
                               $d+=$sub;
                             }
-                            echo  $d;
+                            echo $d;
                           ?>
                         </div>
                       </div>
@@ -266,30 +266,16 @@ include("../../../scripts/productos.php");
           <!--botones-->
           <div class="col">
             <div class="row">
-              <form action="">
-                <div class="col">
-                  <!--interfaces_conclusion_compra/comprobacion_datos.html-->
-                  
-                  <?php
-                    if(isset($_POST['confirmar_productos']))
-                    {
-                      if (session_status()==2) 
-                      {
-                        echo "<input class='nav-link botones' type='submit' name='confirmar_productos'>";
-                      
-                      }
-                    }
-                    else {
-                      echo" <a style='width:100px' class='nav-link botones' type='submit' name='confirmar_productos' 
-                      href='interfaces_conclusion_compra/comprobacion_datos.php'>
-                        siguiente
-                        </a>";
-                    }
-                  ?>
-                </div>
+              <form action="" method="post">
                 <div class="col">
                   <input class="botones" type="reset" value="limpiar carro" />
                 </div>
+              </form>
+              
+              <form action="interfaces_conclusion_compra/comprobacion_datos.php" method="post">
+                <input type='submit' class="botones" value='siguiente'>
+
+                <input type="text" name="TOTAL_ENV" style="display:none;" value="<?php echo $d?>">
               </form>
             </div>
           </div>
