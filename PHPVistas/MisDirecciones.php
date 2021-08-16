@@ -10,7 +10,7 @@
 	<title>Direcciones Registradas Por Ti</title>
 </head>
 <body>
-	<?php
+<?php
         session_start();
     ?>
 
@@ -43,17 +43,26 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                          <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
+                            <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
+                          <?php
+                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador')
+                            {
+
+                            ?>
                           <div class="dropdown-divider"></div>
                           <li>
-                             <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Articulos</a>
+                             <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Productos</a>
                             </li>
                           <li>
                             <a class="dropdown-item" href="../PHPVistas/verMetodosPago.php">Ver registros de  metodos de pago</a>
                           </li>
-                          <div class="dropdown-divider"></div>
+
                             <a class="dropdown-item" href="../PHPVistas/HistorialPedidos.php">Historial de pedidos</a>
+                            <div class="dropdown-divider"></div>
+                            <?php
+                            }
+                            ?>
                         </ul>
                         <!---->
                         
@@ -70,7 +79,6 @@
   
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <div class="dropdown-divider"></div>
                           <li>
                             <a class="dropdown-item" href="../Blog/blog-informativo.php" >Informativo</a>
                           </li>
@@ -80,11 +88,19 @@
                           <li>
                               <a class="dropdown-item" href="../Blog/blog-sugerencias.php">Sugerencias</a>
                             </li>
+                            <?php
+                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador_Blog')
+                            {
+
+                            ?>
                           <div class="dropdown-divider"></div>
-                          
                           <li>
                             <a class="dropdown-item" href="../AdminBlog/FormAddBlog.php">Crear entrada</a>
                           </li>
+                          <div class="dropdown-divider"></div>
+                          <?php
+                            }
+                            ?>
                         </ul>        
                 </li>
                 
@@ -101,7 +117,7 @@
 
                         if(isset($_SESSION["usuario"]))
                         { 
-                            echo $_SESSION['usuario'];
+                            echo $_SESSION['rol'] . ": " . $_SESSION['usuario'];
                         } else {
                             
                             echo "Perfil";
@@ -110,23 +126,54 @@
                         </a>
   
                         <!--lista del dropdown de perfil-->
+                        
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="../php/blog-informativo.php" >Mi perfil</a>
+                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MiPerfil.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
+                          </li>
+
+                          <?php
+                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Cliente')
+                            {
+
+                            ?>
+
+                          <li>
+                              <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/HistorialCompras.php'";}else{echo "href='../login/login.php'";}?>>Mis pedidos</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" href="HistorialCompras.php">Mis pedidos</a>
+                              <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?>>Mis direcciones</a>
                           </li>
-                          <li>
-                              <a class="dropdown-item" href="MisDirecciones.php">Mis direcciones</a>
-                            </li>
-                            <li>
-                            <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
-                          </li>
+
+                            <?php
+                            }
+                            ?>
+
+                          <?php
+                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador')
+                            {
+
+                            ?>
                             <div class="dropdown-divider"></div>
                             <li>
                               <a class="dropdown-item" href="../PHPVistas/VerUsuarios.php">Ver usuarios</a>
+                            </li>
+                            <div class="dropdown-divider"></div>
+                            <?php
+                            }
+                            ?>
+
+                            <?php
+                            if(isset($_SESSION["usuario"]))
+                            {
+
+                            ?>
+                          <li>
+                            <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
                           </li>
+                          <?php
+                            }
+                            ?>
                         </ul>
                              
                 </li>
@@ -150,7 +197,7 @@
           
           <div class="row">
           <div class="offset-2 col-8 offset-2">
-      <h2>Mis direcciones <a href="AgregarDirec.php" type="button" class="btn btn-primary">Agregar Direccion</a></h2> <br>
+      <h2>Mis direcciones <a href="AgregarDirec.php" type="button" class="btn btn-primary text-center">Agregar Direccion</a></h2> <br>
 <?php 
 
 include'../Scripts/database.php';
