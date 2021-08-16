@@ -1,11 +1,15 @@
-/*se restara el stock si se agrega a carrito*/
-CREATE TRIGGER stock_restar_pruebaI
-AFTER
-INSERT
-  ON carrito FOR EACH ROW
+DROP TRIGGER IF EXISTS `pruebasappsocom`.`act_stock_I`;
+
+DELIMITER $$
+USE `pruebasappsocom`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `pruebasappsocom`.`act_stock_I` 
+AFTER INSERT ON `orden_detalle` FOR EACH ROW
+BEGIN
 update
   productos
 set
-  productos.stock = producto.stock - carrito.cantidad
+  productos.stock = productos.stock - new.cantidad
 where
-  productos.id_producto = carrito.producto
+  productos.id_producto = new.producto;
+END$$
+DELIMITER ;
