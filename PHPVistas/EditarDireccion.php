@@ -6,12 +6,17 @@
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
 
     <link rel="stylesheet" href="../AdminBlog/adminBlog.css">
+    <style>
+          .body-g{
+        background-color: #2aa13e;
+    }
+    </style>
 
     <script src="../inicio/js/bootstrap.min.js"></script>
 	<title>Edita la direccion</title>
 
 </head>
-<body>
+<body class="body-g">
 <?php
         session_start();
     ?>
@@ -150,13 +155,13 @@
       </nav>
 
       <?php 
-$calle=$_GET['calle'];
-$colonia=$_GET['colonia'];
-$numero1=$_GET['numero1'];
-$numero2=$_GET['numero2'];
-$codigo=$_GET['codigo'];
-$telefono=$_GET['telefono'];
-$id=$_GET['id'];
+        $calle=$_GET['calle'];
+        $colonia=$_GET['colonia'];
+        $numero1=$_GET['numero1'];
+        $numero2=$_GET['numero2'];
+        $codigo=$_GET['codigo'];
+        $telefono=$_GET['telefono'];
+        $id=$_GET['id'];
 
 
 

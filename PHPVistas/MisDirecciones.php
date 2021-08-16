@@ -150,7 +150,7 @@
           
           <div class="row">
           <div class="offset-2 col-8 offset-2">
-      <h2>Mis direcciones <a href="AgregarDirec.php" type="button" class="btn btn-primary">Agregar Direccion</a></h2> <br>
+      <h2>Mis direcciones <a href="AgregarDirec.php" type="button" class="btn btn-primary text-center">Agregar Direccion</a></h2> <br>
 <?php 
 
 include'../Scripts/database.php';

@@ -208,14 +208,17 @@
     <!---->
     <!--datos de la orden-->
     <div class="row" style="margin: 20px">
+    <div class="row">
+      <h2 style="text-align: center">detalle de orden</h2>
+    </div>
       <table class="table">
+        <title>detalle de la orden</title>
         <thead>
           <tr>
             <th scope="col">numero de orden</th>
             <th scope="col">metodo de pago</th>
             <th scope="col">fecha de pedido</th>
             <th scope="col">Monto total</th>
-            <th scope="col">Direccion de envio</th>
           </tr>
         </thead>
         <tbody>
@@ -223,6 +226,7 @@
               $carga_orden=new producto();
               $cargar_ordenes=$carga_orden->carga_orden($_SESSION['id'],$hoy);
               $ord_total=0;
+              $id_ord_compra=0;
               foreach ($cargar_ordenes as $value) 
               {
                 echo
@@ -232,10 +236,48 @@
                   <td>$value->nombre</td>
                   <td>$value->fecha_pedido</td>
                   <td>$value->total</td>
-                  <td>$value->domicilio</td>
                 </tr>
                 ";
                 $ord_total+=$value->total;
+                $id_ord_compra+=$value->id_orden;
+              }
+            ?>
+        </tbody>
+      </table>
+      <!--domicilio-->
+      <div class="row">
+      <h2 style="text-align: center">domicilio de envio</h2>
+    </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">calle</th>
+            <th scope="col">numeroExt</th>
+            <th scope="col">numeroInt</th>
+            <th scope="col">CP</th>
+            <th scope="col">colonia</th>
+            <th scope="col">telefono</th>
+            <th scope="col">colonia</th>
+          </tr>
+        </thead>
+        <tbody>
+            <?php
+              $carga_orden=new producto();
+              $cargar_ordenes=$carga_orden->carga_orden($_SESSION['id'],$hoy);
+              foreach ($cargar_ordenes as $value) 
+              {
+                echo
+                "
+                <tr>
+                  <th scope='row'>$value->calle</th>
+                  <td>$value->numeroExt</td>
+                  <td>$value->numeroInt</td>
+                  <td>$value->codigo_postal</td>
+                  <td>$value->colonia</td>
+                  <td>$value->telefono</td>
+                  <td>$value->colonia</td>
+                </tr>
+                ";
               }
             ?>
         </tbody>
@@ -326,12 +368,6 @@
                 <form  class="modal-footer" method="POST">
                   <button type="submit" name="cancelar" class="btn btn-secondary" data-bs-dismiss="modal">cancelar</button>
                   <button type="submit" name="comprar" class="btn btn-primary">comprar</button>
-                  <?php
-                    if (isset($_GET['comprar'])) 
-                    {
-                      
-                    }
-                  ?>
                 </form>
               </div>
             </div>
@@ -339,7 +375,24 @@
         </div>
       </form>
     </div>
-    
+    <?php
+      $crear_detalle=new producto();
+      $limpiar_carro=new producto();
+      $proceso_ord_detalle=new producto();
+      /*$crear_detalle=new producto();*/
+      if (isset($_GET['comprar'])) 
+      {
+        $precarga=$proceso_ord_detalle->precarga_para_orden($_SESSION['id']);
+        foreach ($precarga as $value) 
+        {
+            $creason_d=$crear_detalle->crear_orden_detalle($id_ord_compra, $value->producto, $value->cantidad,$value->precio_unitario);
+            $limpiar_carro->eliminar_carrito($_SESSION['id']);
+            echo"se limpio el carro";
+        }
+
+        /*$crear_detalle->crear_orden_detalle($id_ord_compra, $producto, $cantidad,$precio)*/
+      }
+    ?>
     <!-- #endregion -->
     <!-- #region js-->
     <script

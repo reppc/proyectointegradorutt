@@ -145,58 +145,59 @@ class producto extends Database
                 {
                     echo "
                     <div class='row'>
-                        <div class='col'>
+                        <div class='col recuadrop'>
+
                             <!--nombre-->
                             <div class='row'>
-                                <p>$productos->nombre</p>
+                                <h2 class='contenidos'>$productos->nombre</h2>
                             </div>
-                            <!--descripcion y foto-->
-                            <div class='row'>
+
+                            <!--descripcion-->
+                            <div class=''>
                                 <div class='col'>
-                                <p>$productos->descripcion</p>
+                                <p class='contenidos'>$productos->descripcion</p>
                                 </div>
-                                <div class='col'>
-                                <img
-                                    width='30%'
-                                    height='50%'
-                                    src='$productos->imagen'
-                                    class='d-block w-2'
-                                    alt='#'
-                                />
-                                </div>
+
                             </div>
+
                             <!--precio del producto-->
-                            <div class='row'>
-                                <p>$$productos->precio_unitario</p>
+                            <div class=''>
+                                <h3 class='precio-p'>$ $productos->precio_unitario</h3>
                             </div>
+
                             <!--botones-->
                                 <form action='' method='POST'>
-                                    <div class='row'>
-                                    <div class='col' style='margin-left:10px;width:auto;'>
-                                        <select name='cantidad_producto' class='form-select-sm' 
-                                        aria-label='Default select example'>
-                                            <option selected>cantidad</option>
-                                            <option from='cantidad_producto' value='1'>1</option>
-                                            <option from='cantidad_producto' value='2'>2</option>
-                                            <option from='cantidad_producto' value='3'>3</option>
-                                            <option from='cantidad_producto' value='4'>4</option>
-                                            <option from='cantidad_producto' value='5'>5</option>
-                                        </select>
+                                    <div class=''>
+                                        <div class='col-1'>
+                                            
+                                        </div>
+
+                                        <div class='col' style='margin-left:10px;width:auto;'>
+                                            <select name='cantidad_producto' class='form-select-sm controles' 
+                                            aria-label='Default select example'>
+                                                <option selected>cantidad</option>
+                                                <option from='cantidad_producto' value='1'>1</option>
+                                                <option from='cantidad_producto' value='2'>2</option>
+                                                <option from='cantidad_producto' value='3'>3</option>
+                                                <option from='cantidad_producto' value='4'>4</option>
+                                                <option from='cantidad_producto' value='5'>5</option>
+                                            </select>
+                                        </div>
+                                        <br>
+                                        <div class='col'>
+                                            <button class='boton controles' name='agregar_productos_al_carro_prueba' type='submit' value='$productos->id_producto'>
+                                                Agregar al carrito
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class='col'>
-                                        <button
-                                        class='boton'
-                                        name='agregar_productos_al_carro_prueba'
-                                        type='submit'
-                                        value='$productos->id_producto'
-                                        >
-                                            agregar al carrito
-                                        </button>
-                                    </div>
-                                </div>
                                 </form>
+
+                                
                         </div>
-                        <hr />
+                        <div class='col'>
+                                <img width='45%' height='70%' src='$productos->imagen' class='d-block w-2' alt='#'>
+                            </div>
+                        <hr>
                     </div>
                 "; 
                 }
@@ -492,14 +493,13 @@ class producto extends Database
                 usuarios.nombres,
                 metodo_pago.nombre,
                 orden_compra.total,
-                concat(
                     domicilio.calle,
                     domicilio.numeroExt,
                     domicilio.numeroInt,
                     domicilio.codigo_postal,
                     domicilio.colonia,
                     domicilio.telefono,
-                    domicilio.colonia)as 'domicilio',
+                    domicilio.colonia,
                 orden_compra.fecha_pedido 
                 FROM orden_compra
                 INNER JOIN usuarios
@@ -540,7 +540,7 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo="
         SELECT carrito.id_carrito,productos.nombre,productos.precio_unitario,carrito.cantidad 
-        FROM `carrito` 
+        FROM carrito 
         INNER JOIN productos on productos.id_producto=carrito.producto 
         WHERE carrito.cliente=$usuario;
         ";
@@ -729,11 +729,11 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo=
         "
-            INSERT INTO `orden_compra`(
-                `cliente`,
-                `metodoPago`,
-                `total`,
-                `domicilio`
+            INSERT INTO orden_compra(
+                cliente,
+                metodoPago,
+                total,
+                domicilio
             )
             VALUES(
                 $usuario,
@@ -768,11 +768,11 @@ class producto extends Database
         /*fin*/
     }
     function eliminar_carrito($usuario)
-    {/*DELETE FROM `carrito` WHERE carrito.cliente=5;*/
+    {/*DELETE FROM carrito WHERE carrito.cliente=5;*/
         $this->conexion=new Database();
         $articulo=
         "
-        DELETE FROM `carrito` WHERE carrito.cliente=$usuario;
+        DELETE FROM carrito WHERE carrito.cliente=$usuario;
         ";
         /*conexion*/ 
             try{
@@ -803,7 +803,7 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo=
         "
-        UPDATE `orden_compra` SET `total`=$cambio 
+        UPDATE orden_compra SET total=$cambio 
         WHERE orden_compra.cliente='$usuario' and 
         orden_compra.fecha_pedido LIKE('%$fecha%');
         ";
@@ -835,7 +835,7 @@ class producto extends Database
     {
         /*
         posible sentencia a usar
-            INSERT INTO `orden_detalle`(`orden`, `producto`, `cantidad`, `precio`) 
+            INSERT INTO orden_detalle(orden, producto, cantidad, precio) 
         VALUES (
             (select orden_compra.id_orden from orden_compra where orden_compra.cliente=5
             and orden_compra.fecha_pedido LIKE('%$fecha%')),
@@ -851,7 +851,7 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo=
         "
-        UPDATE `orden_compra` SET `total`=$cambio 
+        UPDATE orden_compra SET total=$cambio 
         WHERE orden_compra.cliente='$usuario' and 
         orden_compra.fecha_pedido LIKE('%$fecha%');
         ";
@@ -884,7 +884,7 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo=
         "
-        UPDATE `carrito` SET `cantidad`=$cant WHERE id_carrito=$id;
+        UPDATE carrito SET cantidad=$cant WHERE id_carrito=$id;
         ";
         /*conexion*/ 
             try{
@@ -950,11 +950,11 @@ class producto extends Database
         /*fin*/
     }
     function eliminar_producto_del_carro($id)
-    {/*DELETE FROM `carrito` WHERE carrito.cliente=5;*/
+    {/*DELETE FROM carrito WHERE carrito.cliente=5;*/
         $this->conexion=new Database();
         $articulo=
         "
-        DELETE FROM `carrito` WHERE carrito.id_carrito=$id;
+        DELETE FROM carrito WHERE carrito.id_carrito=$id;
         ";
         /*conexion*/ 
             try{
@@ -980,6 +980,105 @@ class producto extends Database
             }
         /*fin*/
     }
+    function precarga_para_orden($usuario)
+    {
+        $this->conexion=new Database();
+        $articulo="
+        SELECT carrito.id_carrito,carrito.producto,carrito.cantidad,productos.precio_unitario
+        from carrito
+        INNER JOIN productos
+        on productos.id_producto=carrito.producto WHERE carrito.cliente=$usuario;
+        ";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->seleccionar($articulo);
+                return $consulta;
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
+    function crear_orden_detalle($orden, $producto, $cantidad,$precio)
+    {
+        $this->conexion=new Database();
+        $articulo=
+        "
+        INSERT INTO orden_detalle(orden, producto, cantidad, precio) 
+					VALUES ($orden, $producto, $cantidad,$precio);
+        ";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->seleccionar($articulo);
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
+    function seleccion_ord_det($ord_c)
+    {
+        $this->conexion=new Database();
+        $articulo=
+        "
+        SELECT `id_det`, `orden`, `producto`, `cantidad`, `precio` FROM `orden_detalle` WHERE orden_detalle.orden=$ord_c;
+        ";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->ejecutaSQL($articulo);
+                return $consulta;
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
+
 }
 /*
                       if(isset($_GET['cargar_domicilios']))
