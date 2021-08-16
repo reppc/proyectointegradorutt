@@ -132,7 +132,7 @@
             </div>
             </div>
         </div>";
-        //header("refresh:3 ../PHPVistas/verProductos.php");
+        header("refresh:3 ../PHPVistas/verProductos.php");
 ?>
 </body>
 </html>

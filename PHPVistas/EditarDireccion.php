@@ -179,8 +179,8 @@
                     <input type="text" name="calle"placeholder="Ingresa tu calle" value="<?=$calle?>" required autofocus>
                     
                     <label for="formFile" class="form-label">Codigo Postal:</label>
-                    <input type="text" name="codigo" placeholder="Codigo Postal" value="<?=$codigo?>" required>
-                     <p>Recuerda que por el momento solo contamos con servicio en Torreon</p>
+                    <input type="number" min="27000" max="27438" name="codigo" placeholder="Codigo Postal" value="<?=$codigo?>" required>
+                     <p>Recuerda que por el momento solo contamos con servicio en Torreon</p> <p>Ingresa un codigo postal desde <strong>27000</strong> hasta <strong>27438</strong></p>
                     
                     <label class="form" for="categoria-label">Numero exterior: </label>
                     <input type="text" name="numero1" placeholder="Num-Exterior" value="<?=$numero1?>" required>
