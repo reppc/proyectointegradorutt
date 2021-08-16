@@ -1,6 +1,5 @@
 <?php
   include("../../../../Scripts/productos.php");
-  session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +14,10 @@
   </head>
   <body>
 <?php
-  session_start();
+if(!session_start() && $_SESSION['usuario']==null)
+{
+  echo "no hay session";
+}
 ?>
     <!--Barra navegadora-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -30,7 +32,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <!--Inicio-->
                 <li class="nav-item navli">
-                    <a class="nav-link active" aria-current="page" href="../inicio/index copy.php">
+                    <a class="nav-link active" aria-current="page" href="../../../../inicio/index copy.php">
                         <svg style="margin-bottom: 5px;" width="30" height="15" viewBox="0 0 1 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M29.1667 11.0887L19.7917 2.65125L5.02917 15.9375H8.33333V30.9375H14.5833V19.6875H25V30.9375H31.25V15.9375H34.5542L31.25 12.9637V6.5625H29.1667V11.0887ZM0 17.8125L19.7917 0L27.0833 6.5625V4.6875H33.3333V12.1875L39.5833 17.8125H33.3333V32.8088H22.9167V21.5588H16.6667V32.8088H6.25V17.8125H0Z" fill="white"/>
                         </svg>
@@ -46,7 +48,7 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
+                            <a class="dropdown-item" href="../../../home_articulos.php">Articulos</a>
                           </li>
                           <?php
                             if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador')
@@ -205,7 +207,7 @@
       <h1>Datos para la compra</h1>
     </div>
     <!--modificasion de datos para finalisar la compra-->
-    <div style="text-align: center">
+  <div style="text-align: center">
       <p>Direccion de envio</p>
     </div>
     <p style="text-align: center">
@@ -217,7 +219,7 @@
     </div>
     </div>
   </div><!--finalizacion/finalizacion compra.php-->
-  <form  action="" method="get">
+  <form  action="finalizacion/finalizacion compra.php" method="post">
   <div class="row">
       <div class="col">
       <input style="
@@ -261,7 +263,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
+      
         <?php
           $carga_dom_I=new producto();
           if(session_status()==2)
@@ -271,6 +273,7 @@
           foreach ($s as $res) 
           {
               echo"
+              <tr>
               <td>$res->calle</td>
               <td>$res->numeroExt</td>
               <td>$res->numeroInt</td>
@@ -278,24 +281,33 @@
               <td>$res->telefono</td>
               <td>$res->colonia</td>
               <td><input type='radio' name='seleccion_dom' value='$res->id_domicilio'></td>
+              </tr>
               ";
           }
         }
         ?>
-      </tr>
+      
       </tbody>
     </table>
     </form>
     <?php
+      $carga_de_articulos=new producto();
+      $carga_de_articulos->total_carrito($_SESSION['id']);
+      $s=$carga_de_articulos->total_carrito($_SESSION['id']);
+      $d=0;
+      $sub=0;
+      foreach ($s as $value) 
+      { 
+        $sub=$value->cantidad*$value->precio_unitario;
+        $d+=$sub;
+      }
       $crear_orden=new producto();
       if (isset($_POST['sig'])) 
-      {
-        $total_env=$_POST['TOTAL_ENV'];
-        echo $us=$_SESSION['id'];
-        echo $pg=$_POST['seleccion_pago'];
-        echo $dom=$_POST['seleccion_dom'];
+      { $total_env=$d;
+        $us=$_SESSION['id'];
+        $pg=$_POST['seleccion_pago'];
+        $dom=$_POST['seleccion_dom'];
         $crear_orden->crear_orden($us,$pg,$total_env,$dom);
-
       }
     ?>
   </div>

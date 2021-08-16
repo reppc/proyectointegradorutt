@@ -1,7 +1,8 @@
 <?php
+/* H:i:s agregar despues de "d con espacio para agregar la hora"*/
+ $hoys = date("d")-1;
+ $hoy = date("Y-m-$hoys");
   include("../../../../../Scripts/productos.php");
-  $metodo_de_pago_env=$_POST['seleccion_pago'];
-  $direccion_env=$_POST['seleccion_dom'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -218,24 +219,23 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
             <?php
               $carga_orden=new producto();
-              $cargar_ordenes=$carga_orden->carga_orden($_SESSION['id']);
+              $cargar_ordenes=$carga_orden->carga_orden($_SESSION['id'],$hoy);
               foreach ($cargar_ordenes as $value) 
               {
                 echo
                 "
+                <tr>
                   <th scope='row'>$value->id_orden</th>
                   <td>$value->nombre</td>
                   <td>$value->fecha_pedido</td>
                   <td>$value->total</td>
                   <td>$value->domicilio</td>
+                </tr>
                 ";
               }
             ?>
-            
-          </tr>
         </tbody>
       </table>
     </div>

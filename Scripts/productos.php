@@ -97,36 +97,30 @@ class producto extends Database
         /*control del filtro*/
             if($control_filtro!="todos")
             {
-                $consulta=
-                "
-                    select 
-                    productos.id_producto,
-                    productos.nombre,
-                    productos.descripcion,
-                    productos.stock,
-                    productos.precio_unitario,
-                    categoria.categoria,
-                    productos.imagen from productos 
-                    INNER JOIN categoria 
-                    on categoria.id_cat=productos.categoria 
-                    where categoria.categoria='$control_filtro' and  productos.stock!=0;
+                $consulta="SELECT productos.id_producto,productos.nombre,productos.descripcion,productos.stock,
+                productos.precio_unitario,categoria.categoria,productos.imagen from productos INNER JOIN categoria 
+                on categoria.id_cat=productos.categoria where categoria.categoria='$control_filtro' and  
+                productos.stock!=0 AND productos.imagen like '%http%';
+                ";
+
+                $consulta2="SELECT productos.id_producto,productos.nombre,productos.descripcion,productos.stock,
+                productos.precio_unitario,categoria.categoria,productos.imagen from productos INNER JOIN categoria 
+                on categoria.id_cat=productos.categoria where categoria.categoria='$control_filtro' and  
+                productos.stock!=0 AND productos.imagen NOT like '%http%';
                 ";
             }
             elseif ($control_filtro="todos") 
                 {
-                    $consulta=
-                    "
-                        select 
-                        productos.id_producto,
-                        productos.nombre,
-                        productos.descripcion,
-                        productos.stock,
-                        productos.precio_unitario,
-                        categoria.categoria,
-                        productos.imagen from productos 
-                        INNER JOIN categoria 
-                        on categoria.id_cat=productos.categoria 
-                        where productos.stock!=0;
+                    $consulta="SELECT productos.id_producto,productos.nombre,productos.descripcion,productos.stock,
+                    productos.precio_unitario,categoria.categoria,productos.imagen from productos 
+                    INNER JOIN categoria on categoria.id_cat=productos.categoria where productos.stock!=0
+                    AND productos.imagen like '%http%';
+                    ";
+
+                    $consulta2="SELECT productos.id_producto,productos.nombre,productos.descripcion,productos.stock,
+                    productos.precio_unitario,categoria.categoria,productos.imagen from productos 
+                    INNER JOIN categoria on categoria.id_cat=productos.categoria where productos.stock!=0
+                    AND productos.imagen NOT like '%http%';
                     ";
                 }
         /*conexion*/ 
@@ -145,66 +139,121 @@ class producto extends Database
                 {
                     echo "
                     <div class='row'>
-                        <div class='col'>
+                        <div class='col recuadrop'>
+
                             <!--nombre-->
                             <div class='row'>
-                                <p>$productos->nombre</p>
+                                <h2 class='contenidos'>$productos->nombre</h2>
                             </div>
-                            <!--descripcion y foto-->
-                            <div class='row'>
+
+                            <!--descripcion-->
+                            <div class=''>
                                 <div class='col'>
-                                <p>$productos->descripcion</p>
+                                <p class='contenidos'>$productos->descripcion</p>
                                 </div>
-                                <div class='col'>
-                                <img
-                                    width='30%'
-                                    height='50%'
-                                    src='$productos->imagen'
-                                    class='d-block w-2'
-                                    alt='#'
-                                />
-                                </div>
+
                             </div>
+
                             <!--precio del producto-->
-                            <div class='row'>
-                                <p>$$productos->precio_unitario</p>
+                            <div class=''>
+                                <h3 class='precio-p'>$ $productos->precio_unitario</h3>
                             </div>
+
                             <!--botones-->
                                 <form action='' method='POST'>
-                                    <div class='row'>
-                                    <div class='col-1'>
-                                        <input
-                                        class='boton'
-                                        name='ver'
-                                        type='submit'
-                                        value='Ver detalles'
-                                        />
+                                    <div class=''>
+                                        <div class='col-1'>
+                                            
+                                        </div>
+
+                                        <div class='col' style='margin-left:10px;width:auto;'>
+                                            <select name='cantidad_producto' class='form-select-sm controles' 
+                                            aria-label='Default select example'>
+                                                <option selected>cantidad</option>
+                                                <option from='cantidad_producto' value='1'>1</option>
+                                                <option from='cantidad_producto' value='2'>2</option>
+                                                <option from='cantidad_producto' value='3'>3</option>
+                                                <option from='cantidad_producto' value='4'>4</option>
+                                                <option from='cantidad_producto' value='5'>5</option>
+                                            </select>
+                                        </div>
+                                        <br>
+                                        <div class='col'>
+                                            <button class='boton controles' name='agregar_productos_al_carro_prueba' type='submit' value='$productos->id_producto'>
+                                                Agregar al carrito
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class='col' style='margin-left:10px;width:auto;'>
-                                        <select name='cantidad_producto' class='form-select-sm' 
-                                        aria-label='Default select example'>
-                                            <option selected>cantidad</option>
-                                            <option from='cantidad_producto' value='1'>1</option>
-                                            <option from='cantidad_producto' value='2'>2</option>
-                                            <option from='cantidad_producto' value='3'>3</option>
-                                            <option from='cantidad_producto' value='4'>4</option>
-                                            <option from='cantidad_producto' value='5'>5</option>
-                                        </select>
-                                    </div>
-                                    <div class='col'>
-                                        <button
-                                        class='boton'
-                                        name='agregar_productos_al_carro_prueba'
-                                        type='submit'
-                                        value='$productos->id_producto'
-                                        >
-                                            agregar al carrito
-                                        </button>
-                                    </div>
-                                </div>
                                 </form>
+
+                                
                         </div>
-                        <hr />
+                        <div class='col'>
+                                <img width='45%' height='70%' src='$productos->imagen' class='d-block w-2' alt='#'>
+                            </div>
+                        <hr>
+                    </div>
+                "; 
+                }
+
+                $resultado2=$this->conexion->seleccionar($consulta2);
+                foreach ($resultado2 as $productos) 
+                {
+                    echo "
+                    <div class='row'>
+                        <div class='col recuadrop'>
+
+                            <!--nombre-->
+                            <div class='row'>
+                                <h2 class='contenidos'>$productos->nombre</h2>
+                            </div>
+
+                            <!--descripcion-->
+                            <div class=''>
+                                <div class='col'>
+                                <p class='contenidos'>$productos->descripcion</p>
+                                </div>
+
+                            </div>
+
+                            <!--precio del producto-->
+                            <div class=''>
+                                <h3 class='precio-p'>$ $productos->precio_unitario</h3>
+                            </div>
+
+                            <!--botones-->
+                                <form action='' method='POST'>
+                                    <div class=''>
+                                        <div class='col-1'>
+                                            
+                                        </div>
+
+                                        <div class='col' style='margin-left:10px;width:auto;'>
+                                            <select name='cantidad_producto' class='form-select-sm controles' 
+                                            aria-label='Default select example'>
+                                                <option selected>cantidad</option>
+                                                <option from='cantidad_producto' value='1'>1</option>
+                                                <option from='cantidad_producto' value='2'>2</option>
+                                                <option from='cantidad_producto' value='3'>3</option>
+                                                <option from='cantidad_producto' value='4'>4</option>
+                                                <option from='cantidad_producto' value='5'>5</option>
+                                            </select>
+                                        </div>
+                                        <br>
+                                        <div class='col'>
+                                            <button class='boton controles' name='agregar_productos_al_carro_prueba' type='submit' value='$productos->id_producto'>
+                                                Agregar al carrito
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                
+                        </div>
+                        <div class='col'>
+                                <img width='45%' height='70%' src='imgProductos/" . $productos->imagen . "' class='d-block w-2' alt='#'>
+                            </div>
+                        <hr>
                     </div>
                 "; 
                 }
@@ -586,7 +635,7 @@ class producto extends Database
     {
         $this->conexion=new Database();
         $articulo="
-        SELECT * FROM `carrito` 
+        SELECT * FROM carrito 
         WHERE carrito.cliente='$usuario'
         ";
         /*conexion*/ 
@@ -614,7 +663,7 @@ class producto extends Database
             }
         /*fin*/
     }
-    function carga_orden($usuario)
+    function carga_orden($usuario,$fecha)
     {
         $this->conexion=new Database();
         $articulo="
@@ -639,7 +688,7 @@ class producto extends Database
                 on metodo_pago.id_metodo=orden_compra.metodoPago
                 INNER JOIN domicilio
                 on orden_compra.domicilio=domicilio.id_domicilio
-                        WHERE orden_compra.cliente='$usuario';
+                        WHERE orden_compra.cliente='$usuario' and orden_compra.fecha_pedido LIKE('%$fecha%');
         ";
         /*conexion*/ 
             try{
@@ -711,7 +760,7 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo=
         "
-        DELETE FROM `carrito` WHERE id_carrito=$id;
+        DELETE FROM carrito WHERE id_carrito=$id;
         ";
         /*conexion*/ 
             try{
@@ -866,12 +915,18 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo=
         "
-        INSERT INTO `orden_compra`(
-            `cliente`, 
-           `metodoPago`, 
-           `total`, 
-           `domicilio`) 
-       VALUES ($usuario,$pago,$total,$domicilio);
+            INSERT INTO `orden_compra`(
+                `cliente`,
+                `metodoPago`,
+                `total`,
+                `domicilio`
+            )
+            VALUES(
+                $usuario,
+                $pago,
+                $total,
+                $domicilio
+            )
         ";
         /*conexion*/ 
             try{
@@ -884,7 +939,7 @@ class producto extends Database
         /*agregar producto al carro*/
             try 
             {
-                $consulta=$this->conexion->seleccionar($articulo);
+                $consulta=$this->conexion->ejecutaSQL($articulo);
                 return $consulta;
             } catch (PDOException $e) {
                 echo "ERROR-CONSULTA:".$e->getMessage();
