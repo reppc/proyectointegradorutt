@@ -17,6 +17,7 @@
 <body class="body-g">
 <?php
         session_start();
+        
     ?>
 
     <!--Barra navegadora-->
