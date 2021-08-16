@@ -586,7 +586,7 @@ class producto extends Database
     {
         $this->conexion=new Database();
         $articulo="
-        SELECT * FROM `carrito` 
+        SELECT * FROM carrito 
         WHERE carrito.cliente='$usuario'
         ";
         /*conexion*/ 
@@ -614,7 +614,7 @@ class producto extends Database
             }
         /*fin*/
     }
-    function carga_orden($usuario)
+    function carga_orden($usuario,$fecha)
     {
         $this->conexion=new Database();
         $articulo="
@@ -639,7 +639,7 @@ class producto extends Database
                 on metodo_pago.id_metodo=orden_compra.metodoPago
                 INNER JOIN domicilio
                 on orden_compra.domicilio=domicilio.id_domicilio
-                        WHERE orden_compra.cliente='$usuario';
+                        WHERE orden_compra.cliente='$usuario' and orden_compra.fecha_pedido LIKE('%$fecha%');
         ";
         /*conexion*/ 
             try{
@@ -711,7 +711,7 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo=
         "
-        DELETE FROM `carrito` WHERE id_carrito=$id;
+        DELETE FROM carrito WHERE id_carrito=$id;
         ";
         /*conexion*/ 
             try{
@@ -866,12 +866,18 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo=
         "
-        INSERT INTO `orden_compra`(
-            `cliente`, 
-           `metodoPago`, 
-           `total`, 
-           `domicilio`) 
-       VALUES ($usuario,$pago,$total,$domicilio);
+            INSERT INTO `orden_compra`(
+                `cliente`,
+                `metodoPago`,
+                `total`,
+                `domicilio`
+            )
+            VALUES(
+                $usuario,
+                $pago,
+                $total,
+                $domicilio
+            )
         ";
         /*conexion*/ 
             try{
@@ -884,7 +890,7 @@ class producto extends Database
         /*agregar producto al carro*/
             try 
             {
-                $consulta=$this->conexion->seleccionar($articulo);
+                $consulta=$this->conexion->ejecutaSQL($articulo);
                 return $consulta;
             } catch (PDOException $e) {
                 echo "ERROR-CONSULTA:".$e->getMessage();
