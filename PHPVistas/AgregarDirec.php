@@ -7,9 +7,14 @@
     <link rel="stylesheet" href="../AdminBlog/adminBlog.css">
 
     <script src="../inicio/js/bootstrap.min.js"></script>
+    <style>
+      	.body-g{
+        background-color: #2aa13e;
+    }
+    </style>
 	<title>Agrega tu direccion</title>
 </head>
-<body>
+<body class="body-g">
 <?php
         session_start();
     ?>
