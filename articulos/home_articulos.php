@@ -475,7 +475,9 @@ include("../Scripts/productos.php");
             <div class="row">
               <div class="col" style="width:auto;">
               <br><!--Si no hay sesion iniciada redireccionara a login-->
-                <a class='btn btn-secondary redondeado' style='padding:5px;' <?php if(isset($_SESSION["usuario"])){echo "href='interfaces/carrito/carrito.php'";}else{echo "href='../login/login.php'";}?> >Ver Carrito</a>
+                <a class='btn btn-secondary redondeado' style='padding:5px;' 
+                <?php if(isset($_SESSION["usuario"])){echo "href='interfaces/carrito/carrito.php'";}
+                else{echo "href='../login/login.php'";}?> >Ver Carrito</a>
 
             </div>
             </div>
@@ -520,8 +522,5 @@ include("../Scripts/productos.php");
       crossorigin="anonymous"
     ></script>
   <!-- #endregion -->
-  <?php
-    echo $_SESSION['id'];
-  ?>
   </body>
 </html>

@@ -195,10 +195,12 @@
         </div>
       </nav>
 
-      <div class="cuadro container">
+      <div class="cuadro container col-5">
           <br>
         <h1 align="center">Metodos de pago</h1>
-        <br>
+        <br><br>
+            <a href="AgregarDirec.php" type="button" class="offset-4 btn btn-primary text-center">Agregar metodo de pago</a>
+        <br><br><br>
 
 
 
