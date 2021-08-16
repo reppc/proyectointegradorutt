@@ -108,6 +108,9 @@ include("../Scripts/productos.php");
         margin-left: 350px;
         margin-top: 20px;
       }
+      .imagenprod{
+        margin-top: 25px;;
+      }
   
   </style>
     <title>Articulos</title>
@@ -395,12 +398,12 @@ include("../Scripts/productos.php");
                 $xd=$_POST['filtro'];
               }
               else{
-                echo "Articulos disponibles";
+                echo "Articulos disponibles.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                 <i>Solo entregas en torreon.</i>";
               }
             ?>
             </p>
 
-            <p>solo entregeas en torreon.</p>
           </div>
           <div class="col" style="background-color: #1c8ee0; color: white">
             <div class="dropdown" type="select" style="margin-top:10px;">
@@ -468,25 +471,12 @@ include("../Scripts/productos.php");
         <!---->
         <!--carrito-->
         <div class="col-2">
-            <!--boton-->
+            <!--boton de redireccion al carrito-->
             <div class="row">
               <div class="col" style="width:auto;">
-              <br>
-              <?php
-                if (session_status()!=0 || session_status()!=1) {
-                  echo"<a class='btn btn-secondary' 
-                  style='padding:5px;' 
-                  href='interfaces/carrito/carrito.php'>
-                  ver carrito</a>";
-                }
-                else
-                {
-                  echo"<a class='btn btn-secondary' 
-                  style='padding:5px;' 
-                  href='#'>
-                  inicie sesion</a>";
-                }
-              ?>
+              <br><!--Si no hay sesion iniciada redireccionara a login-->
+                <a class='btn btn-secondary redondeado' style='padding:5px;' <?php if(isset($_SESSION["usuario"])){echo "href='interfaces/carrito/carrito.php'";}else{echo "href='../login/login.php'";}?> >Ver Carrito</a>
+
             </div>
             </div>
             <!---->

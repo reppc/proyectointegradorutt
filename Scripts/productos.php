@@ -184,11 +184,9 @@ class producto extends Database
                                             </button>
                                         </div>
                                     </div>
-                                </form>
-
-                                
+                                </form>                                
                         </div>
-                        <div class='col'>
+                        <div class='col imagenprod'>
                                 <img width='45%' height='70%' src='$productos->imagen' class='d-block w-2' alt='#'>
                             </div>
                         <hr>
