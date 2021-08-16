@@ -387,7 +387,6 @@
         {
             $creason_d=$crear_detalle->crear_orden_detalle($id_ord_compra, $value->producto, $value->cantidad,$value->precio_unitario);
             $limpiar_carro->eliminar_carrito($_SESSION['id']);
-            echo"se limpio el carro";
         }
 
         /*$crear_detalle->crear_orden_detalle($id_ord_compra, $producto, $cantidad,$precio)*/

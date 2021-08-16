@@ -35,7 +35,8 @@ foreach ($sentencia as $value)
 
 			<label for="descripcion">cantidad:</label>
 			<input value="<?php echo $value->cantidad ?>" class="form-control" name="precioVenta" required type="number" id="cantidad" placeholder="cantidad">
-			<br><br><input class="btn btn-info" type="submit" name="guardar" value="Guardar">
+			
+            <br><br><input class="btn btn-info" type="submit" name="guardar" value="Guardar">
 			<a class="btn btn-warning" href="carrito.php">Cancelar</a>
 			<a class="btn btn-warning" href="carrito.php">atras</a>
 		</form>

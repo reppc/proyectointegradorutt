@@ -219,13 +219,14 @@ if(!session_start() && $_SESSION['usuario']==null)
     </div>
     </div>
   </div><!--finalizacion/finalizacion compra.php-->
-  <form  action="finalizacion/finalizacion compra.php" method="post">
+  <form  action="" method="post">
   <div class="row">
       <div class="col">
       <input style="
       border: 0px;
       background-color: black;
       color: white;
+      margin-left=20px;
       border-radius: 20px;
 
       " type="submit" name="sig" value="finalizar compra">
@@ -249,7 +250,7 @@ if(!session_start() && $_SESSION['usuario']==null)
       </select>
       </div>
   </div>
-  <div class="col">
+  <div class="col container">
     <table class="table" width="70%">
       <thead>
       <tr>
@@ -263,7 +264,8 @@ if(!session_start() && $_SESSION['usuario']==null)
       </tr>
       </thead>
       <tbody>
-      
+      <select width='100px' name='seleccion_dom' id=''>
+        <option from="seleccion_dom" value="" selected></option>
         <?php
           $carga_dom_I=new producto();
           if(session_status()==2)
@@ -273,6 +275,10 @@ if(!session_start() && $_SESSION['usuario']==null)
           foreach ($s as $res) 
           {
               echo"
+              <option from='seleccion_dom' value='$res->id_domicilio'>
+                $res->calle;#$res->numeroExt
+                </option>
+              </select>
               <tr>
               <td>$res->calle</td>
               <td>$res->numeroExt</td>
@@ -280,7 +286,6 @@ if(!session_start() && $_SESSION['usuario']==null)
               <td>$res->codigo_postal</td>
               <td>$res->telefono</td>
               <td>$res->colonia</td>
-              <td><input type='radio' name='seleccion_dom' value='$res->id_domicilio'></td>
               </tr>
               ";
           }
@@ -302,13 +307,20 @@ if(!session_start() && $_SESSION['usuario']==null)
         $d+=$sub;
       }
       $crear_orden=new producto();
-      if (isset($_POST['sig'])) 
+      if (isset($_GET['sig'])) 
       { 
-        $total_env=$d;
-        $us=$_SESSION['id'];
-        $pg=$_POST['seleccion_pago'];
-        $dom=$_POST['seleccion_dom'];
-        $crear_orden->crear_orden($us,$pg,$total_env,$dom);
+
+          echo$total_env=$d;
+          echo"-";
+          echo$us=$_SESSION['id'];
+          echo"-";
+          echo$pg=$_POST['seleccion_pago'];
+          echo"-";
+          echo$dom=$_POST['seleccion_dom'];
+          $crear_orden->crear_orden($us,$pg,$total_env,$dom);
+      }
+      else {
+        
       }
     ?>
   </div>
