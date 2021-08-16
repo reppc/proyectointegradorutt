@@ -1,6 +1,6 @@
 <?php
 /* H:i:s agregar despues de "d con espacio para agregar la hora"*/
- $hoys = date("d")-1;
+ $hoys = date("d");
  $hoy = date("Y-m-$hoys");
   include("../../../../../Scripts/productos.php");
 ?>
@@ -222,6 +222,7 @@
             <?php
               $carga_orden=new producto();
               $cargar_ordenes=$carga_orden->carga_orden($_SESSION['id'],$hoy);
+              $ord_total=0;
               foreach ($cargar_ordenes as $value) 
               {
                 echo
@@ -234,6 +235,7 @@
                   <td>$value->domicilio</td>
                 </tr>
                 ";
+                $ord_total+=$value->total;
               }
             ?>
         </tbody>
@@ -257,24 +259,27 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          
             <?php
               $carga_articulos=new producto();
               $cont_art=$carga_articulos->carga_productos($_SESSION['id']);
               $sub_t=0;
               $total=0;
               foreach ($cont_art as $value) 
-              {$sub_t=$value->precio_unitario*$value->cantidad;
+              {
+                $sub_t=$value->precio_unitario*$value->cantidad;
                 echo "
+                <tr>
                 <th scope='row'>$value->nombre</th>
                 <td>$value->cantidad</td>
                 <td>$$value->precio_unitario</td>
                 <td>$sub_t</td>
+                </tr>
                 ";
                 $total+=$sub_t;
               }
             ?>
-          </tr>
+          
         </tbody>
       </table>
       <hr>
@@ -284,7 +289,19 @@
       <div class="col">
         <p><?php echo$total;?></p>
       </div>
-      
+      <?php 
+      $act_total=new producto();
+      $usuario=$_SESSION['id'];
+        if($ord_total==$total)
+        {
+          
+        }
+        else 
+        {
+          
+          $atcualizar=$act_total->actualizar_total($total,$usuario,$hoy);
+        }
+      ?>
     </div>
     <!---->
     <div class="row">
@@ -300,15 +317,21 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">importante</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  esta seguro de que todos los datos son correctos y desea comprar el o los articulos en el carro
+                  esta seguro de que todos los datos son correctos y desea comprar el o los articulos de la orden
                 </div>
                 <form  class="modal-footer" method="POST">
                   <button type="submit" name="cancelar" class="btn btn-secondary" data-bs-dismiss="modal">cancelar</button>
                   <button type="submit" name="comprar" class="btn btn-primary">comprar</button>
+                  <?php
+                    if (isset($_GET['comprar'])) 
+                    {
+                      
+                    }
+                  ?>
                 </form>
               </div>
             </div>
@@ -316,6 +339,7 @@
         </div>
       </form>
     </div>
+    
     <!-- #endregion -->
     <!-- #region js-->
     <script

@@ -228,7 +228,7 @@ if(!session_start() && $_SESSION['usuario']==null)
       color: white;
       border-radius: 20px;
 
-      " type="submit" name="sig" value="siguiente">
+      " type="submit" name="sig" value="finalizar compra">
       </div>
       <div class="col">
         <a href="../carrito.php"
@@ -303,7 +303,8 @@ if(!session_start() && $_SESSION['usuario']==null)
       }
       $crear_orden=new producto();
       if (isset($_POST['sig'])) 
-      { $total_env=$d;
+      { 
+        $total_env=$d;
         $us=$_SESSION['id'];
         $pg=$_POST['seleccion_pago'];
         $dom=$_POST['seleccion_dom'];
