@@ -393,13 +393,14 @@ include("../Scripts/productos.php");
               if(isset($_POST['filtro']))
               {
                 $xd=$_POST['filtro'];
-                echo "$xd";
               }
               else{
                 echo "Articulos disponibles";
               }
             ?>
             </p>
+
+            <p>solo entregeas en torreon.</p>
           </div>
           <div class="col" style="background-color: #1c8ee0; color: white">
             <div class="dropdown" type="select" style="margin-top:10px;">
