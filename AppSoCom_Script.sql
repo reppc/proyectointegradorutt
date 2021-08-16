@@ -23,7 +23,7 @@ ap_materno varchar(28) not null,
 contraseña VARCHAR(500) NOT NULL,
 correo VARCHAR(40) UNIQUE NOT NULL,
 Rol INT(10) NOT NULL,
-fecha_creacion date,
+fecha_creacion datetime,
 CONSTRAINT fk_rol_usuario FOREIGN KEY (Rol) REFERENCES Rol_usuario(id_rol)
 );
 
@@ -34,7 +34,7 @@ contenido text NOT NULL,
 imagen varchar(500), 
 tema enum('informativa','consejos','sugerencias') NOT NULL, 
 me_gusta int(10), 
-fecha_pub date NOT NULL,
+fecha_pub datetime NOT NULL,
 autor int(10) not null,
 CONSTRAINT fk_usuario FOREIGN KEY (autor) REFERENCES usuarios(id_usuario)
 );
@@ -86,7 +86,7 @@ cliente int (10) not null,
 metodoPago int (10) not null,
 total int(10) not NULL ,
 domicilio int (10) NOT  NULL,
-fecha_pedido date not NULL,
+fecha_pedido datetime not NULL,
 CONSTRAINT fk_cliente_ord FOREIGN KEY (cliente) REFERENCES usuarios(id_usuario),
 CONSTRAINT fk_metodoPago_ord FOREIGN KEY (metodoPago) REFERENCES metodo_pago(id_metodo),
 CONSTRAINT fk_domicilio_ord FOREIGN KEY (domicilio) REFERENCES domicilio(id_domicilio)
