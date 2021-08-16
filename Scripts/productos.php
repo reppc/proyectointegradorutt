@@ -145,66 +145,59 @@ class producto extends Database
                 {
                     echo "
                     <div class='row'>
-                        <div class='col'>
+                        <div class='col recuadrop'>
+
                             <!--nombre-->
                             <div class='row'>
-                                <p>$productos->nombre</p>
+                                <h2 class='contenidos'>$productos->nombre</h2>
                             </div>
-                            <!--descripcion y foto-->
-                            <div class='row'>
+
+                            <!--descripcion-->
+                            <div class=''>
                                 <div class='col'>
-                                <p>$productos->descripcion</p>
+                                <p class='contenidos'>$productos->descripcion</p>
                                 </div>
-                                <div class='col'>
-                                <img
-                                    width='30%'
-                                    height='50%'
-                                    src='$productos->imagen'
-                                    class='d-block w-2'
-                                    alt='#'
-                                />
-                                </div>
+
                             </div>
+
                             <!--precio del producto-->
-                            <div class='row'>
-                                <p>$$productos->precio_unitario</p>
+                            <div class=''>
+                                <h3 class='precio-p'>$ $productos->precio_unitario</h3>
                             </div>
+
                             <!--botones-->
                                 <form action='' method='POST'>
-                                    <div class='row'>
-                                    <div class='col-1'>
-                                        <input
-                                        class='boton'
-                                        name='ver'
-                                        type='submit'
-                                        value='Ver detalles'
-                                        />
+                                    <div class=''>
+                                        <div class='col-1'>
+                                            
+                                        </div>
+
+                                        <div class='col' style='margin-left:10px;width:auto;'>
+                                            <select name='cantidad_producto' class='form-select-sm controles' 
+                                            aria-label='Default select example'>
+                                                <option selected>cantidad</option>
+                                                <option from='cantidad_producto' value='1'>1</option>
+                                                <option from='cantidad_producto' value='2'>2</option>
+                                                <option from='cantidad_producto' value='3'>3</option>
+                                                <option from='cantidad_producto' value='4'>4</option>
+                                                <option from='cantidad_producto' value='5'>5</option>
+                                            </select>
+                                        </div>
+                                        <br>
+                                        <div class='col'>
+                                            <button class='boton controles' name='agregar_productos_al_carro_prueba' type='submit' value='$productos->id_producto'>
+                                                Agregar al carrito
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class='col' style='margin-left:10px;width:auto;'>
-                                        <select name='cantidad_producto' class='form-select-sm' 
-                                        aria-label='Default select example'>
-                                            <option selected>cantidad</option>
-                                            <option from='cantidad_producto' value='1'>1</option>
-                                            <option from='cantidad_producto' value='2'>2</option>
-                                            <option from='cantidad_producto' value='3'>3</option>
-                                            <option from='cantidad_producto' value='4'>4</option>
-                                            <option from='cantidad_producto' value='5'>5</option>
-                                        </select>
-                                    </div>
-                                    <div class='col'>
-                                        <button
-                                        class='boton'
-                                        name='agregar_productos_al_carro_prueba'
-                                        type='submit'
-                                        value='$productos->id_producto'
-                                        >
-                                            agregar al carrito
-                                        </button>
-                                    </div>
-                                </div>
                                 </form>
+
+                                
                         </div>
-                        <hr />
+                        <div class='col'>
+                                <img width='45%' height='70%' src='$productos->imagen' class='d-block w-2' alt='#'>
+                            </div>
+                        <hr>
                     </div>
                 "; 
                 }
