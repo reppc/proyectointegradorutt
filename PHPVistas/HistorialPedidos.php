@@ -204,7 +204,7 @@
     $conexion = new Database();
     $conexion -> conectarDB();
 
-    $consulta="SELECT usuarios.nombres, usuarios.nombre_usuario,orden_compra.total,orden_compra.folio,productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario";
+    $consulta="SELECT usuarios.nombres, usuarios.nombre_usuario,orden_compra.total,orden_compra.id_orden,productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario";
     $tabla = $conexion->seleccionar($consulta);
 
     //creacion de tabla dinamica para los datos de la BD
@@ -224,7 +224,7 @@
             echo "<td>$registro->nombre</td>"; //no deben quedar espacios
             echo "<td>$registro->total</td>"; //no deben quedar espacios
             echo "<td>$registro->fecha_pedido</td>"; //no deben quedar espacios
-            echo "<td hidden>$registro->folio</td>";
+            echo "<td hidden>$registro->id_orden</td>";
             echo "<td hidden>$registro->imagen</td>";
             echo "<td hidden>$registro->producto</td>";
             echo "<td hidden>$registro->cantidad</td>";
@@ -237,7 +237,7 @@
             metodo=$registro->nombre &
             total=$registro->total &
             fecha=$registro->fecha_pedido &
-            folio=$registro->folio &
+            folio=$registro->id_orden &
             img=$registro->imagen &
             producto=$registro->producto &
             cantidad=$registro->cantidad &
