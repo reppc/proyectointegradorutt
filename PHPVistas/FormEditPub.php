@@ -1,29 +1,27 @@
-<?php
-  include("../../../../Scripts/productos.php");
-?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../../../inicio/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../../../../inicio/css/navStyle.css" />
-    <link rel="stylesheet" href="css/estilos.css" />
-    <title>comprobacion datos</title>
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../AdminBlog/adminBlog.css">
+    <link rel="stylesheet" href="../inicio/css/navStyle.css">
+
+    <!--JS-->
+    <script src="../inicio/js/bootstrap.min.js"></script>
+    <title>Agregar entrada</title>
+</head>
+<body class="body-g">
 <?php
-if(!session_start() && $_SESSION['usuario']==null)
-{
-  echo "no hay session";
-}
-?>
+        session_start();
+    ?>
+
     <!--Barra navegadora-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <!--logo-->
         <div class="container-fluid">
-          <img class="logo navbar-brand md" src="../../../../inicio/Imagenes/logo-sin-letras2.png" alt="">
+          <img class="logo navbar-brand md" src="../inicio/Imagenes/logo-sin-letras2.png" alt="">
           <a class="navbar-brand" href="">Soporte y servicios informaticos</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,7 +30,7 @@ if(!session_start() && $_SESSION['usuario']==null)
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <!--Inicio-->
                 <li class="nav-item navli">
-                    <a class="nav-link active" aria-current="page" href="../../../../inicio/index copy.php">
+                    <a class="nav-link active" aria-current="page" href="../inicio/index copy.php">
                         <svg style="margin-bottom: 5px;" width="30" height="15" viewBox="0 0 1 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M29.1667 11.0887L19.7917 2.65125L5.02917 15.9375H8.33333V30.9375H14.5833V19.6875H25V30.9375H31.25V15.9375H34.5542L31.25 12.9637V6.5625H29.1667V11.0887ZM0 17.8125L19.7917 0L27.0833 6.5625V4.6875H33.3333V12.1875L39.5833 17.8125H33.3333V32.8088H22.9167V21.5588H16.6667V32.8088H6.25V17.8125H0Z" fill="white"/>
                         </svg>
@@ -48,7 +46,7 @@ if(!session_start() && $_SESSION['usuario']==null)
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="../../../home_articulos.php">Articulos</a>
+                            <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
                           <?php
                             if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador')
@@ -198,127 +196,67 @@ if(!session_start() && $_SESSION['usuario']==null)
           </div>
         </div>
       </nav>
-    <!---->
-<!--contenido para la confirmacion de datos del cliente-->
-  <!--titulos principales-->
-  <div class="container" style="text-align: center">
-    <!--titulo-->
-    <div class="row">
-      <h1>Datos para la compra</h1>
-    </div>
-    <!--modificasion de datos para finalisar la compra-->
-  <div style="text-align: center">
-      <p>Direccion de envio</p>
-    </div>
-    <p style="text-align: center">
-    Si tiene domicilio registrado elijalo en la lista
-    </p>
-    <p style="text-align: center">
-    ¡IMPORTANTE SOLO ESTAMOS DISPONIBLES PARA LA CIUDAD DE TORREÓN!
-    </p>
-    </div>
-    </div>
-  </div><!--finalizacion/finalizacion compra.php-->
-  <form  action="finalizacion/finalizacion compra.php" method="post">
-  <div class="row">
-      <div class="col">
-      <input style="
-      border: 0px;
-      background-color: black;
-      color: white;
-      border-radius: 20px;
 
-      " type="submit" name="sig" value="finalizar compra">
-      </div>
-      <div class="col">
-        <a href="../carrito.php"
-        style="
-        border: 0px;
-        background-color: black;
-        color: white;
-        border-radius: 20px;
-        "
-        type="submit" class="btn" name="continuar_compra">atras</a>
-      </div>
-      <div class="col">
-      <label for="">seleccione forma de pago</label>
-      <select width="100px" name="seleccion_pago" id="">
-        <option value="1">efectivo</option>
-        <option value="2">tarjeta</option>
-        <option value="3">transaccion</option>
-      </select>
-      </div>
+
+     <!--contenido del formulario para entrar-->
+     <?php
+    include '../Scripts/database.php';
+    $conexion = new Database();
+    $conexion -> conectarDB();
+    $valor=$_GET['no'];
+    $consulta="SELECT * FROM publicaciones WHERE cve_pub='$valor' ";
+    
+      $resultado=$conexion->seleccionar($consulta);
+
+      //$array = json_decode(json_encode($resultado), true);
+
+      foreach($resultado as $fila){
+
+        echo "
+     <br>
+ <div id='contenedor'>
+    <div id='central'>
+        <div id='login'>
+            <div class='titulo'>
+                Editar publicacion
+            </div>
+            <form id='loginform' action='../Scripts/editarPubl.php' method='POST' enctype='multipart/form-data'>
+              <div class='row'>
+                <div class='col'>
+                <input type='hidden' placeholder='' name='cve'  value=' $fila->cve_pub' required>
+                    <label for='formFile' class='form-label' >Titulo:</label>
+                    <input type='text' name='titulo' value='$fila->titulo_pub' placeholder='Titulo de la publicacion' required autofocus>
+                    <br>
+                    <label for='formFile' class='form-label'>Contenido:</label>
+                    <textarea class='form-control' placeholder='Contenido de la publicacion' name='contenido' required>$fila->contenido</textarea>
+                    <br>
+                    <label class='form' for='categoria-label'>Tema: </label>
+                    <select class='form-select' name='tema' id=''>
+                        <option value='informativa'>Informativa</option>
+                        <option value='sugerencias'>Sugerencias</option>
+                        <option value='consejos'>Consejos</option>
+                    </select>
+        
+                    <br>
+                <div class='mb-3'>
+                    <input type='hidden' name='MAX_TAM' value='20097152'>
+                    <label for='formFile' class='form-label'>Imagen:</label>
+                    <input class='form-control' type='file' name='imagen' id='formFile'>
+                </div>
+              </div>
+              <div class='text-center'>
+                <button type='submit' title='Ingresar' name='ingresar'>Actualizar entrada</button>
+              </div>
+            </form>
+        </div>
+        <br>
+        ";}?>
+        <div class='inferior'>
+            <a href='../Blog/blog-informativo.php'>Ver blog</a>
+        </div>
+    </div>
   </div>
-  <div class="col">
-    <table class="table" width="70%">
-      <thead>
-      <tr>
-      <th scope="col">calle</th>
-      <th scope="col">numeroExt</th>
-      <th scope="col">numeroInt</th>
-      <th scope="col">CP</th>
-      <th scope="col">telefono</th>
-      <th scope="col">colonia</th>
-      <th scope="col"></th>
-      </tr>
-      </thead>
-      <tbody>
-      
-        <?php
-          $carga_dom_I=new producto();
-          if(session_status()==2)
-          {
-          $s=$carga_dom_I->carga_de_domicilios_selects($_SESSION['id']);
-          
-          foreach ($s as $res) 
-          {
-              echo"
-              <tr>
-              <td>$res->calle</td>
-              <td>$res->numeroExt</td>
-              <td>$res->numeroInt</td>
-              <td>$res->codigo_postal</td>
-              <td>$res->telefono</td>
-              <td>$res->colonia</td>
-              <td><input type='radio' name='seleccion_dom' value='$res->id_domicilio'></td>
-              </tr>
-              ";
-          }
-        }
-        ?>
-      
-      </tbody>
-    </table>
-    </form>
-    <?php
-      $carga_de_articulos=new producto();
-      $carga_de_articulos->total_carrito($_SESSION['id']);
-      $s=$carga_de_articulos->total_carrito($_SESSION['id']);
-      $d=0;
-      $sub=0;
-      foreach ($s as $value) 
-      { 
-        $sub=$value->cantidad*$value->precio_unitario;
-        $d+=$sub;
-      }
-      $crear_orden=new producto();
-      if (isset($_POST['sig'])) 
-      { 
-        $total_env=$d;
-        $us=$_SESSION['id'];
-        $pg=$_POST['seleccion_pago'];
-        $dom=$_POST['seleccion_dom'];
-        $crear_orden->crear_orden($us,$pg,$total_env,$dom);
-      }
-    ?>
-  </div>
-<!---->
-<!-- #region js-->
-  <script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-  crossorigin="anonymous"
-  ></script>
-<!-- #endregion -->
-  </body>
+      <!---->
+    
+</body>
 </html>

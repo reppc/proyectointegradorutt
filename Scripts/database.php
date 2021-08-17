@@ -2,7 +2,7 @@
 <?php
     class Database
     {
-        /*private $basededatos="appsocom";*/
+        /*private $basededatos="appsocom"; pruebas_appsocom*/
         private $PDOLocal;
         private $PDOLocal1;
         private $user="root";

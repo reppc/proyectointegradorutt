@@ -199,46 +199,78 @@
           <br>
         <h1 align="center">Usuarios</h1>
         <br>
+        <h5 class="text-center">Puede deslizar sobre la tabla para ver todos los campos</h5>
+        <br>
+        <form action="" method="get">
+        <?php
+            include '../Scripts/database.php';
+            $conexion = new Database();
+            $conexion->conectarDB();
+
+            $cadena = "SELECT id_rol, tipo_usuario FROM rol_usuario";
+            $registros = $conexion->seleccionar($cadena);
+
+            echo "<div>
+                    <label class='control-label'>
+                    Usuario: <label/>
+                    <select class='form-select' name='rol'>";
+
+                    foreach($registros as $value){
+                        echo "<option value ='".$value->id_rol."'>".$value->tipo_usuario."</option>";
+                    }
+                    echo "</select>
+                </div>";    
+                $conexion->desconectarDB();        
+        ?>        
+                <br>
+                <button type="submit" class="offset-1 btn btn-primary col-1">Ver</button>
+        </form>
+
+        <br>
+        <div class="table-responsive">
+        <table class='table table-hover align-middle'>
+            <thead class='table-dark'>
+            <tr>
+            <th>NombreUsuario</th><th>ap_paterno</th><th>ap_materno</th><th>Correo</th><th>Contraseña</th><th>Tipo</th><th>fecha_creacion</th>
+            </tr>
+            </thead>
+            <tbody>
 
 
 
     <?php
-    include '../Scripts/database.php';
-    $conexion = new Database();
-    $conexion -> conectarDB();
 
-    $consulta="SELECT usuarios.nombres, usuarios.ap_paterno, usuarios.ap_materno,
-    usuarios.correo,usuarios.contraseña,rol_usuario.tipo_usuario,usuarios.fecha_creacion FROM usuarios
-    INNER JOIN rol_usuario ON rol_usuario.id_rol = usuarios.Rol";
-    $tabla = $conexion->seleccionar($consulta);
-
-    //creacion de tabla dinamica para los datos de la BD
-    echo "<table class='table table-hover'>
-    <thead class='table-dark'>
-    <tr>
-    <th>NombreUsuario</th><th>ap_paterno</th><th>ap_materno</th><th>Correo</th><th>Contraseña</th><th>Tipo</th><th>fecha_creacion</th>
-    </tr>
-    </thead>
-    <tbody>";
-
-        foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
+      if($_GET)
         {
-            echo "<tr>";
-            echo "<td>$registro->nombres</td>";  //los nombres de los campos deben ser exactos a los de la BD
-            echo "<td>$registro->ap_paterno</td>";
-            echo "<td>$registro->ap_materno</td>"; //no deben quedar espacios
-            echo "<td>$registro->correo</td>"; //no deben quedar espacios
-            echo "<td>$registro->contraseña</td>"; //no deben quedar espacios
-            echo "<td>$registro->tipo_usuario</td>"; //no deben quedar espacios
-            echo "<td>$registro->fecha_creacion</td>"; //no deben quedar espacios
-            echo "<tr>";
-        }
+            $conexion -> conectarDB();
+            extract($_GET);
+            $consulta="SELECT usuarios.nombres, usuarios.ap_paterno, usuarios.ap_materno,
+            usuarios.correo,usuarios.contraseña,rol_usuario.tipo_usuario,usuarios.fecha_creacion FROM usuarios
+            INNER JOIN rol_usuario ON rol_usuario.id_rol = usuarios.Rol WHERE usuarios.Rol = $rol";
+            $tabla = $conexion->seleccionar($consulta);
 
-        echo "</tbody>
-        </table>";
+            //creacion de tabla dinamica para los datos de la BD
 
-        $conexion -> desconectarDB();
+
+                foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
+                {
+                    echo "<tr>";
+                    echo "<td>$registro->nombres</td>";  //los nombres de los campos deben ser exactos a los de la BD
+                    echo "<td>$registro->ap_paterno</td>";
+                    echo "<td>$registro->ap_materno</td>"; //no deben quedar espacios
+                    echo "<td>$registro->correo</td>"; //no deben quedar espacios
+                    echo "<td>$registro->contraseña</td>"; //no deben quedar espacios
+                    echo "<td>$registro->tipo_usuario</td>"; //no deben quedar espacios
+                    echo "<td>$registro->fecha_creacion</td>"; //no deben quedar espacios
+                    echo "<tr>";
+                }
+
+                $conexion -> desconectarDB();
+          }
         ?>
+                        </tbody>
+                </table>
+        </div>
         </div>
     
 </body>

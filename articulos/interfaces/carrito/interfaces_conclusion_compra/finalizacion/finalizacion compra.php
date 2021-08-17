@@ -1,7 +1,8 @@
 <?php
+/* H:i:s agregar despues de "d con espacio para agregar la hora"*/
+ $hoys = date("d");
+ $hoy = date("Y-m-$hoys");
   include("../../../../../Scripts/productos.php");
-  $metodo_de_pago_env=$_POST['seleccion_pago'];
-  $direccion_env=$_POST['seleccion_dom'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -207,35 +208,78 @@
     <!---->
     <!--datos de la orden-->
     <div class="row" style="margin: 20px">
+    <div class="row">
+      <h2 style="text-align: center">detalle de orden</h2>
+    </div>
       <table class="table">
+        <title>detalle de la orden</title>
         <thead>
           <tr>
             <th scope="col">numero de orden</th>
             <th scope="col">metodo de pago</th>
             <th scope="col">fecha de pedido</th>
             <th scope="col">Monto total</th>
-            <th scope="col">Direccion de envio</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
             <?php
               $carga_orden=new producto();
-              $cargar_ordenes=$carga_orden->carga_orden($_SESSION['id']);
+              $cargar_ordenes=$carga_orden->carga_orden($_SESSION['id'],$hoy);
+              $ord_total=0;
+              $id_ord_compra=0;
               foreach ($cargar_ordenes as $value) 
               {
                 echo
                 "
+                <tr>
                   <th scope='row'>$value->id_orden</th>
                   <td>$value->nombre</td>
                   <td>$value->fecha_pedido</td>
                   <td>$value->total</td>
-                  <td>$value->domicilio</td>
+                </tr>
+                ";
+                $ord_total+=$value->total;
+                $id_ord_compra+=$value->id_orden;
+              }
+            ?>
+        </tbody>
+      </table>
+      <!--domicilio-->
+      <div class="row">
+      <h2 style="text-align: center">domicilio de envio</h2>
+    </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">calle</th>
+            <th scope="col">numeroExt</th>
+            <th scope="col">numeroInt</th>
+            <th scope="col">CP</th>
+            <th scope="col">colonia</th>
+            <th scope="col">telefono</th>
+            <th scope="col">colonia</th>
+          </tr>
+        </thead>
+        <tbody>
+            <?php
+              $carga_orden=new producto();
+              $cargar_ordenes=$carga_orden->carga_orden($_SESSION['id'],$hoy);
+              foreach ($cargar_ordenes as $value) 
+              {
+                echo
+                "
+                <tr>
+                  <th scope='row'>$value->calle</th>
+                  <td>$value->numeroExt</td>
+                  <td>$value->numeroInt</td>
+                  <td>$value->codigo_postal</td>
+                  <td>$value->colonia</td>
+                  <td>$value->telefono</td>
+                  <td>$value->colonia</td>
+                </tr>
                 ";
               }
             ?>
-            
-          </tr>
         </tbody>
       </table>
     </div>
@@ -257,24 +301,27 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          
             <?php
               $carga_articulos=new producto();
               $cont_art=$carga_articulos->carga_productos($_SESSION['id']);
               $sub_t=0;
               $total=0;
               foreach ($cont_art as $value) 
-              {$sub_t=$value->precio_unitario*$value->cantidad;
+              {
+                $sub_t=$value->precio_unitario*$value->cantidad;
                 echo "
+                <tr>
                 <th scope='row'>$value->nombre</th>
                 <td>$value->cantidad</td>
                 <td>$$value->precio_unitario</td>
                 <td>$sub_t</td>
+                </tr>
                 ";
                 $total+=$sub_t;
               }
             ?>
-          </tr>
+          
         </tbody>
       </table>
       <hr>
@@ -284,7 +331,19 @@
       <div class="col">
         <p><?php echo$total;?></p>
       </div>
-      
+      <?php 
+      $act_total=new producto();
+      $usuario=$_SESSION['id'];
+        if($ord_total==$total)
+        {
+          
+        }
+        else 
+        {
+          
+          $atcualizar=$act_total->actualizar_total($total,$usuario,$hoy);
+        }
+      ?>
     </div>
     <!---->
     <div class="row">
@@ -300,11 +359,11 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">importante</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  esta seguro de que todos los datos son correctos y desea comprar el o los articulos en el carro
+                  esta seguro de que todos los datos son correctos y desea comprar el o los articulos de la orden
                 </div>
                 <form  class="modal-footer" method="POST">
                   <button type="submit" name="cancelar" class="btn btn-secondary" data-bs-dismiss="modal">cancelar</button>
@@ -316,6 +375,24 @@
         </div>
       </form>
     </div>
+    <?php
+      $crear_detalle=new producto();
+      $limpiar_carro=new producto();
+      $proceso_ord_detalle=new producto();
+      /*$crear_detalle=new producto();*/
+      if (isset($_GET['comprar'])) 
+      {
+        $precarga=$proceso_ord_detalle->precarga_para_orden($_SESSION['id']);
+        foreach ($precarga as $value) 
+        {
+            $creason_d=$crear_detalle->crear_orden_detalle($id_ord_compra, $value->producto, $value->cantidad,$value->precio_unitario);
+            $limpiar_carro->eliminar_carrito($_SESSION['id']);
+            echo"se limpio el carro";
+        }
+
+        /*$crear_detalle->crear_orden_detalle($id_ord_compra, $producto, $cantidad,$precio)*/
+      }
+    ?>
     <!-- #endregion -->
     <!-- #region js-->
     <script

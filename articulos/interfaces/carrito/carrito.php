@@ -10,6 +10,7 @@ include("../../../scripts/productos.php");
     <link rel="stylesheet" href="../../../inicio/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../../inicio/css/navStyle.css" />
     <link rel="stylesheet" href="css/estylo.css" />
+    <link rel="stylesheet" href="css/fontawesome-all.min.css">
     <title>carrito</title>
   </head>
   <body>
@@ -217,18 +218,33 @@ include("../../../scripts/productos.php");
                   else
                   {
                     $carga_de_articulos=new producto();
-                    $carga_de_articulos->carga_de_los_articulos_a_comprar($_SESSION['id']);
+                    $chemadre=$carga_de_articulos->carga_de_los_articulos_a_comprar($_SESSION['id']);
+                    foreach ($chemadre as $value) 
+                    {
+                      echo
+                      "
+                      <tr>
+                        <td width='100px'><img width='20%' src='$value->imagen' alt='' /></td>
+                        <td><p style='margin:4px;'>$value->nombre</p></td>
+                        <td>cantidad:($value->cantidad)</td>
+                        <td><p style='margin:4px;'>$$value->precio_unitario</p></td>
+                        <td>
+                            <!--boton para eliminar productos-->
+                            <div class='col'>
+                            <td><a class='btn btn-warning' href='editar.php?id=$value->id_carrito'>editar</a></td>
+                            <td><a class='btn btn-danger' href='eliminar.php?id=$value->id_carrito'>eliminar</a></td>
+                            </div>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                      ";
+                    }
                   }
                 ?>
               </table>
               <?php
-                if(isset($_GET['edicion_cant']))
-                {
-                  echo $_GET['edicion_cant'];
-                }
-                if (isset($_POST[''])) {
-                  # code...
-                }
               ?>
             </div>
             <hr>
@@ -243,8 +259,7 @@ include("../../../scripts/productos.php");
                         <div class='col'>
                           <?php
                             $carga_total=new producto();
-                            $carga_total->total_carrito($_SESSION['id']);
-                            $s=$carga_de_articulos->total_carrito($_SESSION['id']);
+                            $s=$carga_total->total_carrito($_SESSION['id']);
                             $d=0;
                             $sub=0;
                             foreach ($s as $value) 
@@ -268,10 +283,15 @@ include("../../../scripts/productos.php");
             <div class="row">
               <form action="" method="post">
                 <div class="col">
-                  <input class="botones" type="reset" value="limpiar carro" />
+                  <input class="botones" type="reset" name="eliminar_carro" value="limpiar carro" />
                 </div>
               </form>
-              
+              <?php
+                if (isset($_POST['eliminar_carro'])) 
+                {
+                  # code...
+                }
+              ?>
               <form action="interfaces_conclusion_compra/comprobacion_datos.php" method="post">
                 <input type='submit' class="botones" value='siguiente'>
 

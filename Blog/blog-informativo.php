@@ -290,7 +290,7 @@
   $conexion= new database();
   $conexion->conectarDB();
 
-  $consulta="SELECT publicaciones.titulo_pub, publicaciones.contenido, publicaciones.imagen, publicaciones.fecha_pub FROM publicaciones WHERE publicaciones.tema='informativa' AND publicaciones.imagen like '%http%'";
+  $consulta="SELECT publicaciones.cve_pub,publicaciones.titulo_pub, publicaciones.contenido, publicaciones.imagen, publicaciones.fecha_pub FROM publicaciones WHERE publicaciones.tema='informativa' AND publicaciones.imagen like '%http%'";
 
   $publicacion= $conexion->seleccionar($consulta);
 
@@ -298,8 +298,13 @@
   {
       echo "<div class='row recuadro'>
           <div class='col-x1-6 col-lg-6 col-md-6 col-sm-6'>";
+          echo "<input type='hidden' value='$registro->cve_pub'>";
       echo "<h5><b>$registro->titulo_pub</b><h5><br>";
-      echo "<h6>$registro->fecha_pub</h6>";
+      if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador_Blog')
+          {
+            echo "<a href='../PHPVistas/FormEditPub.php?no=$registro->cve_pub' value type='submit' class=' btn btn-success'>Editar</a>";
+          }
+      echo "<h6 class=''>$registro->fecha_pub</h6>";
       echo "<br>";     
       echo "$registro->contenido</div>";
 
@@ -312,7 +317,7 @@
   }
   echo "</div>";
 
-  $consulta="SELECT publicaciones.titulo_pub, publicaciones.contenido, publicaciones.imagen,publicaciones.fecha_pub FROM publicaciones WHERE publicaciones.tema='informativa' AND publicaciones.imagen NOT like '%http%'";
+  $consulta="SELECT publicaciones.cve_pub,publicaciones.titulo_pub, publicaciones.contenido, publicaciones.imagen,publicaciones.fecha_pub FROM publicaciones WHERE publicaciones.tema='informativa' AND publicaciones.imagen NOT like '%http%'";
 
   $publicacion= $conexion->seleccionar($consulta);
 
@@ -320,7 +325,13 @@
   {
       echo "<div class='row recuadro'>
               <div class='col-x1-6 col-lg-6 col-md-6 col-sm-6'>";
+              echo "<input type='hidden' value='$registro->cve_pub'>";
       echo "<h5><b>$registro->titulo_pub</b><h5><br>";
+
+      if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador_Blog')
+          {
+            echo "<a href='../PHPVistas/FormEditPub.php?no=$registro->cve_pub' value type='submit' class=' btn btn-success'>Editar</a>";
+          }
       echo "<h6>$registro->fecha_pub</h6>";
       echo "<br>";     
       echo "$registro->contenido</div>";

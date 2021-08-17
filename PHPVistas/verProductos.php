@@ -6,13 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
-
+    <style>
+          .body-g{
+        background-color: #2aa13e;
+    }
+    </style>
     <script src="../inicio/js/bootstrap.min.js"></script>
     <title>Productos registrados</title>
 </head>
 <body>
 
-<body> 
+
 <?php
         session_start();
     ?>
@@ -201,10 +205,38 @@
           <br>
           <div class="row">
           <h1 align="center">Productos</h1>
-
+          <br><br><br><br><br>
             <div class="row">
-              <div class="col float-right">
+              <div class="col">
                 <a href="FormAddProd.php" class="col btn btn-primary" type="button">Agregar nuevo producto</a>
+              </div>
+              <div class="col">
+
+              <form action="" method="get">
+                  <?php
+                      include '../Scripts/database.php';
+                      $conexion = new Database();
+                      $conexion->conectarDB();
+
+                      $cadena = "SELECT id_cat, categoria FROM categoria";
+                      $registros = $conexion->seleccionar($cadena);
+
+                      echo "<div>
+                              <label class='control-label'>
+                              Categoria: <label/>
+                              <select class='form-select' name='cat'>";
+
+                              foreach($registros as $value){
+                                  echo "<option value ='".$value->id_cat."'>".$value->categoria."</option>";
+                              }
+                              echo "</select>
+                          </div>";    
+                          $conexion->desconectarDB();        
+                  ?>    
+                    <br>
+                  <button type="submit" class=" offset-2 btn btn-primary col-2">Ver</button>
+                    
+              </form> 
               </div>
             </div>
           </div>
@@ -212,7 +244,7 @@
         <br>
 
 
-    <table class='table table-hover'>
+    <table class='table table-hover table-info'>
     <thead class='table-dark'>
     <tr>
     <th>id_producto</th>
@@ -228,12 +260,14 @@
     <tbody>
 
     <?php
-    include '../Scripts/database.php';
-    $conexion = new Database();
-    $conexion -> conectarDB();
+      if($_GET)
+      {
 
+    $conexion -> conectarDB();
+    extract($_GET);
     $consulta="SELECT productos.id_producto,productos.nombre,productos.descripcion, productos.stock, productos.precio_unitario,
-    C.categoria,productos.imagen FROM productos INNER JOIN categoria as C ON C.id_cat = productos.categoria ORDER BY id_producto";
+    C.categoria,productos.imagen FROM productos INNER JOIN categoria as C ON C.id_cat = productos.categoria
+    WHERE id_cat = $cat ORDER BY id_producto";
 
     $resultado=$conexion->seleccionar($consulta);    
     //print_r($resultado);
@@ -262,6 +296,7 @@
 
             }
             $conexion -> desconectarDB();
+          }
             ?>
         
         </tbody>
