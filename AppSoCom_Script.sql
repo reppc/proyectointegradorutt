@@ -89,7 +89,7 @@ domicilio int (10) NOT  NULL,
 fecha_pedido datetime not NULL,
 CONSTRAINT fk_cliente_ord FOREIGN KEY (cliente) REFERENCES usuarios(id_usuario),
 CONSTRAINT fk_metodoPago_ord FOREIGN KEY (metodoPago) REFERENCES metodo_pago(id_metodo),
-CONSTRAINT fk_domicilio_ord FOREIGN KEY (domicilio) REFERENCES domicilio(id_domicilio)
+CONSTRAINT fk_domicilio_ord FOREIGN KEY (domicilio) REFERENCES Domicilio(id_domicilio)
 );
 
 /*Tabla orden_detalle*/
@@ -115,7 +115,7 @@ update CURRENT_TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP;
 
 
 /*ROL USUARIOS*/
-INSERT INTO rol_usuario (rol_usuario.tipo_usuario) VALUES 
+INSERT INTO Rol_usuario (tipo_usuario) VALUES 
 
 ('Administrador'),
 
@@ -182,9 +182,9 @@ UPDATE usuarios SET fecha_creacion='2021-02-28' WHERE id_usuario = 25;
 UPDATE usuarios SET contraseña='pizzas546' WHERE id_usuario = 25;
 UPDATE usuarios SET correo='jorgdnz@gmail.com' WHERE id_usuario = 25;
 
-ALTER TABLE domicilio ADD colonia varchar(60) not null;
-ALTER TABLE domicilio AUTO_INCREMENT = 1;
-insert into domicilio(cliente,calle,colonia,numeroExt,numeroInt,codigo_postal,telefono)
+ALTER TABLE Domicilio ADD colonia varchar(60) not null;
+ALTER TABLE Domicilio AUTO_INCREMENT = 1;
+insert into Domicilio(cliente,calle,colonia,numeroExt,numeroInt,codigo_postal,telefono)
 VALUES 
 (3,'AZTECAS', 'LAS CAROLINAS',395,null,27040,'8713509720'),
 (4,'PEDRO CAMINO', 'AMPLIACION LOS ANGELES',108,null,27260,'8703985297'),
@@ -330,5 +330,19 @@ VALUES
   (8, 16, 3, '619.66'),
   (9, 1, 1, 849);
   
-  
+  DROP TRIGGER IF EXISTS `AppSoCom`.`act_stock_I`;
+
+DELIMITER $$
+USE `AppSoCom`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `AppSoCom`.`act_stock_I` 
+AFTER INSERT ON `orden_detalle` FOR EACH ROW
+BEGIN
+update
+  productos
+set
+  productos.stock = productos.stock - new.cantidad
+where
+  productos.id_producto = new.producto;
+END$$
+DELIMITER ;
   
