@@ -177,7 +177,7 @@ if(!session_start() && $_SESSION['usuario']==null)
 
                             ?>
                           <li>
-                            <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
+                            <a class="dropdown-item" href="../../../../Scripts/cerrarSesion.php">Cerrar sesion</a>
                           </li>
                           <?php
                             }

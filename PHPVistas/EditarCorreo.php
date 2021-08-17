@@ -5,11 +5,16 @@
 	<link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
     <link rel="stylesheet" href="../AdminBlog/adminBlog.css">
+    <style>
+          	.body-g{
+        background-color: #2aa13e;
+    }
+    </style>
 
     <script src="../inicio/js/bootstrap.min.js"></script>
 	<title>Cambia tu correo</title>
 </head>
-<body>
+<body class="body-g">
 	<?php
         session_start();
     ?>
