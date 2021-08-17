@@ -1,6 +1,6 @@
 <?php
 /* H:i:s agregar despues de "d con espacio para agregar la hora"*/
- $hoys = date("d");
+ $hoys = date("d")-1;
  $hoy = date("Y-m-$hoys");
   include("../../../../../Scripts/productos.php");
 ?>

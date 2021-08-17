@@ -34,8 +34,16 @@ foreach ($sentencia as $value)
 			<input type="hidden" name="id" value="<?php echo $value->id_carrito; ?>">
 
 			<label for="descripcion">cantidad:</label>
-			<input value="<?php echo $value->cantidad ?>" class="form-control" name="precioVenta" required type="number" id="cantidad" placeholder="cantidad">
-			
+			<!--<input value="<?php //echo $value->cantidad ?>" class="form-control" 
+            name="precioVenta" required type="number" 
+            id="cantidad" placeholder="cantidad">-->
+			<select name="precioVenta" id="">
+                <option from="precioVenta" value="1">1</option>
+                <option from="precioVenta" value="2">2</option>
+                <option from="precioVenta" value="3">3</option>
+                <option from="precioVenta" value="4">4</option>
+                <option from="precioVenta" value="5">5</option>
+            </select>
             <br><br><input class="btn btn-info" type="submit" name="guardar" value="Guardar">
 			<a class="btn btn-warning" href="carrito.php">Cancelar</a>
 			<a class="btn btn-warning" href="carrito.php">atras</a>

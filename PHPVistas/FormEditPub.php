@@ -1,87 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="css-blog/blog-sug.css">
-  <link rel="stylesheet" type="text/css" href="../inicio/css/bootstrap.min.css">
-  <script src="../inicio/js/bootstrap.min.js"></script>
-	<style>
-    .redondeado{
-          margin-top: 2px;
-          border-top-left-radius: 37px;
-          border-top-right-radius: 37px;
-          border-bottom-left-radius: 37px;
-          border-bottom-right-radius: 37px;
-          overflow: hidden;
-      }
-    .logo{
-          width: 20pt;
-      }
-      .navli{
-          margin-left: 50pt;
-      }
-      .btn-acceder{
-      text-decoration: none;
-      color: white;
-      }
-      .btn-acceder:hover{
-          color: black;
-      }
-      .body-g{
-      background-color: #2aa13e;
-      }
-      .btn-con{
-        position: absolute;
-        width: 150px;
-        height: 38px;
-        left: 64%;
-        top: 150px;
-        font-size: 15px;
-        font-weight: 600;
-        background-color:#C4C4C4;
-        color: white; 
-        border: #C4C4C4;
-        border-radius: 30px;
-      }
-      .btn-sug{
-        position: absolute;
-        width: 150px;
-        height: 38px;
-        left: 44%;
-        top: 150px;
-        font-size: 15px;
-        font-weight: 600;
-        background-color:rgb(28, 142, 224);
-        color: white;
-        border:rgb(28, 142, 224);
-        border-radius: 30px;
-      }
-      .btn-inf{
-        position: absolute;
-        width: 150px;
-        height: 38px;
-        left: 24%;
-        top: 150px;
-        font-size: 15px;
-        font-weight: 600;
-        background-color: #6FD950;
-        color: white;
-        border:#6FD950;
-        border-radius: 30px;
-      }
-      .recuadro{
-        margin-left:25px;
-        margin-top:15px;
-        padding-bottom:40px;
-        border-bottom: rgb(188, 197, 197) 2px solid;
-      }
-      .recuadro img{
-        margin-top:10px;
-      }
-  </style>
-	<title>Blog-Sugerencias</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../AdminBlog/adminBlog.css">
+    <link rel="stylesheet" href="../inicio/css/navStyle.css">
+
+    <!--JS-->
+    <script src="../inicio/js/bootstrap.min.js"></script>
+    <title>Agregar entrada</title>
 </head>
-<body>
+<body class="body-g">
 <?php
         session_start();
     ?>
@@ -256,7 +187,7 @@
                     { 
                         echo "<!-- #region boton-->
                         <form class='d-flex'>
-                          <a href='../login/login.php' class='btn btn-outline-light redondeado' style='text-decoration: none;' id='redondeado'>Acceder</a>
+                          <a href='../login/login.php' class='btn btn-outline-light' style='text-decoration: none;' id='redondeado'>Acceder</a>
                         </form>
                     <!-- #endregion -->";
                     }
@@ -267,83 +198,65 @@
       </nav>
 
 
-	<div class="portada">
-		<div class="rectangulo">
-			<p class="textoR">Sugerencias</p>
-		</div>
-        <!--Botones de navegacion entre secciones de blog-->
-				<a href="blog-informativo.php" type="button" class="btn btn-primary btn-inf">Informativo</a>	
+     <!--contenido del formulario para entrar-->
+     <?php
+    include '../Scripts/database.php';
+    $conexion = new Database();
+    $conexion -> conectarDB();
+    $valor=$_GET['no'];
+    $consulta="SELECT * FROM publicaciones WHERE cve_pub='$valor' ";
+    
+      $resultado=$conexion->seleccionar($consulta);
 
-        <a href="blog-sugerencias.php" type="button" class="btn btn-primary btn-sug">Sugerencias </a>	
+      //$array = json_decode(json_encode($resultado), true);
 
-        <a href="blog-consejos.php" type="button" class="btn btn-primary btn-con">Consejos</a>
+      foreach($resultado as $fila){
 
-
-	
-
-	</div>
-
- <!--Inicio-->
-<div  class="container-fluid">
-  <br><br><br><br><br><br><br><br><br><br><br>
-  <?php 
-  include '../Scripts/database.php';
-  $conexion= new database();
-  $conexion->conectarDB();
-
-  $consulta="SELECT publicaciones.cve_pub,publicaciones.titulo_pub, publicaciones.contenido, publicaciones.imagen, publicaciones.fecha_pub FROM publicaciones WHERE publicaciones.tema='sugerencias' AND publicaciones.imagen like '%http%'";
-
-  $publicacion= $conexion->seleccionar($consulta);
-
-  foreach($publicacion as $registro)
-  {
-      echo "<div class='row recuadro'>
-          <div class='col-x1-6 col-lg-6 col-md-6 col-sm-6'>";
-          echo "<input type='hidden' value='$registro->cve_pub'>";
-      echo "<h5><b>$registro->titulo_pub</b><h5><br>";
-      if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador_Blog')
-          {
-            echo "<a href='../PHPVistas/FormEditPub.php?no=$registro->cve_pub' value type='submit' class=' btn btn-success'>Editar</a>";
-          }
-      echo "<h6 class=''>$registro->fecha_pub</h6>";
-      echo "<br>";     
-      echo "$registro->contenido</div>";
-
-        echo "<div class='d-none d-lg-block col-lg-6 d-none d-block col-6 text-center'>
-                <img src='$registro->imagen' width='55%' class=' rounded'>
-            </div>";
-     
-      echo "</div>";
-      echo "<br>";
-  }
-  echo "</div>";
-
-  $consulta="SELECT publicaciones.cve_pub,publicaciones.titulo_pub, publicaciones.contenido, publicaciones.imagen,publicaciones.fecha_pub FROM publicaciones WHERE publicaciones.tema='sugerencias' AND publicaciones.imagen NOT like '%http%'";
-
-  $publicacion= $conexion->seleccionar($consulta);
-
-  foreach($publicacion as $registro)
-  {
-      echo "<div class='row recuadro'>
-              <div class='col-x1-6 col-lg-6 col-md-6 col-sm-6'>";
-              echo "<input type='hidden' value='$registro->cve_pub'>";
-      echo "<h5><b>$registro->titulo_pub</b><h5><br><a href='../PHPVistas/FormEditPub.php?no=$registro->cve_pub' value type='submit' class=' btn btn-success'>Editar</a>";
-      echo "<h6>$registro->fecha_pub</h6>";
-      echo "<br>";     
-      echo "$registro->contenido</div>";
-
-          echo "<div class='d-none d-lg-block col-lg-6 d-none d-block col-6 text-center'>
-          <img src='ImgBlog/" . $registro->imagen . "' width='55%' class='rounded'>
-        </div>";
-     
-      echo "</div>";
-      echo "<br>";
-  }
-  echo "</div>";
-
-  $conexion->desconectarDB();
-   
-  
-?>
+        echo "
+     <br>
+ <div id='contenedor'>
+    <div id='central'>
+        <div id='login'>
+            <div class='titulo'>
+                Editar publicacion
+            </div>
+            <form id='loginform' action='../Scripts/editarPubl.php' method='POST' enctype='multipart/form-data'>
+              <div class='row'>
+                <div class='col'>
+                <input type='hidden' placeholder='' name='cve'  value=' $fila->cve_pub' required>
+                    <label for='formFile' class='form-label' >Titulo:</label>
+                    <input type='text' name='titulo' value='$fila->titulo_pub' placeholder='Titulo de la publicacion' required autofocus>
+                    <br>
+                    <label for='formFile' class='form-label'>Contenido:</label>
+                    <textarea class='form-control' placeholder='Contenido de la publicacion' name='contenido' required>$fila->contenido</textarea>
+                    <br>
+                    <label class='form' for='categoria-label'>Tema: </label>
+                    <select class='form-select' name='tema' id=''>
+                        <option value='informativa'>Informativa</option>
+                        <option value='sugerencias'>Sugerencias</option>
+                        <option value='consejos'>Consejos</option>
+                    </select>
+        
+                    <br>
+                <div class='mb-3'>
+                    <input type='hidden' name='MAX_TAM' value='20097152'>
+                    <label for='formFile' class='form-label'>Imagen:</label>
+                    <input class='form-control' type='file' name='imagen' id='formFile'>
+                </div>
+              </div>
+              <div class='text-center'>
+                <button type='submit' title='Ingresar' name='ingresar'>Actualizar entrada</button>
+              </div>
+            </form>
+        </div>
+        <br>
+        ";}?>
+        <div class='inferior'>
+            <a href='../Blog/blog-informativo.php'>Ver blog</a>
+        </div>
+    </div>
+  </div>
+      <!---->
+    
 </body>
 </html>

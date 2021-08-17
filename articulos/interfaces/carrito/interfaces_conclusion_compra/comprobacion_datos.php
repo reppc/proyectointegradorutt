@@ -229,7 +229,7 @@ if(!session_start() && $_SESSION['usuario']==null)
       margin-left=20px;
       border-radius: 20px;
 
-      " type="submit" name="sig" value="finalizar compra">
+      " type="submit" name="sig" value="crear orden de compra">
       </div>
       <div class="col">
         <a href="../carrito.php"
@@ -240,6 +240,16 @@ if(!session_start() && $_SESSION['usuario']==null)
         border-radius: 20px;
         "
         type="submit" class="btn" name="continuar_compra">atras</a>
+      </div>
+      <div class="col">
+        <a href="finalizacion/finalizacion compra.php"
+        style="
+        border: 0px;
+        background-color: black;
+        color: white;
+        border-radius: 20px;
+        "
+        type="submit" class="btn" name="continuar_compra">ver esto de orden</a>
       </div>
       <div class="col">
       <label for="">seleccione forma de pago</label>
@@ -307,21 +317,18 @@ if(!session_start() && $_SESSION['usuario']==null)
         $d+=$sub;
       }
       $crear_orden=new producto();
-      if (isset($_GET['sig'])) 
+      if (isset($_POST['sig'])) 
       { 
-
-          echo$total_env=$d;
-          echo"-";
-          echo$us=$_SESSION['id'];
-          echo"-";
-          echo$pg=$_POST['seleccion_pago'];
-          echo"-";
-          echo$dom=$_POST['seleccion_dom'];
+          $total_env=$d;
+          $us=$_SESSION['id'];
+          $pg=$_POST['seleccion_pago'];
+          $dom=$_POST['seleccion_dom'];
           $crear_orden->crear_orden($us,$pg,$total_env,$dom);
       }
       else {
         
       }
+      
     ?>
   </div>
 <!---->

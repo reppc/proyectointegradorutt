@@ -90,7 +90,7 @@ class producto extends Database
             }
         /*fin*/
     }
-
+    //carga de articulos
     function carga_todo($control_filtro)
     {
         $this->conexion=new Database();
@@ -158,7 +158,10 @@ class producto extends Database
                             <div class=''>
                                 <h3 class='precio-p'>$ $productos->precio_unitario</h3>
                             </div>
-
+                            <!--stock-->
+                            <div class=''>
+                                <h3 class='precio-p'>cantidad disponible:$productos->stock</h3>
+                            </div>
                             <!--botones-->
                                 <form action='' method='POST'>
                                     <div class=''>
@@ -184,11 +187,9 @@ class producto extends Database
                                             </button>
                                         </div>
                                     </div>
-                                </form>
-
-                                
+                                </form>                                
                         </div>
-                        <div class='col'>
+                        <div class='col imagenprod'>
                                 <img width='45%' height='70%' src='$productos->imagen' class='d-block w-2' alt='#'>
                             </div>
                         <hr>
@@ -1134,7 +1135,39 @@ class producto extends Database
             }
         /*fin*/
     }
-
+    function comprobar_disponibilidad()
+    {
+        $this->conexion=new Database();
+        $articulo=
+        "
+        SELECT `id_det`, `orden`, `producto`, `cantidad`, `precio` 
+        FROM `orden_detalle` WHERE orden_detalle.orden=$ord_c;
+        ";
+        /*conexion*/ 
+            try{
+                $this->conexion->conectarDB();
+            }
+            catch(PDOException $e){
+                echo "ERROR-CONEXION:"." ".$e->getMessage();
+            }
+        /*fin*/
+        /*agregar producto al carro*/
+            try 
+            {
+                $consulta=$this->conexion->ejecutaSQL($articulo);
+                return $consulta;
+            } catch (PDOException $e) {
+                echo "ERROR-CONSULTA:".$e->getMessage();
+            }
+        /*fin*/
+        /*desconectar*/
+            try {
+                $this->conexion->desconectarDB();
+            } catch (PDOException $e) {
+                echo "ERROR-DESCONECTAR:".$e->getMessage();
+            }
+        /*fin*/
+    }
 }
 /*
                       if(isset($_GET['cargar_domicilios']))

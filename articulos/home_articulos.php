@@ -108,6 +108,9 @@ include("../Scripts/productos.php");
         margin-left: 350px;
         margin-top: 20px;
       }
+      .imagenprod{
+        margin-top: 25px;;
+      }
   
   </style>
     <title>Articulos</title>
@@ -285,25 +288,6 @@ include("../Scripts/productos.php");
             </div>
                 <div class="col col-lg-3 d-none d-lg-block d-md-block">
                 <!--barra de busqueda-->
-              <div class="col">
-
-                <div class="row">
-                  
-                  <!--input de busqueda-->
-
-                  <div class="col">
-                    <input class="form-control" type="text" name="articulos_a_buscar" id="" style="width: 250px; margin-top: 15px; margin-right: 5px">
-                  </div>
-
-                  <!--boton de busqueda-->
-                  <div class="col">
-                    <button class="btn btn-outline-light" name="buscar_producto" style="margin-top:15px; margin-left:-25px;" type="submit" value="" name="buscar_articulo" class="btn btn-submit">
-                      <i class="bi bi-search"></i>
-                    </button>
-                  </div>
-
-                </div>
-              </div>
                 </div>
       </div>
       <br><br>
@@ -334,6 +318,7 @@ include("../Scripts/productos.php");
               <div class='carousel-caption d-none d-md-block'>
                 <h5 style='color: black'>$resultado->nombre</h5>
                 <p style='color: black'>$$resultado->precio_unitario</p>
+                <p style='color: black'>cantidad disponible:$resultado->stock</p>
               </div>
             </div>"; 
           } } 
@@ -353,6 +338,7 @@ include("../Scripts/productos.php");
                 <div class='carousel-caption d-none d-md-block'>
                   <h5 style='color: black'>$resultado->nombre</h5>
                   <p style='color: black'>$$resultado->precio_unitario</p>
+                  <p style='color: black'>cantidad disponible:$resultado->stock</p>
                 </div>
               </div>"; 
             } 
@@ -395,12 +381,12 @@ include("../Scripts/productos.php");
                 $xd=$_POST['filtro'];
               }
               else{
-                echo "Articulos disponibles";
+                echo "Articulos disponibles.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                 <i>Solo entregas en torreon.</i>";
               }
             ?>
             </p>
 
-            <p>solo entregeas en torreon.</p>
           </div>
           <div class="col" style="background-color: #1c8ee0; color: white">
             <div class="dropdown" type="select" style="margin-top:10px;">
@@ -468,25 +454,12 @@ include("../Scripts/productos.php");
         <!---->
         <!--carrito-->
         <div class="col-2">
-            <!--boton-->
+            <!--boton de redireccion al carrito-->
             <div class="row">
               <div class="col" style="width:auto;">
-              <br>
-              <?php
-                if (session_status()!=0 || session_status()!=1) {
-                  echo"<a class='btn btn-secondary' 
-                  style='padding:5px;' 
-                  href='interfaces/carrito/carrito.php'>
-                  ver carrito</a>";
-                }
-                else
-                {
-                  echo"<a class='btn btn-secondary' 
-                  style='padding:5px;' 
-                  href='#'>
-                  inicie sesion</a>";
-                }
-              ?>
+              <br><!--Si no hay sesion iniciada redireccionara a login-->
+                <a class='btn btn-secondary redondeado' style='padding:5px;' <?php if(isset($_SESSION["usuario"])){echo "href='interfaces/carrito/carrito.php'";}else{echo "href='../login/login.php'";}?> >Ver Carrito</a>
+
             </div>
             </div>
             <!---->
@@ -497,6 +470,7 @@ include("../Scripts/productos.php");
     <?php
       /*agregado de producto al carrito*/
       $insertar_carro=new producto();
+      $disponibilidad=new producto();
       if(session_status()==PHP_SESSION_ACTIVE)
       {
         if (isset($_POST['agregar_productos_al_carro_prueba'])) 
@@ -508,6 +482,7 @@ include("../Scripts/productos.php");
             && $_POST['cantidad_producto']!="cantidad"
           ) 
           {
+            $disponibilidad->carga_todo();
             $usuario=$_SESSION['id'];
             $cantidad_productos=$_POST['agregar_productos_al_carro_prueba'];
             $id_producto=$_POST['cantidad_producto'];
