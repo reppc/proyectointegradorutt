@@ -55,9 +55,7 @@
                           <li>
                              <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Articulos</a>
                             </li>
-                          <li>
-                            <a class="dropdown-item" href="../PHPVistas/verMetodosPago.php">Ver registros de  metodos de pago</a>
-                          </li>
+                          
                           <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../PHPVistas/HistorialPedidos.php">Historial de pedidos</a>
                         </ul>
