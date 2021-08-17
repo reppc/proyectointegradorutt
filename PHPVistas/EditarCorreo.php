@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
+    <link rel="stylesheet" href="../AdminBlog/adminBlog.css">
 
     <script src="../inicio/js/bootstrap.min.js"></script>
-    <title>Historial de pedidos</title>
+	<title>Cambia tu correo</title>
 </head>
 <body>
-<body> 
-<?php
+	<?php
         session_start();
     ?>
 
@@ -56,7 +54,9 @@
                           <li>
                              <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Productos</a>
                             </li>
-                         
+                          <li>
+                            <a class="dropdown-item" href="../PHPVistas/verMetodosPago.php">Ver registros de  metodos de pago</a>
+                          </li>
 
                             <a class="dropdown-item" href="../PHPVistas/HistorialPedidos.php">Historial de pedidos</a>
                             <div class="dropdown-divider"></div>
@@ -129,7 +129,7 @@
                         
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MiPerfil.php.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
+                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
                           </li>
 
                           <?php
@@ -193,68 +193,26 @@
           </div>
         </div>
       </nav>
-
-      <div class="cuadro container">
-          <br>
-        <h1 align="center">Historiales de ventas</h1>
-        <br>
-
-    <?php
-    include '../Scripts/database.php';
-    $conexion = new Database();
-    $conexion -> conectarDB();
-
-    $consulta="SELECT usuarios.nombres, usuarios.nombre_usuario,orden_compra.total,orden_compra.id_orden,productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario";
-    $tabla = $conexion->seleccionar($consulta);
-
-    //creacion de tabla dinamica para los datos de la BD
-    echo "<table class='table table-hover'>
-    <thead class='table-dark'>
-    <tr>
-    <th>NombreCliente</th><th>NUsuario</th><th>MetodoPago</th><th>total</th><th>fecha_pedido</th><th>Opciones</th>
-    </tr>
-    </thead>
-    <tbody>";
-
-        foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
-        {
-            echo "<tr>";
-            echo "<td>$registro->nombres</td>";  //los nombres de los campos deben ser exactos a los de la BD
-            echo "<td>$registro->nombre_usuario</td>";
-            echo "<td>$registro->nombre</td>"; //no deben quedar espacios
-            echo "<td>$registro->total</td>"; //no deben quedar espacios
-            echo "<td>$registro->fecha_pedido</td>"; //no deben quedar espacios
-            echo "<td hidden>$registro->id_orden</td>";
-            echo "<td hidden>$registro->imagen</td>";
-            echo "<td hidden>$registro->producto</td>";
-            echo "<td hidden>$registro->cantidad</td>";
-            echo "<td hidden>$registro->precio</td>";
-            echo "<td hidden>$registro->Domicilio</td>";
-            echo "<td hidden>$registro->fecha_pedido</td>";
-            echo "<td><a href='VerMasAdmin.php?
-            nombre=$registro->nombres &
-            nombreusu=$registro->nombre_usuario &
-            metodo=$registro->nombre &
-            total=$registro->total &
-            fecha=$registro->fecha_pedido &
-            folio=$registro->id_orden &
-            img=$registro->imagen &
-            producto=$registro->producto &
-            cantidad=$registro->cantidad &
-            precio=$registro->precio &
-            dom=$registro->Domicilio 
-           
-
-            '>Ver más</a></td>";
-            echo "<tr>";
-        }
-
-        echo "</tbody>
-        </table>";
-
-        $conexion -> desconectarDB();
-        ?>
+      <div id="contenedor">
+    <div id="central">
+        <div id="login">
+            <div class="titulo">
+                Editar correo
+            </div>
+            <form id="loginform" action="../Scripts/editarcorreo.php" method="POST">
+              <div class="row">
+                <div class="col">
+                    <label for="formFile" class="form-label">Correo:</label>
+                    <input type="text" name="correo" placeholder="Ingresa correo nuevo" required autofocus>
+              </div>
+              <div class="text-center">
+                <button type="submit" title="Ingresar" name="ingresar">Actualizar correo</button>
+              </div>
+            </form>
         </div>
-    
+        <br>
+       
+    </div>
+  </div>
 </body>
 </html>

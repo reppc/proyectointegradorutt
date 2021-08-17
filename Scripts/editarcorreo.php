@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
-	<title>Nombre actualizado</title>
+	<title>Correo actualizado</title>
 	<style>
             #contenedor {
     display: flex;

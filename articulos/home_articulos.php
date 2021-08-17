@@ -159,9 +159,7 @@ include("../Scripts/productos.php");
         <li>
         <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Productos</a>
         </li>
-        <li>
-        <a class="dropdown-item" href="../PHPVistas/verMetodosPago.php">Ver registros de  metodos de pago</a>
-        </li>
+     
         <a class="dropdown-item" href="../PHPVistas/HistorialPedidos.php">Historial de pedidos</a>
         <div class="dropdown-divider"></div>
         <?php

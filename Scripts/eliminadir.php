@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+	<meta charset="utf-8">
+	<title>Eliminado correctamente</title>
+	<link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
 
-    <script src="../inicio/js/bootstrap.min.js"></script>
-    <title>Historial de pedidos</title>
+ <script src="../inicio/js/bootstrap.min.js"></script>
 </head>
 <body>
-<body> 
 <?php
         session_start();
     ?>
@@ -45,24 +42,17 @@
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
+                          <a class="dropdown-item" href="../articulos/home_articulos.php">Articulos</a>
                           </li>
-                          <?php
-                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador')
-                            {
-
-                            ?>
                           <div class="dropdown-divider"></div>
                           <li>
-                             <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Productos</a>
+                             <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Articulos</a>
                             </li>
-                         
-
+                          <li>
+                            <a class="dropdown-item" href="../PHPVistas/verMetodosPago.php">Ver registros de  metodos de pago</a>
+                          </li>
+                          <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../PHPVistas/HistorialPedidos.php">Historial de pedidos</a>
-                            <div class="dropdown-divider"></div>
-                            <?php
-                            }
-                            ?>
                         </ul>
                         <!---->
                         
@@ -79,6 +69,7 @@
   
                         <!--lista del dropdown de articulos-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <div class="dropdown-divider"></div>
                           <li>
                             <a class="dropdown-item" href="../Blog/blog-informativo.php" >Informativo</a>
                           </li>
@@ -88,19 +79,11 @@
                           <li>
                               <a class="dropdown-item" href="../Blog/blog-sugerencias.php">Sugerencias</a>
                             </li>
-                            <?php
-                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador_Blog')
-                            {
-
-                            ?>
                           <div class="dropdown-divider"></div>
+                          
                           <li>
                             <a class="dropdown-item" href="../AdminBlog/FormAddBlog.php">Crear entrada</a>
                           </li>
-                          <div class="dropdown-divider"></div>
-                          <?php
-                            }
-                            ?>
                         </ul>        
                 </li>
                 
@@ -117,7 +100,7 @@
 
                         if(isset($_SESSION["usuario"]))
                         { 
-                            echo $_SESSION['rol'] . ": " . $_SESSION['usuario'];
+                            echo $_SESSION['usuario'];
                         } else {
                             
                             echo "Perfil";
@@ -126,54 +109,23 @@
                         </a>
   
                         <!--lista del dropdown de perfil-->
-                        
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MiPerfil.php.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
-                          </li>
-
-                          <?php
-                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Cliente')
-                            {
-
-                            ?>
-
-                          <li>
-                              <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/HistorialCompras.php'";}else{echo "href='../login/login.php'";}?>>Mis pedidos</a>
+                            <a class="dropdown-item" href="../php/blog-informativo.php" >Mi perfil</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?>>Mis direcciones</a>
+                              <a class="dropdown-item" href="HistorialCompras.php">Mis pedidos</a>
                           </li>
-
-                            <?php
-                            }
-                            ?>
-
-                          <?php
-                            if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador')
-                            {
-
-                            ?>
+                          <li>
+                              <a class="dropdown-item" href="../PHPVistas/MisDirecciones.php">Mis direcciones</a>
+                            </li>
+                            <li>
+                            <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
+                          </li>
                             <div class="dropdown-divider"></div>
                             <li>
                               <a class="dropdown-item" href="../PHPVistas/VerUsuarios.php">Ver usuarios</a>
-                            </li>
-                            <div class="dropdown-divider"></div>
-                            <?php
-                            }
-                            ?>
-
-                            <?php
-                            if(isset($_SESSION["usuario"]))
-                            {
-
-                            ?>
-                          <li>
-                            <a class="dropdown-item" href="../Scripts/cerrarSesion.php">Cerrar sesion</a>
                           </li>
-                          <?php
-                            }
-                            ?>
                         </ul>
                              
                 </li>
@@ -193,68 +145,37 @@
           </div>
         </div>
       </nav>
+      <?php 
+include'database.php';
+$conexion= new Database();
+$conexion->conectarDB();
+$iduser=$_SESSION['id'];
+$id=$_GET['id'];
+$consulta="DELETE FROM domicilio WHERE domicilio.id_domicilio='$id'";
 
-      <div class="cuadro container">
-          <br>
-        <h1 align="center">Historiales de ventas</h1>
-        <br>
+$conexion->ejecutaSQL($consulta);
 
-    <?php
-    include '../Scripts/database.php';
-    $conexion = new Database();
-    $conexion -> conectarDB();
 
-    $consulta="SELECT usuarios.nombres, usuarios.nombre_usuario,orden_compra.total,orden_compra.id_orden,productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario";
-    $tabla = $conexion->seleccionar($consulta);
 
-    //creacion de tabla dinamica para los datos de la BD
-    echo "<table class='table table-hover'>
-    <thead class='table-dark'>
-    <tr>
-    <th>NombreCliente</th><th>NUsuario</th><th>MetodoPago</th><th>total</th><th>fecha_pedido</th><th>Opciones</th>
-    </tr>
-    </thead>
-    <tbody>";
+$conexion->desconectarDB();
 
-        foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
-        {
-            echo "<tr>";
-            echo "<td>$registro->nombres</td>";  //los nombres de los campos deben ser exactos a los de la BD
-            echo "<td>$registro->nombre_usuario</td>";
-            echo "<td>$registro->nombre</td>"; //no deben quedar espacios
-            echo "<td>$registro->total</td>"; //no deben quedar espacios
-            echo "<td>$registro->fecha_pedido</td>"; //no deben quedar espacios
-            echo "<td hidden>$registro->id_orden</td>";
-            echo "<td hidden>$registro->imagen</td>";
-            echo "<td hidden>$registro->producto</td>";
-            echo "<td hidden>$registro->cantidad</td>";
-            echo "<td hidden>$registro->precio</td>";
-            echo "<td hidden>$registro->Domicilio</td>";
-            echo "<td hidden>$registro->fecha_pedido</td>";
-            echo "<td><a href='VerMasAdmin.php?
-            nombre=$registro->nombres &
-            nombreusu=$registro->nombre_usuario &
-            metodo=$registro->nombre &
-            total=$registro->total &
-            fecha=$registro->fecha_pedido &
-            folio=$registro->id_orden &
-            img=$registro->imagen &
-            producto=$registro->producto &
-            cantidad=$registro->cantidad &
-            precio=$registro->precio &
-            dom=$registro->Domicilio 
-           
 
-            '>Ver más</a></td>";
-            echo "<tr>";
-        }
 
-        echo "</tbody>
-        </table>";
+      echo "<div id='contenedor'>
+        <div id='central'>
+          <div id='login'>
+            <div class='titulo'>
+              Eliminacion Realizada
+            </div>
+                <div class='img-fluid img-c'>
+                <img class='img-tam' src='../login/imgLogin/checked-icon-clipart1.png'>
+                </div>
+                
+            </div>
+            </div>
+        </div>";
+        header("refresh:3 ../PHPVistas/MisDirecciones.php");
 
-        $conexion -> desconectarDB();
-        ?>
-        </div>
-    
+       ?>
 </body>
 </html>

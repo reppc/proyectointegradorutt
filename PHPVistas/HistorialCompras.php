@@ -56,9 +56,7 @@
                           <li>
                              <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Productos</a>
                             </li>
-                          <li>
-                            <a class="dropdown-item" href="../PHPVistas/verMetodosPago.php">Ver registros de  metodos de pago</a>
-                          </li>
+                          
 
                             <a class="dropdown-item" href="../PHPVistas/HistorialPedidos.php">Historial de pedidos</a>
                             <div class="dropdown-divider"></div>
@@ -205,9 +203,9 @@
 
     <?php
     include '../Scripts/database.php';
-    $conexion = mysqli_connect("localhost","root","admin","pruebasappsocom");
+    $conexion = mysqli_connect("localhost","root","admin","appsocom");
     $iduser=$_SESSION["usuario"];
-    $consulta="SELECT metodo_pago.nombre,orden_compra.total,CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio',orden_compra.fecha_pedido, orden_compra.folio, productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser'";
+    $consulta="SELECT metodo_pago.nombre,orden_compra.total,CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio',orden_compra.fecha_pedido, orden_compra.id_orden, productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser'";
 
     $tabla = mysqli_query($conexion, $consulta);
 
