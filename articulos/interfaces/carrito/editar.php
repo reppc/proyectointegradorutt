@@ -46,7 +46,6 @@ foreach ($sentencia as $value)
             </select>
             <br><br><input class="btn btn-info" type="submit" name="guardar" value="Guardar">
 			<a class="btn btn-warning" href="carrito.php">Cancelar</a>
-			<a class="btn btn-warning" href="carrito.php">atras</a>
 		</form>
 	</div>
 <?php

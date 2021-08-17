@@ -158,7 +158,7 @@
                         
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
+                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MiPerfil.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
                           </li>
 
                           <?php
@@ -282,24 +282,7 @@
             </div>
        </div>
     </div> <br><br>
-    <div class="container">
-       <div class="row">
-        <div class="col-6 perfil">
-          <div class="row">
-            <div class="col-6">
-              <h3>Explorar</h3> 
-              <div class="row">
-                <div class="col-12 usuario1">
-                  <a href="MisDirecciones.php" class="ref1">Mis direcciones</a> <br>
-                  <a href="../inicio/index copy.php" class="ref1">Inicio</a> <br>
-                  <a href="../Blog/blog-informativo.php" class="ref1">Blog</a> <br>
-                  <a href="HistorialCompras.php" class="ref1">Historial de pedidos</a>
-                </div>
-              </div> <br>
-            </div>
-          </div> 
-        </div>
-      </div>  <br> <br>
+     <br> <br>
       <div  class="row"><div class="col-12 text-center"><a href="../inicio/index copy.html" class="ref btn">Volver a inicio</a></div></div>
      <br> <br>
     </div>

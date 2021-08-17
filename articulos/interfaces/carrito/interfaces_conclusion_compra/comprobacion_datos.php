@@ -1,6 +1,6 @@
 <?php
   /* H:i:s agregar despues de "d con espacio para agregar la hora"*/
- $hoys = date("d")-1;
+ $hoys = date("d");
  $hoy = date("Y-m-$hoys");
   include("../../../../Scripts/productos.php");
 ?>
@@ -137,7 +137,7 @@ if(!session_start() && $_SESSION['usuario']==null)
                         
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
+                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../../../../PHPVistas/MiPerfil.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
                           </li>
 
                           <?php
@@ -147,10 +147,10 @@ if(!session_start() && $_SESSION['usuario']==null)
                             ?>
 
                           <li>
-                              <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/HistorialCompras.php'";}else{echo "href='../login/login.php'";}?>>Mis pedidos</a>
+                              <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../../../../PHPVistas/HistorialCompras.php'";}else{echo "href='../login/login.php'";}?>>Mis pedidos</a>
                           </li>
                           <li>
-                              <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?>>Mis direcciones</a>
+                              <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../../../../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?>>Mis direcciones</a>
                           </li>
 
                             <?php

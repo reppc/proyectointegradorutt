@@ -1,6 +1,6 @@
 <?php
 /* H:i:s agregar despues de "d con espacio para agregar la hora"*/
- $hoys = date("d")-1;
+ $hoys = date("d");
  $hoy = date("Y-m-$hoys");
   include("../../../../../Scripts/productos.php");
 ?>
@@ -58,13 +58,13 @@
                             ?>
                           <div class="dropdown-divider"></div>
                           <li>
-                             <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Productos</a>
+                             <a class="dropdown-item" href="../../../../../PHPVistas/verProductos.php"> Ver registros de Productos</a>
                             </li>
                           <li>
-                            <a class="dropdown-item" href="../PHPVistas/verMetodosPago.php">Ver registros de  metodos de pago</a>
+                            <a class="dropdown-item" href="../../../../../PHPVistas/verMetodosPago.php">Ver registros de  metodos de pago</a>
                           </li>
 
-                            <a class="dropdown-item" href="../PHPVistas/HistorialPedidos.php">Historial de pedidos</a>
+                            <a class="dropdown-item" href="../../../../../PHPVistas/HistorialPedidos.php">Historial de pedidos</a>
                             <div class="dropdown-divider"></div>
                             <?php
                             }
@@ -135,7 +135,7 @@
                         
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../../../../../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
+                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../../../../../PHPVistas/MiPerfil.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
                           </li>
 
                           <?php
@@ -147,8 +147,8 @@
                           <li>
                               <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../../../../../PHPVistas/HistorialCompras.php'";}else{echo "href='../login/login.php'";}?>>Mis pedidos</a>
                           </li>
-                          <li>
-                              <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../../../../../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?>>Mis direcciones</a>
+                          <li>PHPVistas
+                              <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../../../../../MisDirecciones.php'";}else{echo "href='../login/login.php'";}?>>Mis direcciones</a>
                           </li>
 
                             <?php
@@ -162,7 +162,7 @@
                             ?>
                             <div class="dropdown-divider"></div>
                             <li>
-                              <a class="dropdown-item" href="../PHPVistas/VerUsuarios.php">Ver usuarios</a>
+                              <a class="dropdown-item" href="../../../../../PHPVistas/VerUsuarios.php">Ver usuarios</a>
                             </li>
                             <div class="dropdown-divider"></div>
                             <?php
