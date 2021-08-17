@@ -131,7 +131,7 @@
                         
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
+                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MiPerfil.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
                           </li>
 
                           <?php
@@ -205,7 +205,7 @@
 
     <?php
     include '../Scripts/database.php';
-    $conexion = mysqli_connect("localhost","root","admin","appsocompruebas");
+    $conexion = mysqli_connect("localhost","root","","appsocom");
     $iduser=$_SESSION["usuario"];
     $consulta="SELECT metodo_pago.nombre,orden_compra.total,CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio',orden_compra.fecha_pedido, orden_compra.folio, productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser'";
 

@@ -10,8 +10,38 @@
 
     <script src="../inicio/js/bootstrap.min.js"></script>
     <title>Mi Perfil</title>
+    <style type="text/css">
+      .perfil{
+        background-color: white;
+        border: solid;
+        border-width: 1px;
+        border-color: gray;
+
+      }
+      .usuario{
+        font-size: calc(1.044375rem + 1.7325vw);;
+      }
+      .ref{
+        text-decoration: none;
+        left: 505px;
+        color:  black;
+      }
+      .ref:hover{
+        color: rgb(28, 142, 224);
+        text-decoration: underline;
+      }
+     .ref1{
+      text-decoration: none;
+        left: 505px;
+        color:  green;
+     }
+     .ref1:hover{
+        color: rgb(28, 142, 224);
+        text-decoration: underline;
+      }
+    </style>
 </head>
-<body class="body-g">
+<body style="background-color:#f2f2f2;">
     <?php
         session_start();
     ?>
@@ -195,45 +225,88 @@
           </div>
         </div>
       </nav>
-
+<br>
     <?php
     include '../Scripts/database.php';
     $conexion = new Database();
     $conexion -> conectarDB();
+    $id=$_SESSION["rol"];
+    $iduser=$_SESSION["id"];
+    $nombre=$_SESSION["nombres"];
+    $ap1=$_SESSION["ap_paterno"];
+    $ap2=$_SESSION["ap_materno"];
+    $usu=$_SESSION["usuario"];
+    $correo=$_SESSION["correo"];
+    $consulta="SELECT usuarios.correo from usuarios where usuarios.id_usuario='$iduser'";
+    $resultado=$conexion->seleccionar($consulta);
 
     ?>
 
-    <!--contenido del formulario para entrar-->
-    <div id="contenedor">
-     <div id="central">
-         <div id="login">
-             <div class="titulo">
-                 Mi Perfil
-             </div>
-             <form id="loginform" action="../Scripts/registroCompleto.php" method="POST">
-               <div class="row">
-                 <div class="col">
-                   <Label class="form-control"><?php echo $_SESSION['Nombres'];?></Label>
-
+    <!--Contenido de perfil-->
+    <div class="container">
+       <div class="row">
+         <div class=" col-md-12 perfil">
+          <div class="row"> 
+          <div class="col-2"><br><img src="http://assets.stickpng.com/images/585e4beacb11b227491c3399.png" style="width: 70%;">
+          </div>
+          <div class="col-10 usuario">
+            <br><?php echo "$nombre $ap1 $ap2"; ?> 
+        </div>
+        </div><br>
+        <div class="row">
+          <div class="col-2">
+            <strong>Usuario</strong>: <?php echo "$id"; ?>
+          </div>
+        </div>
+         </div>
+         </div> <br> <br>
+         <div class="row">
+            <div class="col-6 perfil">
+              <div class="row">
+                 <div class="col-12">
+                   <h3>Detalles de usuario</h3> <br>
+                   <div class="row">
+                     <div class="col-12 usuario1" style="font-size:20px;">
+                       <strong>Nombre de usuario: </strong><?php  echo "$usu"; ?>
+                     </div>
+                   </div>
+                 </div> 
                  
-                 <input type="text" placeholder="Escribe tu apellido paterno" name="ap_paterno" required>
-   
-                 <input type="text" placeholder="Escribe tu apellido materno" name="ap_materno" required>
-               </div>
-               <div class="col">
-                 <input type="text" placeholder="Escribe tu nombre de usuario" name="usuario" required>
-   
-                 <input type="text" placeholder="Escribe tu correo" name="correo" required>
-   
-                 <input type="password" placeholder="Escribe una contraseña" name="contraseña" required>
-               </div>
-                 <button type="submit" name="registrar">Siguiente</button>
-               </div>
-             </form>
-         </div>
-         <div class="inferior">
-             <a href="../inicio/index copy.html">Volver a inicio</a>
-         </div>
+                 </div> <br><div class="row" style="font-size:20px;">
+                   <div class="col-9">
+                     <strong>Correo electronico: </strong><?php foreach ($resultado as $correo) {
+                       echo "$correo->correo";
+                     }; ?>
+                   </div>
+                   <div class="col-3">
+                     <a href="EditarCorreo.php" class="ref btn btn-success" style="color:white">Editar</a>
+                   </div>
+              </div> <br>
+            </div>
+       </div>
+    </div> <br><br>
+    <div class="container">
+       <div class="row">
+        <div class="col-6 perfil">
+          <div class="row">
+            <div class="col-6">
+              <h3>Explorar</h3> 
+              <div class="row">
+                <div class="col-12 usuario1">
+                  <a href="MisDirecciones.php" class="ref1">Mis direcciones</a> <br>
+                  <a href="../inicio/index copy.php" class="ref1">Inicio</a> <br>
+                  <a href="../Blog/blog-informativo.php" class="ref1">Blog</a> <br>
+                  <a href="HistorialCompras.php" class="ref1">Historial de pedidos</a>
+                </div>
+              </div> <br>
+            </div>
+          </div> 
+        </div>
+      </div>  <br> <br>
+      <div  class="row"><div class="col-12 text-center"><a href="../inicio/index copy.html" class="ref btn">Volver a inicio</a></div></div>
+     <br> <br>
+    </div>
+        
      </div>
    </div>
 

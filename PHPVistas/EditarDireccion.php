@@ -6,12 +6,17 @@
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
 
     <link rel="stylesheet" href="../AdminBlog/adminBlog.css">
+    <style>
+          .body-g{
+        background-color: #2aa13e;
+    }
+    </style>
 
     <script src="../inicio/js/bootstrap.min.js"></script>
 	<title>Edita la direccion</title>
 
 </head>
-<body>
+<body class="body-g">
 <?php
         session_start();
     ?>
@@ -114,7 +119,7 @@
                         <!--lista del dropdown de perfil-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="../php/blog-informativo.php" >Mi perfil</a>
+                            <a class="dropdown-item" href="../php/MiPerfil.php" >Mi perfil</a>
                           </li>
                           <li>
                               <a class="dropdown-item" href="HistorialCompras.php">Mis pedidos</a>
@@ -150,13 +155,13 @@
       </nav>
 
       <?php 
-$calle=$_GET['calle'];
-$colonia=$_GET['colonia'];
-$numero1=$_GET['numero1'];
-$numero2=$_GET['numero2'];
-$codigo=$_GET['codigo'];
-$telefono=$_GET['telefono'];
-$id=$_GET['id'];
+        $calle=$_GET['calle'];
+        $colonia=$_GET['colonia'];
+        $numero1=$_GET['numero1'];
+        $numero2=$_GET['numero2'];
+        $codigo=$_GET['codigo'];
+        $telefono=$_GET['telefono'];
+        $id=$_GET['id'];
 
 
 
@@ -174,8 +179,8 @@ $id=$_GET['id'];
                     <input type="text" name="calle"placeholder="Ingresa tu calle" value="<?=$calle?>" required autofocus>
                     
                     <label for="formFile" class="form-label">Codigo Postal:</label>
-                    <input type="text" name="codigo" placeholder="Codigo Postal" value="<?=$codigo?>" required>
-                     <p>Recuerda que por el momento solo contamos con servicio en Torreon</p>
+                    <input type="number" min="27000" max="27438" name="codigo" placeholder="Codigo Postal" value="<?=$codigo?>" required>
+                     <p>Recuerda que por el momento solo contamos con servicio en Torreon</p> <p>Ingresa un codigo postal desde <strong>27000</strong> hasta <strong>27438</strong></p>
                     
                     <label class="form" for="categoria-label">Numero exterior: </label>
                     <input type="text" name="numero1" placeholder="Num-Exterior" value="<?=$numero1?>" required>
