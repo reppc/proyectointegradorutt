@@ -1,4 +1,7 @@
 <?php
+  /* H:i:s agregar despues de "d con espacio para agregar la hora"*/
+ $hoys = date("d")-1;
+ $hoy = date("Y-m-$hoys");
   include("../../../../Scripts/productos.php");
 ?>
 <!DOCTYPE html>
@@ -221,17 +224,36 @@ if(!session_start() && $_SESSION['usuario']==null)
   </div><!--finalizacion/finalizacion compra.php-->
   <form  action="" method="post">
   <div class="row">
-      <div class="col">
-      <input style="
-      border: 0px;
-      background-color: black;
-      color: white;
-      margin-left=20px;
-      border-radius: 20px;
-
-      " type="submit" name="sig" value="crear orden de compra">
+      <div class="col-2">
+        <!--crear orden de compra-->
+        <?php
+        $carga_orden=new producto();
+        $cargar_ordenes=$carga_orden->carga_orden($_SESSION['id'],$hoy);
+        $prueba="";
+        foreach ($cargar_ordenes as $value) 
+        {
+          $prueba=$value->id_orden;
+        }
+        if($prueba=="")
+        {
+          echo 
+          "
+          <input style='
+          border: 0px;
+          background-color: black;
+          color: white;
+          margin-left=20px;
+          border-radius: 20px;
+  
+          ' type='submit' name='sig' value='crear orden de compra'
+          >
+          ";
+        }
+      ?>
+      
+      
       </div>
-      <div class="col">
+      <div class="col-1" style="margin-bottom: 20px;">
         <a href="../carrito.php"
         style="
         border: 0px;
@@ -241,7 +263,7 @@ if(!session_start() && $_SESSION['usuario']==null)
         "
         type="submit" class="btn" name="continuar_compra">atras</a>
       </div>
-      <div class="col">
+      <div class="col-2">
         <a href="finalizacion/finalizacion compra.php"
         style="
         border: 0px;
@@ -249,7 +271,7 @@ if(!session_start() && $_SESSION['usuario']==null)
         color: white;
         border-radius: 20px;
         "
-        type="submit" class="btn" name="continuar_compra">ver esto de orden</a>
+        type="submit" class="btn" name="continuar_compra">ver orden</a>
       </div>
       <div class="col">
       <label for="">seleccione forma de pago</label>

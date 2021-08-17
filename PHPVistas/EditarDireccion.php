@@ -119,7 +119,7 @@
                         <!--lista del dropdown de perfil-->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" href="../php/blog-informativo.php" >Mi perfil</a>
+                            <a class="dropdown-item" href="../php/MiPerfil.php" >Mi perfil</a>
                           </li>
                           <li>
                               <a class="dropdown-item" href="HistorialCompras.php">Mis pedidos</a>

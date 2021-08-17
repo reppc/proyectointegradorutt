@@ -201,7 +201,7 @@
                         
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
+                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MiPerfil.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
                           </li>
 
                           <?php
@@ -327,7 +327,12 @@
       echo "<div class='row recuadro'>
               <div class='col-x1-6 col-lg-6 col-md-6 col-sm-6'>";
               echo "<input type='hidden' value='$registro->cve_pub'>";
-      echo "<h5><b>$registro->titulo_pub</b><h5><br><a href='../PHPVistas/FormEditPub.php?no=$registro->cve_pub' value type='submit' class=' btn btn-success'>Editar</a>";
+      echo "<h5><b>$registro->titulo_pub</b><h5><br>";
+
+      if(isset($_SESSION["usuario"]) && $_SESSION['rol']=='Administrador_Blog')
+          {
+            echo "<a href='../PHPVistas/FormEditPub.php?no=$registro->cve_pub' value type='submit' class=' btn btn-success'>Editar</a>";
+          }
       echo "<h6>$registro->fecha_pub</h6>";
       echo "<br>";     
       echo "$registro->contenido</div>";

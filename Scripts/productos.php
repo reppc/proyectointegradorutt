@@ -154,14 +154,17 @@ class producto extends Database
 
                             </div>
 
+                            <!--stock-->
+                            <div class=''>
+                                <h5 class='contenidos'>En stock: $productos->stock</h5>
+                            </div>
+                            <br>
                             <!--precio del producto-->
                             <div class=''>
                                 <h3 class='precio-p'>$ $productos->precio_unitario</h3>
                             </div>
-                            <!--stock-->
-                            <div class=''>
-                                <h3 class='precio-p'>cantidad disponible:$productos->stock</h3>
-                            </div>
+
+
                             <!--botones-->
                                 <form action='' method='POST'>
                                     <div class=''>
@@ -216,6 +219,12 @@ class producto extends Database
                                 </div>
 
                             </div>
+
+                            <!--stock-->
+                            <div class=''>
+                                <h5 class='contenidos'>En stock: $productos->stock</h5>
+                            </div>
+                            <br>
 
                             <!--precio del producto-->
                             <div class=''>

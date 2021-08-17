@@ -130,7 +130,7 @@
                         
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
+                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MiPerfil.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
                           </li>
 
                           <?php
@@ -195,10 +195,12 @@
         </div>
       </nav>
 
-      <div class="cuadro container">
+      <div class="cuadro container col-5">
           <br>
         <h1 align="center">Metodos de pago</h1>
-        <br>
+        <br><br>
+            <a href="AgregarDirec.php" type="button" class="offset-4 btn btn-primary text-center">Agregar metodo de pago</a>
+        <br><br><br>
 
 
 

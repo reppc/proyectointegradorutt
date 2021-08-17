@@ -458,7 +458,9 @@ include("../Scripts/productos.php");
             <div class="row">
               <div class="col" style="width:auto;">
               <br><!--Si no hay sesion iniciada redireccionara a login-->
-                <a class='btn btn-secondary redondeado' style='padding:5px;' <?php if(isset($_SESSION["usuario"])){echo "href='interfaces/carrito/carrito.php'";}else{echo "href='../login/login.php'";}?> >Ver Carrito</a>
+                <a class='btn btn-secondary redondeado' style='padding:5px;' 
+                <?php if(isset($_SESSION["usuario"])){echo "href='interfaces/carrito/carrito.php'";}
+                else{echo "href='../login/login.php'";}?> >Ver Carrito</a>
 
             </div>
             </div>
@@ -475,6 +477,8 @@ include("../Scripts/productos.php");
       {
         if (isset($_POST['agregar_productos_al_carro_prueba'])) 
         {
+          echo $_POST['cantidad_producto'];
+          echo $_SESSION['id'];
           if 
           (
             $_POST['cantidad_producto']>0 
@@ -482,7 +486,6 @@ include("../Scripts/productos.php");
             && $_POST['cantidad_producto']!="cantidad"
           ) 
           {
-            $disponibilidad->carga_todo();
             $usuario=$_SESSION['id'];
             $cantidad_productos=$_POST['agregar_productos_al_carro_prueba'];
             $id_producto=$_POST['cantidad_producto'];
@@ -505,8 +508,5 @@ include("../Scripts/productos.php");
       crossorigin="anonymous"
     ></script>
   <!-- #endregion -->
-  <?php
-    echo $_SESSION['id'];
-  ?>
   </body>
 </html>

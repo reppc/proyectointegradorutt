@@ -131,7 +131,7 @@
                         
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li>
-                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MisDirecciones.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
+                            <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../PHPVistas/MiPerfil.php.php'";}else{echo "href='../login/login.php'";}?> >Mi perfil</a>
                           </li>
 
                           <?php

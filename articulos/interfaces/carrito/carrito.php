@@ -277,13 +277,12 @@ include("../../../scripts/productos.php");
                 </div>
               </div>
             </div>
-        <div class="col-2">
+        <div class="col">
           <!--botones-->
           <div class="col">
-            <div class="row">
               <form action="" method="post">
-                <div class="col">
-                  <input class="botones" type="reset" name="eliminar_carro" value="limpiar carro" />
+                <div class="col-1">
+                  
                 </div>
               </form>
               <?php
@@ -297,11 +296,11 @@ include("../../../scripts/productos.php");
 
                 <input type="text" name="TOTAL_ENV" style="display:none;" value="<?php echo $d?>">
               </form>
-            </div>
           </div>
         <!---->
       </div>
-    </div>
+    
+          </div>
   <!-- #region js-->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
