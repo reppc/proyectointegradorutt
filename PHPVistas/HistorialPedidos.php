@@ -193,20 +193,88 @@
           </div>
         </div>
       </nav>
+      <?php
+      include '../Scripts/database.php';
+      $conexion = new Database();
+      $conexion->conectarDB();
+
+      $cadena="SELECT metodo_pago.id_metodo, metodo_pago.nombre FROM metodo_pago";
+      $reg=$conexion->seleccionar($cadena);
+
+      //Variables de consulta
+      $where='';
+      $nombreus="";
+
+      //Botón buscar///////////////////
+
+      if(isset($_POST['buscar']))
+      {
+
+        $nombreus=$_POST['xnombre'];
+        $metodop=$_POST['xmetodo'];
+
+        if(empty($_POST=['xmetodo']))
+        {
+          $where="where usuarios.nombres like '".$nombreus."%'";
+        }
+
+        else if(isset($_POST['xnombre']))
+        {
+            $where="where metodo_pago.id_metodo='".$metodop."'";
+        }
+
+        else
+        {
+            $where="where usuarios.nombres like '".$nombreus."%' OR metodo_pago.id_metodo = '".$metodop."'";
+        }
+      }
+      ?>
 
       <div class="cuadro container">
           <br>
         <h1 align="center">Historiales de ventas</h1>
         <br>
-
+        <form method="post">
+          <div class="row">
+            
+            <div class="col-2">
+                <input type="text" class="form-control" placeholder="Nombre..." name="xnombre" <?php echo "value='".$nombreus."'";?>>
+            </div>
+            
+            <div class="col-2">
+                <select class='form-select' name='xmetodo'>
+                  <option value="">Metodo pago</option>
+                <?php
+                    foreach($reg as $value){
+                        echo "<option value='".$value->id_metodo."'>".$value->nombre."</option>";
+                    }
+                ?>
+                </select>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-dark" name="buscar" type="submit">Buscar</button>
+                
+            </div>
+            <div class="col-2">
+            <button class="btn btn-dark" onclick="setTimeout(function(){location.reload();}, 3000);">Recargar</button>
+            </div>
+          </div>
+          <br>
     <?php
-    include '../Scripts/database.php';
-    $conexion = new Database();
-    $conexion -> conectarDB();
 
-    $consulta="SELECT usuarios.nombres, usuarios.nombre_usuario,orden_compra.total,orden_compra.id_orden,productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario";
+    $consulta="SELECT usuarios.nombres, usuarios.nombre_usuario,orden_compra.total,orden_compra.id_orden,productos.imagen, 
+    productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, 
+    CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal)
+     as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto 
+     INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON 
+     orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo 
+     INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario $where";
+
+
     $tabla = $conexion->seleccionar($consulta);
 
+
+    
     //creacion de tabla dinamica para los datos de la BD
     echo "<table class='table table-hover'>
     <thead class='table-dark'>

@@ -7,7 +7,7 @@
         private $PDOLocal1;
         private $user="root";
         private $password="admin";
-        private $server="mysql:host=localhost; dbname=pruebasappsocom";
+        private $server="mysql:host=localhost; dbname=appsocompruebas";
 
         function conectarDB()
         {

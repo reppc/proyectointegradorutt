@@ -30,11 +30,9 @@
         .btn-acceder:hover{
             color: black;
         }
-        .body-g{
-        background-color: #2aa13e;
-        }
+        
     </style>
-    <title>login</title>
+    <title>Login</title>
   </head>
   <body class="body-g">
   <?php
