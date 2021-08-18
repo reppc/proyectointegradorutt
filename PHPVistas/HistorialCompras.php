@@ -214,7 +214,7 @@
 <table style="display:none" class='table table-hover table-borderless'>
     <?php
     include '../Scripts/database.php';
-    $conexion = mysqli_connect("localhost","root","admin","pruebasappsocom");
+    $conexion = mysqli_connect("localhost","root","admin","appsocompruebas");
     $iduser=$_SESSION["usuario"];
     $consulta="SELECT metodo_pago.nombre,orden_compra.total,
     CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ',
