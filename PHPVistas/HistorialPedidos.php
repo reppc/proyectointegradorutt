@@ -13,8 +13,8 @@
 <body>
 <body> 
 <?php
-        session_start();
-    ?>
+  session_start();
+?>
 
     <!--Barra navegadora-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
