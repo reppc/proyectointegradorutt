@@ -200,21 +200,31 @@
 <form method="get">
   <div class="col">
     <select name="filtro_orden">
-      <option value="todo">todo</option>
-      <option value="efectivo">efectivo</option>
-      <option value="transferencia">transferencia</option>
-      <option value="credito">credito</option>
+      <option from="filtro_orden" value="todo">todo</option>
+      <option from="filtro_orden" value="efectivo">efectivo</option>
+      <option from="filtro_orden" value="transferencia">transferencia</option>
+      <option from="filtro_orden" value="credito">credito</option>
     </select>
   </div>
   <div class="col">
     <input type="submit" value="filtrar">
+    <?php
+      $prueba=" ";
+      if (isset($_GET['filtrar'])) 
+      {
+        if($_GET['filtro_orden']="todo")
+        {
+          
+        }
+      }
+    ?>
   </div>
 </form>
 
-<table style="display:none" class='table table-hover table-borderless'>
+<table style="display:<?php echo $prueba ?>" class='table table-hover table-borderless'>
     <?php
     include '../Scripts/database.php';
-    $conexion = mysqli_connect("localhost","root","admin","appsocompruebas");
+    $conexion = mysqli_connect("localhost","root","admin","pruebasappsocom");
     $iduser=$_SESSION["usuario"];
     $consulta="SELECT metodo_pago.nombre,orden_compra.total,
     CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ',
@@ -230,7 +240,7 @@
      WHERE usuarios.nombre_usuario='$iduser' or fecha_pedido='2021-08-16'";
 
     $tabla = mysqli_query($conexion, $consulta);
-
+    
 
     //creacion de tabla dinamica para los datos de la BD
     echo "
@@ -245,6 +255,13 @@
     </thead>
     <tbody class='table-secondary'>";
 
+    if (isset($_GET['filtrar'])) 
+    {
+      if($_GET['filtro_orden']="todo")
+      {
+        
+      }
+    }
         while($registro = mysqli_fetch_row($tabla))
         {?>
             <tr>
