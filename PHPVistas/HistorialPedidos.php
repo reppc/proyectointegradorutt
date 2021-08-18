@@ -270,7 +270,7 @@
      INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON 
      orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo 
      INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario $where";
-    print_r($consulta);
+
 
     $tabla = $conexion->seleccionar($consulta);
 
