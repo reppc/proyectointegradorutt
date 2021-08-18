@@ -225,7 +225,7 @@
 
         else
         {
-            $where="where usuarios.nombres like '".$nombreus."%' AND metodo_pago.id_metodo = '".$metodop."'";
+            $where="where usuarios.nombres like '".$nombreus."%' OR metodo_pago.id_metodo = '".$metodop."'";
         }
       }
       ?>
@@ -243,7 +243,7 @@
             
             <div class="col-2">
                 <select class='form-select' name='xmetodo'>
-                  <option value="">Metodo pago</option>
+                  <option value=''>Metodo pago</option>
                 <?php
                     foreach($reg as $value){
                         echo "<option value='".$value->id_metodo."'>".$value->nombre."</option>";
@@ -270,7 +270,7 @@
      INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON 
      orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo 
      INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario $where";
-
+    print_r($consulta);
 
     $tabla = $conexion->seleccionar($consulta);
 
