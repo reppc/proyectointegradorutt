@@ -272,7 +272,7 @@ include("../Scripts/productos.php");
             ?>
           </div>
         </div>
-      </nav>
+</nav>
     <!---->
     <!-- #region contenido home articulos-->
     <!--barra de busqueda-->

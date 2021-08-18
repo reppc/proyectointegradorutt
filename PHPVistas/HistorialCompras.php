@@ -193,28 +193,54 @@
           </div>
         </div>
       </nav>
-
       <div class="cuadro container">
           <br>
         <h1 align="center">Historial de tus compras</h1>
         <br>
+<form method="get">
+  <div class="col">
+    <select name="filtro_orden">
+      <option value="todo">todo</option>
+      <option value="efectivo">efectivo</option>
+      <option value="transferencia">transferencia</option>
+      <option value="credito">credito</option>
+    </select>
+  </div>
+  <div class="col">
+    <input type="submit" value="filtrar">
+  </div>
+</form>
 
-
-
+<table style="display:none" class='table table-hover table-borderless'>
     <?php
     include '../Scripts/database.php';
     $conexion = mysqli_connect("localhost","root","admin","pruebasappsocom");
     $iduser=$_SESSION["usuario"];
-    $consulta="SELECT metodo_pago.nombre,orden_compra.total,CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio',orden_compra.fecha_pedido, orden_compra.id_orden, productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser'";
+    $consulta="SELECT metodo_pago.nombre,orden_compra.total,
+    CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ',
+     domicilio.codigo_postal) as 'Domicilio',orden_compra.fecha_pedido, 
+     orden_compra.id_orden, productos.imagen, productos.nombre as 
+     'producto', orden_detalle.cantidad, orden_detalle.precio 
+     FROM productos INNER JOIN orden_detalle 
+     ON productos.id_producto= orden_detalle.producto 
+     INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden 
+     INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio 
+     INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo 
+     INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario 
+     WHERE usuarios.nombre_usuario='$iduser' or fecha_pedido='2021-08-16'";
 
     $tabla = mysqli_query($conexion, $consulta);
 
 
     //creacion de tabla dinamica para los datos de la BD
-    echo "<table class='table table-hover table-borderless'>
+    echo "
     <thead class='table-dark'>
     <tr>
-    <th>Metodo de pago</th><th>Costo</th><th>Domicilio</th><th>Fecha del pedido</th><th>Opciones</th>
+    <th>Metodo de pago</th>
+    <th>Costo</th>
+    <th>Domicilio</th>
+    <th>Fecha del pedido</th>
+    <th>Opciones</th>
     </tr>
     </thead>
     <tbody class='table-secondary'>";
@@ -246,8 +272,8 @@
  ?>
 
         </tbody>
-        </table>
-        </div>
+</table>
+</div>
     
 </body>
 </html>
