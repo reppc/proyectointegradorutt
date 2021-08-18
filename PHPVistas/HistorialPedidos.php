@@ -220,6 +220,13 @@
 ?>
 <button type="submit" class="btn btn-secondary">Ordenar</button>
 </form>
+<table class='table table-hover'>
+    <thead class='table-dark'>
+    <tr>
+    <th>NombreCliente</th><th>NUsuario</th><th>MetodoPago</th><th>total</th><th>fecha_pedido</th><th>Opciones</th>
+    </tr>
+    </thead>
+    <tbody>
 <?php
 if($_GET)
 {
@@ -229,13 +236,7 @@ if($_GET)
     $tabla = $conexion->seleccionar($consulta);
 
     //creacion de tabla dinamica para los datos de la BD
-    echo "<table class='table table-hover'>
-    <thead class='table-dark'>
-    <tr>
-    <th>NombreCliente</th><th>NUsuario</th><th>MetodoPago</th><th>total</th><th>fecha_pedido</th><th>Opciones</th>
-    </tr>
-    </thead>
-    <tbody>";
+    
 
         foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
         {
