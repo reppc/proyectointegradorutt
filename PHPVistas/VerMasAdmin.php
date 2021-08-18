@@ -200,7 +200,7 @@
         
 <?php     
 
-$conexion = mysqli_connect("localhost","root","admin","pruebasappsocom");
+$conexion = mysqli_connect("localhost","root","admin","AppSoCom");
     
 
 $consulta="SELECT orden_compra.folio,productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario";
