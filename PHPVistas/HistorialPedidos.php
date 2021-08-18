@@ -199,34 +199,47 @@
       $conexion->conectarDB();
 
       $cadena="SELECT metodo_pago.id_metodo, metodo_pago.nombre FROM metodo_pago";
+      $cadenaF="SELECT DISTINCT orden_compra.fecha_pedido FROM orden_compra";
       $reg=$conexion->seleccionar($cadena);
+      $regF=$conexion->seleccionar($cadenaF);
 
       //Variables de consulta
       $where='';
-      $nombreus="";
 
       //Botón buscar///////////////////
 
       if(isset($_POST['buscar']))
       {
-
         $nombreus=$_POST['xnombre'];
-        $metodop=$_POST['xmetodo'];
+        $metodop=$_POST['xmetodo'];     
 
-        if(empty($_POST=['xmetodo']))
+        if(empty($metodop))
         {
           $where="where usuarios.nombres like '".$nombreus."%'";
         }
 
-        else if(isset($_POST['xnombre']))
+         else if(empty($_POST['xnombre']))
         {
-            $where="where metodo_pago.id_metodo='".$metodop."'";
+          $where="where metodo_pago.id_metodo='".$metodop."'"; 
         }
 
         else
         {
-            $where="where usuarios.nombres like '".$nombreus."%' OR metodo_pago.id_metodo = '".$metodop."'";
+          $where="where usuarios.nombres like '".$nombreus."%' AND metodo_pago.id_metodo = '".$metodop."'";
         }
+
+       // else
+    //    {
+    //        $where="where usuarios.nombres like '".$nombreus."%' AND metodo_pago.id_metodo = '".$metodop."'";
+    //    }
+      }
+
+      if(isset($_POST['buscarfech']))
+      {
+        $fecha1=$_POST['fechdes'];
+        $fecha2=$_POST['fechhas'];
+
+        $where="where orden_compra.fecha_pedido BETWEEN '$fecha1' AND '$fecha2'";
       }
       ?>
 
@@ -238,9 +251,9 @@
           <div class="row">
             
             <div class="col-2">
-                <input type="text" class="form-control" placeholder="Nombre..." name="xnombre" <?php echo "value='".$nombreus."'";?>>
+                <input type="text" class="form-control" placeholder="Nombre..." name="xnombre" >
             </div>
-            
+
             <div class="col-2">
                 <select class='form-select' name='xmetodo'>
                   <option value=''>Metodo pago</option>
@@ -253,9 +266,34 @@
             </div>
 
             <div class="col-2">
-                <button class="btn btn-dark" name="buscar" type="submit">Buscar</button>
-                
+                <button class="btn btn-success" name="buscar" type="submit">Buscar</button>
             </div>
+            
+            <div class="col-1">
+                <select class='form-select' name='fechdes'>
+                  <option>Desde...</option>
+                <?php
+                    foreach($regF as $f1){
+                        echo "<option value='".$f1->fecha_pedido."'>".$f1->fecha_pedido."</option>";
+                    }
+                ?>
+                </select>
+            </div>
+
+            <div class="col-1">
+                <select class='form-select' name='fechhas'>
+                  <option value=''>Hasta...</option>
+                <?php
+                    foreach($regF as $f1){
+                        echo "<option value='".$f1->fecha_pedido."'>".$f1->fecha_pedido."</option>";
+                    }
+                ?>
+                </select>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-success" name="buscarfech" type="submit">Buscar</button>
+            </div>
+
             <div class="col-2">
             <button class="btn btn-dark" onclick="setTimeout(function(){location.reload();}, 3000);">Recargar</button>
             </div>
@@ -270,7 +308,6 @@
      INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON 
      orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo 
      INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario $where";
-    print_r($consulta);
 
     $tabla = $conexion->seleccionar($consulta);
 
