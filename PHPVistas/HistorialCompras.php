@@ -237,7 +237,7 @@
      INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio 
      INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo 
      INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario 
-     WHERE usuarios.nombre_usuario='$iduser' or fecha_pedido='2021-08-16'";
+     WHERE usuarios.nombre_usuario='$iduser'";
 
     $tabla = mysqli_query($conexion, $consulta);
     
