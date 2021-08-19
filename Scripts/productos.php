@@ -554,27 +554,16 @@ class producto extends Database
     {
         $this->conexion=new Database();
         $articulo="
-                SELECT 
-                orden_compra.id_orden,
-                usuarios.nombres,
-                metodo_pago.nombre,
-                orden_compra.total,
-                    domicilio.calle,
-                    domicilio.numeroExt,
-                    domicilio.numeroInt,
-                    domicilio.codigo_postal,
-                    domicilio.colonia,
-                    domicilio.telefono,
-                    domicilio.colonia,
-                orden_compra.fecha_pedido 
-                FROM orden_compra
-                INNER JOIN usuarios
-                on usuarios.id_usuario=orden_compra.cliente
-                INNER JOIN metodo_pago
-                on metodo_pago.id_metodo=orden_compra.metodoPago
-                INNER JOIN domicilio
-                on orden_compra.domicilio=domicilio.id_domicilio
-                        WHERE orden_compra.cliente='$usuario' and orden_compra.fecha_pedido LIKE('%$fecha%');
+        SELECT orden_compra.id_orden, usuarios.nombres, 
+        metodo_pago.nombre, orden_compra.total, 
+        domicilio.calle, domicilio.numeroExt, domicilio.numeroInt, 
+        domicilio.codigo_postal, domicilio.colonia, domicilio.telefono, 
+        domicilio.colonia, orden_compra.fecha_pedido FROM orden_compra 
+        INNER JOIN usuarios on usuarios.id_usuario=orden_compra.cliente 
+        INNER JOIN metodo_pago on metodo_pago.id_metodo=orden_compra.metodoPago 
+        INNER JOIN domicilio on orden_compra.domicilio=domicilio.id_domicilio 
+        WHERE orden_compra.cliente=$usuario and orden_compra.fecha_pedido LIKE('%$fecha%') 
+        order BY orden_compra.id_orden DESC LIMIT 1;
         ";
         /*conexion*/ 
             try{
