@@ -14,6 +14,14 @@
 <body> 
 <?php
   session_start();
+  if($_SESSION['usuario']=="" && $_SESSION['rol']=="")
+  {
+      header("location:../login/login.php");
+  }
+  if ($_SESSION['rol']!="Cliente") 
+  {
+    header("location: ../inicio/index copy.php");
+  }
 ?>
 
     <!--Barra navegadora-->
@@ -322,7 +330,7 @@
     <thead class='table-dark'>
     <tr>
     <th>Metodo de pago</th>
-    <th>Costo</th>
+    <th>Total</th>
     <th>Domicilio</th>
     <th>Fecha del pedido</th>
     <th>Opciones</th>
@@ -359,7 +367,8 @@
             producto=$registro->producto &
             cantidad=$registro->cantidad &
             precio=$registro->precio &
-            dom=$registro->Domicilio 
+            dom=$registro->Domicilio&
+            orden=$registro->id_orden
            
 
             '>Ver más</a></td>";

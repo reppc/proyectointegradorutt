@@ -19,6 +19,10 @@
   <body>
 <?php
     session_start();
+    if($_SESSION['usuario']=="" && $_SESSION['rol']=="")
+        {
+            header("location:../../../../../login/login.php");
+        }
 ?>
 
     <!--Barra navegadora-->

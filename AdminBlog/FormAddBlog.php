@@ -15,6 +15,15 @@
 <body class="body-g">
 <?php
         session_start();
+        if($_SESSION['usuario']=="" && $_SESSION['rol']=="")
+        {
+          header("location: ../login/login.php");
+          
+        }
+        if ($_SESSION['rol']!="Administrador_Blog") 
+          {
+            header("location: ../inicio/index copy.php");
+          }
     ?>
 
     <!--Barra navegadora-->

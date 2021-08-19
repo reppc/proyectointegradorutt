@@ -1106,7 +1106,18 @@ class producto extends Database
         $this->conexion=new Database();
         $articulo=
         "
-        SELECT `id_det`, `orden`, `producto`, `cantidad`, `precio` FROM `orden_detalle` WHERE orden_detalle.orden=$ord_c;
+        SELECT orden_detalle.id_det, 
+        orden_detalle.orden, orden_detalle.producto, 
+        orden_detalle.cantidad, orden_detalle.precio, 
+        productos.imagen, productos.nombre as 'nombrep', 
+        metodo_pago.nombre as 'mtp', CONCAT(domicilio.calle,' ',
+        domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) 
+        as 'dom', orden_compra.fecha_pedido FROM `orden_detalle` 
+        INNER JOIN orden_compra on orden_compra.id_orden=orden_detalle.orden 
+        INNER JOIN productos on productos.id_producto=orden_detalle.producto 
+        INNER JOIN metodo_pago on metodo_pago.id_metodo=orden_compra.metodoPago 
+        INNER JOIN domicilio on domicilio.id_domicilio=orden_compra.domicilio 
+        WHERE orden_detalle.orden=$ord_c;
         ";
         /*conexion*/ 
             try{

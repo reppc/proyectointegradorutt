@@ -2,24 +2,16 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+	<title>Detalle de la compra</title>
+	 <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="../css/vermas.css">
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
 
     <script src="../inicio/js/bootstrap.min.js"></script>
-
-	<title>Direcciones Registradas Por Ti</title>
 </head>
 <body>
 <?php
         session_start();
-        if($_SESSION['usuario']=="" && $_SESSION['rol']=="")
-  {
-      header("location:../login/login.php");
-  }
-  if ($_SESSION['rol']!="Cliente") 
-  {
-    header("location: ../inicio/index copy.php");
-  }
     ?>
 
     <!--Barra navegadora-->
@@ -201,58 +193,36 @@
           </div>
         </div>
       </nav>
-      <div class="container-fluid"> <br>
-          
-          <div class="row">
-          <div class="offset-2 col-8 offset-2">
-      <h2>Mis direcciones <a href="AgregarDirec.php" type="button" class="btn btn-primary text-center">Agregar Direccion</a></h2> <br>
-<?php 
 
-include'../Scripts/database.php';
-$conexion= new Database();
-$conexion->conectarDB();
-$iduser=$_SESSION["usuario"];
+      <br> 
+      <div class="container-fluid"><h2 align="center">Detalles de tu compra</h2>
+        
+<?php     
+//include'../Scripts/database.php';
+include '../Scripts/productos.php';
 
-$consulta="SELECT domicilio.calle,' ', domicilio.colonia, ' ', domicilio.numeroExt,' ',domicilio.numeroInt,' ',domicilio.telefono,' ', domicilio.codigo_postal,' ', domicilio.id_domicilio FROM domicilio INNER JOIN usuarios ON domicilio.cliente= usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser'";
-$tabla=$conexion->seleccionar($consulta);
-echo "<table class='table table-hover table-borderless'>
-    <thead class='table-dark'>
-    <tr>
-    <th>Domicilio</th><th>Opciones</th>
-    </tr>
-    </thead>
-    <tbody class='table-secondary'>";
+$conexion =new producto();
+    $iduser=$_SESSION["usuario"];
+    $idorden=$_GET['orden'];
+$consulta="SELECT orden_compra.id_orden,orden_compra.folio,productos.imagen, productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal) as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario WHERE usuarios.nombre_usuario='$iduser';";
+//$tabla = $conexion->seleccion_ord_det($idorden);
+$tabla = $conexion->seleccion_ord_det($_GET['orden']);
+$asd=serialize($tabla);
 
-foreach($tabla as $registro)
-{
-    echo "<tr>";
-    echo "<td>$registro->calle";
-    echo " $registro->colonia";
-    echo " $registro->numeroExt";
-    echo " $registro->codigo_postal";
-    echo "</td>";
-    echo "<td hidden>$registro->numeroInt</td>";
-    echo "<td hidden>$registro->telefono</td>";
-    echo "<td hidden>$registro->id_domicilio</td>";
-//creacion de editar
-    echo "<td><a href='EditarDireccion.php?
-    calle=$registro->calle &
-    colonia=$registro->colonia &
-    numero1=$registro->numeroExt &
-    numero2=$registro->numeroInt &
-    telefono=$registro->telefono &
-    codigo=$registro->codigo_postal &
-    id=$registro->id_domicilio
-
-    ' value type='submit' class='btn btn-primary'>Editar</a> 
-    ";
-    echo "</tr>";
+$met=$_GET['met'];
+//$tot=$_GET['tot'];
+$dom=$_GET['dom'];
+$fecha=$_GET['fecha'];
+$folio=$_GET['folio'];
+$img=$_GET['img'];
+$producto=$_GET['producto'];
+$cantidad=$_GET['cantidad'];
+$precio=$_GET['precio'];
+foreach ($tabla as $value) {
+  
 }
-echo "</tbody>
-        </table>";
-        echo "</div>";
-        echo "</div>";
-echo "</div>";
-?> 
+?>
+
+
 </body>
 </html>

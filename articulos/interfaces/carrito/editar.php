@@ -14,6 +14,11 @@
 <body>
     <div class="container">
 <?php
+session_start();
+if($_SESSION['usuario']=="" && $_SESSION['rol']=="")
+        {
+            header("location:../../../login/login.php");
+        }
 if(!isset($_GET["id"])) exit();
 $id = $_GET["id"];
 include_once "../../../scripts/productos.php";

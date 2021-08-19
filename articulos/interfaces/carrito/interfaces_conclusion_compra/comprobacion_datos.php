@@ -17,10 +17,11 @@
   </head>
   <body>
 <?php
-if(!session_start() && $_SESSION['usuario']==null)
-{
-  echo "no hay session";
-}
+  session_start();
+  if($_SESSION['usuario']=="" && $_SESSION['rol']=="")
+        {
+            header("location: ../../../../login/login.php");
+        }
 ?>
     <!--Barra navegadora-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

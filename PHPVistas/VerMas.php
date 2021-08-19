@@ -12,6 +12,10 @@
 <body>
 <?php
         session_start();
+        if($_SESSION['usuario']=="" && $_SESSION['rol']=="")
+  {
+      header("location:../login/login.php");
+  }
     ?>
 
     <!--Barra navegadora-->
@@ -225,7 +229,7 @@ echo "<br>
       
     ";
     if($registro = mysqli_fetch_row($tabla))
-    { ?>
+    {  ?>
       
       <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
         <strong>Folio: <?php echo  "$folio" ?></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

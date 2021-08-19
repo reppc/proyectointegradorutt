@@ -19,6 +19,14 @@
 
 <?php
         session_start();
+        if($_SESSION['usuario']=="" && $_SESSION['rol']=="")
+  {
+      header("location:../login/login.php");
+  }
+  if ($_SESSION['rol']!="Administrador") 
+  {
+    header("location: ../inicio/index copy.php");
+  }
     ?>
 
     <!--Barra navegadora-->

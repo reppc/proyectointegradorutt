@@ -44,6 +44,10 @@
 <body style="background-color:#f2f2f2;">
     <?php
         session_start();
+        if($_SESSION['usuario']=="" && $_SESSION['rol']=="")
+  {
+      header("location:../login/login.php");
+  }
     ?>
 
     <!--Barra navegadora-->
