@@ -148,7 +148,7 @@
                           <li>
                               <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../../../../../PHPVistas/HistorialCompras.php'";}else{echo "href='../login/login.php'";}?>>Mis pedidos</a>
                           </li>
-                          <li>PHPVistas
+                          <li>
                               <a class="dropdown-item" <?php if(isset($_SESSION["usuario"])){echo "href='../../../../../MisDirecciones.php'";}else{echo "href='../login/login.php'";}?>>Mis direcciones</a>
                           </li>
 

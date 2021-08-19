@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="../inicio/css/navStyle.css">
 
     <script src="../inicio/js/bootstrap.min.js"></script>
-    <title>Historial de tus compras</title>
+    <title>Historial de pedidos</title>
 </head>
 <body>
 <body> 
 <?php
-        session_start();
-    ?>
+  session_start();
+?>
 
     <!--Barra navegadora-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -56,7 +56,7 @@
                           <li>
                              <a class="dropdown-item" href="../PHPVistas/verProductos.php"> Ver registros de Productos</a>
                             </li>
-                          
+                         
 
                             <a class="dropdown-item" href="../PHPVistas/HistorialPedidos.php">Historial de pedidos</a>
                             <div class="dropdown-divider"></div>
@@ -193,57 +193,132 @@
           </div>
         </div>
       </nav>
+      <?php
+      include '../Scripts/database.php';
+      $conexion = new Database();
+      $conexion->conectarDB();
+      $us=$_SESSION['id'];
+      $cadena="SELECT metodo_pago.id_metodo, metodo_pago.nombre FROM metodo_pago";
+      $cadenaF="SELECT DISTINCT orden_compra.fecha_pedido FROM orden_compra where orden_compra.cliente=$us";
+      $reg=$conexion->seleccionar($cadena);
+      $regF=$conexion->seleccionar($cadenaF);
+
+      //Variables de consulta
+      $where='';
+      $us=$_SESSION['id'];
+      //Botón buscar///////////////////
+
+      if(isset($_POST['buscar']))
+      {
+        $metodop=$_POST['xmetodo'];     
+
+        if(empty($metodop))
+        {
+          $where="usuarios.id_usuario=$us";
+        }
+
+         else if(empty($_POST['xnombre']))
+        {
+          $where="where metodo_pago.id_metodo='".$metodop."' and usuarios.id_usuario=$us"; 
+        }
+
+        else
+        {
+          $where="metodo_pago.id_metodo = '".$metodop."' and usuarios.id_usuario=$us";
+        }
+
+       // else
+    //    {
+    //        $where="where usuarios.nombres like '".$nombreus."%' AND metodo_pago.id_metodo = '".$metodop."'";
+    //    }
+      }
+
+      if(isset($_POST['buscarfech']))
+      {
+        $fecha1=$_POST['fechdes'];
+        $fecha2=$_POST['fechhas'];
+
+        $where="where orden_compra.fecha_pedido BETWEEN '$fecha1' AND '$fecha2' and usuarios.id_usuario=$us";
+      }
+      ?>
+
       <div class="cuadro container">
           <br>
-        <h1 align="center">Historial de tus compras</h1>
+        <h1 align="center">Historiales de ventas</h1>
         <br>
-<form method="get">
-  <div class="col">
-    <select name="filtro_orden">
-      <option from="filtro_orden" value="todo">todo</option>
-      <option from="filtro_orden" value="efectivo">efectivo</option>
-      <option from="filtro_orden" value="transferencia">transferencia</option>
-      <option from="filtro_orden" value="credito">credito</option>
-    </select>
-  </div>
-  <div class="col">
-    <input type="submit" value="filtrar">
-    <?php
-      $prueba=" ";
-      if (isset($_GET['filtrar'])) 
-      {
-        if($_GET['filtro_orden']="todo")
-        {
-          
-        }
-      }
-    ?>
-  </div>
-</form>
+        <form method="post">
+          <div class="row">
 
-<table style="display:<?php echo $prueba ?>" class='table table-hover table-borderless'>
-    <?php
-    include '../Scripts/database.php';
-    $conexion = mysqli_connect("localhost","root","admin","AppSoCom");
-    $iduser=$_SESSION["usuario"];
-    $consulta="SELECT metodo_pago.nombre,orden_compra.total,
-    CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ',
-     domicilio.codigo_postal) as 'Domicilio',orden_compra.fecha_pedido, 
-     orden_compra.id_orden, productos.imagen, productos.nombre as 
-     'producto', orden_detalle.cantidad, orden_detalle.precio 
-     FROM productos INNER JOIN orden_detalle 
-     ON productos.id_producto= orden_detalle.producto 
-     INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden 
-     INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio 
-     INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo 
-     INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario 
-     WHERE usuarios.nombre_usuario='$iduser'";
+            <div class="col-2">
+                <select class='form-select' name='xmetodo'>
+                <?php
+                    foreach($reg as $value){
+                        echo "<option value='".$value->id_metodo."'>".$value->nombre."</option>";
+                    }
+                ?>
+                </select>
+            </div>
 
-    $tabla = mysqli_query($conexion, $consulta);
-    
+            <div class="col-2">
+                <button class="btn btn-success" name="buscar" type="submit">Buscar</button>
+            </div>
+            
+            <div class="col-1">
+                <select class='form-select' name='fechdes'>
+                  <option>Desde...</option>
+                <?php
+                    foreach($regF as $f1){
+                        echo "<option value='".$f1->fecha_pedido."'>".$f1->fecha_pedido."</option>";
+                    }
+                ?>
+                </select>
+            </div>
+
+            <div class="col-1">
+                <select class='form-select' name='fechhas'>
+                  <option value=''>Hasta...</option>
+                <?php
+                    foreach($regF as $f1){
+                        echo "<option value='".$f1->fecha_pedido."'>".$f1->fecha_pedido."</option>";
+                    }
+                ?>
+                </select>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-success" name="buscarfech" type="submit">Buscar</button>
+            </div>
+
+            <div class="col-2">
+            <button class="btn btn-dark" onclick="setTimeout(function(){location.reload();}, 3000);">Recargar</button>
+            </div>
+          </div>
+          <br>
+    <?php
+    $us=$_SESSION['id'];
+    if ($where!="") {
+      $consulta="SELECT DISTINCT usuarios.nombres, usuarios.nombre_usuario,orden_compra.total,orden_compra.id_orden,productos.imagen, 
+    productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, 
+    CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal)
+     as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto 
+     INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON 
+     orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo 
+     INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario $where";
+    }
+    else {
+      
+    $consulta="SELECT DISTINCT usuarios.nombres, usuarios.nombre_usuario,orden_compra.total,orden_compra.id_orden,productos.imagen, 
+    productos.nombre as 'producto', orden_detalle.cantidad, orden_detalle.precio, metodo_pago.nombre, 
+    CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ', domicilio.codigo_postal)
+     as 'Domicilio', orden_compra.fecha_pedido FROM productos INNER JOIN orden_detalle ON productos.id_producto= orden_detalle.producto 
+     INNER JOIN orden_compra ON orden_detalle.orden= orden_compra.id_orden INNER JOIN domicilio ON 
+     orden_compra.domicilio= domicilio.id_domicilio INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo 
+     INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario $where and usuarios.id_usuario=$us";
+     }
+
+    $tabla = $conexion->seleccionar($consulta);
 
     //creacion de tabla dinamica para los datos de la BD
-    echo "
+    echo "<table class='table table-hover'>
     <thead class='table-dark'>
     <tr>
     <th>Metodo de pago</th>
@@ -253,44 +328,51 @@
     <th>Opciones</th>
     </tr>
     </thead>
-    <tbody class='table-secondary'>";
+    <tbody>";
 
-    if (isset($_GET['filtrar'])) 
-    {
-      if($_GET['filtro_orden']="todo")
-      {
-        
-      }
-    }
-        while($registro = mysqli_fetch_row($tabla))
-        {?>
-            <tr>
-            <td><?php echo $registro['0']; ?></td> <!--los nombres de los campos deben ser exactos a los de la BD-->
-            <td><?php echo $registro['1'] ?></td>
-            <td><?php echo $registro['2'] ?></td> <!--//no deben quedar espacios-->
-            <td><?php echo $registro['3'] ?></td>
-            <td hidden><?php echo $registro['4'] ?></td>
-            <td hidden><?php echo $registro['5'] ?></td>
-            <td hidden><?php echo $registro['6'] ?></td>
-            <td hidden><?php echo $registro['7'] ?></td>
-            <td hidden><?php echo $registro['8'] ?></td>
-            <th><a href="VerMas.php? met=<?php echo $registro['0'] ?> &
-              tot=<?php echo $registro['1'] ?> &
-              dom=<?php echo $registro['2'] ?> &
-              fecha=<?php echo $registro['3'] ?>&
-              folio=<?php echo $registro['4'] ?> &
-              img=<?php echo $registro['5'] ?> &
-              producto=<?php echo $registro['6'] ?> &
-              cantidad=<?php echo $registro['7'] ?> &
-              precio=<?php echo $registro['8'] ?>">Ver más</a></th>
-            </tr>
-            <?php 
+
+    //creacion de tabla dinamica para los datos de la BD
+    
+
+        foreach($tabla as $registro) //foreach acuerdo a la cant. de registros
+        {
+            echo "<tr>";
+            echo "<td>$registro->nombre</td>";  //los nombres de los campos deben ser exactos a los de la BD
+            echo "<td>$registro->total</td>";
+            echo "<td>$registro->Domicilio</td>"; //no deben quedar espacios
+            echo "<td>$registro->fecha_pedido</td>"; //no deben quedar espacios
+            echo "<td hidden>$registro->id_orden</td>";
+            echo "<td hidden>$registro->imagen</td>";
+            echo "<td hidden>$registro->producto</td>";
+            echo "<td hidden>$registro->cantidad</td>";
+            echo "<td hidden>$registro->precio</td>";
+            echo "<td hidden>$registro->Domicilio</td>";
+            echo "<td hidden>$registro->fecha_pedido</td>";
+            echo "<td><a href='VerMasAdmin.php?
+            nombre=$registro->nombres &
+            nombreusu=$registro->nombre_usuario &
+            metodo=$registro->nombre &
+            total=$registro->total &
+            fecha=$registro->fecha_pedido &
+            folio=$registro->id_orden &
+            img=$registro->imagen &
+            producto=$registro->producto &
+            cantidad=$registro->cantidad &
+            precio=$registro->precio &
+            dom=$registro->Domicilio 
+           
+
+            '>Ver más</a></td>";
+            echo "<tr>";
         }
- ?>
 
-        </tbody>
-</table>
-</div>
+        echo "</tbody>
+        </table>";
+
+        $conexion -> desconectarDB();
+      
+        ?>
+        </div>
     
 </body>
 </html>
