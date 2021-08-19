@@ -21,7 +21,13 @@
     session_start();
     if($_SESSION['usuario']=="" && $_SESSION['rol']=="")
         {
-            header("location:../../../../../login/login.php");
+            header("location: ../../../../../login/login.php");
+        }
+        else {
+          if ($_SESSION['rol']=="Administrador" || $_SESSION['rol']=="Administrador_Blog") 
+          {
+            header("location: ../../../../../inicio/index copy.php");
+          }
         }
 ?>
 
