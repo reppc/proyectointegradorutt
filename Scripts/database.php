@@ -57,7 +57,7 @@
             try
             {
                 $pase=0;
-                $query="SELECT * FROM usuarios INNER JOIN rol_usuario ON rol_usuario.id_rol=usuarios.Rol 
+                $query="SELECT * FROM usuarios INNER JOIN rol_usuario ON rol_usuario.id_rol=usuarios.rol 
                         WHERE nombre_usuario='$usuario'";
 
                 $queryR= "SELECT rol_usuario.tipo_usuario FROM usuarios 
