@@ -9,7 +9,7 @@
     <script src="../inicio/js/bootstrap.min.js"></script>
     <style>
       	.body-g{
-        background-color: #2aa13e;
+        background-color: rgb(40, 80, 36);
     }
     </style>
 	<title>Agrega tu direccion</title>
@@ -164,19 +164,20 @@
                 <div class="col">
                     <label for="formFile" class="form-label">Calle:</label>
                     <input type="text" name="calle" placeholder="Ingresa tu calle" required autofocus>
-                    
+                    <br>
                     <label for="formFile" class="form-label">Codigo Postal:</label>
                     <input type="number"  min="27000" max="27438" maxlength="5"name="codigop" placeholder="Codigo Postal" required>
-                     <p>Recuerda que por el momento solo contamos con servicio en Torreon</p> <p>Ingresa un codigo postal desde <strong>27000</strong> hasta <strong>27438</strong></p>
-                    
+                     <p class="text-light"><i>Recuerda que por el momento solo contamos con servicio en Torreon</i></p> <p class="text-light"><i>Ingresa un codigo postal desde <strong>27000</strong> hasta <strong>27438</strong></i></p>
+                    <br>
                     <label class="form" for="categoria-label">Numero exterior: </label>
                     <input type="text" name="numeroE" placeholder="Num-Exterior" required>
-
+                    <br>
                     <label class="form" for="categoria-label">Numero interior: </label>
                     <input type="text" name="numeroI" placeholder="Num-interior">
-
+                    <br>
                     <label class="form" for="categoria-label">Telefono: </label>
                     <input type="text" maxlength="10" name="telefono" placeholder="Escribe tu telefono" required>
+                    <br>
                     <label class="form" for="categoria-label">Colonia: </label>
                     <input type="text" name="colonia" placeholder="Escribe la colonia" required>
 

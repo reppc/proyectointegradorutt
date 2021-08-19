@@ -295,9 +295,10 @@
             </div>
 
             <div class="col-2">
-            <button class="btn btn-dark" onclick="setTimeout(function(){location.reload();}, 3000);">Recargar</button>
+                <button class="btn btn-dark" onclick="setTimeout(function(){location.reload();}, 3000);">Recargar</button>
             </div>
           </div>
+        </form>
           <br>
     <?php
 

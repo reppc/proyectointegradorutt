@@ -197,35 +197,82 @@
           <br>
         <h1 align="center">Historial de tus compras</h1>
         <br>
-<form method="get">
-  <div class="col">
-    <select name="filtro_orden">
-      <option from="filtro_orden" value="todo">todo</option>
-      <option from="filtro_orden" value="efectivo">efectivo</option>
-      <option from="filtro_orden" value="transferencia">transferencia</option>
-      <option from="filtro_orden" value="credito">credito</option>
-    </select>
-  </div>
-  <div class="col">
-    <input type="submit" value="filtrar">
-    <?php
-      $prueba=" ";
-      if (isset($_GET['filtrar'])) 
+        <?php
+      include '../Scripts/database.php';
+      $conexion = new Database();
+      $conexion->conectarDB();
+      $iduser=$_SESSION["usuario"];
+
+      $cadena="SELECT metodo_pago.id_metodo, metodo_pago.nombre FROM metodo_pago";
+      $cadenaF="SELECT DISTINCT orden_compra.fecha_pedido FROM orden_compra inner join usuarios on usuarios.id_usuario = orden_compra.cliente where usuarios.nombre_usuario='$iduser'";
+      $reg=$conexion->seleccionar($cadena);
+      $regF=$conexion->seleccionar($cadenaF);
+
+      //Variables de consulta
+      $where='';
+
+      //Botón buscar///////////////////
+
+       // else
+    //    {
+    //        $where="where usuarios.nombres like '".$nombreus."%' AND metodo_pago.id_metodo = '".$metodop."'";
+    //    }
+      
+
+      if(isset($_POST['buscarfech']))
       {
-        if($_GET['filtro_orden']="todo")
-        {
-          
-        }
+        $fecha1=$_POST['fechdes'];
+        $fecha2=$_POST['fechhas'];
+
+        $where="where orden_compra.fecha_pedido BETWEEN '$fecha1' AND '$fecha2'";
       }
-    ?>
-  </div>
-</form>
+      ?>
+
+      <div class="cuadro container">
+          
+        <br>
+        <form method="post">
+          <div class="row">
+
+
+            
+            <div class="col-1">
+                <select class='form-select' name='fechdes'>
+                  <option>Desde...</option>
+                <?php
+                    foreach($regF as $f1){
+                        echo "<option value='".$f1->fecha_pedido."'>".$f1->fecha_pedido."</option>";
+                    }
+                ?>
+                </select>
+            </div>
+
+            <div class="col-1">
+                <select class='form-select' name='fechhas'>
+                  <option value=''>Hasta...</option>
+                <?php
+                    foreach($regF as $f1){
+                        echo "<option value='".$f1->fecha_pedido."'>".$f1->fecha_pedido."</option>";
+                    }
+                ?>
+                </select>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-success" name="buscarfech" type="submit">Buscar</button>
+            </div>
+
+            <div class="col-2">
+                <button class="btn btn-dark" onclick="setTimeout(function(){location.reload();}, 3000);">Recargar</button>
+            </div>
+          </div>
+        </form>
+          <br>
 
 <table style="display:<?php echo $prueba ?>" class='table table-hover table-borderless'>
     <?php
-    include '../Scripts/database.php';
-    $conexion = mysqli_connect("localhost","root","admin","AppSoCom");
-    $iduser=$_SESSION["usuario"];
+
+    $conexion = mysqli_connect("localhost","root","admin","appsocompruebas");
+
     $consulta="SELECT metodo_pago.nombre,orden_compra.total,
     CONCAT(domicilio.calle,' ',domicilio.colonia,' ',domicilio.numeroExt,' ',
      domicilio.codigo_postal) as 'Domicilio',orden_compra.fecha_pedido, 
@@ -237,7 +284,7 @@
      INNER JOIN domicilio ON orden_compra.domicilio= domicilio.id_domicilio 
      INNER JOIN metodo_pago ON orden_compra.metodoPago= metodo_pago.id_metodo 
      INNER JOIN usuarios ON orden_compra.cliente = usuarios.id_usuario 
-     WHERE usuarios.nombre_usuario='$iduser' or fecha_pedido='2021-08-16'";
+     WHERE usuarios.nombre_usuario='$iduser'";
 
     $tabla = mysqli_query($conexion, $consulta);
     

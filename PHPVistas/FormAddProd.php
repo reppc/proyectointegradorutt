@@ -207,19 +207,19 @@
             <form id="loginform" action="../Scripts/agregarProd.php" method="POST" enctype="multipart/form-data">
               <div class="row">
                 <div class="col">
-                    <label for="formFile" class="form-label">Nombre:</label>
+                    <label for="formFile" class="form-label text-light">Nombre:</label>
                     <input type="text" name="nombre"  required autofocus>
                     <br>
-                    <label for="formFile" class="form-label">Descripción:</label>
+                    <label for="formFile" class="form-label text-light">Descripción:</label>
                     <textarea class="form-control" name="descripcion" required></textarea>
                     <br>
-                    <label for="formFile" class="form-label">Stock:</label>
+                    <label for="formFile" class="form-label text-light">Stock:</label>
                     <input type="text" name="stock"  required autofocus>
                     <br>
-                    <label for="formFile" class="form-label">Precio:</label>
+                    <label for="formFile" class="form-label text-light">Precio:</label>
                     <input type="text" name="precio" " required autofocus>
                     <br>
-                    <label class="form" for="categoria-label">Categoria: </label>
+                    <label class="form text-light" for="categoria-label ">Categoria: </label>
                     <?php
 
                     include '../Scripts/database.php';
@@ -230,7 +230,7 @@
                     $reg=$conexion->seleccionar($cadena);
 
                     echo "
-                    <select class='form-select' name='categoria'>";
+                    <select class='form-select ' name='categoria'>";
 
                         foreach($reg as $value){
                             echo "<option value='".$value->id_cat."'>".$value->categoria."</option>";
@@ -244,7 +244,7 @@
                     <br>
                 <div class="mb-3">
                     <input type="hidden" name="MAX_TAM" value="20097152">
-                    <label for="formFile" class="form-label">Imagen:</label>
+                    <label for="formFile" class="form-label text-light">Imagen:</label>
                     <input class="form-control" type="file" name="imagen" id="formFile">
                 </div>
               </div>

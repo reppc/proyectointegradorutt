@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../inicio/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/login.css">
 <style>
         .redondeado{
           margin-top: 2px;
@@ -44,7 +45,7 @@
     }
     .titulo {
         font-size: 250%;
-        color:#56c93f;
+        color:rgb(104, 173, 64);
         text-align: center;
         margin-bottom: 20px;
     }
@@ -56,7 +57,7 @@
     #login {
         width: 100%;
         padding: 50px 30px;
-        background-color: #eafff1;
+        background-color: white;
         
         -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
         -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.15);
@@ -69,7 +70,7 @@
         box-sizing: border-box;
     }
     .body-g{
-        background-color: #2aa13e;
+        background-color: rgb(40, 80, 36);
     }
     .img-c{
       text-align: center;
