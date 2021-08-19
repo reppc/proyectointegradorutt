@@ -244,7 +244,7 @@
 
       <div class="cuadro container">
           <br>
-        <h1 align="center">Historiales de ventas</h1>
+        <h1 align="center">Historiales de compras</h1>
         <br>
         <form method="post">
           <div class="row">
@@ -348,10 +348,10 @@
             echo "<td hidden>$registro->precio</td>";
             echo "<td hidden>$registro->Domicilio</td>";
             echo "<td hidden>$registro->fecha_pedido</td>";
-            echo "<td><a href='VerMasAdmin.php?
+            echo "<td><a href='VerMas.php?
             nombre=$registro->nombres &
             nombreusu=$registro->nombre_usuario &
-            metodo=$registro->nombre &
+            met=$registro->nombre &
             total=$registro->total &
             fecha=$registro->fecha_pedido &
             folio=$registro->id_orden &
