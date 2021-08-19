@@ -1,5 +1,6 @@
 <?php
 /* H:i:s agregar despues de "d con espacio para agregar la hora"*/
+ date_default_timezone_set('America/Chihuahua');
  $hoys = date("d");
  $hoy = date("Y-m-$hoys");
   include("../../../../../Scripts/productos.php");
