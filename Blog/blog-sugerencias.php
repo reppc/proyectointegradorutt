@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="css-blog/blog-sug.css">
   <link rel="stylesheet" type="text/css" href="../inicio/css/bootstrap.min.css">

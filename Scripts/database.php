@@ -57,11 +57,11 @@
             try
             {
                 $pase=0;
-                $query="SELECT * FROM usuarios INNER JOIN rol_usuario ON rol_usuario.id_rol=usuarios.Rol 
+                $query="SELECT * FROM usuarios INNER JOIN rol_usuario ON rol_usuario.id_rol=usuarios.rol 
                         WHERE nombre_usuario='$usuario'";
 
                 $queryR= "SELECT rol_usuario.tipo_usuario FROM usuarios 
-                            INNER JOIN rol_usuario ON rol_usuario.id_rol=usuarios.Rol 
+                            INNER JOIN rol_usuario ON rol_usuario.id_rol=usuarios.rol 
                             WHERE usuarios.nombre_usuario = '$usuario'";
                 $consulta1=$this->PDOLocal->query($query);
                 $nUsuario=$consulta1->fetch(PDO::FETCH_ASSOC);

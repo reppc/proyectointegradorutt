@@ -69,7 +69,7 @@
         extract($_POST);
         $lafecha=date("Y-m-d H:i:s");
         $hash=password_hash($contraseña, PASSWORD_DEFAULT);
-        $cadena="INSERT INTO usuarios(nombres, ap_paterno, ap_materno,nombre_usuario,correo,contraseña,Rol, fecha_creacion) 
+        $cadena="INSERT INTO usuarios(nombres, ap_paterno, ap_materno,nombre_usuario,correo,contraseña,rol, fecha_creacion) 
         VALUES('$nombre','$ap_paterno','$ap_materno','$usuario','$correo','$hash',3,'".$lafecha."')";
     
         $db->ejecutaSQL($cadena);
